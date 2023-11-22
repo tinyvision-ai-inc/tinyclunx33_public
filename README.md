@@ -3,18 +3,19 @@ Documentation for the tinyNX33U SoM and related boards.
 
 Schematics: Has the assembly drawings as well as schematics
 
-RTL: Sample designs to bring up the system
+RTL/Firmware: A separate repo will be used for this.
 
 Docs: Miscellaneous stuff
 
 # Clocking scheme
-An [Si5351A](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/data-sheets/Si5351-B.pdf) provides 3 programmable clocks to the system.
 
-- Clock 0: This clock output is dedicated to the FPGA. It feeds pin N8 which is also the GPLL input of the FPGA hence allowing for the highest clock quality going to the FPGA's PLL. _Note_: this input to the FPGA cannot be routed to the clock tree in the FPGA and must feed a PLL diorectly, else will result in a Map error.
+This documentation applies to the Rev 2 of the SoM and upwards.
 
-- Clock 1: This is intended to be used as the clock to the USB core. The clock is routed to the baseboard where it is converted to an LVDS signal and brought back into the SoM as the REFCLK signals that are used by the USB core.
+An [Si5351A](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/data-sheets/Si5351-B.pdf) programmable PLL provides 2 programmable clocks to the system. The following summarizes the clock output of the PLL chip:
 
-- Clock 2: This clock is available as a general purpose clock that is hooked up to both the FPGA on pin H8 as well as the SoM connector.
+- Clock 0, Clock 1: These are setup to generate a 60MHz differential clock to the USB core in the FPGA. One of the clocks must be set to be inverted, passing this through a resistor network changes the levels to be compatible witht he differential inputs on the FPGA. Do not change this clock frequency unles the coresponding change has been made in the USB RTL.
+
+- Clock 2: This is intended to be used as the clock to the FPGA. This is usually set to 24MHz and also routes to the SoM output where it can be used as a master clock to a camera for example.
 
 The following sequence of writes to the PLL will set this up:
 1. Disable all outputs: CLKx_DIS high; Register 3 = 0x7
@@ -26,3 +27,5 @@ The following sequence of writes to the PLL will set this up:
 Now thats the official way to do it but for most applications, a far simpler way is to follow the Adafruit driver [here](https://github.com/adafruit/Adafruit_CircuitPython_SI5351/blob/main/adafruit_si5351.py)
 
 Another way is to run the clock builder tool which then generates a sequence of I2C accesses to the PLL. More details can be found under the [Si5351 directory](Docs/Si5351).
+
+We also provide a bit of RTL that can do the I2C initialization for you by loading the registers into a .mem file that the RTL reads at synthesis time. This scheme can be used to boot up the system and bring it to an operational state before the processor is up for example.
