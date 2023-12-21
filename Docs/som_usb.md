@@ -35,7 +35,7 @@ It can be selected at build-time like any other USB driver in Zephyr.
 It implements the new
 [Zephyr USB Device API](https://zephyrproject.org/zephyr-rtos-usb/)
 known as
-[`device_next`](https://docs.zephyrproject.org/latest/connectivity/usb/device_next/usb_device.html).
+[device\_next](https://docs.zephyrproject.org/latest/connectivity/usb/device_next/usb_device.html).
 
 It complies to the Zephyr driver API, and the general documentation can be used
 for configuring USB.

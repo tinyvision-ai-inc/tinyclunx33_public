@@ -5,9 +5,9 @@
 [Assembly](tinyCLUNX33_v2.0_Assembly.pdf) |
 [Discord](https://discord.gg/yjVc6P3sCt)
 
-![](images/som_block_diagram.png)
+![](images/som_v2.png)
 
-25.4mm x 25.4mm x 4.5mm module, commercial temperature grade
+25.4mm x 25.4mm x 4.5mm module, commercial temperature grade: 0°C to 85°C
 
 Connector:
 - 2x Hirose high density DF40C 60 pin connectors
@@ -31,3 +31,5 @@ Development boards:
 - development baseboard for programming/debug
 - tinyCamera board as a basis of a compact camera device
 - extra adapter boards for various camera connectors and expansion
+
+![](images/som_block_diagram.png)
