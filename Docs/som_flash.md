@@ -11,8 +11,6 @@ In the default RTL, the flash is mapped at address `0x2000_0000`.
 0x20*0_0000 -- Free area at the end of the flash for custom
 ```
 
-## Programming the flash
-
 The command [ecpprog](https://github.com/gregdavill/ecpprog) permits to send
 a bitfile to the SoM by using the FTDI present on the
 [DevBoard](carrier_devboard.md).
