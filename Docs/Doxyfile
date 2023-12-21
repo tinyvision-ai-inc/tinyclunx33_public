@@ -6,6 +6,8 @@ FILE_PATTERNS          = *.v *.vh *.sv *.svh *.md
 EXTENSION_MAPPING      = v=C++ vh=C++ sv=C++ svh=C++
 IMAGE_PATH             = images pinout
 USE_MDFILE_AS_MAINPAGE = index.md
+HTML_EXTRA_FILES       = ../Schematics/SoM/v2/tinyCLUNX33_v2.0_Schematic.pdf \
+                         ../Schematics/SoM/v2/tinyCLUNX33_v2.0_Assembly.pdf
 HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
                          doxygen-awesome-css/doxygen-awesome-sidebar-only.css
 HTML_COLORSTYLE        = LIGHT

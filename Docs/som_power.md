@@ -3,14 +3,19 @@
 The SoM uses a single source of power at 5V, and exports several power rails
 at lower voltage using LDO and Buck converters.
 
-![power rails cascade](images/power_rails.png)
+![power rails cascade](images/som_power_rails.png)
 
 The SoM supports turning all power rails off, except a single Always ON (AON)
 rail, only powering one power domain of the FPGA.
 
 This allows staying in a deep sleep state until custom logic wakes the SoM.
 
-## Power Rails
+## Hardware integration
+
+### Power rails
+
+The SoM generates various voltage level useable by the user design within the
+current capability of the LDOs and buck converters.
 
 | Name         | Voltage   | Current | EN pin | Type         | Derived from       |
 | ------------ | --------- | ------- | ------ | ------------ | ------------------ |
@@ -44,22 +49,33 @@ This allows staying in a deep sleep state until custom logic wakes the SoM.
   Drawing most of the current to power the FPGA core.
   Not available to the outside.
 
-## I/O voltage levels
+### I/O voltage level
 
 The SoM allows to provide external reference voltages, directly applied to the
-FPGA I/O banks.
+FPGA I/O banks, thanks to 3 different pins used for different purposes at
+different supported ranges:
 
 | Bank      | Voltage Supply    | Pins                                        |
 | --------- | ----------------- | ------------------------------------------- |
 | USB VBUS  | From SoM at 5.0 V | USB3 SSTX+/- SSRX+/-, USB2 D+/-, REFCLK, EN |
-| 1.8 V     | From SoM at 1.8 V | GPIOs, Flash/SRAM, PROGN, AON in/out        |
+| Bank 0    | From SoM at 1.8 V | GPIOs, Flash/SRAM, PROGN, AON in/out        |
 | Bank 1    | 1.2 V to 3.3 V    | GPIOs, JTAG, I2C                            |
 | Bank 2    | 1.2 V to 1.8 V    | Connectivity SoM variant differential pairs |
 | Bank 3    | 1.2 V to 1.8 V    | 6 differential pairs                        |
 
+## RTL integration
+
+TODO: Describe the GPIO controller pin in use.
+
+## Zephyr integration
+
+TODO: Describe the pinctrl DeviceTree integration.
+
 ## Parts used
 
+- Diodes [AP61102](https://www.diodes.com/assets/Datasheets/AP61100-AP61102.pdf) buck converter
 - Diodes [AP2120N](https://www.diodes.com/assets/Datasheets/AP2120.pdf) LDO
-- Diodes [AP61102](https://www.diodes.com/assets/Datasheets/AP61100-AP61102.pdf) LDO
 - Texas Instrument [TLV707](https://www.ti.com/lit/ds/symlink/tlv707.pdf) LDO
-- Texas Instrument [TPS7A02](https://www.ti.com/lit/ds/symlink/tps7a02.pdf) Nanopower LDO
+- Texas Instrument [TPS7A02](https://www.ti.com/lit/ds/symlink/tps7a02.pdf) nanopower LDO
+
+![](images/som_power.png)
