@@ -1,4 +1,4 @@
-/** @defgroup SVmodule
+/**
  * @page fpga_top
  * @brief Top level module for a led blink test
  * @param[out] gpio_b1 Signal slowly toggling between 0 and 1.
