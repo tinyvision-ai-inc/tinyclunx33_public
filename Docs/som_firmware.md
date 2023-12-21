@@ -1,1 +1,0 @@
-# SoM Firmware
