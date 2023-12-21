@@ -5,7 +5,7 @@
 [Assembly](tinyCLUNX33_v2.0_Assembly.pdf) |
 [Discord](https://discord.gg/yjVc6P3sCt)
 
-![block diagram](images/som_block_diagram.png)
+![](images/som_block_diagram.png)
 
 25.4mm x 25.4mm x 4.5mm module, commercial temperature grade
 
