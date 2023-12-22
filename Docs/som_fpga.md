@@ -11,6 +11,18 @@ that is attached to it. Upon power on, the FPGA will load it out of the first
 The [RTL Reference Design](rtl_reference_design.md) provides the foundation of
 a system, on top of which the application can be implemented.
 
+| Resource                 | Num or Size (total)   |
+|--------------------------|-----------------------|
+| Logic Cells              | 33k                   |
+| 18*18 Multipliers        | 64                    |
+| Embedded Block RAM (EBR) | 1152 kbit / 144 kByte |
+| Distributed RAM          | 220 kbit / 27.5 kByte |
+| Large RAM (LRAM)         | 2560 kbit / 320 kByte |
+| 450 MHz Oscillator       | 1                     |
+| 128 kHz Oscillator       | 1                     |
+| GPLL                     | 1                     |
+| USB2/USB3 MAC+PHY        | 1                     |
+
 ## Parts used
 
 - Lattice Semiconductor

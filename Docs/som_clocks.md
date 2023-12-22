@@ -1,7 +1,11 @@
 # SoM Clocks
 
+The FPGA features two internal oscillators and an internal PLL to further
+synthesize a clock signal out of the available sources.
+
 An external Si5351A PLL is responsible for generating the USB reference clock,
-as well as 2 extra clock signals out of a 25 MHz Crystal Oscillator
+as well as one extra clock signals for custom use. Clocks are synthesized out
+of a 25 MHz Crystal Oscillator on the SoM.
 
 ![clock tree](images/som_clock_tree.png)
 
@@ -9,12 +13,15 @@ The Si5351 PLL can be configured over I2C.
 Skyworks provides a generator tool to build the table of I2C registers address
 and value for a given clock setup.
 
-| Name                          | Frequency  | PLL pins   |
-| ----------------------------- | ---------- | ---------- |
-| Input crystal oscillator      | 35 MHz     | XA, XB     |
-| USB REFCLK differential clock | 60 MHz     | CLK0, CLK1 |
-| Free output clock             | Selectable | CLK2       |
-| External input clock          | Selectable | -          |
+| Clock                          | Frequency  | Location                 |
+|--------------------------------|------------|--------------------------|
+| PLL input crystal oscillator   | 25 MHz     | Si5351 input XA, XB      |
+| USB REFCLK differential clock  | 60 MHz     | Si5351 output CLK0, CLK1 |
+| PLL Extra output clock         | Selectable | Si5351 output CLK2       |
+| PLL External input clock       | Selectable | SoM input pin            |
+| FPGA high frequency oscillator | 450 MHz    | FPGA fabric              |
+| FPGA low power oscillator      | 128 kHz    | FPGA fabric              |
+| FPGA GPLL                      | Selectable | FPGA fabric              |
 
 ## Hardware integration
 
