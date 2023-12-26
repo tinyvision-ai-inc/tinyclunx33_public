@@ -6,6 +6,8 @@ that can be used through the RTL.
 It also has two Large RAM (LRAM) blocks that provide can be used for storing
 larger memory buffers, such as entire frames, or as CPU main memory.
 
+![](images/som_memory_architecture.png)
+
 The "compute" variant of the SoM additionally has an external Octal SPI or
 HyperRAM memory installed and interconnected with the FPGA.
 

@@ -3,6 +3,8 @@
 The LIFCL-33U FPGA part of the CrosslinkU-NX series contains a hard USB3 core
 capable of 5 Gbit/s transfers.
 
+![](images/som_usb_architecture.png)
+
 ## Hardware integration
 
 An external PHY is not required as the LIFCL-33U provides an integrated
@@ -66,5 +68,8 @@ binaries, and publish a link here.
 - Lattice Semiconductor
   [LIFCL-33U](https://www.latticesemi.com/Products/FPGAandCPLD/CrossLink-NX)
   FPGA
+
+- Lattice Semiconductor
+  [USB23]()
 
 ![](images/som_usb.png)
