@@ -1,5 +1,6 @@
-# tinyNX33U_docs
-Documentation for the tinyNX33U SoM and related boards.
+# tinyCLUNX33
+
+Sources and documentation for the tinyCLUNX33 SoM and related boards.
 
 Schematics: Has the assembly drawings as well as schematics
 
