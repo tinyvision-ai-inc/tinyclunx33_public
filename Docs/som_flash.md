@@ -3,6 +3,8 @@
 A 16 MByte (128 Mbit) QSPI flash with Dual Transmission Rate (DTR) can store the
 FPGA bitfile as well as a firmware for running on the soft core.
 
+![](images/som_flash_architecture.png)
+
 In the default RTL, the flash is mapped at address `0x2000_0000`.
 
 ```
