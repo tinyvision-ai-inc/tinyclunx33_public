@@ -36,7 +36,7 @@ connectors, each with two rows of 30-pins.
 | 53   | X            | 54   | X             | 53   | P1V_AON      | 54.P | P5V             |
 | 55   | **GND**      | 56   | **GND**       | 55.0 | P1V8D        | 56.P | P3V3D           |
 | 57   | X            | 58   | X             | 57.P | PVDD_1       | 58.P | PVDD_2          |
-| 59   | X            | 60   | X             | 59.P | PVDD_3       | 60   | PVDD_4          |
+| 59   | X            | 60   | X             | 59.P | PVDD_3       | 60.P | PVDD_4          |
 
 The meaning of the labels in the "Pin" column is:
 
