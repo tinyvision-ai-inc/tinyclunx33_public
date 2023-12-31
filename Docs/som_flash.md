@@ -15,7 +15,7 @@ In the default RTL, the flash is mapped at address `0x2000_0000`.
 
 The command [ecpprog](https://github.com/gregdavill/ecpprog) permits to send
 a bitfile to the SoM by using the FTDI present on the
-[DevBoard](carrier_devboard.md).
+[BaseBoard](carrier_baseboard.md).
 
 It can be installed as part of
 [OSS Cad Suite](https://github.com/YosysHQ/oss-cad-suite-build#installation)
@@ -63,4 +63,4 @@ flash0: flash@20100000 {
   [W25Q128JW_DTR](https://www.winbond.com/hq/support/documentation/downloadV2022.jsp?__locale=en&xmlPath=/support/resources/.content/item/DA00-W25Q128JW_1.html&level=1)
   QSPI DTR flash
 
-![](images/som_flash.png)
+![](images/som_flash_schematic.png)

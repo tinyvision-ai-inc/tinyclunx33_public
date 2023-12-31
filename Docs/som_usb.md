@@ -72,4 +72,4 @@ binaries, and publish a link here.
 - Lattice Semiconductor
   [USB23]()
 
-![](images/som_usb.png)
+![](images/som_usb_schematic.png)

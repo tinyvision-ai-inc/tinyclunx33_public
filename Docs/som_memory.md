@@ -49,4 +49,4 @@ integration of the NXLRAM as well as a controller for the external RAM chip.
 
 - AP Memory Octal SPI RAM (alternative)
 
-![](images/som_ram.png)
+![](images/som_ram_schematic.png)
