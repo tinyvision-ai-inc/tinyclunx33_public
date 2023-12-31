@@ -59,4 +59,4 @@ TODO: Write a driver to initialize the PLL and control free clock signal.
   [TCA9509](https://www.ti.com/lit/ds/symlink/tca9509.pdf)
   I2C level shifter
 
-![](images/som_clocks.png)
+![](images/som_clocks_schematic.png)
