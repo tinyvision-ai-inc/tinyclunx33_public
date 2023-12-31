@@ -37,7 +37,7 @@ allocate a given NXLRAM block.
 The [RTL Reference Design](rtl_reference_design.md) shows a possible
 integration of the NXLRAM as well as a controller for the external RAM chip.
 
-## Parts used
+## Parts featured
 
 - Lattice Semiconductor
   [LIFCL-33U-8CTG104CAS](https://www.latticesemi.com/Products/FPGAandCPLD/CrossLink-NX)

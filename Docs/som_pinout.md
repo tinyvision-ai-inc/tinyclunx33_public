@@ -49,7 +49,7 @@ The meaning of the labels in the "Pin" column is:
 
 TODO: Document the connectivity variant
 
-## Parts used
+## Parts featured
 
 - Hirose [DF40C-60](https://www.hirose.com/en/product/document?clcode=&productname=&series=DF40&documenttype=Guideline&lang=en&documentid=D80_en)
   60 pin connectors (x2)

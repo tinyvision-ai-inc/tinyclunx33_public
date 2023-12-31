@@ -45,7 +45,7 @@ TODO: Integrate the clock tree definition into a Device Tree.
 
 TODO: Write a driver to initialize the PLL and control free clock signal.
 
-## Parts used
+## Parts featured
 
 - NDK
   [X3225GA](https://www.ndk.com/en/products/upload/lineup/pdf/NDKX03-00006_en.pdf)
