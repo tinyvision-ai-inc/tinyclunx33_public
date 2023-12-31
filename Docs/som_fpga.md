@@ -31,7 +31,7 @@ a system, on top of which the application can be implemented.
 | GPLL                     | 1                     |
 | USB2/USB3 MAC+PHY        | 1                     |
 
-## Parts used
+## Parts featured
 
 - Lattice Semiconductor
   [LIFCL-33U-8CTG104CAS](https://www.latticesemi.com/Products/FPGAandCPLD/CrossLink-NX)

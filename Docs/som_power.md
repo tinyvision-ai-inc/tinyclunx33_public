@@ -71,7 +71,7 @@ TODO: Describe the GPIO controller pin in use.
 
 TODO: Describe the pinctrl DeviceTree integration.
 
-## Parts used
+## Parts featured
 
 - Diodes [AP61102](https://www.diodes.com/assets/Datasheets/AP61100-AP61102.pdf) buck converter
 - Diodes [AP2120N](https://www.diodes.com/assets/Datasheets/AP2120.pdf) LDO

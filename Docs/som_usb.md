@@ -63,7 +63,7 @@ TODO: Send a merge request for the Zephyr driver and link it there
 TODO: Provide a sample repository with a complete Zephyr firmware, along with
 binaries, and publish a link here.
 
-## Parts used
+## Parts featured
 
 - Lattice Semiconductor
   [LIFCL-33U](https://www.latticesemi.com/Products/FPGAandCPLD/CrossLink-NX)
