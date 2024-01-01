@@ -25,11 +25,9 @@ Mechanical:
 - No-tool setup of the SoM helping factory programming
 - Mounting holes matching the Raspberry Pi Camera HQ layout
 
-
 ## Pinout
 
 TODO: switch to v2 and document the pinout as tables
-
 
 ## Parts featured
 

@@ -25,11 +25,9 @@ Mechanical:
 - No-tool setup of the SoM helping factory programming
 - Mounting holes for securing the board in a rig or enclosure
 
-
 ## Pinout
 
 TODO: switch to v2 and document the pinout as tables
-
 
 ## Parts featured
 
