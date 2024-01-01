@@ -46,14 +46,16 @@ TODO: Complete the integration of the new RTL VexRiscv core
 
 ## Zephyr integration
 
-A Zephyr driver for the tinyCLUNX33 hard USB core "USB23" was written.
+A
+[Zephyr driver](https://github.com/tinyvision-ai-inc/zephyr/blob/tinyclunx33/drivers/usb/udc/udc_usb23.c)
+for the Lattice USB23 core was written.
 
 It can be selected at build-time like any other USB driver in Zephyr.
 
 It implements the new
 [Zephyr USB Device API](https://zephyrproject.org/zephyr-rtos-usb/)
 known as
-[device\_next](https://docs.zephyrproject.org/latest/connectivity/usb/device_next/usb_device.html).
+[`device_next`](https://docs.zephyrproject.org/latest/connectivity/usb/device_next/usb_device.html).
 
 It complies to the Zephyr driver API, and the general documentation can be used
 for configuring USB.

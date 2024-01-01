@@ -49,7 +49,8 @@ The hard USB23 core LMMI interface, used for controlling the core.
 An QSPI, DDR, memory-mapped flash controller:
 - \subpage TODO
 
-An I2C controller used to program the [external Si5351 PLL](som_clocks.md):
+An I2C controller used to program the [external Si5351 PLL](som_clocks.md),
+MIPI configuration, and Type-C port manager if present:
 - \subpage TODO
 
 An UART for debug logs and bringup of software on the CPU:
