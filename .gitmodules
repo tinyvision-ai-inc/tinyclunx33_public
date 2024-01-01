@@ -2,5 +2,5 @@
 	path = Docs/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
 [submodule "RTL/VexRiscv"]
-	path = RTL/VexRiscv
+	path = RTL/ext/VexRiscv
 	url = https://github.com/SpinalHDL/VexRiscv
