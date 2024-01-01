@@ -1,18 +1,20 @@
 # Zephyr integration
 
 Including a soft CPU inside the hard USB23 core permits to control the register
-interface with RTL
+interface with RTL.
+A Zephyr firmware is provided for running on this CPU, with a
+[driver](https://github.com/tinyvision-ai-inc/zephyr/blob/tinyclunx33/drivers/usb/udc/udc_usb23.c)
+for this USB23 core.
 
-[VexRiscv](https://github.com/SpinalHDL/VexRiscv#area-usage-and-maximal-frequency)
-CPU integrated into the [RTL Reference Design](rtl_reference_design.md) is
-necessary
+Ultimately, the Zephyr firmware image will be possible to build using the
+[regular process](https://docs.zephyrproject.org/latest/develop/getting_started/index.html)
+from the Zephyr Project.
 
-The Zephyr firmware image can be build using the
-[official process](https://docs.zephyrproject.org/latest/develop/getting_started/index.html)
-from Zephyr Project.
+Until then, these repositories are requied:
 
-A [public fork](https://github.com/tinyvision-ai-inc/zephyr/tree/tinyclunx33)
-is being worked on for it to get submitted upstream.
+- [Zephyr fork](https://github.com/tinyvision-ai-inc/zephyr/tree/tinyclunx33) -
+  in progress until it gets submitted upstream.
 
-An [example project](https://github.com/josuah/tinyclunx33_zephyr_example)
-with build instructions is provided as a starting point.
+- [Example project](https://github.com/josuah/tinyclunx33_zephyr_example) -
+  with build instructions. The starting point for building Zephyr for the
+  tinyCLUNX33.
