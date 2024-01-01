@@ -7,17 +7,25 @@ TODO: Publish a block diagram of the various parts cores
 
 TODO: Publish a relatively recent estimation of the LUT usage.
 
-The former SoC was built on LiteX.
+The new SoC is based on
+[VexRiscv]()'s
+[Briey](https://github.com/SpinalHDL/VexRiscv#briey-soc).
+It integrates a minimum viable system able to run USB.
 
-The new SoC is based on SpinalHDL Briey, and integrates the minimum required
-for USB operation and integrating the fixed hardware
+A Radiant installation is only required for rebuilding the RTL.,
+provided as
+[binary releases](https://github.com/tinyvision-ai-inc/tinyclunx33/releases).
 
+A SpinalHDL installation is only required for rebuilding the Briey SoC,
+provided as
+[Verilog artefacts](#TODO).
 
-## External connection interface
+TODO: remove \subpage fpga_top
+
+## External interface
 
 A FIFO stream for piping data in/out USB3.
 - \subpage TODO
-
 
 ## Internal fast AXI bus
 
@@ -33,7 +41,6 @@ CPU implementing the RISC-V RV32I specification:
 
 The external Octal SPI or HyperRAM chip.
 - \subpage TODO
-
 
 ## Internal lower-speed peripheral bus
 
