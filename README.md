@@ -1,11 +1,12 @@
-# tinyNX33U_docs
-Documentation for the tinyNX33U SoM and related boards.
+# tinyCLUNX33
+
+Sources and documentation for the tinyCLUNX33 SoM and related boards.
 
 Schematics: Has the assembly drawings as well as schematics
 
-RTL/Firmware: A separate repo will be used for this.
+RTL/Firmware: Example code that works with the tinyCLUNX SoM
 
-Docs: Miscellaneous stuff
+Hardware: Misc stuff
 
 # Clocking scheme
 

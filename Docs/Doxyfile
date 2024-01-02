@@ -1,0 +1,20 @@
+PROJECT_NAME           = "tinyCLUNX33"
+PROJECT_BRIEF          = System on Module with CrosslinkU-NX
+OPTIMIZE_OUTPUT_FOR_C  = YES
+INPUT                  = ../RTL/blink_led/src/ .
+FILE_PATTERNS          = *.v *.vh *.sv *.svh *.md
+EXTENSION_MAPPING      = v=C++ vh=C++ sv=C++ svh=C++
+IMAGE_PATH             = images pinout
+USE_MDFILE_AS_MAINPAGE = index.md
+HTML_EXTRA_FILES       = ../Schematics/SoM/v2/tinyCLUNX33_v2.0_Schematic.pdf \
+                         ../Schematics/SoM/v2/tinyCLUNX33_v2.0_Assembly.pdf \
+                         ../Schematics/Baseboard/v1/NXU_baseboard_v1.0_Schematic.pdf \
+                         ../Schematics/Baseboard/v1/NXU_baseboard_v1.0_Assembly.pdf \
+                         ../Schematics/tinyCamera/v1/tinyCamera_v1.0_Assembly.pdf \
+                         ../Schematics/tinyCamera/v1/tinyCamera_v1.0_Schematic.pdf
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
+                         doxygen-awesome-css/doxygen-awesome-sidebar-only.css
+HTML_COLORSTYLE        = LIGHT
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
