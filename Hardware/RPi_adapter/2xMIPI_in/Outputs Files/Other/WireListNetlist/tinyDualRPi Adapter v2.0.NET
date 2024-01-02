@@ -1,0 +1,189 @@
+Wire List
+
+<<< Component List >>>
+0.1uF                           C1             CAPC1005X55USR
+0.1uF                           C2             CAPC1005X55USR
+1-84953-5                       J1             TE_1-84953-5
+QTE-020-01-F-D-A-K              J3             SAMTEC_QTE-020-01-X-D-A
+1-84953-5                       J4             TE_1-84953-5
+1K                              R1             RESC1005X40USR
+1K                              R2             RESC1005X40USR
+10K                             RN1            RESCAXS50P100X200X45-8NA
+TP_S                            T1             TP 1mm
+TP_S                            T2             TP 1mm
+TP_S                            T3             TP 1mm
+TP_S                            T4             TP 1mm
+TP_S                            T5             TP 1mm
+TP_S                            T6             TP 1mm
+TP_S                            T7             TP 1mm
+TP_S                            T8             TP 1mm
+TP_S                            T9             TP 1mm
+PCA9542APW,118                  U1             SOP65P640X110-14N
+
+<<< Wire List >>>
+
+  NODE  REFERENCE  PIN #   PIN NAME       PIN TYPE    PART VALUE
+
+[00038] SDA33
+        J3         34      34             PASSIVE     QTE-020-01-F-D-A-K
+        U1         13      SDA            INPUT       PCA9542APW,118
+
+[00037] SCL33
+        J3         32      32             PASSIVE     QTE-020-01-F-D-A-K
+        U1         12      SCL            INPUT       PCA9542APW,118
+
+[00036] P3V3D
+        C1         2       2              PASSIVE     0.1uF
+        C2         2       2              PASSIVE     0.1uF
+        J1         1       1              PASSIVE     1-84953-5
+        J3         01      01             PASSIVE     QTE-020-01-F-D-A-K
+        J4         1       1              PASSIVE     1-84953-5
+        R1         2       2              PASSIVE     1K
+        R2         2       2              PASSIVE     1K
+        RN1        5                      PASSIVE     10K
+        RN1        6                      PASSIVE     10K
+        RN1        7                      PASSIVE     10K
+        RN1        8                      PASSIVE     10K
+        U1         14      VDD            POWER       PCA9542APW,118
+
+[00035] NetT1_1
+        T1         1                      PASSIVE     TP_S
+        U1         11      I\N\T\\        OUTPUT      PCA9542APW,118
+
+[00034] NetR2_1
+        R2         1       1              PASSIVE     1K
+        U1         8       I\N\T\1\\      INPUT       PCA9542APW,118
+
+[00033] NetR1_1
+        R1         1       1              PASSIVE     1K
+        U1         4       I\N\T\0\\      INPUT       PCA9542APW,118
+
+[00022] LED_1
+        J3         40      40             PASSIVE     QTE-020-01-F-D-A-K
+        J4         4       4              PASSIVE     1-84953-5
+        T5         1                      PASSIVE     TP_S
+
+[00021] LED_0
+        J1         4       4              PASSIVE     1-84953-5
+        J3         38      38             PASSIVE     QTE-020-01-F-D-A-K
+        T4         1                      PASSIVE     TP_S
+
+[00020] ID
+        J3         36      36             PASSIVE     QTE-020-01-F-D-A-K
+        U1         1       A0             INPUT       PCA9542APW,118
+
+[00019] GND
+        C1         1       1              PASSIVE     0.1uF
+        C2         1       1              PASSIVE     0.1uF
+        J1         6       6              PASSIVE     1-84953-5
+        J1         9       9              PASSIVE     1-84953-5
+        J1         12      12             PASSIVE     1-84953-5
+        J1         15      15             PASSIVE     1-84953-5
+        J1         M1      M1             PASSIVE     1-84953-5
+        J1         M2      M2             PASSIVE     1-84953-5
+        J3         05      05             PASSIVE     QTE-020-01-F-D-A-K
+        J3         06      06             PASSIVE     QTE-020-01-F-D-A-K
+        J3         11      11             PASSIVE     QTE-020-01-F-D-A-K
+        J3         12      12             PASSIVE     QTE-020-01-F-D-A-K
+        J3         17      17             PASSIVE     QTE-020-01-F-D-A-K
+        J3         18      18             PASSIVE     QTE-020-01-F-D-A-K
+        J3         23      23             PASSIVE     QTE-020-01-F-D-A-K
+        J3         24      24             PASSIVE     QTE-020-01-F-D-A-K
+        J3         29      29             PASSIVE     QTE-020-01-F-D-A-K
+        J3         30      30             PASSIVE     QTE-020-01-F-D-A-K
+        J3         G1      GND            POWER       QTE-020-01-F-D-A-K
+        J3         G2      GND            POWER       QTE-020-01-F-D-A-K
+        J3         G3      GND            POWER       QTE-020-01-F-D-A-K
+        J3         G4      GND            POWER       QTE-020-01-F-D-A-K
+        J4         6       6              PASSIVE     1-84953-5
+        J4         9       9              PASSIVE     1-84953-5
+        J4         12      12             PASSIVE     1-84953-5
+        J4         15      15             PASSIVE     1-84953-5
+        J4         M1      M1             PASSIVE     1-84953-5
+        J4         M2      M2             PASSIVE     1-84953-5
+        U1         2       A1             INPUT       PCA9542APW,118
+        U1         3       A2             INPUT       PCA9542APW,118
+        U1         7       VSS            PASSIVE     PCA9542APW,118
+
+[00018] EN_1
+        J3         33      33             PASSIVE     QTE-020-01-F-D-A-K
+        J4         5       5              PASSIVE     1-84953-5
+        T3         1                      PASSIVE     TP_S
+
+[00017] EN_0
+        J1         5       5              PASSIVE     1-84953-5
+        J3         31      31             PASSIVE     QTE-020-01-F-D-A-K
+        T2         1                      PASSIVE     TP_S
+
+[00016] DIFF5_P
+        J3         19      19             PASSIVE     QTE-020-01-F-D-A-K
+        J4         7       7              PASSIVE     1-84953-5
+
+[00015] DIFF5_N
+        J3         21      21             PASSIVE     QTE-020-01-F-D-A-K
+        J4         8       8              PASSIVE     1-84953-5
+
+[00014] DIFF4_P
+        J3         13      13             PASSIVE     QTE-020-01-F-D-A-K
+        J4         10      10             PASSIVE     1-84953-5
+
+[00013] DIFF4_N
+        J3         15      15             PASSIVE     QTE-020-01-F-D-A-K
+        J4         11      11             PASSIVE     1-84953-5
+
+[00012] DIFF3_P
+        J3         07      07             PASSIVE     QTE-020-01-F-D-A-K
+        J4         13      13             PASSIVE     1-84953-5
+
+[00011] DIFF3_N
+        J3         09      09             PASSIVE     QTE-020-01-F-D-A-K
+        J4         14      14             PASSIVE     1-84953-5
+
+[00010] DIFF2_P
+        J1         10      10             PASSIVE     1-84953-5
+        J3         14      14             PASSIVE     QTE-020-01-F-D-A-K
+
+[00009] DIFF2_N
+        J1         11      11             PASSIVE     1-84953-5
+        J3         16      16             PASSIVE     QTE-020-01-F-D-A-K
+
+[00008] DIFF1_P
+        J1         7       7              PASSIVE     1-84953-5
+        J3         20      20             PASSIVE     QTE-020-01-F-D-A-K
+
+[00007] DIFF1_N
+        J1         8       8              PASSIVE     1-84953-5
+        J3         22      22             PASSIVE     QTE-020-01-F-D-A-K
+
+[00006] DIFF0_P
+        J1         13      13             PASSIVE     1-84953-5
+        J3         26      26             PASSIVE     QTE-020-01-F-D-A-K
+
+[00005] DIFF0_N
+        J1         14      14             PASSIVE     1-84953-5
+        J3         28      28             PASSIVE     QTE-020-01-F-D-A-K
+
+[00004] CAM1_SDA
+        J4         2       2              PASSIVE     1-84953-5
+        RN1        3                      PASSIVE     10K
+        T7         1                      PASSIVE     TP_S
+        U1         9       SD1            INPUT       PCA9542APW,118
+
+[00003] CAM1_SCL
+        J4         3       3              PASSIVE     1-84953-5
+        RN1        4                      PASSIVE     10K
+        T6         1                      PASSIVE     TP_S
+        U1         10      SC1            INPUT       PCA9542APW,118
+
+[00002] CAM0_SDA
+        J1         2       2              PASSIVE     1-84953-5
+        RN1        1                      PASSIVE     10K
+        T9         1                      PASSIVE     TP_S
+        U1         5       SD0            INPUT       PCA9542APW,118
+
+[00001] CAM0_SCL
+        J1         3       3              PASSIVE     1-84953-5
+        RN1        2                      PASSIVE     10K
+        T8         1                      PASSIVE     TP_S
+        U1         6       SC0            INPUT       PCA9542APW,118
+

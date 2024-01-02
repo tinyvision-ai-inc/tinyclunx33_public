@@ -1,0 +1,342 @@
+#
+#Component attribute names
+#
+@0 .comp_mount_type
+@1 .comp_height
+
+# CMP 0
+CMP 5 0.583555 0.7380219 180 N J4 1-84953-5 ;0=1,1=0.0000
+PRP Actuator_Color 'Black'
+PRP Actuator_Material 'Nylon,Glass,Polyamide'
+PRP Category 'FFC / FPC'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669110.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669110.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669111.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669111.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669112.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669112.pdf?src-supplier=Digi-Key'
+PRP Connector_System 'Flex-to-Board'
+PRP Connector_Type 'Receptacle,Connector,Socket'
+PRP Contact_Current_Rating '1A'
+PRP Contact_Location 'Top'
+PRP Contact_Material 'Bronze'
+PRP Contact_Plating 'Tin,Bright'
+PRP Current_Rating '1A'
+PRP Depth '7.3mm'
+PRP ELV 'Compliant'
+PRP Flammability_Rating 'UL94 V-0'
+PRP Gender 'Receptacle'
+PRP Height '2.56mm'
+PRP Housing_Color 'Natural'
+PRP Housing_Material 'Polymer'
+PRP Length '22.92mm'
+PRP Manufacturer 'TE Connectivity'
+PRP Manufacturer_Part_Number '1-84953-5'
+PRP Mating_Alignment 'Yes (With)'
+PRP Max_Operating_Temperature '85°C'
+PRP Max_Voltage_Rating_(AC) '200V'
+PRP Min_Operating_Temperature '-40°C'
+PRP Mount 'Surface Mount'
+PRP Number_of_Contacts '15'
+PRP Number_of_Positions '15'
+PRP Number_of_Rows '1'
+PRP Orientation 'Right Angle'
+PRP Package_Quantity '1200'
+PRP Packaging 'Tape and Reel'
+PRP PCB_Mount_Alignment 'No (Without)'
+PRP PCB_Mount_Retention 'With'
+PRP PCB_Mounting_Orientation 'Right Angle'
+PRP Pitch '0.039inch'
+PRP Plating_Thickness '2um'
+PRP Pricing_1 '1=1.02000, 10=0.97700, 25=0.93400, 50=0.92100, 100=0.80470, 250=0.77460, 500=0.73158 (USD)'
+PRP Radiation_Hardening 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Sealable 'No (Without)'
+PRP Series 'FPC'
+PRP Shielding 'Unshielded'
+PRP Shrouded 'Yes (With)'
+PRP Stock_1 '9836'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'A101405CT-ND'
+PRP Termination 'SMD/SMT'
+PRP Voltage_Rating '200V'
+PRP Width '0.2575inch'
+PRP Wire/Cable_Type 'Flat Flex'
+TOP 0 0.3079644 0.7380219 0 N 3 13 J4-1
+TOP 1 0.3473345 0.7380219 0 N 24 2 J4-2
+TOP 2 0.3867046 0.7380219 0 N 25 2 J4-3
+TOP 3 0.4260747 0.7380219 0 N 7 1 J4-4
+TOP 4 0.4654448 0.7380219 0 N 10 1 J4-5
+TOP 5 0.5048148 0.7380219 0 N 28 30 J4-6
+TOP 6 0.5441849 0.7380219 0 N 12 1 J4-7
+TOP 7 0.583555 0.7380219 0 N 13 1 J4-8
+TOP 8 0.6229251 0.7380219 0 N 28 33 J4-9
+TOP 9 0.6622952 0.7380219 0 N 14 1 J4-10
+TOP 10 0.7016652 0.7380219 0 N 15 1 J4-11
+TOP 11 0.7410353 0.7380219 0 N 28 34 J4-12
+TOP 12 0.7804054 0.7380219 0 N 16 1 J4-13
+TOP 13 0.8197755 0.7380219 0 N 17 1 J4-14
+TOP 14 0.8591456 0.7380219 0 N 28 35 J4-15
+TOP 15 0.1902479 0.8482581 0 N 28 32 J4-M1
+TOP 16 0.9768621 0.8482581 0 N 28 31 J4-M2
+#
+# CMP 1
+CMP 4 1.09677 0.33168 270 N U1 PCA9542APW,118 ;0=1,1=0.0000
+PRP Case/Package 'TSSOP'
+PRP Category 'Interface ICs'
+PRP Clock_Frequency '400kHz'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/4806/pca9542a-185703-4806721.pdf?src-supplier=Mouser'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/4806/pca9542a-185703-4806721.pdf?src-supplier=Mouser'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/15087/getdatasheetpartid-214981-15087231.pdf?src-supplier=Verical'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/15087/getdatasheetpartid-214981-15087231.pdf?src-supplier=Verical'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/8242/pca9542a-8242759.pdf?src-supplier=Avnet'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/8242/pca9542a-8242759.pdf?src-supplier=Avnet'
+PRP ComponentLink4Description 'https://datasheet.ciiva.com/1784/pca9542a-1784041.pdf?src-supplier=Digi-Key'
+PRP ComponentLink4URL 'https://datasheet.ciiva.com/1784/pca9542a-1784041.pdf?src-supplier=Digi-Key'
+PRP ComponentLink5Description 'https://datasheet.ciiva.com/1784/pca9542a-1784042.pdf?src-supplier=Digi-Key'
+PRP ComponentLink5URL 'https://datasheet.ciiva.com/1784/pca9542a-1784042.pdf?src-supplier=Digi-Key'
+PRP ComponentLink6Description 'https://datasheet.ciiva.com/1784/pca9542a-1784043.pdf?src-supplier=Digi-Key'
+PRP ComponentLink6URL 'https://datasheet.ciiva.com/1784/pca9542a-1784043.pdf?src-supplier=Digi-Key'
+PRP ComponentLink7Description 'https://datasheet.ciiva.com/16219/pca9542a-16219928.pdf?src-supplier=Future+Electronics'
+PRP ComponentLink7URL 'https://datasheet.ciiva.com/16219/pca9542a-16219928.pdf?src-supplier=Future+Electronics'
+PRP Height '0.95mm'
+PRP High_Level_Output_Current '-10uA'
+PRP Interface 'I2C,SMBus'
+PRP Lead_Free 'Lead Free'
+PRP Length '5.1mm'
+PRP Logic_Function 'Multiplexer'
+PRP Low_Level_Output_Current '10mA'
+PRP Manufacturer 'NXP Semiconductors'
+PRP Manufacturer_Part_Number 'PCA9542APW,118'
+PRP Max_Operating_Temperature '85°C'
+PRP Max_Supply_Current '25uA'
+PRP Max_Supply_Voltage '5.5V'
+PRP Min_Operating_Temperature '-40°C'
+PRP Min_Supply_Voltage '2.3V'
+PRP Mounting_Technology 'Surface Mount'
+PRP Nominal_Supply_Voltage '3.6V'
+PRP Number_Of_Channels '2'
+PRP Number_of_Input_Lines '2'
+PRP Number_of_Inputs '2'
+PRP Number_of_Output_Lines '1'
+PRP Number_of_Outputs '1'
+PRP Operating_Supply_Voltage '5V'
+PRP Package_Quantity '1'
+PRP Packaging 'Tape and Reel'
+PRP Pins '14'
+PRP Power_Dissipation '400mW'
+PRP Pricing '1=2.50000, 10=2.24900, 25=2.12160, 100=1.80750, 250=1.69720, 500=1.48506, 1000=1.23047 (USD)'
+PRP Propagation_Delay '0.3ns'
+PRP Radiation_Hardening 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series '-'
+PRP Stock '18695'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '568-1856-1-ND'
+PRP Supply_Current '100mA'
+PRP Weight '0.004949oz'
+PRP Width '4.5mm'
+TOP 0 1.17377 0.21668 270 N 9 1 U1-1
+TOP 1 1.14777 0.21668 270 N 28 27 U1-2
+TOP 2 1.12277 0.21668 270 N 28 28 U1-3
+TOP 3 1.09677 0.21668 270 N 6 1 U1-4
+TOP 4 1.07077 0.21668 270 N 26 1 U1-5
+TOP 5 1.04577 0.21668 270 N 27 1 U1-6
+TOP 6 1.01977 0.21668 270 N 28 29 U1-7
+TOP 7 1.01977 0.44668 270 N 5 1 U1-8
+TOP 8 1.04577 0.44668 270 N 24 1 U1-9
+TOP 9 1.07077 0.44668 270 N 25 1 U1-10
+TOP 10 1.09677 0.44668 270 N 4 0 U1-11
+TOP 11 1.12277 0.44668 270 N 2 1 U1-12
+TOP 12 1.14777 0.44668 270 N 1 1 U1-13
+TOP 13 1.17377 0.44668 270 N 3 12 U1-14
+#
+# CMP 2
+CMP 2 1.132545 0.665 270 N RN1 10K ;0=1,1=0.0177
+PRP Case_Code_(Imperial) '0402'
+PRP Case_Code_(Metric) '1005'
+PRP Case/Package '0804'
+PRP Category 'Resistor Arrays'
+PRP Circuit_Type 'Isolated'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/46387/1480003-46387949.pdf?src-supplier=Element14'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/46387/1480003-46387949.pdf?src-supplier=Element14'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/46376/1480003-46376265.pdf?src-supplier=Element14'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/46376/1480003-46376265.pdf?src-supplier=Element14'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/28418/1790599-28418558.pdf?src-supplier=Element14'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/28418/1790599-28418558.pdf?src-supplier=Element14'
+PRP ComponentLink4Description 'https://datasheet.ciiva.com/28636/1790599-28636885.pdf?src-supplier=Element14'
+PRP ComponentLink4URL 'https://datasheet.ciiva.com/28636/1790599-28636885.pdf?src-supplier=Element14'
+PRP ComponentLink5Description 'https://datasheet.ciiva.com/30209/aoc0000ce1-30209125.pdf?src-supplier=Onlinecomponents.com'
+PRP ComponentLink5URL 'https://datasheet.ciiva.com/30209/aoc0000ce1-30209125.pdf?src-supplier=Onlinecomponents.com'
+PRP Depth '1mm'
+PRP Height '0.35mm'
+PRP Lead_Free 'Lead Free'
+PRP Length '2mm'
+PRP Manufacturer 'Panasonic'
+PRP Manufacturer_Part_Number 'EXB-28V103JX'
+PRP Max_Operating_Temperature '125°C'
+PRP Military_Standard 'Not'
+PRP Min_Operating_Temperature '-55°C'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '8'
+PRP Number_of_Elements '4'
+PRP Number_of_Resistors '4'
+PRP Package_Quantity '1'
+PRP Packaging 'Tape and Reel'
+PRP Pins '8'
+PRP Power_Dissipation '63mW'
+PRP Power_Per_Element '62.5mW'
+PRP Pricing '1=0.10000, 10=0.08100, 25=0.05640, 50=0.04380, 100=0.03130, 250=0.02444, 500=0.01942, 1000=0.01378, 5000=0.01065 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'Unknown'
+PRP Resistance_Tolerance '5%'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series 'EXB'
+PRP Stock '1570078'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'Y7103CT-ND'
+PRP Technology 'THICK FILM'
+PRP Temperature_Coefficient '200ppm/°C'
+PRP Terminal_Pitch '0.5mm'
+PRP Termination 'Convex'
+PRP Tolerance '5%'
+PRP Value '10K'
+PRP Voltage_Rating '50V'
+PRP Voltage_Rating_(DC) '100V'
+PRP Width '1mm'
+TOP 0 1.1640411 0.6433465 270 N 26 0 RN1-1
+TOP 1 1.1423875 0.6433465 270 N 27 0 RN1-2
+TOP 2 1.1227025 0.6433465 270 N 24 0 RN1-3
+TOP 3 1.1010489 0.6433465 270 N 25 0 RN1-4
+TOP 4 1.1010489 0.6866535 270 N 3 10 RN1-5
+TOP 5 1.1227025 0.6866535 270 N 3 9 RN1-6
+TOP 6 1.1423875 0.6866535 270 N 3 8 RN1-7
+TOP 7 1.1640411 0.6866535 270 N 3 7 RN1-8
+#
+# CMP 3
+CMP 1 1.01677 0.531675 270 N R2 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 1.01677 0.5139585 90 N 5 0 R2-1
+TOP 1 1.01677 0.5493915 270 N 3 6 R2-2
+#
+# CMP 4
+CMP 1 1.158285 0.14304 180 N R1 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 1.1405685 0.14304 180 N 6 0 R1-1
+TOP 1 1.1760015 0.14304 0 N 3 3 R1-2
+#
+# CMP 5
+CMP 3 0.5905515 0 180 N J3 QTE-020-01-F-D-A-K ;0=1,1=0.0000
+PRP Category 'Board to Board Connectors'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/6924/qte-xxx-xx-x-d-xxx-mkt-6924765.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/6924/qte-xxx-xx-x-d-xxx-mkt-6924765.pdf?src-supplier=Digi-Key'
+PRP Contact_Plating 'Gold'
+PRP Gender 'Male'
+PRP Manufacturer 'Samtec'
+PRP Manufacturer_Part_Number 'QTE-020-01-F-D-A'
+PRP Mated_Stacking_Heights '5mm'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '40'
+PRP Number_of_Positions '40'
+PRP Number_of_Rows '2'
+PRP Package_Quantity '1'
+PRP Packaging 'Tray'
+PRP Pitch '0.031inch'
+PRP Pricing '1=5.61000, 10=5.09400, 25=4.82480, 40=4.71275, 80=4.48825, 230=3.92726, 440=3.81505, 945=3.25402, 2400=3.02960 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series 'QStrip® QTE'
+PRP Stock '179'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM8846-ND'
+PRP Termination 'Solder'
+TOP 0 0.2913389 -0.1216535 0 N 3 11 J3-01
+TOP 1 0.2913389 0.1216535 0 N 0 0 J3-02
+TOP 2 0.322835 -0.1216535 0 N 0 1 J3-03
+TOP 3 0.322835 0.1216535 0 N 0 2 J3-04
+TOP 4 0.354331 -0.1216535 0 N 28 13 J3-05
+TOP 5 0.354331 0.1216535 0 N 28 14 J3-06
+TOP 6 0.3858271 -0.1216535 0 N 16 0 J3-07
+TOP 7 0.3858271 0.1216535 0 N 0 3 J3-08
+TOP 8 0.4173232 -0.1216535 0 N 17 0 J3-09
+TOP 9 0.4173232 0.1216535 0 N 0 4 J3-10
+TOP 10 0.4488192 -0.1216535 0 N 28 15 J3-11
+TOP 11 0.4488192 0.1216535 0 N 28 16 J3-12
+TOP 12 0.4803153 -0.1216535 0 N 14 0 J3-13
+TOP 13 0.4803153 0.1216535 0 N 18 0 J3-14
+TOP 14 0.5118113 -0.1216535 0 N 15 0 J3-15
+TOP 15 0.5118113 0.1216535 0 N 19 0 J3-16
+TOP 16 0.5433074 -0.1216535 0 N 28 17 J3-17
+TOP 17 0.5433074 0.1216535 0 N 28 18 J3-18
+TOP 18 0.5748035 -0.1216535 0 N 12 0 J3-19
+TOP 19 0.5748035 0.1216535 0 N 20 0 J3-20
+TOP 20 0.6062995 -0.1216535 0 N 13 0 J3-21
+TOP 21 0.6062995 0.1216535 0 N 21 0 J3-22
+TOP 22 0.6377956 -0.1216535 0 N 28 19 J3-23
+TOP 23 0.6377956 0.1216535 0 N 28 20 J3-24
+TOP 24 0.6692917 -0.1216535 0 N 0 5 J3-25
+TOP 25 0.6692917 0.1216535 0 N 22 0 J3-26
+TOP 26 0.7007877 -0.1216535 0 N 0 6 J3-27
+TOP 27 0.7007877 0.1216535 0 N 23 0 J3-28
+TOP 28 0.7322838 -0.1216535 0 N 28 21 J3-29
+TOP 29 0.7322838 0.1216535 0 N 28 22 J3-30
+TOP 30 0.7637798 -0.1216535 0 N 11 0 J3-31
+TOP 31 0.7637798 0.1216535 0 N 2 0 J3-32
+TOP 32 0.7952759 -0.1216535 0 N 10 0 J3-33
+TOP 33 0.7952759 0.1216535 0 N 1 0 J3-34
+TOP 34 0.826772 -0.1216535 0 N 0 7 J3-35
+TOP 35 0.826772 0.1216535 0 N 9 0 J3-36
+TOP 36 0.858268 -0.1216535 0 N 0 8 J3-37
+TOP 37 0.858268 0.1216535 0 N 8 0 J3-38
+TOP 38 0.8897641 -0.1216535 0 N 0 9 J3-39
+TOP 39 0.8897641 0.1216535 0 N 7 0 J3-40
+TOP 40 0.954331 -0.080315 0 N 0 11 J3-empty-1
+TOP 41 0.226772 -0.080315 0 N 0 10 J3-empty-2
+TOP 42 0.2580712 0 0 N 28 23 J3-G1
+TOP 43 0.4655515 0 0 N 28 24 J3-G2
+TOP 44 0.7155515 0 0 N 28 25 J3-G3
+TOP 45 0.9230318 0 0 N 28 26 J3-G4
+#
+# CMP 6
+CMP 0 1.166755 0.51668 180 N C2 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 1.1498259 0.51668 180 N 28 12 C2-1
+TOP 1 1.1836841 0.51668 0 N 3 5 C2-2
+#
+# CMP 7
+CMP 0 1.0596 0.669715 270 N C1 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 1.0596 0.6527859 90 N 28 11 C1-1
+TOP 1 1.0596 0.6866441 270 N 3 4 C1-2
+#

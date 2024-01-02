@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [rpi_adapter_mipi_in_out.PcbDoc]
+   Generated File[tinyDualRPi Adapter MIPI_IN_OUT v2.0-Plated.TXT]
+   Generated File[tinyDualRPi Adapter MIPI_IN_OUT v2.0-NonPlated.TXT]
+   Generated File[tinyDualRPi Adapter MIPI_IN_OUT v2.0.LDP]
+   Generated File[tinyDualRPi Adapter MIPI_IN_OUT v2.0.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 7:34:43 AM On 12/19/2023

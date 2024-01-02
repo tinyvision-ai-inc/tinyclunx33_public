@@ -1,0 +1,155 @@
+#
+#Component attribute names
+#
+@0 .comp_mount_type
+@1 .comp_height
+
+# CMP 0
+CMP 2 0.5835602 0.73802 180 N J2 1-84953-5 ;0=1,1=0.0000
+PRP Actuator_Color 'Black'
+PRP Actuator_Material 'Nylon,Glass,Polyamide'
+PRP Category 'FFC / FPC'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669110.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669110.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669111.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669111.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669112.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669112.pdf?src-supplier=Digi-Key'
+PRP Connector_System 'Flex-to-Board'
+PRP Connector_Type 'Receptacle,Connector,Socket'
+PRP Contact_Current_Rating '1A'
+PRP Contact_Location 'Top'
+PRP Contact_Material 'Bronze'
+PRP Contact_Plating 'Tin,Bright'
+PRP Current_Rating '1A'
+PRP Depth '7.3mm'
+PRP ELV 'Compliant'
+PRP Flammability_Rating 'UL94 V-0'
+PRP Gender 'Receptacle'
+PRP Height '2.56mm'
+PRP Housing_Color 'Natural'
+PRP Housing_Material 'Polymer'
+PRP Length '22.92mm'
+PRP Manufacturer 'TE Connectivity'
+PRP Manufacturer_Part_Number '1-84953-5'
+PRP Mating_Alignment 'Yes (With)'
+PRP Max_Operating_Temperature '85°C'
+PRP Max_Voltage_Rating_(AC) '200V'
+PRP Min_Operating_Temperature '-40°C'
+PRP Mount 'Surface Mount'
+PRP Number_of_Contacts '15'
+PRP Number_of_Positions '15'
+PRP Number_of_Rows '1'
+PRP Orientation 'Right Angle'
+PRP Package_Quantity '1200'
+PRP Packaging 'Tape and Reel'
+PRP PCB_Mount_Alignment 'No (Without)'
+PRP PCB_Mount_Retention 'With'
+PRP PCB_Mounting_Orientation 'Right Angle'
+PRP Pitch '0.039inch'
+PRP Plating_Thickness '2um'
+PRP Pricing_1 '1=1.02000, 10=0.97700, 25=0.93400, 50=0.92100, 100=0.80470, 250=0.77460, 500=0.73158 (USD)'
+PRP Radiation_Hardening 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Sealable 'No (Without)'
+PRP Series 'FPC'
+PRP Shielding 'Unshielded'
+PRP Shrouded 'Yes (With)'
+PRP Stock_1 '9836'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'A101405CT-ND'
+PRP Termination 'SMD/SMT'
+PRP Voltage_Rating '200V'
+PRP Width '0.2575inch'
+PRP Wire/Cable_Type 'Flat Flex'
+TOP 0 0.3079696 0.73802 0 N 26 25 J2-1
+TOP 1 0.3473397 0.73802 0 N 19 1 J2-2
+TOP 2 0.3867098 0.73802 0 N 18 1 J2-3
+TOP 3 0.4260799 0.73802 0 N 26 22 J2-4
+TOP 4 0.46545 0.73802 0 N 17 1 J2-5
+TOP 5 0.50482 0.73802 0 N 16 1 J2-6
+TOP 6 0.5441901 0.73802 0 N 26 26 J2-7
+TOP 7 0.5835602 0.73802 0 N 15 1 J2-8
+TOP 8 0.6229303 0.73802 0 N 14 1 J2-9
+TOP 9 0.6623004 0.73802 0 N 26 27 J2-10
+TOP 10 0.7016704 0.73802 0 N 5 1 J2-11
+TOP 11 0.7410405 0.73802 0 N 4 1 J2-12
+TOP 12 0.7804106 0.73802 0 N 3 1 J2-13
+TOP 13 0.8197807 0.73802 0 N 2 1 J2-14
+TOP 14 0.8591508 0.73802 0 N 1 1 J2-15
+TOP 15 0.1902531 0.8482562 0 N 26 24 J2-M1
+TOP 16 0.9768673 0.8482562 0 N 26 23 J2-M2
+#
+# CMP 1
+CMP 0 0.5905515 0 180 N J3 QTE-020-01-F-D-A-K ;0=1,1=0.0000
+PRP Category 'Board to Board Connectors'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/6924/qte-xxx-xx-x-d-xxx-mkt-6924765.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/6924/qte-xxx-xx-x-d-xxx-mkt-6924765.pdf?src-supplier=Digi-Key'
+PRP Contact_Plating 'Gold'
+PRP Gender 'Male'
+PRP Manufacturer 'Samtec'
+PRP Manufacturer_Part_Number 'QTE-020-01-F-D-A'
+PRP Mated_Stacking_Heights '5mm'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '40'
+PRP Number_of_Positions '40'
+PRP Number_of_Rows '2'
+PRP Package_Quantity '1'
+PRP Packaging 'Tray'
+PRP Pitch '0.031inch'
+PRP Pricing '1=5.61000, 10=5.09400, 25=4.82480, 40=4.71275, 80=4.48825, 230=3.92726, 440=3.81505, 945=3.25402, 2400=3.02960 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series 'QStrip® QTE'
+PRP Stock '179'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM8846-ND'
+PRP Termination 'Solder'
+TOP 0 0.2913389 -0.1216535 0 N 8 3 J3-01
+TOP 1 0.2913389 0.1216535 0 N 0 0 J3-02
+TOP 2 0.322835 -0.1216535 0 N 0 1 J3-03
+TOP 3 0.322835 0.1216535 0 N 0 2 J3-04
+TOP 4 0.354331 -0.1216535 0 N 26 8 J3-05
+TOP 5 0.354331 0.1216535 0 N 26 9 J3-06
+TOP 6 0.3858271 -0.1216535 0 N 18 0 J3-07
+TOP 7 0.3858271 0.1216535 0 N 0 3 J3-08
+TOP 8 0.4173232 -0.1216535 0 N 19 0 J3-09
+TOP 9 0.4173232 0.1216535 0 N 0 4 J3-10
+TOP 10 0.4488192 -0.1216535 0 N 26 10 J3-11
+TOP 11 0.4488192 0.1216535 0 N 26 11 J3-12
+TOP 12 0.4803153 -0.1216535 0 N 16 0 J3-13
+TOP 13 0.4803153 0.1216535 0 N 20 0 J3-14
+TOP 14 0.5118113 -0.1216535 0 N 17 0 J3-15
+TOP 15 0.5118113 0.1216535 0 N 21 0 J3-16
+TOP 16 0.5433074 -0.1216535 0 N 26 12 J3-17
+TOP 17 0.5433074 0.1216535 0 N 26 13 J3-18
+TOP 18 0.5748035 -0.1216535 0 N 14 0 J3-19
+TOP 19 0.5748035 0.1216535 0 N 22 0 J3-20
+TOP 20 0.6062995 -0.1216535 0 N 15 0 J3-21
+TOP 21 0.6062995 0.1216535 0 N 23 0 J3-22
+TOP 22 0.6377956 -0.1216535 0 N 26 14 J3-23
+TOP 23 0.6377956 0.1216535 0 N 26 15 J3-24
+TOP 24 0.6692917 -0.1216535 0 N 0 5 J3-25
+TOP 25 0.6692917 0.1216535 0 N 24 0 J3-26
+TOP 26 0.7007877 -0.1216535 0 N 0 6 J3-27
+TOP 27 0.7007877 0.1216535 0 N 25 0 J3-28
+TOP 28 0.7322838 -0.1216535 0 N 26 16 J3-29
+TOP 29 0.7322838 0.1216535 0 N 26 17 J3-30
+TOP 30 0.7637798 -0.1216535 0 N 13 0 J3-31
+TOP 31 0.7637798 0.1216535 0 N 7 1 J3-32
+TOP 32 0.7952759 -0.1216535 0 N 12 1 J3-33
+TOP 33 0.7952759 0.1216535 0 N 6 1 J3-34
+TOP 34 0.826772 -0.1216535 0 N 0 7 J3-35
+TOP 35 0.826772 0.1216535 0 N 11 0 J3-36
+TOP 36 0.858268 -0.1216535 0 N 0 8 J3-37
+TOP 37 0.858268 0.1216535 0 N 10 0 J3-38
+TOP 38 0.8897641 -0.1216535 0 N 0 9 J3-39
+TOP 39 0.8897641 0.1216535 0 N 9 1 J3-40
+TOP 40 0.954331 -0.080315 0 N 0 11 J3-empty-1
+TOP 41 0.226772 -0.080315 0 N 0 10 J3-empty-2
+TOP 42 0.2580712 0 0 N 26 18 J3-G1
+TOP 43 0.4655515 0 0 N 26 19 J3-G2
+TOP 44 0.7155515 0 0 N 26 20 J3-G3
+TOP 45 0.9230318 0 0 N 26 21 J3-G4
+#

@@ -1,0 +1,14 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 7:34:03 AM On 12/19/2023
+
+Output: Bill of Materials
+Type  : BOM
+From  : Variant [[No Variations]] of Project [rpi_adapter_mipi_in_out.PrjPcb]
+   Generated File[tinyDualRPi Adapter MIPI_IN_OUT v2.0.xlsx]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 7:34:05 AM On 12/19/2023

@@ -1,0 +1,3 @@
+Layer Pairs Export File for PCB: E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\PCB\rpi_adapter_mipi_in_out.PcbDoc
+LayersSetName=Top_Bot_Plated_Thru_Holes|DrillFile=tinydualrpi adapter mipi_in_out v2.0-plated.txt|DrillLayers=gtl,g1,g2,gbl
+LayersSetName=Top_Bot_NonPlated_Thru_Holes|DrillFile=tinydualrpi adapter mipi_in_out v2.0-nonplated.txt|DrillLayers=gtl,g1,g2,gbl

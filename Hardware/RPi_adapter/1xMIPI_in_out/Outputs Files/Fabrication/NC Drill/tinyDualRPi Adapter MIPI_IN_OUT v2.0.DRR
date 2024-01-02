@@ -1,0 +1,17 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: rpi_adapter_mipi_in_out.PcbDoc   12/19/2023  7:34:43 AM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII Plated RoundHoles File : tinyDualRPi Adapter MIPI_IN_OUT v2.0-Plated.TXT
+ASCII Non-Plated RoundHoles File : tinyDualRPi Adapter MIPI_IN_OUT v2.0-NonPlated.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      8mil (0.203mm)                                            Round             205       PTH        19.44inch (493.68mm)
+T2      40mil (1.02mm)                                            Round             2         NPTH       0.73inch (18.48mm)
+T3      118mil (3mm)            +/-2mil (0.051mm)                 Round             2         NPTH       1.18inch (30.00mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              209
+
+Total Processing Time (hh:mm:ss) : 00:00:00

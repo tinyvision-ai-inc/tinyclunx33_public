@@ -1,0 +1,10 @@
+DRC Rules Export File for PCB: E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\PCB\rpi_adapter_mipi_in_out.PcbDoc
+RuleKind=Clearance|RuleName=Clearance_MIPI|Scope=Board|Minimum=5.00
+RuleKind=Clearance|RuleName=Clearance_Keepout|Scope=Board|Minimum=0.01
+RuleKind=Clearance|RuleName=Clearance_Poly|Scope=Board|Minimum=25.00
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion_via|Scope=Board|Minimum=3.00
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=2.50
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=5.00
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=6.00
+RuleKind=Clearance|RuleName=Clearance_FID|Scope=Board|Minimum=6.00

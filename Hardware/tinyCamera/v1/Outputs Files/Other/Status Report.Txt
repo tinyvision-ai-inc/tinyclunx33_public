@@ -1,0 +1,10 @@
+Output: WireList Netlist
+Type  : WireListNetlist
+From  : Project [tinyCamera.PrjPcb]
+   Generated File[tinyCamera v2.0.NET]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 2:19:02 PM On 12/27/2023

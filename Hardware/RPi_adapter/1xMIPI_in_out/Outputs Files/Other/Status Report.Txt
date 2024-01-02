@@ -1,0 +1,14 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 7:33:04 AM On 12/19/2023
+
+Output: Export STEP
+Type  : ExportSTEP
+From  : Variant [[No Variations]] of PCB Document [rpi_adapter_mipi_in_out.PcbDoc]
+   Generated File[tinyDualRPi Adapter MIPI_IN_OUT v2.0.step]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 7:33:07 AM On 12/19/2023

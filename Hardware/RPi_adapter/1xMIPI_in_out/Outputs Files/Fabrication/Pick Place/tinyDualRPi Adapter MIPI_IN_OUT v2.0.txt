@@ -1,0 +1,25 @@
+Altium Designer Pick and Place Locations
+E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\Pick Place\tinyDualRPi Adapter MIPI_IN_OUT v2.0.txt
+
+========================================================================================================================
+File Design Information:
+
+Date:       19/12/23
+Time:       07:34
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mil
+
+Designator Comment            Layer       Footprint               Center-X(mil) Center-Y(mil) Rotation Description                                             
+SB5        Solderbridge       TopLayer    Solderbridge            1018.113      693.591       0        Solderbridge                                            
+SB4        Solderbridge       TopLayer    Solderbridge            1171.772      454.685       270      Solderbridge                                            
+SB3        Solderbridge       TopLayer    Solderbridge            1101.772      454.685       270      Solderbridge                                            
+SB2        Solderbridge       TopLayer    Solderbridge            956.772       454.685       90       Solderbridge                                            
+SB1        Solderbridge       TopLayer    Solderbridge            1026.772      454.685       90       Solderbridge                                            
+J2         1-84953-5          BottomLayer TE_1-84953-5            583.560       793.138       0        "Conn FPC Connector SKT 15 POS 1mm Solder RA SMD T/R"   
+T5         TP_S               TopLayer    TP_1mm                  991.770       376.680       0        "test point"                                            
+T4         TP_S               TopLayer    TP_1mm                  886.772       224.685       0        "test point"                                            
+T3         TP_S               TopLayer    TP_1mm                  991.770       311.680       0        "test point"                                            
+T2         TP_S               TopLayer    TP_1mm                  762.772       -116.315      0        "test point"                                            
+J1         1-84953-5          TopLayer    TE_1-84953-5            583.555       793.140       180      "Conn FPC Connector SKT 15 POS 1mm Solder RA SMD T/R"   
+J3         QTE-020-01-F-D-A-K BottomLayer SAMTEC_QTE-020-01-X-D-A 590.552       0.000         0        "Q Strip® High-Speed Ground Plane Header, 0.80mm Pitch" 

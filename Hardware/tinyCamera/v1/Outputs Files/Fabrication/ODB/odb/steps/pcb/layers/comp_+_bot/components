@@ -1,0 +1,792 @@
+#
+#Component attribute names
+#
+@0 .comp_mount_type
+@1 .comp_height
+
+# CMP 0
+CMP 25 0.165 0.84 270 N T18 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.165 0.84 270 N 4 1 T18-1
+#
+# CMP 1
+CMP 25 0.545 0.855 270 N T16 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.545 0.855 270 N 52 5 T16-1
+#
+# CMP 2
+CMP 25 0.375 0.43 270 N T14 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.375 0.43 270 N 23 1 T14-1
+#
+# CMP 3
+CMP 25 0.405 0.43 270 N T12 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.405 0.43 270 N 24 1 T12-1
+#
+# CMP 4
+CMP 25 0.436 0.624 270 N T10 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.436 0.624 270 N 25 1 T10-1
+#
+# CMP 5
+CMP 25 0.436 0.591 180 N T9 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.436 0.591 0 N 26 1 T9-1
+#
+# CMP 6
+CMP 25 0.42 0.49 180 N T5 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.42 0.49 0 N 21 1 T5-1
+#
+# CMP 7
+CMP 25 0.455 0.49 180 N T3 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.455 0.49 0 N 22 1 T3-1
+#
+# CMP 8
+CMP 24 0.33 -0.165 180 N T1 3V3 ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.33 -0.165 0 N 76 11 T1-1
+#
+# CMP 9
+CMP 4 -0.428 -0.389 270 N FID6 empty_part_name ;0=1,1=0.0512
+PRP Notes 'DNP'
+TOP 0 -0.428 -0.389 270 N 0 2 FID6-1
+#
+# CMP 10
+CMP 4 -0.395 0.835 270 N FID5 empty_part_name ;0=1,1=0.0512
+PRP Notes 'DNP'
+TOP 0 -0.395 0.835 270 N 0 0 FID5-1
+#
+# CMP 11
+CMP 4 1.08 -0.155 270 N FID4 empty_part_name ;0=1,1=0.0512
+PRP Notes 'DNP'
+TOP 0 1.08 -0.155 270 N 0 1 FID4-1
+#
+# CMP 12
+CMP 25 0.11 0.21 270 N T35 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.11 0.21 270 N 7 0 T35-1
+#
+# CMP 13
+CMP 24 0.665 0.59 270 N T34 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.665 0.59 270 N 9 0 T34-1
+#
+# CMP 14
+CMP 24 0.61 0.59 270 N T32 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.61 0.59 270 N 10 0 T32-1
+#
+# CMP 15
+CMP 25 0.75 0.52 270 N T30 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.75 0.52 270 N 66 0 T30-1
+#
+# CMP 16
+CMP 25 0.75 0.475 270 N T28 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.75 0.475 270 N 69 0 T28-1
+#
+# CMP 17
+CMP 22 0.965 0.405 180 N Q2 RU1J002YNTCL ;0=1,1=0.0000
+PRP Automotive 'No'
+PRP Category 'Trans'
+PRP ComponentLink2Description 'Datasheet'
+PRP ComponentLink2URL 'https://d1d2qsbl8m0m72.cloudfront.net/en/products/databook/datasheet/discrete/transistor/mosfet/ru1j002yn-e.pdf'
+PRP Continuous_Drain_Current '200mA'
+PRP Depletion_Mode 'False'
+PRP Device_Class_L1 'Discrete Semiconductors'
+PRP Device_Class_L2 'Transistors'
+PRP Device_Class_L3 'MOSFETs'
+PRP Drain_to_Source_Breakdown_Voltage '50V'
+PRP Drain_to_Source_Resistance '1.6O'
+PRP Drain_To_Source_Voltage '50V'
+PRP Gate_To_Source_Voltage '8V'
+PRP Height '1.05mm'
+PRP Input_Capacitace_At_Vds '26pF @ 10V'
+PRP Lead_Free 'Yes'
+PRP Manufacturer 'Rohm'
+PRP Manufacturer_Part_Number 'RU1J002YNTCL'
+PRP Max_Forward_Diode_Voltage '1.2V'
+PRP Max_Junction_Temp '+150°C'
+PRP Mouser_Description 'MOSFET 0.9V Drive Nch MOSFET'
+PRP Number_Of_Channels '1'
+PRP Number_Of_N_Channels '1'
+PRP Octopart 'https://octopart.com/ru1j002yntcl-rohm-47197697'
+PRP Package 'UMT3F'
+PRP Power_Dissipation '150mW'
+PRP Pulse_Drain_Current '800mA'
+PRP RoHS 'TRUE'
+PRP Rthja_Max '833°C/W'
+PRP Standoff_Height '0mm'
+PRP Supplier_1 'Mouser'
+PRP Supplier_Part_Number_1 '755-RU1J002YNTCL'
+PRP Temperature 'to +150°C'
+PRP Threshold_Vgs_Max '0.8V'
+PRP Threshold_Vgs_Min '0.3V'
+PRP Turn_Off_Delay_Time '17ns'
+PRP Turn_On_Delay_Time '5ns'
+TOP 0 0.936063 0.3794094 0 N 14 0 Q2-1
+TOP 1 0.936063 0.4305906 0 N 77 23 Q2-2
+TOP 2 0.993937 0.405 0 N 12 0 Q2-3
+#
+# CMP 18
+CMP 25 0.63 -0.25 180 N T6 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.63 -0.25 0 N 58 0 T6-1
+#
+# CMP 19
+CMP 25 0.64 -0.4 180 N T7 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.64 -0.4 0 N 50 8 T7-1
+#
+# CMP 20
+CMP 25 0.15 0.66752 180 N T8 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.15 0.66752 0 N 19 0 T8-1
+#
+# CMP 21
+CMP 25 0.363 0.574 270 N T11 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.363 0.574 270 N 18 0 T11-1
+#
+# CMP 22
+CMP 25 0.363 0.607 270 N T13 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.363 0.607 270 N 17 0 T13-1
+#
+# CMP 23
+CMP 25 0.23 0.66752 270 N T15 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.23 0.66752 270 N 16 0 T15-1
+#
+# CMP 24
+CMP 25 0.27 0.66752 270 N T17 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.27 0.66752 270 N 15 0 T17-1
+#
+# CMP 25
+CMP 25 0.11 0.66752 270 N T4 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.11 0.66752 270 N 20 0 T4-1
+#
+# CMP 26
+CMP 18 1.114695 0.32516 180 N R18 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 1.0969784 0.32516 180 N 76 9 R18-1
+TOP 1 1.1324116 0.32516 0 N 28 0 R18-2
+#
+# CMP 27
+CMP 22 0.9650001 0.29 180 N Q1 RU1J002YNTCL ;0=1,1=0.0000
+PRP Automotive 'No'
+PRP Category 'Trans'
+PRP ComponentLink2Description 'Datasheet'
+PRP ComponentLink2URL 'https://d1d2qsbl8m0m72.cloudfront.net/en/products/databook/datasheet/discrete/transistor/mosfet/ru1j002yn-e.pdf'
+PRP Continuous_Drain_Current '200mA'
+PRP Depletion_Mode 'False'
+PRP Device_Class_L1 'Discrete Semiconductors'
+PRP Device_Class_L2 'Transistors'
+PRP Device_Class_L3 'MOSFETs'
+PRP Drain_to_Source_Breakdown_Voltage '50V'
+PRP Drain_to_Source_Resistance '1.6O'
+PRP Drain_To_Source_Voltage '50V'
+PRP Gate_To_Source_Voltage '8V'
+PRP Height '1.05mm'
+PRP Input_Capacitace_At_Vds '26pF @ 10V'
+PRP Lead_Free 'Yes'
+PRP Manufacturer 'Rohm'
+PRP Manufacturer_Part_Number 'RU1J002YNTCL'
+PRP Max_Forward_Diode_Voltage '1.2V'
+PRP Max_Junction_Temp '+150°C'
+PRP Mouser_Description 'MOSFET 0.9V Drive Nch MOSFET'
+PRP Number_Of_Channels '1'
+PRP Number_Of_N_Channels '1'
+PRP Octopart 'https://octopart.com/ru1j002yntcl-rohm-47197697'
+PRP Package 'UMT3F'
+PRP Power_Dissipation '150mW'
+PRP Pulse_Drain_Current '800mA'
+PRP RoHS 'TRUE'
+PRP Rthja_Max '833°C/W'
+PRP Standoff_Height '0mm'
+PRP Supplier_1 'Mouser'
+PRP Supplier_Part_Number_1 '755-RU1J002YNTCL'
+PRP Temperature 'to +150°C'
+PRP Threshold_Vgs_Max '0.8V'
+PRP Threshold_Vgs_Min '0.3V'
+PRP Turn_Off_Delay_Time '17ns'
+PRP Turn_On_Delay_Time '5ns'
+TOP 0 0.9360631 0.2644095 0 N 71 0 Q1-1
+TOP 1 0.9360631 0.3155905 0 N 77 22 Q1-2
+TOP 2 0.993937 0.29 0 N 27 0 Q1-3
+#
+# CMP 28
+CMP 1 -0.4 0.02 90 N C1 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 -0.4 0.0369291 270 N 77 40 C1-1
+TOP 1 -0.4 0.0030708 90 N 11 2 C1-2
+#
+# CMP 29
+CMP 1 0.11 0.31 180 N C17 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 0.0930709 0.31 180 N 77 39 C17-1
+TOP 1 0.1269291 0.31 0 N 76 14 C17-2
+#
+# CMP 30
+CMP 26 -0.365 -0.115 270 N TP1 5019 ;0=1,1=0.0000
+PRP ComponentLink1Description 'Manufacturer URL'
+PRP ComponentLink1URL 'http://www.keyelco.com/'
+PRP ComponentLink2Description 'Datasheet'
+PRP ComponentLink2URL 'http://keyelco.com/userAssets/file/M65p56.pdf'
+PRP Manufacturer 'Keystone Electronics'
+PRP Manufacturer_Part_Number '5019'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '36-5019CT-ND'
+TOP 0 -0.365 -0.115 270 N 77 37 TP1-1
+#
+# CMP 31
+CMP 18 0.519995 -0.375 270 N R4 22 ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-0722RL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-22.0LRCT-ND'
+PRP Value '22'
+TOP 0 0.519995 -0.3927165 90 N 8 0 R4-1
+TOP 1 0.519995 -0.3572835 270 N 6 0 R4-2
+#
+# CMP 32
+CMP 18 1.115635 0.52 180 N R3 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 1.0979184 0.52 180 N 11 1 R3-1
+TOP 1 1.1333516 0.52 0 N 59 0 R3-2
+#
+# CMP 33
+CMP 18 1.1150049 0.39 180 N R2 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 1.0972885 0.39 180 N 76 10 R2-1
+TOP 1 1.1327215 0.39 0 N 13 0 R2-2
+#
+# CMP 34
+CMP 18 1.1146849 0.455 180 N R1 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 1.0969685 0.455 180 N 50 7 R1-1
+TOP 1 1.1324015 0.455 0 N 60 0 R1-2
+#
+# CMP 35
+CMP 28 0.75364 -0.395 90 N U6 NCP110AFCT120T2G ;0=1,1=0.0000
+PRP Category 'Voltage Regulators - Linear'
+PRP Manufacturer 'ON Semiconductor'
+PRP Manufacturer_Part_Number 'NCP110AFCT120T2G'
+PRP Pricing_1 '1=0.41000, 10=0.33100, 25=0.30280, 100=0.22520, 250=0.20412, 500=0.16892, 1000=0.12669, 2500=0.11613 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Stock_1 '4650'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '488-NCP110AFCT120T2GCT-ND'
+TOP 0 0.7467502 -0.3881104 90 N 76 6 U6-A1
+TOP 1 0.7467504 -0.4018898 90 N 52 2 U6-A2
+TOP 2 0.7605296 -0.3881102 90 N 76 7 U6-B1
+TOP 3 0.7605298 -0.4018896 90 N 77 24 U6-B2
+#
+# CMP 36
+CMP 18 0.115 0.349995 0 N R13 10K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Samsung Electro-Mechanics'
+PRP Manufacturer_Part_Number 'RC1005F103CS'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '1276-3431-2-ND'
+PRP Value '10K'
+TOP 0 0.1327165 0.349995 0 N 76 12 R13-1
+TOP 1 0.0972835 0.349995 180 N 54 0 R13-2
+#
+# CMP 37
+CMP 9 0.3533425 0.8435158 180 N J1 DF37NC-30DS-0.4V(51) ;0=1,1=0.0000
+PRP Category 'Connectors'
+PRP ComponentLink1Description 'http://www.mouser.com/ds/2/185/DF37_catalog-939311.pdf?src-supplier=Mouser'
+PRP ComponentLink1URL 'http://www.mouser.com/ds/2/185/DF37_catalog-939311.pdf?src-supplier=Mouser'
+PRP ComponentLink2Description 'https://www.hirose.com/product/document?clcode=CL0684-3008-1-53&amp;productname=DF37B-20DP-0.4V(53)&amp;series=DF37&amp;documenttype=Catalog&amp;lang=en&amp;documentid=D49052_en&src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://www.hirose.com/product/document?clcode=CL0684-3008-1-53&amp;productname=DF37B-20DP-0.4V(53)&amp;series=DF37&amp;documenttype=Catalog&amp;lang=en&amp;documentid=D49052_en&src-supplier=Digi-Key'
+PRP ComponentLink3Description 'https://www.hirose.com/product/en/download_file/key_name/DF37NC-30DS-0.4V%2851%29/category/Specification%20Sheet/doc_file_id/46745/?file_category_id=9&item_id=06843313551&is_series=&src-supplier=Digi-Key'
+PRP ComponentLink3URL 'https://www.hirose.com/product/en/download_file/key_name/DF37NC-30DS-0.4V%2851%29/category/Specification%20Sheet/doc_file_id/46745/?file_category_id=9&item_id=06843313551&is_series=&src-supplier=Digi-Key'
+PRP ComponentLink4Description 'https://datasheet.octopart.com/DF37NC-30DS-0.4V%2851%29-Hirose-datasheet-136945248.pdf?src-supplier=LKR'
+PRP ComponentLink4URL 'https://datasheet.octopart.com/DF37NC-30DS-0.4V%2851%29-Hirose-datasheet-136945248.pdf?src-supplier=LKR'
+PRP Connector_Type 'Receptacle'
+PRP Contact_Material 'Bronze'
+PRP Contact_Plating 'Gold'
+PRP Current_Rating '300mA'
+PRP Insulation_Resistance '50MR'
+PRP Lead_Free 'Lead Free'
+PRP Manufacturer 'Hirose'
+PRP Manufacturer_Part_Number 'DF37NC-30DS-0.4V(51)'
+PRP Mated_Stacking_Heights '0.98mm'
+PRP Max_Operating_Temperature '85°C'
+PRP Min_Operating_Temperature '-35°C'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Positions '30'
+PRP Number_of_Rows '2'
+PRP Package_Quantity '8000'
+PRP Packaging 'Tape and Reel'
+PRP Pitch '0.4mm'
+PRP Pricing '1=1.08000, 10=0.91600, 25=0.87800, 50=0.85960, 100=0.82210, 250=0.74740, 500=0.67266, 1000=0.59792, 2500=0.54186 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series 'DF37'
+PRP Stock '2921'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'H11856CT-ND'
+PRP Termination 'SMD/SMT'
+PRP Voltage_Rating '30V'
+TOP 0 0.4635787 0.8956812 0 N 0 3 J1-1
+TOP 1 0.4478307 0.8956812 0 N 0 4 J1-2
+TOP 2 0.4320827 0.8956812 0 N 5 1 J1-3
+TOP 3 0.4163346 0.8956812 0 N 52 4 J1-4
+TOP 4 0.4005866 0.8956812 0 N 5 2 J1-5
+TOP 5 0.3848386 0.8956812 0 N 77 28 J1-6
+TOP 6 0.3690905 0.8956812 0 N 6 1 J1-7
+TOP 7 0.3533425 0.8956812 0 N 77 30 J1-8
+TOP 8 0.3375945 0.8956812 0 N 77 31 J1-9
+TOP 9 0.3218464 0.8956812 0 N 4 0 J1-10
+TOP 10 0.3060984 0.8956812 0 N 0 5 J1-11
+TOP 11 0.2903504 0.8956812 0 N 77 33 J1-12
+TOP 12 0.2746023 0.8956812 0 N 0 6 J1-13
+TOP 13 0.2588543 0.8956812 0 N 0 8 J1-14
+TOP 14 0.2431063 0.8956812 0 N 77 35 J1-15
+TOP 15 0.2431063 0.7913504 0 N 77 36 J1-16
+TOP 16 0.2588543 0.7913504 0 N 0 9 J1-17
+TOP 17 0.2746023 0.7913504 0 N 0 7 J1-18
+TOP 18 0.2903504 0.7913504 0 N 77 34 J1-19
+TOP 19 0.3060984 0.7913504 0 N 22 0 J1-20
+TOP 20 0.3218464 0.7913504 0 N 21 0 J1-21
+TOP 21 0.3375945 0.7913504 0 N 77 32 J1-22
+TOP 22 0.3533425 0.7913504 0 N 26 0 J1-23
+TOP 23 0.3690905 0.7913504 0 N 25 0 J1-24
+TOP 24 0.3848386 0.7913504 0 N 77 29 J1-25
+TOP 25 0.4005866 0.7913504 0 N 24 0 J1-26
+TOP 26 0.4163346 0.7913504 0 N 23 0 J1-27
+TOP 27 0.4320827 0.7913504 0 N 77 27 J1-28
+TOP 28 0.4478307 0.7913504 0 N 49 0 J1-29
+TOP 29 0.4635787 0.7913504 0 N 48 0 J1-30
+#
+# CMP 38
+CMP 1 0.11 0.27 180 N C7 4.7uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'C1005X5R1A475M050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-8023-1-ND'
+PRP Value '4.7uF'
+TOP 0 0.0930709 0.27 180 N 77 38 C7-1
+TOP 1 0.1269291 0.27 0 N 76 13 C7-2
+#
+# CMP 39
+CMP 1 0.76 -0.44 0 N C6 4.7uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'C1005X5R1A475M050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-8023-1-ND'
+PRP Value '4.7uF'
+TOP 0 0.7769291 -0.44 0 N 77 25 C6-1
+TOP 1 0.7430709 -0.44 180 N 52 3 C6-2
+#
+# CMP 40
+CMP 1 0.76 -0.35 0 N C5 4.7uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'C1005X5R1A475M050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-8023-1-ND'
+PRP Value '4.7uF'
+TOP 0 0.7769291 -0.35 0 N 77 26 C5-1
+TOP 1 0.7430709 -0.35 180 N 76 8 C5-2
+#

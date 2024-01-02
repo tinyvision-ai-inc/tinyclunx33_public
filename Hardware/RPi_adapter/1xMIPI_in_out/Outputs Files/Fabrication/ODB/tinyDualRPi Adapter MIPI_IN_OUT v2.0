@@ -1,0 +1,110 @@
+*************************************************************
+FileName = rpi_adapter_mipi_in_out.PcbDoc
+ODB++ directory structure
+*************************************************************
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\profile
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\stephdr
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\dielectric_2\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\dielectric_2\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\dielectric_1\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\dielectric_1\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\dielectric_3\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\dielectric_3\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\drill_non-plated_bottom-top\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\drill_non-plated_bottom-top\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\drill_non-plated_bottom-top\tools
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\drill_plated_bottom-top\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\drill_plated_bottom-top\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\drill_plated_bottom-top\tools
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_3d_body_top_bottom\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_3d_body_top_bottom\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\keep-out_layer\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\keep-out_layer\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\3d_bottom\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\3d_bottom\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_courtyard\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_courtyard\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\bottom_paste\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\bottom_paste\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\bottom_solder\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\bottom_solder\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\assembly_top_bottom_bottom\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\assembly_top_bottom_bottom\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\assembly_top_bottom_top\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\assembly_top_bottom_top\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\bottom_overlay\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\bottom_overlay\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\l02_gnd\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\l02_gnd\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_paste\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_paste\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\bottom_layer\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\bottom_layer\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_solder\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_solder\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\l03_gnd\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\l03_gnd\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_overlay\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_overlay\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_layer\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\top_layer\attrlist
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\comp_+_top\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\comp_+_top\components
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\comp_+_bot\features
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\layers\comp_+_bot\components
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\steps\pcb\eda\data
+
+Generated File : E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\mipi_in_out_rev2\Outputs Files\Fabrication\ODB\odb\matrix\matrix
+

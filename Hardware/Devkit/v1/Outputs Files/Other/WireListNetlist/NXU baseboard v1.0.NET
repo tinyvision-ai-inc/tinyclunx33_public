@@ -1,0 +1,1092 @@
+Wire List
+
+<<< Component List >>>
+STANDOFF M2.5                   BH1            MH_3MM
+STANDOFF M2.5                   BH2            MH_3MM
+STANDOFF M2.5                   BH3            MH_3MM
+STANDOFF M2.5                   BH4            MH_3MM
+STANDOFF M2.5                   BH5            MH_3MM
+0.1uF                           C1             CAPC1005X55USR
+10uF                            C2             CAP_0603
+47uF                            C3             CAP_0603
+0.1uF                           C4             CAPC0603X33N
+4.7uF                           C5             CAPC1005X55USR
+4.7uF                           C6             CAPC1005X55USR
+4.7uF                           C7             CAPC1005X55USR
+0.1uF                           C9             CAPC1005X55USR
+0.1uF                           C10            CAPC1005X55USR
+0.1uF                           C11            CAPC1005X55USR
+0.1uF                           C12            CAPC1005X55USR
+1uF                             C13            CAPC1005X55USR
+1uF                             C15            CAPC1005X55USR
+0.1uF                           C17            CAPC1005X55USR
+0.1uF                           C18            CAPC1005X55USR
+0.1uF                           C19            CAPC1005X55USR
+0.1uF                           C21            CAPC1005X55USR
+0.1uF                           C22            CAPC1005X55USR
+0.1uF                           C47            CAPC1005X55USR
+0.1uF                           C48            CAPC1005X55USR
+0.1uF                           C49            CAPC1005X55USR
+0.1uF                           C50            CAPC1005X55USR
+4.7uF                           C51            CAPC1005X55USR
+0.1uF                           C52            CAPC1005X55USR
+4.7uF                           C53            CAPC1005X55USR
+0.1uF                           C54            CAPC1005X55USR
+0.1uF                           C55            CAPC1005X55USR
+0.1uF                           C56            CAPC1005X55USR
+0.1uF                           C57            CAPC1005X55USR
+0.1uF                           C64            CAPC1005X55USR
+1uF                             C71            CAPC1005X55USR
+0.1uF                           C83            CAPC1005X55USR
+0.1uF                           C139           CAPC1005X55USR
+0.1uF                           C143           CAPC1005X55USR
+4.7uF                           C144           CAPC1005X55USR
+LTST-C191KGKT                   D1             LED_0603
+PUSB3F96X                       D2             DFN2510A-10
+LTST-C191KGKT                   D3             LED_0603
+PUSB3F96X                       D4             DFN2510A-10
+LTST-C191KGKT                   D5             LED_0603
+LTST-C191KGKT                   D6             LED_0603
+CMS06(TE12L,Q,M)                D7             SOD-128
+CMS06(TE12L,Q,M)                D8             SOD-128
+120Ohms                         FB4            0402_FB
+120Ohms                         FB9            0402_FB
+120Ohms                         FB15           0402_FB
+                                FID1           FID_040
+                                FID2           FID_040
+                                FID3           FID_040
+QSE-020-01-F-D-A-K              J1             SAMTEC_QSE-020-01-XXX-D-A-L
+DF40C-60DS-0.4V(51)             J2             DF40C60DS04V51
+DF40C-60DS-0.4V(51)             J3             DF40C60DS04V51
+QSE-020-01-F-D-A-K              J4             SAMTEC_QSE-020-01-XXX-D-A-L
+FTSH-105-01-L-DV-K-TR           J5             FTSH-105-01-XXX-DV-K
+CX90B1-24P                      J6             HRS_CX90B1-24P
+Header 3X2_SMD                  J7             HDR3X2_MALE_2.54MM_SAMTEC-A-T
+Header 6X2_SMD                  J8             HDR6X2_MALE_2.54MM_SAMTEC-A-T
+Header 3X2_SMD                  J10            HDR3X2_MALE_2.54MM_SAMTEC-A-T
+Header 3X1_2.54MM               J11            HDR3X1_MALE_2.54MM
+Header 2X1_2.54MM               J12            HDR2X1_MALE_2.54MM
+Header 3X2_SMD                  J13            HDR3X2_MALE_2.54MM_SAMTEC-A-T
+Header 6X2_SMD                  J14            HDR6X2_MALE_2.54MM_SAMTEC-A-T
+Header 6X2_SMD                  J15            HDR6X2_MALE_2.54MM_SAMTEC-A-T
+Header 2X1_2.54MM               J16            HDR2X1_MALE_2.54MM
+731000114                       J17            0731000114
+731000114                       J19            0731000114
+USB4105-GF-A                    J20            USB4105_GCT
+1uH                             L1             INDC2016X100N
+WEEE                            Logo1          WEEE_Minimum
+ESD Susceptible                 Logo2          ESD_Overlay_Medium
+AP61100QZ6-7                    PS1            SOTFL50P160X60-6N
+TP_S                            PVDD_4         TP_TH
+RU1J002YNTCL                    Q1             SOT-323FL
+RU1J002YNTCL                    Q2             SOT-323FL
+1K                              R1             RESC1005X40USR
+1K                              R2             RESC1005X40USR
+1K                              R3             RESC1005X40USR
+0.1                             R4             RESC1005X40USR
+0.1                             R5             RESC1005X40USR
+0.1                             R6             RESC1005X40USR
+0.1                             R7             RESC1005X40USR
+0.1                             R8             RESC1005X40USR
+0.1                             R9             RESC1005X40USR
+0.1                             R10            RESC1005X40USR
+10K                             R11            RESC1005X40USR
+910K                            R12            RESC1005X40USR
+10K                             R13            RESC1005X40USR
+10K                             R14            RESC1005X40USR
+0                               R15            RESC1005X40USR
+1K                              R16            RESC1005X40USR
+1K                              R17            RESC1005X40USR
+1K                              R18            RESC1005X40USR
+4.7K                            R19            RESC1005X40USR
+4.7K                            R20            RESC1005X40USR
+4.7K                            R21            RESC1005X40USR
+10K                             R22            RESC1005X40USR
+0.1                             R23            RESC1005X40USR
+4.7K                            R24            RESC1005X40USR
+4.7K                            R25            RESC1005X40USR
+200K                            R26            RESC1005X40USR
+44.2K                           R27            RESC1005X40USR
+1K                              R28            RESC1005X40USR
+2K                              R49            RESC1005X40USR
+12.1K                           R87            RESC1005X40USR
+10K                             RN1            RESCAXS50P100X200X45-8NA
+10K                             RN3            RESCAXS50P100X200X45-8NA
+PTS820 J25K SMTR LFS            SW1            PTS820J25MSMTRLFS
+PTS820 J25K SMTR LFS            SW2            PTS820J25MSMTRLFS
+TP_S                            T1             TP 1mm
+TP_S                            T2             TP 1mm
+TP_S                            T3             TP 1mm
+TP_S                            T4             TP 1mm
+TP_S                            T5             TP_TH
+TP_S                            T6             TP_TH
+TP_S                            T7             TP_TH
+TP_S                            T8             TP_TH
+TP_S                            T9             TP_TH
+TP_S                            T10            TP_TH
+TP_S                            T11            TP_TH
+TP_S                            T12            TP_TH
+TP_S                            T13            TP_TH
+TP_S                            T14            TP_TH
+TP_S                            T15            TP_TH
+TP_S                            T16            TP_TH
+TP_S                            T17            TP_TH
+TP_S                            T18            TP_TH
+3V3                             T19            TP 1mm
+TP_S                            T85            TP 1mm
+TP_S                            T86            TP 1mm
+5019                            TP1            TP380X203
+ESDR0502NMUTAG                  U1             ONSC-UDFN-6-517AA-01_V
+TCA9509DGKR                     U2             SOP65P490X110-8N
+TCK106AG,LF                     U4             WCSP4D
+NCP110AFCT120T2G                U6             WLCSP4_P6XP6_ONS
+NCP349MNAETBG                   U7             SON50P200X160X100-7N-D
+PI5USB30213XEAEX                U8             QFN40P400X200X50-25N
+SN74AXC4T245RSVR                U10            QFN40P260X180X55-16N
+93AA56BT-I/OT                   U11            SOT23-6
+FT2232HL-REEL                   U12            QFP50P1200X1200X160-64N
+SN74AXC4T245RSVR                U13            QFN40P260X180X55-16N
+ESDR0502NMUTAG                  U15            ONSC-UDFN-6-517AA-01_V
+CSTNE12M0G550000R0              Y4             OSC_CSTNE12M0G550000R0
+
+<<< Wire List >>>
+
+  NODE  REFERENCE  PIN #   PIN NAME       PIN TYPE    PART VALUE
+
+[00225] VBUSC
+        C13        2       2              PASSIVE     1uF
+        J6         A4      VBUS           PASSIVE     CX90B1-24P
+        J6         A9      VBUS           PASSIVE     CX90B1-24P
+        J6         B4      VBUS           PASSIVE     CX90B1-24P
+        J6         B9      VBUS           PASSIVE     CX90B1-24P
+        U1         6       VBUS           POWER       ESDR0502NMUTAG
+        U7         1       IN_1           POWER       NCP349MNAETBG
+        U7         7       IN_2           POWER       NCP349MNAETBG
+
+[00224] USB2_P
+        J2         15      15             PASSIVE     DF40C-60DS-0.4V(51)
+        J6         A6      Dp1            PASSIVE     CX90B1-24P
+        J6         B6      Dp2            PASSIVE     CX90B1-24P
+        U1         2       NC             PASSIVE     ESDR0502NMUTAG
+        U1         5       D+             PASSIVE     ESDR0502NMUTAG
+
+[00223] USB2_N
+        J2         17      17             PASSIVE     DF40C-60DS-0.4V(51)
+        J6         A7      Dn1            PASSIVE     CX90B1-24P
+        J6         B7      Dn2            PASSIVE     CX90B1-24P
+        U1         3       NC             PASSIVE     ESDR0502NMUTAG
+        U1         4       D-             PASSIVE     ESDR0502NMUTAG
+
+[00222] TXD_3V3
+        T86        1                      PASSIVE     TP_S
+        U10        9       2A2            PASSIVE     SN74AXC4T245RSVR
+        U12        39      BDBUS1         I/O         FT2232HL-REEL
+
+[00221] TMS
+        J3         11      11             PASSIVE     DF40C-60DS-0.4V(51)
+        J5         2       2              PASSIVE     FTSH-105-01-L-DV-K-TR
+        U13        13      2B1            PASSIVE     SN74AXC4T245RSVR
+
+[00220] TDO_3V3
+        T3         1                      PASSIVE     TP_S
+        U10        8       2A1            PASSIVE     SN74AXC4T245RSVR
+        U12        18      ADBUS2         I/O         FT2232HL-REEL
+
+[00219] TDO
+        J3         7       7              PASSIVE     DF40C-60DS-0.4V(51)
+        J5         6       6              PASSIVE     FTSH-105-01-L-DV-K-TR
+        U10        13      2B1            PASSIVE     SN74AXC4T245RSVR
+
+[00218] TDI
+        J3         9       9              PASSIVE     DF40C-60DS-0.4V(51)
+        J5         8       8              PASSIVE     FTSH-105-01-L-DV-K-TR
+        U13        14      1B2            PASSIVE     SN74AXC4T245RSVR
+
+[00217] TCK
+        J3         3       3              PASSIVE     DF40C-60DS-0.4V(51)
+        J5         4       4              PASSIVE     FTSH-105-01-L-DV-K-TR
+        U13        15      1B1            PASSIVE     SN74AXC4T245RSVR
+
+[00216] SS_TX_P
+        J2         9       9              PASSIVE     DF40C-60DS-0.4V(51)
+        U8         8       BP             PASSIVE     PI5USB30213XEAEX
+
+[00215] SS_TX_N
+        J2         11      11             PASSIVE     DF40C-60DS-0.4V(51)
+        U8         7       BN             PASSIVE     PI5USB30213XEAEX
+
+[00214] SS_TX2_P
+        D4         1       IO1            I/O         PUSB3F96X
+        D4         10      NC             PASSIVE     PUSB3F96X
+        J6         B2      SSTXp2         PASSIVE     CX90B1-24P
+        U8         18      B2N            PASSIVE     PI5USB30213XEAEX
+
+[00213] SS_TX2_N
+        D4         2       IO2            I/O         PUSB3F96X
+        D4         9       NC             PASSIVE     PUSB3F96X
+        J6         B3      SSTXn2         PASSIVE     CX90B1-24P
+        U8         19      B2P            PASSIVE     PI5USB30213XEAEX
+
+[00212] SS_TX1_P
+        D2         1       IO1            I/O         PUSB3F96X
+        D2         10      NC             PASSIVE     PUSB3F96X
+        J6         A2      SSTXp1         PASSIVE     CX90B1-24P
+        U8         14      B1P            PASSIVE     PI5USB30213XEAEX
+
+[00211] SS_TX1_N
+        D2         2       IO2            I/O         PUSB3F96X
+        D2         9       NC             PASSIVE     PUSB3F96X
+        J6         A3      SSTXn1         PASSIVE     CX90B1-24P
+        U8         15      B1N            PASSIVE     PI5USB30213XEAEX
+
+[00210] SS_RX_P
+        J2         3       3              PASSIVE     DF40C-60DS-0.4V(51)
+        U8         4       AP             PASSIVE     PI5USB30213XEAEX
+
+[00209] SS_RX_N
+        J2         5       5              PASSIVE     DF40C-60DS-0.4V(51)
+        U8         5       AN             PASSIVE     PI5USB30213XEAEX
+
+[00208] SS_RX2_P
+        C21        2       2              PASSIVE     0.1uF
+        D4         4       IO3            I/O         PUSB3F96X
+        D4         7       NC             PASSIVE     PUSB3F96X
+        J6         A11     SSRXp2         PASSIVE     CX90B1-24P
+
+[00207] SS_RX2_N
+        C22        2       2              PASSIVE     0.1uF
+        D4         5       IO4            I/O         PUSB3F96X
+        D4         6       NC             PASSIVE     PUSB3F96X
+        J6         A10     SSRXn2         PASSIVE     CX90B1-24P
+
+[00206] SS_RX1_P
+        C18        2       2              PASSIVE     0.1uF
+        D2         4       IO3            I/O         PUSB3F96X
+        D2         7       NC             PASSIVE     PUSB3F96X
+        J6         B11     SSRXp1         PASSIVE     CX90B1-24P
+
+[00205] SS_RX1_N
+        C19        2       2              PASSIVE     0.1uF
+        D2         5       IO4            I/O         PUSB3F96X
+        D2         6       NC             PASSIVE     PUSB3F96X
+        J6         B10     SSRXn1         PASSIVE     CX90B1-24P
+
+[00204] SDA33
+        J1         34      34             PASSIVE     QSE-020-01-F-D-A-K
+        J4         34      34             PASSIVE     QSE-020-01-F-D-A-K
+        J8         7       7              PASSIVE     Header 6X2_SMD
+        RN1        6                      PASSIVE     10K
+        U2         6       SDAB           I/O         TCA9509DGKR
+        U8         24      SDA(OUT1)      PASSIVE     PI5USB30213XEAEX
+
+[00203] SDA
+        J1         39      39             PASSIVE     QSE-020-01-F-D-A-K
+        J3         25      25             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         39      39             PASSIVE     QSE-020-01-F-D-A-K
+        J8         8       8              PASSIVE     Header 6X2_SMD
+        RN1        8                      PASSIVE     10K
+        U2         3       SDAA           I/O         TCA9509DGKR
+
+[00202] SCL33
+        J1         32      32             PASSIVE     QSE-020-01-F-D-A-K
+        J4         32      32             PASSIVE     QSE-020-01-F-D-A-K
+        J8         5       5              PASSIVE     Header 6X2_SMD
+        RN1        5                      PASSIVE     10K
+        U2         7       SCLB           I/O         TCA9509DGKR
+        U8         1       SCL(OUT2)      PASSIVE     PI5USB30213XEAEX
+
+[00201] SCL
+        J1         37      37             PASSIVE     QSE-020-01-F-D-A-K
+        J3         23      23             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         37      37             PASSIVE     QSE-020-01-F-D-A-K
+        J8         6       6              PASSIVE     Header 6X2_SMD
+        RN1        7                      PASSIVE     10K
+        U2         2       SCLA           I/O         TCA9509DGKR
+
+[00200] RX2_P
+        C21        1       1              PASSIVE     0.1uF
+        U8         21      A2P            PASSIVE     PI5USB30213XEAEX
+
+[00199] RX2_N
+        C22        1       1              PASSIVE     0.1uF
+        U8         20      A2N            PASSIVE     PI5USB30213XEAEX
+
+[00198] RX1_P
+        C18        1       1              PASSIVE     0.1uF
+        U8         16      A1P            PASSIVE     PI5USB30213XEAEX
+
+[00197] RX1_N
+        C19        1       1              PASSIVE     0.1uF
+        U8         17      A1N            PASSIVE     PI5USB30213XEAEX
+
+[00196] REFCLK_P
+        J2         16      16             PASSIVE     DF40C-60DS-0.4V(51)
+        J17        1       1              PASSIVE     731000114
+
+[00195] REFCLK_N
+        J2         18      18             PASSIVE     DF40C-60DS-0.4V(51)
+        J19        1       1              PASSIVE     731000114
+
+[00194] PVUSBC
+        D8         A       A              PASSIVE     CMS06(TE12L,Q,M)
+        J3         46      46             PASSIVE     DF40C-60DS-0.4V(51)
+        R12        2       2              PASSIVE     910K
+        U7         4       OUT_1          OUTPUT      NCP349MNAETBG
+        U7         5       OUT_2          OUTPUT      NCP349MNAETBG
+
+[00193] PVDD_3
+        J13        3       3              PASSIVE     Header 3X2_SMD
+        R10        2       2              PASSIVE     0.1
+        T17        1                      PASSIVE     TP_S
+
+[00192] PVDD_2
+        J7         3       3              PASSIVE     Header 3X2_SMD
+        R9         1       1              PASSIVE     0.1
+        T16        1                      PASSIVE     TP_S
+
+[00191] PVDD_1
+        C4         2       2              PASSIVE     0.1uF
+        C10        2       2              PASSIVE     0.1uF
+        C12        2       2              PASSIVE     0.1uF
+        J5         1       1              PASSIVE     FTSH-105-01-L-DV-K-TR
+        J7         4       4              PASSIVE     Header 3X2_SMD
+        J8         12      12             PASSIVE     Header 6X2_SMD
+        J10        4       4              PASSIVE     Header 3X2_SMD
+        J15        11      11             PASSIVE     Header 6X2_SMD
+        R8         2       2              PASSIVE     0.1
+        R16        1       1              PASSIVE     1K
+        RN1        1                      PASSIVE     10K
+        RN1        2                      PASSIVE     10K
+        T13        1                      PASSIVE     TP_S
+        U2         1       VCCA           POWER       TCA9509DGKR
+        U10        2       VCCB           PASSIVE     SN74AXC4T245RSVR
+        U13        2       VCCB           PASSIVE     SN74AXC4T245RSVR
+
+[00190] PROGN
+        J3         18      18             PASSIVE     DF40C-60DS-0.4V(51)
+        J14        4       4              PASSIVE     Header 6X2_SMD
+
+[00189] P5V
+        C15        2       2              PASSIVE     1uF
+        D7         C       C              PASSIVE     CMS06(TE12L,Q,M)
+        D8         C       C              PASSIVE     CMS06(TE12L,Q,M)
+        J1         03      03             PASSIVE     QSE-020-01-F-D-A-K
+        J4         03      03             PASSIVE     QSE-020-01-F-D-A-K
+        J11        3       3              PASSIVE     Header 3X1_2.54MM
+        R1         1       1              PASSIVE     1K
+        R5         1       1              PASSIVE     0.1
+        R23        2       2              PASSIVE     0.1
+        T8         1                      PASSIVE     TP_S
+        U4         A2      VIN            PASSIVE     TCK106AG,LF
+
+[00188] P3V3D
+        C1         2       2              PASSIVE     0.1uF
+        C3         2       2              PASSIVE     47uF
+        C5         2       2              PASSIVE     4.7uF
+        C7         2       2              PASSIVE     4.7uF
+        C9         2       2              PASSIVE     0.1uF
+        C11        2       2              PASSIVE     0.1uF
+        C17        2       2              PASSIVE     0.1uF
+        C47        2       2              PASSIVE     0.1uF
+        C48        2       2              PASSIVE     0.1uF
+        C49        2       2              PASSIVE     0.1uF
+        C50        2       2              PASSIVE     0.1uF
+        C52        2       2              PASSIVE     0.1uF
+        C56        2       2              PASSIVE     0.1uF
+        C57        2       2              PASSIVE     0.1uF
+        FB9        2       2              PASSIVE     120Ohms
+        FB15       2       2              PASSIVE     120Ohms
+        J1         01      01             PASSIVE     QSE-020-01-F-D-A-K
+        J4         01      01             PASSIVE     QSE-020-01-F-D-A-K
+        J8         11      11             PASSIVE     Header 6X2_SMD
+        L1         2       2              PASSIVE     1uH
+        R2         1       1              PASSIVE     1K
+        R13        1       1              PASSIVE     10K
+        R15        1       1              PASSIVE     0
+        R17        1       1              PASSIVE     1K
+        R18        1       1              PASSIVE     1K
+        R19        2       2              PASSIVE     4.7K
+        R22        2       2              PASSIVE     10K
+        R24        2       2              PASSIVE     4.7K
+        R26        2       2              PASSIVE     200K
+        RN1        3                      PASSIVE     10K
+        RN1        4                      PASSIVE     10K
+        RN3        5                      PASSIVE     10K
+        RN3        6                      PASSIVE     10K
+        RN3        7                      PASSIVE     10K
+        RN3        8                      PASSIVE     10K
+        T19        1                      PASSIVE     3V3
+        U2         8       VCCB           POWER       TCA9509DGKR
+        U6         A1      IN             PASSIVE     NCP110AFCT120T2G
+        U8         6       VDD            PASSIVE     PI5USB30213XEAEX
+        U10        3       VCCA           PASSIVE     SN74AXC4T245RSVR
+        U11        6       VCC            POWER       93AA56BT-I/OT
+        U12        20      VCCIO          POWER       FT2232HL-REEL
+        U12        31      VCCIO          POWER       FT2232HL-REEL
+        U12        42      VCCIO          POWER       FT2232HL-REEL
+        U12        50      VREGIN         POWER       FT2232HL-REEL
+        U12        56      VCCIO          POWER       FT2232HL-REEL
+        U13        3       VCCA           PASSIVE     SN74AXC4T245RSVR
+
+[00187] P3V3_SOM
+        J7         2       2              PASSIVE     Header 3X2_SMD
+        R3         1       1              PASSIVE     1K
+        R7         1       1              PASSIVE     0.1
+        T12        1                      PASSIVE     TP_S
+
+[00186] P1V8D
+        J1         35      35             PASSIVE     QSE-020-01-F-D-A-K
+        J4         35      35             PASSIVE     QSE-020-01-F-D-A-K
+        J7         5       5              PASSIVE     Header 3X2_SMD
+        J7         6       6              PASSIVE     Header 3X2_SMD
+        J13        5       5              PASSIVE     Header 3X2_SMD
+        J14        11      11             PASSIVE     Header 6X2_SMD
+        J14        12      12             PASSIVE     Header 6X2_SMD
+        R6         2       2              PASSIVE     0.1
+        T9         1                      PASSIVE     TP_S
+
+[00185] P1V8_AON
+        J15        12      12             PASSIVE     Header 6X2_SMD
+        R4         2       2              PASSIVE     0.1
+        T5         1                      PASSIVE     TP_S
+
+[00184] P1V2D
+        C6         2       2              PASSIVE     4.7uF
+        J7         1       1              PASSIVE     Header 3X2_SMD
+        J13        1       1              PASSIVE     Header 3X2_SMD
+        U6         A2      OUT            PASSIVE     NCP110AFCT120T2G
+
+[00156] NetU12_3
+        U12        3       OSCO           PASSIVE     FT2232HL-REEL
+        Y4         3       OUTPUT         PASSIVE     CSTNE12M0G550000R0
+
+[00155] NetU12_2
+        U12        2       OSCI           PASSIVE     FT2232HL-REEL
+        Y4         1       INPUT          PASSIVE     CSTNE12M0G550000R0
+
+[00149] NetT85_1
+        T85        1                      PASSIVE     TP_S
+        U12        38      BDBUS0         I/O         FT2232HL-REEL
+        U13        9       2A2            PASSIVE     SN74AXC4T245RSVR
+
+[00148] NetT4_1
+        T4         1                      PASSIVE     TP_S
+        U12        19      ADBUS3         I/O         FT2232HL-REEL
+        U13        8       2A1            PASSIVE     SN74AXC4T245RSVR
+
+[00147] NetT2_1
+        T2         1                      PASSIVE     TP_S
+        U12        17      ADBUS1         I/O         FT2232HL-REEL
+        U13        7       1A2            PASSIVE     SN74AXC4T245RSVR
+
+[00146] NetT1_1
+        T1         1                      PASSIVE     TP_S
+        U12        16      ADBUS0         I/O         FT2232HL-REEL
+        U13        6       1A1            PASSIVE     SN74AXC4T245RSVR
+
+[00143] NetRN3_2
+        RN3        2                      PASSIVE     10K
+        U11        4       CLK            INPUT       93AA56BT-I/OT
+        U12        62      EECLK          HIZ         FT2232HL-REEL
+
+[00142] NetRN3_1
+        RN3        1                      PASSIVE     10K
+        U11        5       CS             INPUT       93AA56BT-I/OT
+        U12        63      EECS           I/O         FT2232HL-REEL
+
+[00141] NetR87_2
+        R87        2       2              PASSIVE     12.1K
+        U12        6       REF            PASSIVE     FT2232HL-REEL
+
+[00140] NetR49_2
+        R49        2       2              PASSIVE     2K
+        U11        1       DO             HIZ         93AA56BT-I/OT
+
+[00139] NetR49_1
+        R49        1       1              PASSIVE     2K
+        RN3        3                      PASSIVE     10K
+        U11        3       DI             INPUT       93AA56BT-I/OT
+        U12        61      EEDATA         I/O         FT2232HL-REEL
+
+[00138] NetR25_1
+        R25        1       1              PASSIVE     4.7K
+        U10        5       2DIR           PASSIVE     SN74AXC4T245RSVR
+
+[00137] NetR24_1
+        R24        1       1              PASSIVE     4.7K
+        U10        4       1DIR           PASSIVE     SN74AXC4T245RSVR
+
+[00136] NetR19_1
+        R19        1       1              PASSIVE     4.7K
+        U13        4       1DIR           PASSIVE     SN74AXC4T245RSVR
+        U13        5       2DIR           PASSIVE     SN74AXC4T245RSVR
+
+[00135] NetR17_2
+        R17        2       2              PASSIVE     1K
+        U6         B1      EN             PASSIVE     NCP110AFCT120T2G
+
+[00134] NetR16_2
+        R16        2       2              PASSIVE     1K
+        U2         5       EN             INPUT       TCA9509DGKR
+
+[00133] NetR14_1
+        R14        1       1              PASSIVE     10K
+        U8         13      ENB            PASSIVE     PI5USB30213XEAEX
+
+[00132] NetR13_2
+        R13        2       2              PASSIVE     10K
+        U8         9       ID             PASSIVE     PI5USB30213XEAEX
+
+[00131] NetR12_1
+        R12        1       1              PASSIVE     910K
+        U8         23      VBUSDET        PASSIVE     PI5USB30213XEAEX
+
+[00130] NetR11_2
+        R11        2       2              PASSIVE     10K
+        U8         3       PORT           PASSIVE     PI5USB30213XEAEX
+
+[00129] NetPS1_6
+        PS1        6       OUT            PASSIVE     AP61100QZ6-7
+        R15        2       2              PASSIVE     0
+
+[00128] NetPS1_1
+        PS1        1       FB             PASSIVE     AP61100QZ6-7
+        R26        1       1              PASSIVE     200K
+        R27        2       2              PASSIVE     44.2K
+
+[00127] NetL1_1
+        L1         1       1              PASSIVE     1uH
+        PS1        4       SW             PASSIVE     AP61100QZ6-7
+
+[00125] NetJ20_B5
+        J20        B5      CC2            I/O         USB4105-GF-A
+        R21        2       2              PASSIVE     4.7K
+
+[00123] NetJ20_A5
+        J20        A5      CC1            POWER       USB4105-GF-A
+        R20        2       2              PASSIVE     4.7K
+
+[00118] NetJ12_1
+        J12        1       1              PASSIVE     Header 2X1_2.54MM
+        U8         22      ADDR           PASSIVE     PI5USB30213XEAEX
+
+[00117] NetJ10_3
+        J10        3       3              PASSIVE     Header 3X2_SMD
+        R28        2       2              PASSIVE     1K
+
+[00107] NetJ3_60
+        J3         60      60             PASSIVE     DF40C-60DS-0.4V(51)
+        PVDD_4     1                      PASSIVE     TP_S
+
+[00106] NetJ3_59
+        J3         59      59             PASSIVE     DF40C-60DS-0.4V(51)
+        R10        1       1              PASSIVE     0.1
+        T18        1                      PASSIVE     TP_S
+
+[00105] NetJ3_58
+        J3         58      58             PASSIVE     DF40C-60DS-0.4V(51)
+        R9         2       2              PASSIVE     0.1
+        T15        1                      PASSIVE     TP_S
+
+[00104] NetJ3_57
+        J3         57      57             PASSIVE     DF40C-60DS-0.4V(51)
+        R8         1       1              PASSIVE     0.1
+        T14        1                      PASSIVE     TP_S
+
+[00103] NetJ3_56
+        J3         56      56             PASSIVE     DF40C-60DS-0.4V(51)
+        R7         2       2              PASSIVE     0.1
+        T11        1                      PASSIVE     TP_S
+
+[00102] NetJ3_55
+        J3         55      55             PASSIVE     DF40C-60DS-0.4V(51)
+        R6         1       1              PASSIVE     0.1
+        T10        1                      PASSIVE     TP_S
+
+[00101] NetJ3_53
+        J3         53      53             PASSIVE     DF40C-60DS-0.4V(51)
+        R4         1       1              PASSIVE     0.1
+        T6         1                      PASSIVE     TP_S
+
+[00100] NetJ3_52
+        J3         52      52             PASSIVE     DF40C-60DS-0.4V(51)
+        J3         54      54             PASSIVE     DF40C-60DS-0.4V(51)
+        R5         2       2              PASSIVE     0.1
+        T7         1                      PASSIVE     TP_S
+
+[00067] NetD6_2
+        D6         2       K              PASSIVE     LTST-C191KGKT
+        Q2         3       D              PASSIVE     RU1J002YNTCL
+
+[00066] NetD6_1
+        D6         1       A              PASSIVE     LTST-C191KGKT
+        R2         2       2              PASSIVE     1K
+
+[00065] NetD5_2
+        D5         2       K              PASSIVE     LTST-C191KGKT
+        Q1         3       D              PASSIVE     RU1J002YNTCL
+
+[00064] NetD5_1
+        D5         1       A              PASSIVE     LTST-C191KGKT
+        R18        2       2              PASSIVE     1K
+
+[00063] NetD3_1
+        D3         1       A              PASSIVE     LTST-C191KGKT
+        R3         2       2              PASSIVE     1K
+
+[00062] NetD1_1
+        D1         1       A              PASSIVE     LTST-C191KGKT
+        R1         2       2              PASSIVE     1K
+
+[00061] NetC71_2
+        C71        2       2              PASSIVE     1uF
+        D7         A       A              PASSIVE     CMS06(TE12L,Q,M)
+        FB4        2       2              PASSIVE     120Ohms
+
+[00060] NetC2_2
+        C2         2       2              PASSIVE     10uF
+        PS1        3       VIN            PASSIVE     AP61100QZ6-7
+        R23        1       1              PASSIVE     0.1
+
+[00059] JTAG_EN_3V3
+        U10        6       1A1            PASSIVE     SN74AXC4T245RSVR
+        U12        21      ADBUS4         I/O         FT2232HL-REEL
+
+[00058] JTAG_EN
+        J3         5       5              PASSIVE     DF40C-60DS-0.4V(51)
+        J5         10      10             PASSIVE     FTSH-105-01-L-DV-K-TR
+        R28        1       1              PASSIVE     1K
+        U10        15      1B1            PASSIVE     SN74AXC4T245RSVR
+
+[00057] GPIO_G1
+        J1         31      31             PASSIVE     QSE-020-01-F-D-A-K
+        J3         21      21             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         31      31             PASSIVE     QSE-020-01-F-D-A-K
+        J8         2       2              PASSIVE     Header 6X2_SMD
+        U10        12      2B2            PASSIVE     SN74AXC4T245RSVR
+
+[00056] GPIO_F1
+        J1         38      38             PASSIVE     QSE-020-01-F-D-A-K
+        J3         19      19             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         38      38             PASSIVE     QSE-020-01-F-D-A-K
+        J15        7       7              PASSIVE     Header 6X2_SMD
+
+[00055] GPIO_B1
+        J3         17      17             PASSIVE     DF40C-60DS-0.4V(51)
+        J15        5       5              PASSIVE     Header 6X2_SMD
+        SW1        1       1              PASSIVE     PTS820 J25K SMTR LFS
+        U13        12      2B2            PASSIVE     SN74AXC4T245RSVR
+
+[00054] GPIO_A1_INITN
+        J1         40      40             PASSIVE     QSE-020-01-F-D-A-K
+        J3         15      15             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         40      40             PASSIVE     QSE-020-01-F-D-A-K
+        J10        1       1              PASSIVE     Header 3X2_SMD
+        SW2        1       1              PASSIVE     PTS820 J25K SMTR LFS
+
+[00053] GPIO1V8_H8
+        J3         42      42             PASSIVE     DF40C-60DS-0.4V(51)
+        J13        2       2              PASSIVE     Header 3X2_SMD
+
+[00052] GPIO1V8_A3
+        J1         33      33             PASSIVE     QSE-020-01-F-D-A-K
+        J3         16      16             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         33      33             PASSIVE     QSE-020-01-F-D-A-K
+        J14        2       2              PASSIVE     Header 6X2_SMD
+        Q2         1       G              PASSIVE     RU1J002YNTCL
+
+[00051] GND
+        BH1        1       1              PASSIVE     STANDOFF M2.5
+        BH2        1       1              PASSIVE     STANDOFF M2.5
+        BH3        1       1              PASSIVE     STANDOFF M2.5
+        BH4        1       1              PASSIVE     STANDOFF M2.5
+        BH5        1       1              PASSIVE     STANDOFF M2.5
+        C1         1       1              PASSIVE     0.1uF
+        C2         1       1              PASSIVE     10uF
+        C3         1       1              PASSIVE     47uF
+        C4         1       1              PASSIVE     0.1uF
+        C5         1       1              PASSIVE     4.7uF
+        C6         1       1              PASSIVE     4.7uF
+        C7         1       1              PASSIVE     4.7uF
+        C9         1       1              PASSIVE     0.1uF
+        C10        1       1              PASSIVE     0.1uF
+        C11        1       1              PASSIVE     0.1uF
+        C12        1       1              PASSIVE     0.1uF
+        C13        1       1              PASSIVE     1uF
+        C15        1       1              PASSIVE     1uF
+        C17        1       1              PASSIVE     0.1uF
+        C47        1       1              PASSIVE     0.1uF
+        C48        1       1              PASSIVE     0.1uF
+        C49        1       1              PASSIVE     0.1uF
+        C50        1       1              PASSIVE     0.1uF
+        C51        1       1              PASSIVE     4.7uF
+        C52        1       1              PASSIVE     0.1uF
+        C53        1       1              PASSIVE     4.7uF
+        C54        1       1              PASSIVE     0.1uF
+        C55        1       1              PASSIVE     0.1uF
+        C56        1       1              PASSIVE     0.1uF
+        C57        1       1              PASSIVE     0.1uF
+        C64        1       1              PASSIVE     0.1uF
+        C71        1       1              PASSIVE     1uF
+        C83        1       1              PASSIVE     0.1uF
+        C139       1       1              PASSIVE     0.1uF
+        C143       1       1              PASSIVE     0.1uF
+        C144       1       1              PASSIVE     4.7uF
+        D1         2       K              PASSIVE     LTST-C191KGKT
+        D2         3       GND            POWER       PUSB3F96X
+        D2         8       GND            POWER       PUSB3F96X
+        D3         2       K              PASSIVE     LTST-C191KGKT
+        D4         3       GND            POWER       PUSB3F96X
+        D4         8       GND            POWER       PUSB3F96X
+        J1         05      05             PASSIVE     QSE-020-01-F-D-A-K
+        J1         06      06             PASSIVE     QSE-020-01-F-D-A-K
+        J1         11      11             PASSIVE     QSE-020-01-F-D-A-K
+        J1         12      12             PASSIVE     QSE-020-01-F-D-A-K
+        J1         17      17             PASSIVE     QSE-020-01-F-D-A-K
+        J1         18      18             PASSIVE     QSE-020-01-F-D-A-K
+        J1         23      23             PASSIVE     QSE-020-01-F-D-A-K
+        J1         24      24             PASSIVE     QSE-020-01-F-D-A-K
+        J1         29      29             PASSIVE     QSE-020-01-F-D-A-K
+        J1         30      30             PASSIVE     QSE-020-01-F-D-A-K
+        J1         36      36             PASSIVE     QSE-020-01-F-D-A-K
+        J1         G1      GND            POWER       QSE-020-01-F-D-A-K
+        J1         G2      GND            POWER       QSE-020-01-F-D-A-K
+        J1         G3      GND            POWER       QSE-020-01-F-D-A-K
+        J1         G4      GND            POWER       QSE-020-01-F-D-A-K
+        J2         1       1              PASSIVE     DF40C-60DS-0.4V(51)
+        J2         2       2              PASSIVE     DF40C-60DS-0.4V(51)
+        J2         7       7              PASSIVE     DF40C-60DS-0.4V(51)
+        J2         8       8              PASSIVE     DF40C-60DS-0.4V(51)
+        J2         13      13             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         14      14             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         19      19             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         20      20             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         25      25             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         26      26             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         31      31             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         32      32             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         37      37             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         38      38             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         43      43             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         44      44             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         49      49             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         50      50             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         55      55             PASSIVE     DF40C-60DS-0.4V(51)
+        J2         56      56             PASSIVE     DF40C-60DS-0.4V(51)
+        J3         1       1              PASSIVE     DF40C-60DS-0.4V(51)
+        J3         2       2              PASSIVE     DF40C-60DS-0.4V(51)
+        J3         27      27             PASSIVE     DF40C-60DS-0.4V(51)
+        J3         44      44             PASSIVE     DF40C-60DS-0.4V(51)
+        J3         47      47             PASSIVE     DF40C-60DS-0.4V(51)
+        J3         50      50             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         05      05             PASSIVE     QSE-020-01-F-D-A-K
+        J4         06      06             PASSIVE     QSE-020-01-F-D-A-K
+        J4         11      11             PASSIVE     QSE-020-01-F-D-A-K
+        J4         12      12             PASSIVE     QSE-020-01-F-D-A-K
+        J4         17      17             PASSIVE     QSE-020-01-F-D-A-K
+        J4         18      18             PASSIVE     QSE-020-01-F-D-A-K
+        J4         23      23             PASSIVE     QSE-020-01-F-D-A-K
+        J4         24      24             PASSIVE     QSE-020-01-F-D-A-K
+        J4         29      29             PASSIVE     QSE-020-01-F-D-A-K
+        J4         30      30             PASSIVE     QSE-020-01-F-D-A-K
+        J4         G1      GND            POWER       QSE-020-01-F-D-A-K
+        J4         G2      GND            POWER       QSE-020-01-F-D-A-K
+        J4         G3      GND            POWER       QSE-020-01-F-D-A-K
+        J4         G4      GND            POWER       QSE-020-01-F-D-A-K
+        J5         3       3              PASSIVE     FTSH-105-01-L-DV-K-TR
+        J5         5       5              PASSIVE     FTSH-105-01-L-DV-K-TR
+        J5         9       9              PASSIVE     FTSH-105-01-L-DV-K-TR
+        J6         A1      GND            PASSIVE     CX90B1-24P
+        J6         A12     GND            PASSIVE     CX90B1-24P
+        J6         B1      GND            PASSIVE     CX90B1-24P
+        J6         B12     GND            PASSIVE     CX90B1-24P
+        J6         Shell   Shield         PASSIVE     CX90B1-24P
+        J8         9       9              PASSIVE     Header 6X2_SMD
+        J8         10      10             PASSIVE     Header 6X2_SMD
+        J10        2       2              PASSIVE     Header 3X2_SMD
+        J10        6       6              PASSIVE     Header 3X2_SMD
+        J12        2       2              PASSIVE     Header 2X1_2.54MM
+        J14        9       9              PASSIVE     Header 6X2_SMD
+        J14        10      10             PASSIVE     Header 6X2_SMD
+        J15        9       9              PASSIVE     Header 6X2_SMD
+        J15        10      10             PASSIVE     Header 6X2_SMD
+        J16        2       2              PASSIVE     Header 2X1_2.54MM
+        J17        2       2              PASSIVE     731000114
+        J17        3       3              PASSIVE     731000114
+        J17        4       4              PASSIVE     731000114
+        J17        5       5              PASSIVE     731000114
+        J19        2       2              PASSIVE     731000114
+        J19        3       3              PASSIVE     731000114
+        J19        4       4              PASSIVE     731000114
+        J19        5       5              PASSIVE     731000114
+        J20        1       MNT 1          POWER       USB4105-GF-A
+        J20        2       MNT 2          POWER       USB4105-GF-A
+        J20        3       MNT 3          POWER       USB4105-GF-A
+        J20        4       MNT 4          POWER       USB4105-GF-A
+        J20        A1-B12  GND            POWER       USB4105-GF-A
+        J20        B1-A12  GND            I/O         USB4105-GF-A
+        PS1        2       GND            PASSIVE     AP61100QZ6-7
+        Q1         2       S              PASSIVE     RU1J002YNTCL
+        Q2         2       S              PASSIVE     RU1J002YNTCL
+        R11        1       1              PASSIVE     10K
+        R14        2       2              PASSIVE     10K
+        R20        1       1              PASSIVE     4.7K
+        R21        1       1              PASSIVE     4.7K
+        R25        2       2              PASSIVE     4.7K
+        R27        1       1              PASSIVE     44.2K
+        R87        1       1              PASSIVE     12.1K
+        SW1        2       2              PASSIVE     PTS820 J25K SMTR LFS
+        SW2        2       2              PASSIVE     PTS820 J25K SMTR LFS
+        TP1        1       1              PASSIVE     5019
+        U1         1       GND            POWER       ESDR0502NMUTAG
+        U2         4       GND            POWER       TCA9509DGKR
+        U4         B1      GND            PASSIVE     TCK106AG,LF
+        U6         B2      GND            PASSIVE     NCP110AFCT120T2G
+        U7         2       GND            POWER       NCP349MNAETBG
+        U7         6       E\N\           INPUT       NCP349MNAETBG
+        U8         25      GND            PASSIVE     PI5USB30213XEAEX
+        U10        10      GND_1          PASSIVE     SN74AXC4T245RSVR
+        U10        11      GND_2          PASSIVE     SN74AXC4T245RSVR
+        U10        16      2O\E\          PASSIVE     SN74AXC4T245RSVR
+        U11        2       VSS            POWER       93AA56BT-I/OT
+        U12        1       GND            POWER       FT2232HL-REEL
+        U12        5       GND            POWER       FT2232HL-REEL
+        U12        10      AGND           POWER       FT2232HL-REEL
+        U12        11      GND            POWER       FT2232HL-REEL
+        U12        13      TEST           PASSIVE     FT2232HL-REEL
+        U12        15      GND            POWER       FT2232HL-REEL
+        U12        25      GND            POWER       FT2232HL-REEL
+        U12        35      GND            POWER       FT2232HL-REEL
+        U12        47      GND            POWER       FT2232HL-REEL
+        U12        51      GND            POWER       FT2232HL-REEL
+        U13        10      GND_1          PASSIVE     SN74AXC4T245RSVR
+        U13        11      GND_2          PASSIVE     SN74AXC4T245RSVR
+        U15        1       GND            POWER       ESDR0502NMUTAG
+        Y4         2       GND            PASSIVE     CSTNE12M0G550000R0
+
+[00050] FTDI_ENB
+        J10        5       5              PASSIVE     Header 3X2_SMD
+        R22        1       1              PASSIVE     10K
+        U10        1       1O\E\          PASSIVE     SN74AXC4T245RSVR
+        U13        1       1O\E\          PASSIVE     SN74AXC4T245RSVR
+        U13        16      2O\E\          PASSIVE     SN74AXC4T245RSVR
+
+[00049] FT_VPLL
+        C51        2       2              PASSIVE     4.7uF
+        C54        2       2              PASSIVE     0.1uF
+        FB9        1       1              PASSIVE     120Ohms
+        U12        9       VPLL           POWER       FT2232HL-REEL
+
+[00048] FT_VPHY
+        C53        2       2              PASSIVE     4.7uF
+        C55        2       2              PASSIVE     0.1uF
+        FB15       1       1              PASSIVE     120Ohms
+        U12        4       VPHY           POWER       FT2232HL-REEL
+
+[00047] FT_VDD18
+        C83        2       2              PASSIVE     0.1uF
+        C139       2       2              PASSIVE     0.1uF
+        C143       2       2              PASSIVE     0.1uF
+        C144       2       2              PASSIVE     4.7uF
+        U12        12      VCORE          POWER       FT2232HL-REEL
+        U12        37      VCORE          POWER       FT2232HL-REEL
+        U12        49      VREGOUT        POWER       FT2232HL-REEL
+        U12        64      VCORE          POWER       FT2232HL-REEL
+
+[00046] FT_RSTn
+        C64        2       2              PASSIVE     0.1uF
+        J16        1       1              PASSIVE     Header 2X1_2.54MM
+        RN3        4                      PASSIVE     10K
+        U12        14      RESET#         INPUT       FT2232HL-REEL
+
+[00045] FLASH_SSN
+        J3         14      14             PASSIVE     DF40C-60DS-0.4V(51)
+        J14        1       1              PASSIVE     Header 6X2_SMD
+
+[00044] FLASH_SIO3
+        J3         12      12             PASSIVE     DF40C-60DS-0.4V(51)
+        J14        8       8              PASSIVE     Header 6X2_SMD
+
+[00043] FLASH_SIO2
+        J3         10      10             PASSIVE     DF40C-60DS-0.4V(51)
+        J14        6       6              PASSIVE     Header 6X2_SMD
+
+[00042] FLASH_SIO1
+        J3         8       8              PASSIVE     DF40C-60DS-0.4V(51)
+        J14        5       5              PASSIVE     Header 6X2_SMD
+
+[00041] FLASH_SIO0
+        J3         6       6              PASSIVE     DF40C-60DS-0.4V(51)
+        J14        3       3              PASSIVE     Header 6X2_SMD
+
+[00040] FLASH_SCK
+        J3         4       4              PASSIVE     DF40C-60DS-0.4V(51)
+        J14        7       7              PASSIVE     Header 6X2_SMD
+
+[00039] EN
+        J3         48      48             PASSIVE     DF40C-60DS-0.4V(51)
+        J11        2       2              PASSIVE     Header 3X1_2.54MM
+        PS1        5       EN             PASSIVE     AP61100QZ6-7
+
+[00038] DONE
+        J3         13      13             PASSIVE     DF40C-60DS-0.4V(51)
+        J15        1       1              PASSIVE     Header 6X2_SMD
+        Q1         1       G              PASSIVE     RU1J002YNTCL
+
+[00037] DIFF13_P
+        J1         19      19             PASSIVE     QSE-020-01-F-D-A-K
+        J2         58      58             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00036] DIFF13_N
+        J1         21      21             PASSIVE     QSE-020-01-F-D-A-K
+        J2         60      60             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00035] DIFF12_P
+        J1         13      13             PASSIVE     QSE-020-01-F-D-A-K
+        J2         57      57             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00034] DIFF12_N
+        J1         15      15             PASSIVE     QSE-020-01-F-D-A-K
+        J2         59      59             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00033] DIFF11_P
+        J1         07      07             PASSIVE     QSE-020-01-F-D-A-K
+        J2         52      52             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00032] DIFF11_N
+        J1         09      09             PASSIVE     QSE-020-01-F-D-A-K
+        J2         54      54             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00031] DIFF10_P
+        J1         14      14             PASSIVE     QSE-020-01-F-D-A-K
+        J2         51      51             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00030] DIFF10_N
+        J1         16      16             PASSIVE     QSE-020-01-F-D-A-K
+        J2         53      53             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00029] DIFF9_P
+        J1         20      20             PASSIVE     QSE-020-01-F-D-A-K
+        J2         46      46             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00028] DIFF9_N
+        J1         22      22             PASSIVE     QSE-020-01-F-D-A-K
+        J2         48      48             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00027] DIFF8_P
+        J1         26      26             PASSIVE     QSE-020-01-F-D-A-K
+        J2         45      45             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00026] DIFF8_N
+        J1         28      28             PASSIVE     QSE-020-01-F-D-A-K
+        J2         47      47             PASSIVE     DF40C-60DS-0.4V(51)
+
+[00025] DIFF7_P
+        J2         40      40             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         02      02             PASSIVE     QSE-020-01-F-D-A-K
+
+[00024] DIFF7_N
+        J2         42      42             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         04      04             PASSIVE     QSE-020-01-F-D-A-K
+
+[00023] DIFF6_P
+        J2         39      39             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         08      08             PASSIVE     QSE-020-01-F-D-A-K
+
+[00022] DIFF6_N
+        J2         41      41             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         10      10             PASSIVE     QSE-020-01-F-D-A-K
+
+[00021] DIFF5_P
+        J2         34      34             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         19      19             PASSIVE     QSE-020-01-F-D-A-K
+
+[00020] DIFF5_N
+        J2         36      36             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         21      21             PASSIVE     QSE-020-01-F-D-A-K
+
+[00019] DIFF4_P
+        J2         33      33             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         13      13             PASSIVE     QSE-020-01-F-D-A-K
+
+[00018] DIFF4_N
+        J2         35      35             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         15      15             PASSIVE     QSE-020-01-F-D-A-K
+
+[00017] DIFF3_P
+        J2         28      28             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         07      07             PASSIVE     QSE-020-01-F-D-A-K
+
+[00016] DIFF3_N
+        J2         30      30             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         09      09             PASSIVE     QSE-020-01-F-D-A-K
+
+[00015] DIFF2_P
+        J2         27      27             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         14      14             PASSIVE     QSE-020-01-F-D-A-K
+
+[00014] DIFF2_N
+        J2         29      29             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         16      16             PASSIVE     QSE-020-01-F-D-A-K
+
+[00013] DIFF1_P
+        J2         22      22             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         20      20             PASSIVE     QSE-020-01-F-D-A-K
+
+[00012] DIFF1_N
+        J2         24      24             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         22      22             PASSIVE     QSE-020-01-F-D-A-K
+
+[00011] DIFF0_P
+        J2         21      21             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         26      26             PASSIVE     QSE-020-01-F-D-A-K
+
+[00010] DIFF0_N
+        J2         23      23             PASSIVE     DF40C-60DS-0.4V(51)
+        J4         28      28             PASSIVE     QSE-020-01-F-D-A-K
+
+[00009] DEBUG_USB_P
+        J20        A6      Dp1            I/O         USB4105-GF-A
+        J20        B6      Dp2            I/O         USB4105-GF-A
+        U12        8       DP             I/O         FT2232HL-REEL
+        U15        2       NC             PASSIVE     ESDR0502NMUTAG
+        U15        5       D+             PASSIVE     ESDR0502NMUTAG
+
+[00008] DEBUG_USB_N
+        J20        A7      Dn1            I/O         USB4105-GF-A
+        J20        B7      Dn2            I/O         USB4105-GF-A
+        U12        7       DM             I/O         FT2232HL-REEL
+        U15        3       NC             PASSIVE     ESDR0502NMUTAG
+        U15        4       D-             PASSIVE     ESDR0502NMUTAG
+
+[00007] DEBUG_PVUSB
+        FB4        1       1              PASSIVE     120Ohms
+        J20        A4-B9   VBUS           POWER       USB4105-GF-A
+        J20        B4-A9   VBUS           I/O         USB4105-GF-A
+        U15        6       VBUS           POWER       ESDR0502NMUTAG
+
+[00006] CLK_2
+        J3         40      40             PASSIVE     DF40C-60DS-0.4V(51)
+        J13        4       4              PASSIVE     Header 3X2_SMD
+
+[00005] CC2
+        J6         B5      CC2            PASSIVE     CX90B1-24P
+        U8         12      CC2            PASSIVE     PI5USB30213XEAEX
+
+[00004] CC1
+        J6         A5      CC1            PASSIVE     CX90B1-24P
+        U8         11      CC1            PASSIVE     PI5USB30213XEAEX
+
+[00003] AON_OUT_5V
+        J11        1       1              PASSIVE     Header 3X1_2.54MM
+        U4         A1      VOUT           PASSIVE     TCK106AG,LF
+
+[00002] AON_OUT
+        J3         49      49             PASSIVE     DF40C-60DS-0.4V(51)
+        J15        6       6              PASSIVE     Header 6X2_SMD
+        U4         B2      CONT           PASSIVE     TCK106AG,LF
+
+[00001] AON_INT
+        J3         51      51             PASSIVE     DF40C-60DS-0.4V(51)
+        J15        8       8              PASSIVE     Header 6X2_SMD
+

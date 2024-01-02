@@ -1,0 +1,31 @@
+Altium Designer Pick and Place Locations
+E:\@@@@@Darial\@@@Venkat\Job18_NX Module\rpi_adapter\Rev 1\Outputs Files\Fabrication\Pick Place\tinyDualRPi Adapter v2.0.txt
+
+========================================================================================================================
+File Design Information:
+
+Date:       19/12/23
+Time:       07:41
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mil
+
+Designator Comment            Layer       Footprint                Center-X(mil) Center-Y(mil) Rotation Description                                                                                      
+T9         TP_S               TopLayer    TP_1mm                   1051.770      661.680       0        "test point"                                                                                     
+T8         TP_S               TopLayer    TP_1mm                   1106.770      661.680       0        "test point"                                                                                     
+T7         TP_S               TopLayer    TP_1mm                   1016.770      461.680       0        "test point"                                                                                     
+T6         TP_S               TopLayer    TP_1mm                   1071.770      461.680       0        "test point"                                                                                     
+T5         TP_S               TopLayer    TP_1mm                   991.770       376.680       0        "test point"                                                                                     
+T4         TP_S               TopLayer    TP_1mm                   1101.770      181.680       0        "test point"                                                                                     
+T3         TP_S               TopLayer    TP_1mm                   991.770       311.680       0        "test point"                                                                                     
+T2         TP_S               TopLayer    TP_1mm                   1176.770      181.680       0        "test point"                                                                                     
+J4         1-84953-5          BottomLayer TE_1-84953-5             583.555       793.140       0        "Conn FPC Connector SKT 15 POS 1mm Solder RA SMD T/R"                                            
+J1         1-84953-5          TopLayer    TE_1-84953-5             583.555       793.140       180      "Conn FPC Connector SKT 15 POS 1mm Solder RA SMD T/R"                                            
+U1         PCA9542APW,118     BottomLayer SOP65P640X110-14N        1096.770      331.680       90       "PCA9542A Series 2-Channel I2C-bus Multiplexer with Interrupt Logic - TSSOP - 14"                
+RN1        10K                BottomLayer RESCAXS50P100X200X45-8NA 1132.545      665.000       90       "Res Thick Film Array 10K Ohm 5% ±200ppm/°C ISOL 8-Pin 0804(4 X 0402) Convex SMD Automotive T/R" 
+R2         1K                 BottomLayer RESC1005X40USR           1016.770      531.675       90       "RES SMD 1K OHM 1% 1/16W 0402"                                                                   
+R1         1K                 BottomLayer RESC1005X40USR           1158.285      143.040       0        "RES SMD 1K OHM 1% 1/16W 0402"                                                                   
+J3         QTE-020-01-F-D-A-K BottomLayer SAMTEC_QTE-020-01-X-D-A  590.552       0.000         0        "Q Strip® High-Speed Ground Plane Header, 0.80mm Pitch"                                          
+C2         0.1uF              BottomLayer CAPC1005X55USR           1166.755      516.680       0        "CAP CER 0.1UF 16V X7R 0402"                                                                     
+C1         0.1uF              BottomLayer CAPC1005X55USR           1059.600      669.715       90       "CAP CER 0.1UF 16V X7R 0402"                                                                     
+T1         TP_S               TopLayer    TP_1mm                   1051.770      376.680       0        "test point"                                                                                     

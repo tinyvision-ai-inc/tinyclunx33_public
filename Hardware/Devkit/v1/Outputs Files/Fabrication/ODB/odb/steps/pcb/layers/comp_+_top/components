@@ -1,0 +1,3187 @@
+#
+#Component attribute names
+#
+@0 .comp_mount_type
+@1 .comp_height
+
+# CMP 0
+CMP 22 0.395 0.4481102 180 N R28 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 0.4127165 0.4481102 0 N 125 3 1
+TOP 1 0.3772835 0.4481102 180 N 1 1 2
+#
+# CMP 1
+CMP 3 0.225 0.454 0 N C4 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 0.2080709 0.454 180 N 144 236 1
+TOP 1 0.2419291 0.454 0 N 100 26 2
+#
+# CMP 2
+CMP 25 0.58 1.3681102 180 N D8 CMS06(TE12L,Q,M) ;0=1,1=0.0000
+PRP Average_Rectified_Current '2A'
+PRP Category 'Rectifier Diodes'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/916/dst-cms06-tde-en-1613-916722.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/916/dst-cms06-tde-en-1613-916722.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/916/dst-cms06-tde-en-1613-916723.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/916/dst-cms06-tde-en-1613-916723.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/8281/cms06-datasheet-en-20131101-8281819.pdf?src-supplier=Avnet'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/8281/cms06-datasheet-en-20131101-8281819.pdf?src-supplier=Avnet'
+PRP Contact_Plating 'Tin,Silver'
+PRP Element_Configuration 'Single'
+PRP Forward_Current '2A'
+PRP Forward_Voltage '370mV'
+PRP Manufacturer 'Toshiba'
+PRP Manufacturer_Part_Number 'CMS06(TE12L,Q,M)'
+PRP Max_Operating_Temperature '125°C'
+PRP Max_Repetitive_Reverse_Voltage_(Vrrm) '30V'
+PRP Max_Reverse_Current '3mA'
+PRP Max_Reverse_Leakage_Current '3mA'
+PRP Max_Reverse_Voltage_(DC) '30V'
+PRP Max_Surge_Current '40A'
+PRP Min_Operating_Temperature '-40°C'
+PRP Mount 'Surface Mount'
+PRP Number_of_Pins '2'
+PRP Package_Quantity '1'
+PRP Packaging 'Tape and Reel'
+PRP Peak_Non-Repetitive_Surge_Current '40A'
+PRP Pricing_1 '1=0.56000, 10=0.48200, 100=0.35950, 500=0.28248, 1000=0.21828 (USD)'
+PRP Radiation_Hardening 'No'
+PRP RoHS 'No'
+PRP RoHS_Compliant 'No'
+PRP Series '-'
+PRP Stock_1 '49976'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CMS06QMCT-ND'
+TOP 0 0.4933858 1.3681102 180 N 97 7 A
+TOP 1 0.6666142 1.3681102 180 N 102 20 C
+#
+# CMP 3
+CMP 25 2.84 0.6981102 0 N D7 CMS06(TE12L,Q,M) ;0=1,1=0.0000
+PRP Average_Rectified_Current '2A'
+PRP Category 'Rectifier Diodes'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/916/dst-cms06-tde-en-1613-916722.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/916/dst-cms06-tde-en-1613-916722.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/916/dst-cms06-tde-en-1613-916723.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/916/dst-cms06-tde-en-1613-916723.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/8281/cms06-datasheet-en-20131101-8281819.pdf?src-supplier=Avnet'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/8281/cms06-datasheet-en-20131101-8281819.pdf?src-supplier=Avnet'
+PRP Contact_Plating 'Tin,Silver'
+PRP Element_Configuration 'Single'
+PRP Forward_Current '2A'
+PRP Forward_Voltage '370mV'
+PRP Manufacturer 'Toshiba'
+PRP Manufacturer_Part_Number 'CMS06(TE12L,Q,M)'
+PRP Max_Operating_Temperature '125°C'
+PRP Max_Repetitive_Reverse_Voltage_(Vrrm) '30V'
+PRP Max_Reverse_Current '3mA'
+PRP Max_Reverse_Leakage_Current '3mA'
+PRP Max_Reverse_Voltage_(DC) '30V'
+PRP Max_Surge_Current '40A'
+PRP Min_Operating_Temperature '-40°C'
+PRP Mount 'Surface Mount'
+PRP Number_of_Pins '2'
+PRP Package_Quantity '1'
+PRP Packaging 'Tape and Reel'
+PRP Peak_Non-Repetitive_Surge_Current '40A'
+PRP Pricing_1 '1=0.56000, 10=0.48200, 100=0.35950, 500=0.28248, 1000=0.21828 (USD)'
+PRP Radiation_Hardening 'No'
+PRP RoHS 'No'
+PRP RoHS_Compliant 'No'
+PRP Series '-'
+PRP Stock_1 '49976'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CMS06QMCT-ND'
+TOP 0 2.9266142 0.6981102 0 N 17 3 A
+TOP 1 2.7533858 0.6981102 0 N 102 22 C
+#
+# CMP 4
+CMP 31 1.434995 2.0731052 90 N T19 3V3 ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.434995 2.0731052 90 N 143 59 1
+#
+# CMP 5
+CMP 18 2.47001 0.5581102 180 N SW2 PTS820_J25K_SMTR_LFS ;0=1,1=0.0000
+PRP Datasheet ''
+PRP Manufacturer 'C&K'
+PRP Manufacturer_Part_Number 'PTS820 J25K SMTR LFS'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CKN10897CT-ND'
+PRP Unit_Price@1k ''
+PRP Vendor_Part_No. ''
+TOP 0 2.5517029 0.5581102 90 N 129 4 1
+TOP 1 2.3883171 0.5581102 90 N 144 154 2
+TOP 2 2.5320179 0.6181496 180 N 0 97 G1
+TOP 3 2.4080021 0.6181496 180 N 0 96 G2
+TOP 4 2.4080021 0.4980708 180 N 0 95 G3
+TOP 5 2.5320179 0.4980708 180 N 0 94 G4
+#
+# CMP 6
+CMP 22 1.499995 2.1081002 0 N R27 44.2K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Yageo'
+PRP Manufacturer_Part_Number 'RC0402FR-0744K2L'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'YAG3163TR-ND'
+PRP Value '44.2K'
+TOP 0 1.4822785 2.1081002 180 N 144 163 1
+TOP 1 1.5177115 2.1081002 0 N 11 1 2
+#
+# CMP 7
+CMP 22 1.499995 2.0681102 180 N R26 200K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'RMCF0402FT200K'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'RMCF0402FT200KTR-ND'
+PRP Value '200K'
+TOP 0 1.5177115 2.0681102 0 N 11 3 1
+TOP 1 1.4822785 2.0681102 180 N 143 60 2
+#
+# CMP 8
+CMP 29 0.384995 1.2981102 0 N Q2 RU1J002YNTCL ;0=1,1=0.0000
+PRP Automotive 'No'
+PRP Category 'Trans'
+PRP ComponentLink2Description 'Datasheet'
+PRP ComponentLink2URL 'https://d1d2qsbl8m0m72.cloudfront.net/en/products/databook/datasheet/discrete/transistor/mosfet/ru1j002yn-e.pdf'
+PRP Continuous_Drain_Current '200mA'
+PRP Depletion_Mode 'False'
+PRP Device_Class_L1 'Discrete Semiconductors'
+PRP Device_Class_L2 'Transistors'
+PRP Device_Class_L3 'MOSFETs'
+PRP Drain_to_Source_Breakdown_Voltage '50V'
+PRP Drain_to_Source_Resistance '1.6O'
+PRP Drain_To_Source_Voltage '50V'
+PRP Gate_To_Source_Voltage '8V'
+PRP Height '1.05mm'
+PRP Input_Capacitace_At_Vds '26pF @ 10V'
+PRP Lead_Free 'Yes'
+PRP Manufacturer 'Rohm'
+PRP Manufacturer_Part_Number 'RU1J002YNTCL'
+PRP Max_Forward_Diode_Voltage '1.2V'
+PRP Max_Junction_Temp '+150°C'
+PRP Mouser_Description 'MOSFET 0.9V Drive Nch MOSFET'
+PRP Number_Of_Channels '1'
+PRP Number_Of_N_Channels '1'
+PRP Octopart 'https://octopart.com/ru1j002yntcl-rohm-47197697'
+PRP Package 'UMT3F'
+PRP Power_Dissipation '150mW'
+PRP Pulse_Drain_Current '800mA'
+PRP RoHS 'TRUE'
+PRP Rthja_Max '833°C/W'
+PRP Standoff_Height '0mm'
+PRP Supplier_1 'Mouser'
+PRP Supplier_Part_Number_1 '755-RU1J002YNTCL'
+PRP Temperature 'to +150°C'
+PRP Threshold_Vgs_Max '0.8V'
+PRP Threshold_Vgs_Min '0.3V'
+PRP Turn_Off_Delay_Time '17ns'
+PRP Turn_On_Delay_Time '5ns'
+TOP 0 0.356058 1.3237008 0 N 20 4 1
+TOP 1 0.356058 1.2725196 0 N 144 232 2
+TOP 2 0.413932 1.2981102 0 N 15 0 3
+#
+# CMP 9
+CMP 32 2.08583 0.7098402 270 N PVDD_4 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.08583 0.7098402 270 N 111 0 1
+#
+# CMP 10
+CMP 30 1.485 2.1731102 180 N PS1 AP61100QZ6-7 ;0=1,1=0.0000
+PRP Height '0.6mm'
+PRP Manufacturer 'Diodes Incorporated'
+PRP Manufacturer_Part_Number 'AP61100QZ6-7'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '31-AP61100QZ6-7TR-ND'
+TOP 0 1.5179921 2.1534252 180 N 11 2 1
+TOP 1 1.5179921 2.1731102 180 N 144 160 2
+TOP 2 1.5179921 2.1927952 180 N 18 3 3
+TOP 3 1.4520079 2.1927952 180 N 12 2 4
+TOP 4 1.4520079 2.1731102 180 N 135 2 5
+TOP 5 1.4520079 2.1534252 180 N 10 1 6
+#
+# CMP 11
+CMP 13 1.369995 2.2281052 270 N L1 1uH ;0=1,1=0.0000
+PRP Manufacturer 'Murata Electronics'
+PRP Manufacturer_Part_Number 'DFE201610E-1R0M=P2'
+PRP Supplier_Part_Number_1 '490-18106-1-ND'
+PRP Value '1uH'
+TOP 0 1.369995 2.1942469 270 N 12 1 1
+TOP 1 1.369995 2.2619635 270 N 143 58 2
+#
+# CMP 12
+CMP 34 3.1547688 0.8731102 270 N J20 USB4105-GF-A ;0=1,1=0.0000
+PRP Category 'USB Connectors'
+PRP Manufacturer 'Global Connector Technology'
+PRP Manufacturer_Part_Number 'USB4105-GF-A'
+PRP Pricing_1 '1=0.75400, 10=0.68200, 25=0.64000, 50=0.61200, 100=0.58400, 250=0.52900, 500=0.48700 (USD)'
+PRP RoHS 'No'
+PRP Stock_1 '2162'
+PRP Supplier_1 'Newark'
+PRP Supplier_Part_Number_1 '86AH2021'
+TOP 0 3.0401704 0.7030314 180 N 144 132 1
+TOP 1 3.0401704 1.043189 180 N 144 117 2
+TOP 2 3.2047373 0.7030314 180 N 144 134 3
+TOP 3 3.2047373 1.043189 180 N 144 116 4
+TOP 4 3.0598554 0.7593307 270 N 0 10 17
+TOP 5 3.0598554 0.9868897 270 N 0 11 18
+TOP 6 3.0175326 0.747126 270 N 144 133 A1-B12
+TOP 7 3.0175326 0.778622 270 N 47 3 A4-B9
+TOP 8 3.0175326 0.8238976 270 N 14 1 A5
+TOP 9 3.0175326 0.8632677 270 N 70 3 A6
+TOP 10 3.0175326 0.8829527 270 N 71 4 A7
+TOP 11 3.0175326 0.9223228 270 N 0 93 A8
+TOP 12 3.0175326 0.9990944 270 N 144 118 B1-A12
+TOP 13 3.0175326 0.9675984 270 N 47 4 B4-A9
+TOP 14 3.0175326 0.9420078 270 N 13 1 B5
+TOP 15 3.0175326 0.9026378 270 N 70 4 B6
+TOP 16 3.0175326 0.8435826 270 N 71 3 B7
+TOP 17 3.0175326 0.8042126 270 N 0 92 B8
+#
+# CMP 13
+CMP 1 3.13366 1.3331102 180 N J19 731000114 ;0=2,1=0.0000
+PRP Body_Material 'Brass'
+PRP Body_Plating 'Gold'
+PRP Case/Package 'SMA'
+PRP Category 'RF / Coaxial Connectors'
+PRP Center_Contact_Plating 'Gold'
+PRP Clock_Frequency '18GHz'
+PRP Connector_Type 'PCB,SMA,Coaxial'
+PRP Contact_Material 'Copper'
+PRP Contact_Plating 'Gold'
+PRP Dielectric_Material 'PTFE'
+PRP Fastening_Type 'Threaded'
+PRP Gender 'Female'
+PRP Halogen_Free '5696HalogenFree'
+PRP Housing_Color 'Gold'
+PRP Impedance '50R'
+PRP Insulation_Material 'Teflon'
+PRP Lead_Free '5697LeadFree'
+PRP Length '14.8mm'
+PRP Manufacturer 'Molex'
+PRP Manufacturer_Part_Number '73100-0114'
+PRP Max_Operating_Temperature '165°C'
+PRP Min_Operating_Temperature '-65°C'
+PRP Mounting_Technology 'Through Hole'
+PRP Number_of_Contacts '1NUMBER'
+PRP Operating_Frequency '0 to 12Hz'
+PRP Orientation 'Right Angle'
+PRP Package_Quantity '1760'
+PRP Packaging 'Tray'
+PRP Plating 'Gold'
+PRP Polarity 'Normal'
+PRP Pricing '1=8.01000, 10=7.00800, 80=5.67300, 1760=4.57174 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'Unknown'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series '73100'
+PRP Stock '19371'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'WM5525-ND'
+PRP Termination 'Solder'
+PRP Voltage_Rating '500V'
+TOP 0 3.13366 1.3331102 180 N 96 0 1
+TOP 1 3.03366 1.2331102 180 N 144 111 2
+TOP 2 3.23366 1.2331102 180 N 144 112 3
+TOP 3 3.23366 1.4331102 180 N 144 85 4
+TOP 4 3.03366 1.4331102 180 N 144 86 5
+#
+# CMP 14
+CMP 14 0.625005 1.1731102 0 N D6 LTST-C191KGKT ;0=1,1=0.0000
+PRP Manufacturer 'Lite-On Inc.'
+PRP Manufacturer_Part_Number 'LTST-C191GKT'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '160-1443-1-ND'
+PRP Unit_Cost__Qty_1 '$0.68'
+PRP Unit_Cost__Qty_500 '$0.293'
+PRP Value 'LTST-C191KGKT'
+TOP 0 0.6515798 1.1731102 270 N 16 1 1
+TOP 1 0.5984302 1.1731102 270 N 15 1 2
+#
+# CMP 15
+CMP 32 2.25959 1.2008602 0 N T5 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.25959 1.2008602 0 N 103 5 1
+#
+# CMP 16
+CMP 32 2.18085 1.2008602 0 N T6 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.18085 1.2008602 0 N 117 1 1
+#
+# CMP 17
+CMP 32 1.7559 0.7098402 0 N T7 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.7559 0.7098402 0 N 118 1 1
+#
+# CMP 18
+CMP 32 1.7559 0.6098402 0 N T8 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.7559 0.6098402 0 N 102 13 1
+#
+# CMP 19
+CMP 32 2.25959 1.1024502 0 N T9 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.25959 1.1024502 0 N 142 7 1
+#
+# CMP 20
+CMP 32 2.18085 1.1024502 270 N T10 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.18085 1.1024502 270 N 116 1 1
+#
+# CMP 21
+CMP 32 1.86732 0.7098402 270 N T11 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.86732 0.7098402 270 N 115 1 1
+#
+# CMP 22
+CMP 32 1.86732 0.6098402 270 N T12 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.86732 0.6098402 270 N 8 3 1
+#
+# CMP 23
+CMP 32 2.25959 1.0040202 270 N T13 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.25959 1.0040202 270 N 100 16 1
+#
+# CMP 24
+CMP 32 2.18085 1.0040202 270 N T14 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.18085 1.0040202 270 N 114 1 1
+#
+# CMP 25
+CMP 32 1.97583 0.7098402 270 N T15 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.97583 0.7098402 270 N 113 1 1
+#
+# CMP 26
+CMP 32 1.97583 0.6098402 270 N T16 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.97583 0.6098402 270 N 99 3 1
+#
+# CMP 27
+CMP 32 2.25959 0.9056002 270 N T17 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.25959 0.9056002 270 N 98 4 1
+#
+# CMP 28
+CMP 32 2.18085 0.9056002 270 N T18 TP_S ;0=2,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.18085 0.9056002 270 N 112 1 1
+#
+# CMP 29
+CMP 7 0.36 0.6431149 0 N J5 FTSH-105-01-L-DV-K-TR ;0=1,1=0.0000
+PRP Category 'Headers and Wire Housings'
+PRP Color 'Black'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/10245/ftsh-mt-10245289.pdf?src-supplier=Avnet'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/10245/ftsh-mt-10245289.pdf?src-supplier=Avnet'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/739/ftsh-1xx-xx-xxx-dv-xxx-mkt-739005.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/739/ftsh-1xx-xx-xxx-dv-xxx-mkt-739005.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/23735/81359-23735917.pdf?src-supplier=Newark'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/23735/81359-23735917.pdf?src-supplier=Newark'
+PRP Connector_Type 'Male Pin'
+PRP Contact_Material 'Bronze'
+PRP Contact_Mating_Length '0.12inch'
+PRP Contact_Plating 'Gold'
+PRP Contact_Type 'Male Pin'
+PRP Current_Rating '1.75A'
+PRP Depth '3.43mm'
+PRP Gender 'Male'
+PRP Housing_Color 'Black'
+PRP Housing_Material 'Polymer'
+PRP Lead_Free 'Lead Free'
+PRP Length '6.35mm'
+PRP Manufacturer 'Samtec Inc.'
+PRP Manufacturer_Part_Number 'FTSH-105-01-L-DV-K-TR'
+PRP Max_Current_Rating '1.75A'
+PRP Max_Operating_Temperature '125°C'
+PRP Min_Operating_Temperature '-55°C'
+PRP Mount 'Surface Mount'
+PRP Number_of_Contacts '10'
+PRP Number_of_Positions '10'
+PRP Number_of_Rows '2'
+PRP Orientation 'Straight'
+PRP Package_Quantity '550'
+PRP Packaging 'Tape and Reel'
+PRP Pitch '1.27mm'
+PRP Pricing_1 '1=4.28000, 10=3.88500, 100=3.42300 (USD)'
+PRP Radiation_Hardening 'No'
+PRP REACH_SVHC 'No SVHC'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Row_Spacing '0.05inch'
+PRP Series 'FTSH'
+PRP Stock_1 '18878'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM13165CT-ND'
+PRP Termination 'Solder'
+TOP 0 0.26 0.5631149 270 N 100 24 1
+TOP 1 0.26 0.7231149 270 N 75 2 2
+TOP 2 0.31 0.5631149 270 N 144 233 3
+TOP 3 0.31 0.7231149 270 N 78 2 4
+TOP 4 0.36 0.5631149 270 N 144 231 5
+TOP 5 0.36 0.7231149 270 N 76 2 6
+TOP 6 0.41 0.5631149 270 N 0 98 7
+TOP 7 0.41 0.7231149 270 N 77 2 8
+TOP 8 0.46 0.5631149 270 N 144 230 9
+TOP 9 0.46 0.7231149 270 N 125 2 10
+#
+# CMP 30
+CMP 19 2.818878 1.0206325 270 N U13 SN74AXC4T245RSVR ;0=1,1=0.0000
+PRP Category 'Buffers, Drivers and Transceivers'
+PRP ComponentLink1Description 'http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&amp;gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Fsn74axc4t245&src-supplier=Digi-Key'
+PRP ComponentLink1URL 'http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&amp;gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Fsn74axc4t245&src-supplier=Digi-Key'
+PRP Manufacturer 'Texas Instruments'
+PRP Manufacturer_Part_Number 'SN74AXC4T245RSVR'
+PRP Pricing '1=1.48000, 10=1.32500, 25=1.25760, 100=1.03290, 250=0.96552, 500=0.85326, 1000=0.67362 (USD)'
+PRP RoHS 'Yes'
+PRP Stock '6479'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '296-53432-1-ND'
+TOP 0 2.7952561 0.9911049 270 N 54 1 1
+TOP 1 2.8110041 0.9891364 270 N 100 12 2
+TOP 2 2.8267521 0.9891364 270 N 143 44 3
+TOP 3 2.8425001 0.9891364 270 N 50 0 4
+TOP 4 2.8661221 0.9970105 180 N 50 1 5
+TOP 5 2.8661222 1.0127585 180 N 60 2 6
+TOP 6 2.8661222 1.0285065 180 N 59 2 7
+TOP 7 2.8661221 1.0442545 180 N 58 2 8
+TOP 8 2.8425001 1.0521286 270 N 57 2 9
+TOP 9 2.8267521 1.0521286 270 N 144 114 10
+TOP 10 2.8110041 1.0521286 270 N 144 115 11
+TOP 11 2.7952561 1.0521286 270 N 128 2 12
+TOP 12 2.771634 1.0442545 180 N 75 1 13
+TOP 13 2.771634 1.0285065 180 N 77 1 14
+TOP 14 2.771634 1.0127585 180 N 78 1 15
+TOP 15 2.771634 0.9970105 180 N 54 2 16
+#
+# CMP 31
+CMP 23 2.2259231 1.5556325 270 N RN3 10K ;0=1,1=0.0177
+PRP Case_Code_(Imperial) '0402'
+PRP Case_Code_(Metric) '1005'
+PRP Case/Package '0804'
+PRP Category 'Resistor Arrays'
+PRP Circuit_Type 'Isolated'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/46387/1480003-46387949.pdf?src-supplier=Element14'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/46387/1480003-46387949.pdf?src-supplier=Element14'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/46376/1480003-46376265.pdf?src-supplier=Element14'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/46376/1480003-46376265.pdf?src-supplier=Element14'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/28418/1790599-28418558.pdf?src-supplier=Element14'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/28418/1790599-28418558.pdf?src-supplier=Element14'
+PRP ComponentLink4Description 'https://datasheet.ciiva.com/28636/1790599-28636885.pdf?src-supplier=Element14'
+PRP ComponentLink4URL 'https://datasheet.ciiva.com/28636/1790599-28636885.pdf?src-supplier=Element14'
+PRP ComponentLink5Description 'https://datasheet.ciiva.com/30209/aoc0000ce1-30209125.pdf?src-supplier=Onlinecomponents.com'
+PRP ComponentLink5URL 'https://datasheet.ciiva.com/30209/aoc0000ce1-30209125.pdf?src-supplier=Onlinecomponents.com'
+PRP Depth '1mm'
+PRP Height '0.35mm'
+PRP Lead_Free 'Lead Free'
+PRP Length '2mm'
+PRP Manufacturer 'Panasonic'
+PRP Manufacturer_Part_Number 'EXB-28V103JX'
+PRP Max_Operating_Temperature '125°C'
+PRP Military_Standard 'Not'
+PRP Min_Operating_Temperature '-55°C'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '8'
+PRP Number_of_Elements '4'
+PRP Number_of_Resistors '4'
+PRP Package_Quantity '1'
+PRP Packaging 'Tape and Reel'
+PRP Pins '8'
+PRP Power_Dissipation '63mW'
+PRP Power_Per_Element '62.5mW'
+PRP Pricing '1=0.10000, 10=0.08100, 25=0.05640, 50=0.04380, 100=0.03130, 250=0.02444, 500=0.01942, 1000=0.01378, 5000=0.01065 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'Unknown'
+PRP Resistance_Tolerance '5%'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series 'EXB'
+PRP Stock '1570078'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'Y7103CT-ND'
+PRP Technology 'THICK FILM'
+PRP Temperature_Coefficient '200ppm/°C'
+PRP Terminal_Pitch '0.5mm'
+PRP Termination 'Convex'
+PRP Tolerance '5%'
+PRP Value '10K'
+PRP Voltage_Rating '50V'
+PRP Voltage_Rating_(DC) '100V'
+PRP Width '1mm'
+TOP 0 2.194427 1.5339791 270 N 53 0 1
+TOP 1 2.2160806 1.5339791 270 N 52 0 2
+TOP 2 2.2357656 1.5339791 270 N 63 0 3
+TOP 3 2.2574192 1.5339791 270 N 66 1 4
+TOP 4 2.2574192 1.5772859 270 N 143 18 5
+TOP 5 2.2357656 1.5772859 270 N 143 17 6
+TOP 6 2.2160806 1.5772859 270 N 143 16 7
+TOP 7 2.194427 1.5772859 270 N 143 15 8
+#
+# CMP 32
+CMP 22 2.61 1.0081052 0 N R25 4.7K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'RMCF0402FT4K70'
+PRP Package '0402'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'RMCF0402FT4K70TR-ND'
+PRP Value '4.7K'
+TOP 0 2.5922834 1.0081052 180 N 49 1 1
+TOP 1 2.6277166 1.0081052 0 N 144 131 2
+#
+# CMP 33
+CMP 22 2.61 0.9681052 0 N R24 4.7K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'RMCF0402FT4K70'
+PRP Package '0402'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'RMCF0402FT4K70TR-ND'
+PRP Value '4.7K'
+TOP 0 2.5922834 0.9681052 180 N 9 0 1
+TOP 1 2.6277166 0.9681052 0 N 143 41 2
+#
+# CMP 34
+CMP 1 3.13366 1.8931102 180 N J17 731000114 ;0=2,1=0.0000
+PRP Body_Material 'Brass'
+PRP Body_Plating 'Gold'
+PRP Case/Package 'SMA'
+PRP Category 'RF / Coaxial Connectors'
+PRP Center_Contact_Plating 'Gold'
+PRP Clock_Frequency '18GHz'
+PRP Connector_Type 'PCB,SMA,Coaxial'
+PRP Contact_Material 'Copper'
+PRP Contact_Plating 'Gold'
+PRP Dielectric_Material 'PTFE'
+PRP Fastening_Type 'Threaded'
+PRP Gender 'Female'
+PRP Halogen_Free '5696HalogenFree'
+PRP Housing_Color 'Gold'
+PRP Impedance '50R'
+PRP Insulation_Material 'Teflon'
+PRP Lead_Free '5697LeadFree'
+PRP Length '14.8mm'
+PRP Manufacturer 'Molex'
+PRP Manufacturer_Part_Number '73100-0114'
+PRP Max_Operating_Temperature '165°C'
+PRP Min_Operating_Temperature '-65°C'
+PRP Mounting_Technology 'Through Hole'
+PRP Number_of_Contacts '1NUMBER'
+PRP Operating_Frequency '0 to 12Hz'
+PRP Orientation 'Right Angle'
+PRP Package_Quantity '1760'
+PRP Packaging 'Tray'
+PRP Plating 'Gold'
+PRP Polarity 'Normal'
+PRP Pricing '1=8.01000, 10=7.00800, 80=5.67300, 1760=4.57174 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'Unknown'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series '73100'
+PRP Stock '19371'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'WM5525-ND'
+PRP Termination 'Solder'
+PRP Voltage_Rating '500V'
+TOP 0 3.13366 1.8931102 180 N 95 0 1
+TOP 1 3.03366 1.7931102 180 N 144 81 2
+TOP 2 3.23366 1.7931102 180 N 144 80 3
+TOP 3 3.23366 1.9931102 180 N 144 71 4
+TOP 4 3.03366 1.9931102 180 N 144 70 5
+#
+# CMP 35
+CMP 15 1.12204 1.2598449 0 N BH5 STANDOFF_M2.5 ;0=2,1=0.0000
+TOP 0 1.12204 1.2598449 0 N 144 212 1
+#
+# CMP 36
+CMP 8 3.15 0.5522302 0 N J16 Header_2X1_2.54MM ;0=2,1=0.0000
+PRP Category 'Connectors'
+PRP Color 'Black'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/741/xrxczzzsxxn-rc-st-11635-b-741243.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/741/xrxczzzsxxn-rc-st-11635-b-741243.pdf?src-supplier=Digi-Key'
+PRP Contact_Mating_Length '0.23inch'
+PRP Contact_Plating 'Gold'
+PRP Contact_Type 'Male Pin'
+PRP Content 'DNI'
+PRP Manufacturer 'Sullins'
+PRP Manufacturer_Part_Number 'PRPC002SAAN-RC'
+PRP Mounting_Technology 'Through Hole'
+PRP Number_of_Positions '2'
+PRP Number_of_Rows '1'
+PRP Package_Quantity '1'
+PRP Packaging 'Bulk'
+PRP Pitch '0.1inch'
+PRP Pricing '1=0.08000, 10=0.07300, 25=0.05400, 50=0.04640, 100=0.04490, 250=0.03872, 500=0.03716 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series '-'
+PRP Stock '31528'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'S1011EC-02-ND'
+PRP Termination 'Solder'
+TOP 0 3.1000001 0.5522302 0 N 66 0 1
+TOP 1 3.1999999 0.5522302 0 N 144 135 2
+#
+# CMP 37
+CMP 22 1.62999 2.1881051 90 N R23 0.1 ;0=1,1=0.0157
+PRP Height '0.43mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'CSR0402FKR100'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CSR0402FKR100CT-ND'
+PRP Value '0.1'
+TOP 0 1.62999 2.2058217 270 N 18 1 1
+TOP 1 1.62999 2.1703887 90 N 102 19 2
+#
+# CMP 38
+CMP 16 2.855 0.8381103 0 N U15 ESDR0502NMUTAG ;0=1,1=0.0000
+PRP ComponentLink1Description 'Manufacturer URL'
+PRP ComponentLink1URL 'http://www.onsemi.com/'
+PRP ComponentLink2Description 'Datasheet'
+PRP ComponentLink2URL 'http://www.onsemi.cn/pub_link/Collateral/ESDR0502N-D.PDF'
+PRP ComponentLink3Description 'Package Specification'
+PRP ComponentLink3URL 'http://www.onsemi.com/pub_link/Collateral/517AA.PDF'
+PRP Manufacturer 'ON Semiconductor'
+PRP Manufacturer_Part_Number 'ESDR0502NMUTAG'
+PRP Supplier_1 'Mouser'
+PRP Supplier_Part_Number_1 '863-ESDR0502NMUTAG'
+TOP 0 2.8422047 0.8538583 270 N 144 137 1
+TOP 1 2.8422047 0.8381103 270 N 70 2 2
+TOP 2 2.8422047 0.8223622 270 N 71 2 3
+TOP 3 2.8677953 0.8223622 270 N 71 1 4
+TOP 4 2.8677953 0.8381103 270 N 70 1 5
+TOP 5 2.8677953 0.8538583 270 N 47 2 6
+#
+# CMP 39
+CMP 31 2.685 1.9100049 180 N T86 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.685 1.9100049 180 N 6 1 1
+#
+# CMP 40
+CMP 31 2.745 1.9100049 180 N T85 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.745 1.9100049 180 N 57 1 1
+#
+# CMP 41
+CMP 31 2.87 1.1281102 270 N T4 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.87 1.1281102 270 N 58 1 1
+#
+# CMP 42
+CMP 31 2.555 1.0881102 270 N T3 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.555 1.0881102 270 N 7 1 1
+#
+# CMP 43
+CMP 31 2.905 1.1981102 270 N T2 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.905 1.1981102 270 N 59 1 1
+#
+# CMP 44
+CMP 31 2.935 1.1281102 270 N T1 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 2.935 1.1281102 270 N 60 1 1
+#
+# CMP 45
+CMP 22 2.36 1.2431252 270 N R87 12.1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Yageo'
+PRP Manufacturer_Part_Number 'RC0402FR-0712K1L'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-12.1KLRTR-ND'
+PRP Value '12.1K'
+TOP 0 2.36 1.2254087 90 N 144 146 1
+TOP 1 2.36 1.2608417 270 N 61 1 2
+#
+# CMP 46
+CMP 22 2.3609231 1.4206375 90 N R49 2K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-072KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-2KLRCT-ND'
+PRP Value '2K'
+TOP 0 2.3609231 1.438354 270 N 63 3 1
+TOP 1 2.3609231 1.402921 90 N 62 1 2
+#
+# CMP 47
+CMP 22 2.7050031 0.9691075 90 N R22 10K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Samsung Electro-Mechanics'
+PRP Manufacturer_Part_Number 'RC1005F103CS'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '1276-3431-2-ND'
+PRP Value '10K'
+TOP 0 2.7050031 0.9868241 270 N 54 4 1
+TOP 1 2.7050031 0.9513909 90 N 143 52 2
+#
+# CMP 48
+CMP 22 2.94 0.8981153 270 N R21 4.7K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'RMCF0402FT4K70'
+PRP Package '0402'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'RMCF0402FT4K70TR-ND'
+PRP Value '4.7K'
+TOP 0 2.94 0.8803986 90 N 144 120 1
+TOP 1 2.94 0.9158319 270 N 13 0 2
+#
+# CMP 49
+CMP 22 2.7650051 0.7781102 0 N R20 4.7K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'RMCF0402FT4K70'
+PRP Package '0402'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'RMCF0402FT4K70TR-ND'
+PRP Value '4.7K'
+TOP 0 2.7472885 0.7781102 180 N 144 138 1
+TOP 1 2.7827215 0.7781102 0 N 14 0 2
+#
+# CMP 50
+CMP 22 2.9247981 0.9798425 0 N R19 4.7K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'RMCF0402FT4K70'
+PRP Package '0402'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'RMCF0402FT4K70TR-ND'
+PRP Value '4.7K'
+TOP 0 2.9070815 0.9798425 180 N 50 2 1
+TOP 1 2.9425147 0.9798425 0 N 143 54 2
+#
+# CMP 51
+CMP 22 0.635005 1.0381102 0 N R18 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 0.6172884 1.0381102 180 N 143 22 1
+TOP 1 0.6527216 1.0381102 0 N 65 0 2
+#
+# CMP 52
+CMP 29 0.2649951 1.2981102 0 N Q1 RU1J002YNTCL ;0=1,1=0.0000
+PRP Automotive 'No'
+PRP Category 'Trans'
+PRP ComponentLink2Description 'Datasheet'
+PRP ComponentLink2URL 'https://d1d2qsbl8m0m72.cloudfront.net/en/products/databook/datasheet/discrete/transistor/mosfet/ru1j002yn-e.pdf'
+PRP Continuous_Drain_Current '200mA'
+PRP Depletion_Mode 'False'
+PRP Device_Class_L1 'Discrete Semiconductors'
+PRP Device_Class_L2 'Transistors'
+PRP Device_Class_L3 'MOSFETs'
+PRP Drain_to_Source_Breakdown_Voltage '50V'
+PRP Drain_to_Source_Resistance '1.6O'
+PRP Drain_To_Source_Voltage '50V'
+PRP Gate_To_Source_Voltage '8V'
+PRP Height '1.05mm'
+PRP Input_Capacitace_At_Vds '26pF @ 10V'
+PRP Lead_Free 'Yes'
+PRP Manufacturer 'Rohm'
+PRP Manufacturer_Part_Number 'RU1J002YNTCL'
+PRP Max_Forward_Diode_Voltage '1.2V'
+PRP Max_Junction_Temp '+150°C'
+PRP Mouser_Description 'MOSFET 0.9V Drive Nch MOSFET'
+PRP Number_Of_Channels '1'
+PRP Number_Of_N_Channels '1'
+PRP Octopart 'https://octopart.com/ru1j002yntcl-rohm-47197697'
+PRP Package 'UMT3F'
+PRP Power_Dissipation '150mW'
+PRP Pulse_Drain_Current '800mA'
+PRP RoHS 'TRUE'
+PRP Rthja_Max '833°C/W'
+PRP Standoff_Height '0mm'
+PRP Supplier_1 'Mouser'
+PRP Supplier_Part_Number_1 '755-RU1J002YNTCL'
+PRP Temperature 'to +150°C'
+PRP Threshold_Vgs_Max '0.8V'
+PRP Threshold_Vgs_Min '0.3V'
+PRP Turn_Off_Delay_Time '17ns'
+PRP Turn_On_Delay_Time '5ns'
+TOP 0 0.2360581 1.3237007 0 N 137 2 1
+TOP 1 0.2360581 1.2725197 0 N 144 235 2
+TOP 2 0.293932 1.2981102 0 N 64 1 3
+#
+# CMP 53
+CMP 0 2.6159281 1.1206325 0 N FB15 120Ohms ;0=1,1=0.0157
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'Murata Electronics'
+PRP Manufacturer_Part_Number 'BLM15AG121SN1D'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '490-1005-2-ND'
+PRP Value '120Ohms'
+TOP 0 2.5982115 1.1206325 180 N 68 1 1
+TOP 1 2.6336447 1.1206325 0 N 143 45 2
+#
+# CMP 54
+CMP 0 2.7309281 1.1206325 0 N FB9 120Ohms ;0=1,1=0.0157
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'Murata Electronics'
+PRP Manufacturer_Part_Number 'BLM15AG121SN1D'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '490-1005-2-ND'
+PRP Value '120Ohms'
+TOP 0 2.7132115 1.1206325 180 N 67 2 1
+TOP 1 2.7486447 1.1206325 0 N 143 43 2
+#
+# CMP 55
+CMP 0 2.93 0.7781052 180 N FB4 120Ohms ;0=1,1=0.0157
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'Murata Electronics'
+PRP Manufacturer_Part_Number 'BLM15AG121SN1D'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '490-1005-2-ND'
+PRP Value '120Ohms'
+TOP 0 2.9477165 0.7781052 0 N 47 1 1
+TOP 1 2.9122835 0.7781052 180 N 17 2 2
+#
+# CMP 56
+CMP 14 0.625 1.1031102 0 N D5 LTST-C191KGKT ;0=1,1=0.0000
+PRP Manufacturer 'Lite-On Inc.'
+PRP Manufacturer_Part_Number 'LTST-C191GKT'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '160-1443-1-ND'
+PRP Unit_Cost__Qty_1 '$0.68'
+PRP Unit_Cost__Qty_500 '$0.293'
+PRP Value 'LTST-C191KGKT'
+TOP 0 0.6515748 1.1031102 270 N 65 1 1
+TOP 1 0.5984252 1.1031102 270 N 64 0 2
+#
+# CMP 57
+CMP 3 2.83 1.1931102 270 N C64 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.83 1.176181 90 N 144 113 1
+TOP 1 2.83 1.2100393 270 N 66 3 2
+#
+# CMP 58
+CMP 3 2.3609231 1.7087025 90 N C143 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.3609231 1.7256316 270 N 144 96 1
+TOP 1 2.3609231 1.6917734 90 N 69 1 2
+#
+# CMP 59
+CMP 3 2.7703031 1.8356325 180 N C139 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.7872322 1.8356325 0 N 144 88 1
+TOP 1 2.753374 1.8356325 180 N 69 6 2
+#
+# CMP 60
+CMP 3 2.7900031 1.1931125 270 N C83 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.7900031 1.1761834 90 N 144 127 1
+TOP 1 2.7900031 1.2100416 270 N 69 7 2
+#
+# CMP 61
+CMP 3 2.849995 0.7781052 0 N C71 1uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'Murata Electronics'
+PRP Manufacturer_Part_Number 'GRM155R61E105MA12D'
+PRP Package '0402'
+PRP Part_# 'E-CAP-042'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '490-10018-1-ND'
+PRP Value '1uF'
+TOP 0 2.8330659 0.7781052 180 N 144 139 1
+TOP 1 2.8669241 0.7781052 0 N 17 1 2
+#
+# CMP 62
+CMP 3 2.1959231 1.3256325 180 N C57 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.2128522 1.3256325 0 N 144 108 1
+TOP 1 2.178994 1.3256325 180 N 143 55 2
+#
+# CMP 63
+CMP 3 2.3609231 1.6306325 270 N C56 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.3609231 1.6137034 90 N 144 100 1
+TOP 1 2.3609231 1.6475616 270 N 143 28 2
+#
+# CMP 64
+CMP 3 2.6159231 1.2106325 180 N C55 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.6328522 1.2106325 0 N 144 126 1
+TOP 1 2.598994 1.2106325 180 N 68 3 2
+#
+# CMP 65
+CMP 3 2.7309231 1.2106325 180 N C54 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.7478522 1.2106325 0 N 144 125 1
+TOP 1 2.713994 1.2106325 180 N 67 3 2
+#
+# CMP 66
+CMP 3 2.3159231 1.5506325 90 N C52 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.3159231 1.5675616 270 N 144 103 1
+TOP 1 2.3159231 1.5337034 90 N 143 30 2
+#
+# CMP 67
+CMP 3 2.3609231 1.5506325 90 N C50 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.3609231 1.5675616 270 N 144 102 1
+TOP 1 2.3609231 1.5337034 90 N 143 29 2
+#
+# CMP 68
+CMP 3 2.6409231 1.8356325 0 N C49 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.623994 1.8356325 180 N 144 89 1
+TOP 1 2.6578522 1.8356325 0 N 143 40 2
+#
+# CMP 69
+CMP 3 2.9954131 1.6675725 90 N C48 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.9954131 1.6845016 270 N 144 82 1
+TOP 1 2.9954131 1.6506434 90 N 143 42 2
+#
+# CMP 70
+CMP 3 2.999995 1.5481152 90 N C47 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.999995 1.5650443 270 N 144 84 1
+TOP 1 2.999995 1.5311861 90 N 143 61 2
+#
+# CMP 71
+CMP 3 2.4488831 0.9406325 0 N C12 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.431954 0.9406325 180 N 144 149 1
+TOP 1 2.4658122 0.9406325 0 N 100 13 2
+#
+# CMP 72
+CMP 3 2.5208131 0.9406325 180 N C11 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.5377422 0.9406325 0 N 144 144 1
+TOP 1 2.503884 0.9406325 180 N 143 47 2
+#
+# CMP 73
+CMP 3 2.7820031 0.9391125 0 N C10 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.765074 0.9391125 180 N 144 129 1
+TOP 1 2.7989322 0.9391125 0 N 100 14 2
+#
+# CMP 74
+CMP 3 2.8558131 0.9406325 180 N C9 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 2.8727422 0.9406325 0 N 144 119 1
+TOP 1 2.838884 0.9406325 180 N 143 53 2
+#
+# CMP 75
+CMP 2 1.47 2.2581052 180 N C3 47uF ;0=1,1=0.0000
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '1.0mm'
+PRP Manufacturer 'Murata Electronics'
+PRP Manufacturer_Part_Number 'GRM188R60J476ME15D'
+PRP Package '0603'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '490-13247-1-ND'
+PRP Value '47uF'
+PRP Voltage '6.3V'
+TOP 0 1.498 2.2581052 90 N 144 161 1
+TOP 1 1.442 2.2581052 90 N 143 56 2
+#
+# CMP 76
+CMP 2 1.574995 2.1781002 270 N C2 10uF ;0=1,1=0.0000
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.95mm'
+PRP Manufacturer 'Murata Electronics'
+PRP Manufacturer_Part_Number 'GRM188R61A106ME69D'
+PRP Package '0603'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '490-10475-1-ND'
+PRP Value '10uF'
+PRP Voltage '10V'
+TOP 0 1.574995 2.1501002 180 N 144 162 1
+TOP 1 1.574995 2.2061002 180 N 18 2 2
+#
+# CMP 77
+CMP 3 1.335 2.0781102 180 N C1 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 1.3519291 2.0781102 0 N 144 164 1
+TOP 1 1.3180708 2.0781102 180 N 143 20 2
+#
+# CMP 78
+CMP 3 0.4006031 1.5877225 180 N C22 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 0.4175322 1.5877225 0 N 121 0 1
+TOP 1 0.383674 1.5877225 180 N 88 2 2
+#
+# CMP 79
+CMP 3 0.4006031 1.5521825 180 N C21 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 0.4175322 1.5521825 0 N 122 0 1
+TOP 1 0.383674 1.5521825 180 N 87 2 2
+#
+# CMP 80
+CMP 3 0.4006031 1.7147325 180 N C19 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 0.4175322 1.7147325 0 N 123 1 1
+TOP 1 0.383674 1.7147325 180 N 90 0 2
+#
+# CMP 81
+CMP 3 0.4006031 1.7502725 180 N C18 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 0.4175322 1.7502725 0 N 124 1 1
+TOP 1 0.383674 1.7502725 180 N 89 0 2
+#
+# CMP 82
+CMP 3 0.7123931 1.6662125 270 N C17 0.1uF ;0=1,1=0.0217
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'CGA2B1X7R1C104K050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-5613-2-ND'
+PRP Value '0.1uF'
+TOP 0 0.7123931 1.6492834 90 N 144 205 1
+TOP 1 0.7123931 1.6831416 270 N 143 33 2
+#
+# CMP 83
+CMP 21 2.6809281 1.5206325 270 N U12 FT2232HL-REEL ;0=1,1=0.0000
+PRP Datasheet_URL 'http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_FT2232H.pdf'
+PRP Datasheet_Version 'Rev. 2.5, 07/2016'
+PRP Dimensions '10x10x1.4mm'
+PRP Height '1.4mm'
+PRP Length '10mm'
+PRP Manufacturer 'FTDI'
+PRP Manufacturer_Part_Number 'FT2232HL-REEL'
+PRP Manufacturer_URL 'http://www.nxp.com/'
+PRP Maximum_Data_Rate '480Mbit/s'
+PRP Minimum_Operating_Temperature '-40°C'
+PRP Mounting_Type 'SurfaceMount'
+PRP Number_of_Channels_per_Chip '2'
+PRP Package_Reference 'LQFP-64'
+PRP Package_Type 'LQFP'
+PRP Standard_Supported 'RS232,RS422,RS485'
+PRP Supplier_1 'RS Components'
+PRP Supplier_Part_Number_1 '6877720P'
+PRP Width '10mm'
+TOP 0 2.5332903 1.294727 270 N 144 142 1
+TOP 1 2.5529753 1.294727 270 N 56 0 2
+TOP 2 2.5726604 1.294727 270 N 55 0 3
+TOP 3 2.5923454 1.294727 270 N 68 0 4
+TOP 4 2.6120305 1.294727 270 N 144 141 5
+TOP 5 2.6317155 1.294727 270 N 61 0 6
+TOP 6 2.6514005 1.294727 270 N 71 0 7
+TOP 7 2.6710856 1.294727 270 N 70 0 8
+TOP 8 2.6907706 1.294727 270 N 67 1 9
+TOP 9 2.7104557 1.294727 270 N 144 123 10
+TOP 10 2.7301407 1.294727 270 N 144 121 11
+TOP 11 2.7498257 1.294727 270 N 69 3 12
+TOP 12 2.7695108 1.294727 270 N 144 122 13
+TOP 13 2.7891958 1.294727 270 N 66 2 14
+TOP 14 2.8088809 1.294727 270 N 144 124 15
+TOP 15 2.8285659 1.294727 270 N 60 0 16
+TOP 16 2.9068336 1.3729947 180 N 59 0 17
+TOP 17 2.9068336 1.3926797 180 N 7 0 18
+TOP 18 2.9068336 1.4123648 180 N 58 0 19
+TOP 19 2.9068336 1.4320498 180 N 143 24 20
+TOP 20 2.9068336 1.4517349 180 N 19 0 21
+TOP 21 2.9068336 1.4714199 180 N 0 33 22
+TOP 22 2.9068336 1.4911049 180 N 0 34 23
+TOP 23 2.9068336 1.51079 180 N 0 35 24
+TOP 24 2.9068336 1.530475 180 N 144 87 25
+TOP 25 2.9068336 1.5501601 180 N 0 36 26
+TOP 26 2.9068336 1.5698451 180 N 0 37 27
+TOP 27 2.9068336 1.5895301 180 N 0 38 28
+TOP 28 2.9068336 1.6092152 180 N 0 39 29
+TOP 29 2.9068336 1.6289002 180 N 0 40 30
+TOP 30 2.9068336 1.6485853 180 N 143 25 31
+TOP 31 2.9068336 1.6682703 180 N 0 41 32
+TOP 32 2.8285659 1.746538 270 N 0 32 33
+TOP 33 2.8088809 1.746538 270 N 0 31 34
+TOP 34 2.7891958 1.746538 270 N 144 83 35
+TOP 35 2.7695108 1.746538 270 N 0 30 36
+TOP 36 2.7498257 1.746538 270 N 69 2 37
+TOP 37 2.7301407 1.746538 270 N 57 0 38
+TOP 38 2.7104557 1.746538 270 N 6 0 39
+TOP 39 2.6907706 1.746538 270 N 0 29 40
+TOP 40 2.6710856 1.746538 270 N 0 28 41
+TOP 41 2.6514005 1.746538 270 N 143 23 42
+TOP 42 2.6317155 1.746538 270 N 0 27 43
+TOP 43 2.6120305 1.746538 270 N 0 26 44
+TOP 44 2.5923454 1.746538 270 N 0 25 45
+TOP 45 2.5726604 1.746538 270 N 0 24 46
+TOP 46 2.5529753 1.746538 270 N 144 90 47
+TOP 47 2.5332903 1.746538 270 N 0 42 48
+TOP 48 2.4550226 1.6682703 180 N 69 4 49
+TOP 49 2.4550226 1.6485853 180 N 143 26 50
+TOP 50 2.4550226 1.6289002 180 N 144 99 51
+TOP 51 2.4550226 1.6092152 180 N 0 43 52
+TOP 52 2.4550226 1.5895301 180 N 0 44 53
+TOP 53 2.4550226 1.5698451 180 N 0 45 54
+TOP 54 2.4550226 1.5501601 180 N 0 46 55
+TOP 55 2.4550226 1.530475 180 N 143 27 56
+TOP 56 2.4550226 1.51079 180 N 0 47 57
+TOP 57 2.4550226 1.4911049 180 N 0 48 58
+TOP 58 2.4550226 1.4714199 180 N 0 49 59
+TOP 59 2.4550226 1.4517349 180 N 0 50 60
+TOP 60 2.4550226 1.4320498 180 N 63 1 61
+TOP 61 2.4550226 1.4123648 180 N 52 1 62
+TOP 62 2.4550226 1.3926797 180 N 53 1 63
+TOP 63 2.4550226 1.3729947 180 N 69 5 64
+#
+# CMP 84
+CMP 17 2.4987281 1.1890425 0 N Y4 CSTNE12M0G550000R0 ;0=1,1=0.0000
+PRP Datasheet_Link 'https://www.murata.com/en-eu/products/productdata/8801162067998/SPEC-CSTNE12M0G550000R0.pdf?1559743212000'
+PRP Height '0.8mm'
+PRP Manufacturer 'Murata Electronics'
+PRP Manufacturer_Part_Number 'CSTNE12M0G550000R0'
+PRP Supplier_1 'Mouser'
+PRP Supplier_Part_Number_1 '81-CSTNE12M0G550000R'
+TOP 0 2.451484 1.1890425 0 N 56 1 1
+TOP 1 2.4987281 1.1890425 0 N 144 143 2
+TOP 2 2.5459722 1.1890425 0 N 55 1 3
+#
+# CMP 85
+CMP 28 2.2309281 1.4206325 180 N U11 93AA56BT-I/OT ;0=1,1=0.0000
+PRP Manufacturer 'Microchip Technology'
+PRP Manufacturer_Part_Number '93AA56BT-I/OT'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '93AA56BT-I/OTTR-ND'
+TOP 0 2.2803375 1.3832309 180 N 62 0 1
+TOP 1 2.2803375 1.4206325 180 N 144 104 2
+TOP 2 2.2803375 1.4580341 180 N 63 2 3
+TOP 3 2.1815187 1.4580341 180 N 52 2 4
+TOP 4 2.1815187 1.4206325 180 N 53 2 5
+TOP 5 2.1815187 1.3832309 180 N 143 31 6
+#
+# CMP 86
+CMP 19 2.4838781 1.0206325 270 N U10 SN74AXC4T245RSVR ;0=1,1=0.0000
+PRP Category 'Buffers, Drivers and Transceivers'
+PRP ComponentLink1Description 'http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&amp;gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Fsn74axc4t245&src-supplier=Digi-Key'
+PRP ComponentLink1URL 'http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&amp;gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Fsn74axc4t245&src-supplier=Digi-Key'
+PRP Manufacturer 'Texas Instruments'
+PRP Manufacturer_Part_Number 'SN74AXC4T245RSVR'
+PRP Pricing '1=1.48000, 10=1.32500, 25=1.25760, 100=1.03290, 250=0.96552, 500=0.85326, 1000=0.67362 (USD)'
+PRP RoHS 'Yes'
+PRP Stock '6479'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '296-53432-1-ND'
+TOP 0 2.4602561 0.9911049 270 N 54 3 1
+TOP 1 2.4760041 0.9891364 270 N 100 11 2
+TOP 2 2.4917521 0.9891364 270 N 143 46 3
+TOP 3 2.5075001 0.9891364 270 N 9 1 4
+TOP 4 2.5311222 0.9970105 180 N 49 0 5
+TOP 5 2.5311222 1.0127585 180 N 19 1 6
+TOP 6 2.5311222 1.0285065 180 N 0 84 7
+TOP 7 2.5311222 1.0442545 180 N 7 2 8
+TOP 8 2.5075001 1.0521286 270 N 6 2 9
+TOP 9 2.4917521 1.0521286 270 N 144 145 10
+TOP 10 2.4760041 1.0521286 270 N 144 147 11
+TOP 11 2.4602561 1.0521286 270 N 126 3 12
+TOP 12 2.436634 1.0442545 180 N 76 1 13
+TOP 13 2.436634 1.0285065 180 N 0 83 14
+TOP 14 2.436634 1.0127585 180 N 125 1 15
+TOP 15 2.436634 0.9970105 180 N 144 148 16
+#
+# CMP 87
+CMP 3 2.3609231 1.3306325 270 N C144 4.7uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'C1005X5R1A475M050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-8023-1-ND'
+PRP Value '4.7uF'
+TOP 0 2.3609231 1.3137034 90 N 144 101 1
+TOP 1 2.3609231 1.3475616 270 N 69 8 2
+#
+# CMP 88
+CMP 3 2.6159231 1.1706325 180 N C53 4.7uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'C1005X5R1A475M050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-8023-1-ND'
+PRP Value '4.7uF'
+TOP 0 2.6328522 1.1706325 0 N 144 130 1
+TOP 1 2.598994 1.1706325 180 N 68 2 2
+#
+# CMP 89
+CMP 3 2.7309231 1.1706325 180 N C51 4.7uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'C1005X5R1A475M050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-8023-1-ND'
+PRP Value '4.7uF'
+TOP 0 2.7478522 1.1706325 0 N 144 128 1
+TOP 1 2.713994 1.1706325 180 N 67 4 2
+#
+# CMP 90
+CMP 11 1.5848031 0.2148425 180 N J15 Header_6X2_SMD ;0=1,1=0.0000
+PRP Category 'Headers and Wire Housings'
+PRP Color 'Black'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739673.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739673.pdf?src-supplier=Digi-Key'
+PRP Connector_Type 'Header'
+PRP Contact_Finish_-_Mating 'GOLD'
+PRP Contact_Material 'Bronze'
+PRP Contact_Mating_Length '0.23inch'
+PRP Contact_Plating 'Gold'
+PRP Contact_Shape 'Square'
+PRP Contact_Type 'Male Pin'
+PRP Content 'MISC'
+PRP Fastening_Type 'Pull'
+PRP Flammability_Rating 'UL94 V-0'
+PRP Gender 'Male'
+PRP Insulation_Color 'Black'
+PRP Insulation_Material 'Polymer'
+PRP Lead_Free 'Lead Free'
+PRP Manufacturer 'Samtec'
+PRP Manufacturer_Part_Number 'TSM-106-01-L-DV'
+PRP Max_Operating_Temperature '125°C'
+PRP Min_Operating_Temperature '-55°C'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '12'
+PRP Number_of_Positions '12'
+PRP Number_of_Rows '2'
+PRP Package_Quantity '1'
+PRP Packaging 'Rail/Tube'
+PRP Pitch '0.1inch'
+PRP Pricing '1=2.21000, 10=1.92300, 100=1.71800, 500=1.43168, 1000=1.22715, 5000=1.08807 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Row_Spacing '0.1inch'
+PRP Series 'TSM'
+PRP Stock '6386'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM10803-ND'
+PRP Termination 'Solder'
+TOP 0 1.8348031 0.3123225 180 N 137 0 1
+TOP 1 1.8348031 0.1173625 180 N 0 59 2
+TOP 2 1.7348031 0.3123225 180 N 0 58 3
+TOP 3 1.7348031 0.1173625 180 N 0 57 4
+TOP 4 1.6348031 0.3123225 180 N 128 0 5
+TOP 5 1.6348031 0.1173625 180 N 140 0 6
+TOP 6 1.5348031 0.3123225 180 N 127 2 7
+TOP 7 1.5348031 0.1173625 180 N 141 0 8
+TOP 8 1.4348031 0.3123225 180 N 144 210 9
+TOP 9 1.4348031 0.1173625 180 N 144 211 10
+TOP 10 1.3348031 0.3123225 180 N 100 20 11
+TOP 11 1.3348031 0.1173625 180 N 103 6 12
+#
+# CMP 91
+CMP 11 2.2748031 0.2148425 180 N J8 Header_6X2_SMD ;0=1,1=0.0000
+PRP Category 'Headers and Wire Housings'
+PRP Color 'Black'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739673.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739673.pdf?src-supplier=Digi-Key'
+PRP Connector_Type 'Header'
+PRP Contact_Finish_-_Mating 'GOLD'
+PRP Contact_Material 'Bronze'
+PRP Contact_Mating_Length '0.23inch'
+PRP Contact_Plating 'Gold'
+PRP Contact_Shape 'Square'
+PRP Contact_Type 'Male Pin'
+PRP Content 'I2C'
+PRP Fastening_Type 'Pull'
+PRP Flammability_Rating 'UL94 V-0'
+PRP Gender 'Male'
+PRP Insulation_Color 'Black'
+PRP Insulation_Material 'Polymer'
+PRP Lead_Free 'Lead Free'
+PRP Manufacturer 'Samtec'
+PRP Manufacturer_Part_Number 'TSM-106-01-L-DV'
+PRP Max_Operating_Temperature '125°C'
+PRP Min_Operating_Temperature '-55°C'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '12'
+PRP Number_of_Positions '12'
+PRP Number_of_Rows '2'
+PRP Package_Quantity '1'
+PRP Packaging 'Rail/Tube'
+PRP Pitch '0.1inch'
+PRP Pricing '1=2.21000, 10=1.92300, 100=1.71800, 500=1.43168, 1000=1.22715, 5000=1.08807 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Row_Spacing '0.1inch'
+PRP Series 'TSM'
+PRP Stock '6386'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM10803-ND'
+PRP Termination 'Solder'
+TOP 0 2.5248031 0.3123225 180 N 0 91 1
+TOP 1 2.5248031 0.1173625 180 N 126 4 2
+TOP 2 2.4248031 0.3123225 180 N 0 90 3
+TOP 3 2.4248031 0.1173625 180 N 0 89 4
+TOP 4 2.3248031 0.3123225 180 N 94 4 5
+TOP 5 2.3248031 0.1173625 180 N 93 4 6
+TOP 6 2.2248031 0.3123225 180 N 92 4 7
+TOP 7 2.2248031 0.1173625 180 N 91 4 8
+TOP 8 2.1248031 0.3123225 180 N 144 157 9
+TOP 9 2.1248031 0.1173625 180 N 144 158 10
+TOP 10 2.0248031 0.3123225 180 N 143 51 11
+TOP 11 2.0248031 0.1173625 180 N 100 19 12
+#
+# CMP 92
+CMP 10 2.8148031 0.2148425 180 N J7 Header_3X2_SMD ;0=1,1=0.0000
+PRP Category 'Headers and Wire Housings'
+PRP Color 'Black'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/25616/0900766b81157e6c-25616863.pdf?src-supplier=Rs'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/25616/0900766b81157e6c-25616863.pdf?src-supplier=Rs'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739577.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739577.pdf?src-supplier=Digi-Key'
+PRP Contact_Material 'Bronze'
+PRP Contact_Mating_Length '0.23inch'
+PRP Contact_Plating 'Gold'
+PRP Contact_Type 'Male Pin'
+PRP Content 'VDD1/2 SEL'
+PRP Current_Rating '7A'
+PRP Depth '7.36mm'
+PRP Gender 'Male'
+PRP Housing_Color 'Black'
+PRP Housing_Material 'Polymer'
+PRP Lead_Free 'Lead Free'
+PRP Length '7.62mm'
+PRP Manufacturer 'Samtec'
+PRP Manufacturer_Part_Number 'TSM-103-01-L-DV'
+PRP Max_Current_Rating '7A'
+PRP Max_Operating_Temperature '125°C'
+PRP Max_Voltage_Rating_(AC) '475V'
+PRP Min_Operating_Temperature '-55°C'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '6'
+PRP Number_of_Positions '6'
+PRP Number_of_Rows '2'
+PRP Orientation 'Straight'
+PRP Package_Quantity '1'
+PRP Packaging 'Rail/Tube'
+PRP Pitch '2.54mm'
+PRP Pricing '1=1.17000, 10=0.99000, 100=0.88880, 500=0.72720, 1000=0.64640, 5000=0.56560, 10000=0.53732 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Row_Spacing '0.1inch'
+PRP Series 'TSM'
+PRP Stock '12257'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM10786-ND'
+PRP Termination 'Solder'
+PRP Voltage_Rating '475V'
+TOP 0 2.9148031 0.3123225 180 N 104 7 1
+TOP 1 2.9148031 0.1173625 180 N 8 6 2
+TOP 2 2.8148031 0.3123225 180 N 99 5 3
+TOP 3 2.8148031 0.1173625 180 N 100 18 4
+TOP 4 2.7148031 0.3123225 180 N 142 14 5
+TOP 5 2.7148031 0.1173625 180 N 142 13 6
+#
+# CMP 93
+CMP 27 1.165 2.0381102 0 N U2 TCA9509DGKR ;0=1,1=0.0000
+PRP Case/Package 'VSSOP'
+PRP Category 'Interface ICs'
+PRP Clock_Frequency '400kHz'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/22791/tca9509-22791264.pdf?src-supplier=Farnell'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/22791/tca9509-22791264.pdf?src-supplier=Farnell'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/3149/tca9509-3149522.pdf?src-supplier=Avnet'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/3149/tca9509-3149522.pdf?src-supplier=Avnet'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/26911/getdatasheetpartid-476504-26911504.pdf?src-supplier=Verical'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/26911/getdatasheetpartid-476504-26911504.pdf?src-supplier=Verical'
+PRP ComponentLink4Description 'https://datasheet.ciiva.com/41460/001187989-da-01-en-ic-i2c-bus-rep-l-tca9509dgkr-vssop-8-tid-41460370.pdf?src-supplier=Conrad'
+PRP ComponentLink4URL 'https://datasheet.ciiva.com/41460/001187989-da-01-en-ic-i2c-bus-rep-l-tca9509dgkr-vssop-8-tid-41460370.pdf?src-supplier=Conrad'
+PRP ComponentLink5Description 'https://datasheet.ciiva.com/1784/tca9509-1784225.pdf?src-supplier=Digi-Key'
+PRP ComponentLink5URL 'https://datasheet.ciiva.com/1784/tca9509-1784225.pdf?src-supplier=Digi-Key'
+PRP ComponentLink6Description 'https://datasheet.ciiva.com/1784/tca9509-1784226.pdf?src-supplier=Digi-Key'
+PRP ComponentLink6URL 'https://datasheet.ciiva.com/1784/tca9509-1784226.pdf?src-supplier=Digi-Key'
+PRP ComponentLink7Description 'https://datasheet.ciiva.com/1784/tca9509-1784227.pdf?src-supplier=Digi-Key'
+PRP ComponentLink7URL 'https://datasheet.ciiva.com/1784/tca9509-1784227.pdf?src-supplier=Digi-Key'
+PRP Height '0.95mm'
+PRP Input '2-Wire Bus'
+PRP Lead_Free 'Lead Free'
+PRP Length '3.1mm'
+PRP Manufacturer 'Texas Instruments'
+PRP Manufacturer_Part_Number 'TCA9509DGKR'
+PRP Max_Operating_Temperature '85°C'
+PRP Max_Supply_Voltage '5.5V'
+PRP Min_Operating_Temperature '-40°C'
+PRP Min_Supply_Voltage '900mV'
+PRP Number_Of_Channels '1'
+PRP Number_of_Outputs '2'
+PRP Operating_Supply_Current '3mA'
+PRP Packaging 'Tape and Reel'
+PRP Pins '8'
+PRP Pricing '1=1.27000, 10=1.13200, 25=1.07480, 100=0.88270, 250=0.82516, 500=0.72922, 1000=0.57570 (USD)'
+PRP Propagation_Delay '132.8ns'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series '-'
+PRP Stock '68069'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '296-30283-1-ND'
+PRP Weight '0.001058oz'
+PRP Width '3.1mm'
+TOP 0 1.0803543 2.076496 0 N 100 21 1
+TOP 1 1.0803543 2.0509055 0 N 93 5 2
+TOP 2 1.0803543 2.0253149 0 N 91 5 3
+TOP 3 1.0803543 1.9997244 0 N 144 165 4
+TOP 4 1.2496457 1.9997244 0 N 51 1 5
+TOP 5 1.2496457 2.0253149 0 N 92 5 6
+TOP 6 1.2496457 2.0509055 0 N 94 5 7
+TOP 7 1.2496457 2.076496 0 N 143 57 8
+#
+# CMP 94
+CMP 16 0.2942981 1.6564976 0 N U1 ESDR0502NMUTAG ;0=1,1=0.0000
+PRP ComponentLink1Description 'Manufacturer URL'
+PRP ComponentLink1URL 'http://www.onsemi.com/'
+PRP ComponentLink2Description 'Datasheet'
+PRP ComponentLink2URL 'http://www.onsemi.cn/pub_link/Collateral/ESDR0502N-D.PDF'
+PRP ComponentLink3Description 'Package Specification'
+PRP ComponentLink3URL 'http://www.onsemi.com/pub_link/Collateral/517AA.PDF'
+PRP Manufacturer 'ON Semiconductor'
+PRP Manufacturer_Part_Number 'ESDR0502NMUTAG'
+PRP Supplier_1 'Mouser'
+PRP Supplier_Part_Number_1 '863-ESDR0502NMUTAG'
+TOP 0 0.2815028 1.6722456 270 N 144 196 1
+TOP 1 0.2815028 1.6564976 270 N 73 1 2
+TOP 2 0.2815028 1.6407495 270 N 74 1 3
+TOP 3 0.3070934 1.6407495 270 N 74 0 4
+TOP 4 0.3070934 1.6564976 270 N 73 0 5
+TOP 5 0.3070934 1.6722456 270 N 72 4 6
+#
+# CMP 95
+CMP 33 0.0380931 1.2190825 0 N TP1 5019 ;0=1,1=0.0000
+PRP ComponentLink1Description 'Manufacturer URL'
+PRP ComponentLink1URL 'http://www.keyelco.com/'
+PRP ComponentLink2Description 'Datasheet'
+PRP ComponentLink2URL 'http://keyelco.com/userAssets/file/M65p56.pdf'
+PRP Manufacturer 'Keystone Electronics'
+PRP Manufacturer_Part_Number '5019'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '36-5019CT-ND'
+TOP 0 0.0380931 1.2190825 0 N 144 237 1
+#
+# CMP 96
+CMP 22 2.2202181 0.9567825 0 N R10 0.1 ;0=1,1=0.0157
+PRP Height '0.43mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'CSR0402FKR100'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CSR0402FKR100CT-ND'
+PRP Value '0.1'
+TOP 0 2.2025016 0.9567825 180 N 112 3 1
+TOP 1 2.2379346 0.9567825 0 N 98 6 2
+#
+# CMP 97
+CMP 22 1.9248031 0.6598375 270 N R9 0.1 ;0=1,1=0.0157
+PRP Height '0.43mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'CSR0402FKR100'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CSR0402FKR100CT-ND'
+PRP Value '0.1'
+TOP 0 1.9248031 0.642121 90 N 99 4 1
+TOP 1 1.9248031 0.677554 270 N 113 2 2
+#
+# CMP 98
+CMP 22 2.2202181 1.0552125 0 N R8 0.1 ;0=1,1=0.0157
+PRP Height '0.43mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'CSR0402FKR100'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CSR0402FKR100CT-ND'
+PRP Value '0.1'
+TOP 0 2.2025016 1.0552125 180 N 114 3 1
+TOP 1 2.2379346 1.0552125 0 N 100 17 2
+#
+# CMP 99
+CMP 22 1.8122831 0.6598375 270 N R7 0.1 ;0=1,1=0.0157
+PRP Height '0.43mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'CSR0402FKR100'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CSR0402FKR100CT-ND'
+PRP Value '0.1'
+TOP 0 1.8122831 0.642121 90 N 8 5 1
+TOP 1 1.8122831 0.677554 270 N 115 2 2
+#
+# CMP 100
+CMP 22 2.2202181 1.1536325 0 N R6 0.1 ;0=1,1=0.0157
+PRP Height '0.43mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'CSR0402FKR100'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CSR0402FKR100CT-ND'
+PRP Value '0.1'
+TOP 0 2.2025016 1.1536325 180 N 116 3 1
+TOP 1 2.2379346 1.1536325 0 N 142 15 2
+#
+# CMP 101
+CMP 22 1.7023231 0.6598375 270 N R5 0.1 ;0=1,1=0.0157
+PRP Height '0.43mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'CSR0402FKR100'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CSR0402FKR100CT-ND'
+PRP Value '0.1'
+TOP 0 1.7023231 0.642121 90 N 102 18 1
+TOP 1 1.7023231 0.677554 270 N 118 2 2
+#
+# CMP 102
+CMP 22 2.2202181 1.2520425 0 N R4 0.1 ;0=1,1=0.0157
+PRP Height '0.43mm'
+PRP Manufacturer 'Stackpole Electronics Inc'
+PRP Manufacturer_Part_Number 'CSR0402FKR100'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CSR0402FKR100CT-ND'
+PRP Value '0.1'
+TOP 0 2.2025016 1.2520425 180 N 117 3 1
+TOP 1 2.2379346 1.2520425 0 N 103 7 2
+#
+# CMP 103
+CMP 22 0.7452781 1.2238925 0 N R3 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 0.7275615 1.2238925 180 N 8 4 1
+TOP 1 0.7629947 1.2238925 0 N 119 1 2
+#
+# CMP 104
+CMP 22 0.6350049 1.2231102 0 N R2 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 0.6172885 1.2231102 180 N 143 39 1
+TOP 1 0.6527215 1.2231102 0 N 16 0 2
+#
+# CMP 105
+CMP 22 0.743318 1.0392225 0 N R1 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 0.7256016 1.0392225 180 N 102 17 1
+TOP 1 0.7610346 1.0392225 0 N 120 0 2
+#
+# CMP 106
+CMP 6 0.01 0.2362204 270 N FID3 empty_part_name ;0=1,1=0.0512
+PRP Notes 'DNP'
+TOP 0 0.01 0.2362204 270 N 0 12 1
+#
+# CMP 107
+CMP 6 -0.01 2.0281102 270 N FID2 empty_part_name ;0=1,1=0.0512
+PRP Notes 'DNP'
+TOP 0 -0.01 2.0281102 270 N 0 20 1
+#
+# CMP 108
+CMP 6 3.1496031 0.2362204 0 N FID1 empty_part_name ;0=1,1=0.0512
+PRP Notes 'DNP'
+TOP 0 3.1496031 0.2362204 0 N 0 13 1
+#
+# CMP 109
+CMP 15 0 2.4803149 0 N BH4 STANDOFF_M2.5 ;0=2,1=0.0000
+TOP 0 0 2.4803149 0 N 144 184 1
+#
+# CMP 110
+CMP 15 0 0 0 N BH3 STANDOFF_M2.5 ;0=2,1=0.0000
+TOP 0 0 0 0 N 144 239 1
+#
+# CMP 111
+CMP 15 3.1496062 2.4803149 0 N BH2 STANDOFF_M2.5 ;0=2,1=0.0000
+TOP 0 3.1496062 2.4803149 0 N 144 68 1
+#
+# CMP 112
+CMP 15 3.1496062 0 0 N BH1 STANDOFF_M2.5 ;0=2,1=0.0000
+TOP 0 3.1496062 0 0 N 144 136 1
+#
+# CMP 113
+CMP 20 0.5764281 1.6586625 180 N U8 PI5USB30213XEAEX ;0=1,1=0.0000
+PRP Category 'Power Management ICs'
+PRP ComponentLink1Description 'https://media.digikey.com/pdf/Data%20Sheets/Pericom%20PDFs/PI5USB30213_Web.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://media.digikey.com/pdf/Data%20Sheets/Pericom%20PDFs/PI5USB30213_Web.pdf?src-supplier=Digi-Key'
+PRP Manufacturer 'Diodes'
+PRP Manufacturer_Part_Number 'PI5USB30213XEAEX'
+PRP Pricing '1=1.92000, 10=1.72200, 25=1.62480, 100=1.38450, 250=1.30000, 500=1.13750, 1000=0.94250 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Stock '3456'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'PI5USB30213XEAEXCT-ND'
+TOP 0 0.6165856 1.5877964 180 N 94 2 1
+TOP 1 0.6165856 1.6035444 180 N 0 53 2
+TOP 2 0.6165856 1.6192924 180 N 109 1 3
+TOP 3 0.6165856 1.6350405 180 N 85 0 4
+TOP 4 0.6165856 1.6507885 180 N 86 0 5
+TOP 5 0.6165856 1.6665365 180 N 143 35 6
+TOP 6 0.6165856 1.6822845 180 N 80 0 7
+TOP 7 0.6165856 1.6980326 180 N 79 0 8
+TOP 8 0.6165856 1.7137806 180 N 107 0 9
+TOP 9 0.6165856 1.7295286 180 N 0 52 10
+TOP 10 0.5843021 1.7381901 180 N 139 0 11
+TOP 11 0.5685541 1.7381901 180 N 138 0 12
+TOP 12 0.5362706 1.7295286 180 N 106 0 13
+TOP 13 0.5362706 1.7137806 180 N 83 0 14
+TOP 14 0.5362706 1.6980326 180 N 84 0 15
+TOP 15 0.5362706 1.6822845 180 N 124 0 16
+TOP 16 0.5362706 1.6665365 180 N 123 0 17
+TOP 17 0.5362706 1.6507885 180 N 81 2 18
+TOP 18 0.5362706 1.6350405 180 N 82 2 19
+TOP 19 0.5362706 1.6192924 180 N 121 1 20
+TOP 20 0.5362706 1.6035444 180 N 122 1 21
+TOP 21 0.5362706 1.5877964 180 N 110 1 22
+TOP 22 0.5685541 1.5791349 180 N 108 1 23
+TOP 23 0.5843021 1.5791349 180 N 92 2 24
+TOP 24 0.5764281 1.6586625 180 N 144 218 25
+#
+# CMP 114
+CMP 26 0.3802931 1.3907275 0 N U7 NCP349MNAETBG ;0=1,1=0.0000
+PRP Case/Package 'DFN'
+PRP Category 'Power Management ICs'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/1967/ncp349-d-1967888.pdf?src-supplier=Avnet'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/1967/ncp349-d-1967888.pdf?src-supplier=Avnet'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/6602/ncp349-d-6602421.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/6602/ncp349-d-6602421.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/6602/ncp349-d-6602425.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/6602/ncp349-d-6602425.pdf?src-supplier=Digi-Key'
+PRP Halogen_Free 'Halogen Free'
+PRP Height '0.95mm'
+PRP Lead_Free 'Lead Free'
+PRP Length '2mm'
+PRP Manufacturer 'ON Semiconductor'
+PRP Manufacturer_Part_Number 'NCP349MNAETBG'
+PRP Max_Operating_Temperature '85°C'
+PRP Max_Supply_Voltage '28V'
+PRP Min_Operating_Temperature '-40°C'
+PRP Min_Supply_Voltage '1.2V'
+PRP Mount 'Surface Mount'
+PRP Number_of_Pins '6'
+PRP Operating_Supply_Current '70uA'
+PRP Package_Quantity '3000'
+PRP Packaging 'Tape and Reel'
+PRP Pricing_1 '1=0.96000, 10=0.84700, 25=0.79520, 100=0.64900, 250=0.60284, 500=0.51304, 1000=0.41043 (USD)'
+PRP Reach_SVHC_Compliant 'Yes'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series '-'
+PRP Stock_1 '1255'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'NCP349MNAETBGOSCT-ND'
+PRP Weight '0.000744oz'
+PRP Width '1.6mm'
+TOP 0 0.3389545 1.4104125 0 N 72 6 1
+TOP 1 0.3389545 1.3907275 0 N 144 221 2
+TOP 2 0.3389545 1.3710425 0 N 0 51 3
+TOP 3 0.4216317 1.3710425 0 N 97 3 4
+TOP 4 0.4216317 1.3907275 0 N 97 4 5
+TOP 5 0.4216317 1.4104125 0 N 144 219 6
+TOP 6 0.3802931 1.3907275 270 N 72 7 7
+#
+# CMP 115
+CMP 36 2.2793331 0.6548425 90 N U6 NCP110AFCT120T2G ;0=1,1=0.0000
+PRP Category 'Voltage Regulators - Linear'
+PRP Manufacturer 'ON Semiconductor'
+PRP Manufacturer_Part_Number 'NCP110AFCT120T2G'
+PRP Pricing_1 '1=0.41000, 10=0.33100, 25=0.30280, 100=0.22520, 250=0.20412, 500=0.16892, 1000=0.12669, 2500=0.11613 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Stock_1 '4650'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '488-NCP110AFCT120T2GCT-ND'
+TOP 0 2.2862229 0.6617323 90 N 143 50 A1
+TOP 1 2.2862229 0.6479527 90 N 104 5 A2
+TOP 2 2.2724433 0.6617323 90 N 105 1 B1
+TOP 3 2.2724433 0.6479527 90 N 144 152 B2
+#
+# CMP 116
+CMP 35 2.650225 0.7969552 180 N U4 TCK106AG,LF ;0=1,1=0.0000
+PRP 1pc_cost '$0.47'
+PRP 100pc_cost '$0.2349'
+PRP Built_By 'EMA_UL_Team'
+PRP Copyright 'Copyright (C) 2018 Accelerated Designs. All rights reserved'
+PRP Height '0.55mm'
+PRP Manufacturer 'Toshiba'
+PRP Manufacturer_Part_Number 'TCK106AG,LF'
+PRP Number_devices_in_Package '1'
+PRP PCB_Footprint ''
+PRP PositionInPackage ''
+PRP RefDes 'RefDes'
+PRP Source_Package 'TCK106AG'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'TCK106AGLFCT-ND'
+PRP Type 'DEV'
+PRP Vendor 'Toshiba'
+TOP 0 2.658099 0.7890812 180 N 136 2 A1
+TOP 1 2.642351 0.7890812 180 N 102 21 A2
+TOP 2 2.658099 0.8048292 180 N 144 140 B1
+TOP 3 2.642351 0.8048292 180 N 140 2 B2
+#
+# CMP 117
+CMP 18 2.468875 0.7548402 180 N SW1 PTS820_J25K_SMTR_LFS ;0=1,1=0.0000
+PRP Datasheet ''
+PRP Manufacturer 'C&K'
+PRP Manufacturer_Part_Number 'PTS820 J25K SMTR LFS'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'CKN10897CT-ND'
+PRP Unit_Price@1k ''
+PRP Vendor_Part_No. ''
+TOP 0 2.5505679 0.7548402 90 N 128 3 1
+TOP 1 2.3871821 0.7548402 90 N 144 150 2
+TOP 2 2.5308829 0.8148796 180 N 0 88 G1
+TOP 3 2.4068671 0.8148796 180 N 0 87 G2
+TOP 4 2.4068671 0.6948008 180 N 0 86 G3
+TOP 5 2.5308829 0.6948008 180 N 0 85 G4
+#
+# CMP 118
+CMP 23 0.7896231 1.3494625 180 N RN1 10K ;0=1,1=0.0177
+PRP Case_Code_(Imperial) '0402'
+PRP Case_Code_(Metric) '1005'
+PRP Case/Package '0804'
+PRP Category 'Resistor Arrays'
+PRP Circuit_Type 'Isolated'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/46387/1480003-46387949.pdf?src-supplier=Element14'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/46387/1480003-46387949.pdf?src-supplier=Element14'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/46376/1480003-46376265.pdf?src-supplier=Element14'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/46376/1480003-46376265.pdf?src-supplier=Element14'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/28418/1790599-28418558.pdf?src-supplier=Element14'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/28418/1790599-28418558.pdf?src-supplier=Element14'
+PRP ComponentLink4Description 'https://datasheet.ciiva.com/28636/1790599-28636885.pdf?src-supplier=Element14'
+PRP ComponentLink4URL 'https://datasheet.ciiva.com/28636/1790599-28636885.pdf?src-supplier=Element14'
+PRP ComponentLink5Description 'https://datasheet.ciiva.com/30209/aoc0000ce1-30209125.pdf?src-supplier=Onlinecomponents.com'
+PRP ComponentLink5URL 'https://datasheet.ciiva.com/30209/aoc0000ce1-30209125.pdf?src-supplier=Onlinecomponents.com'
+PRP Depth '1mm'
+PRP Height '0.35mm'
+PRP Lead_Free 'Lead Free'
+PRP Length '2mm'
+PRP Manufacturer 'Panasonic'
+PRP Manufacturer_Part_Number 'EXB-28V103JX'
+PRP Max_Operating_Temperature '125°C'
+PRP Military_Standard 'Not'
+PRP Min_Operating_Temperature '-55°C'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '8'
+PRP Number_of_Elements '4'
+PRP Number_of_Resistors '4'
+PRP Package_Quantity '1'
+PRP Packaging 'Tape and Reel'
+PRP Pins '8'
+PRP Power_Dissipation '63mW'
+PRP Power_Per_Element '62.5mW'
+PRP Pricing '1=0.10000, 10=0.08100, 25=0.05640, 50=0.04380, 100=0.03130, 250=0.02444, 500=0.01942, 1000=0.01378, 5000=0.01065 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'Unknown'
+PRP Resistance_Tolerance '5%'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series 'EXB'
+PRP Stock '1570078'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'Y7103CT-ND'
+PRP Technology 'THICK FILM'
+PRP Temperature_Coefficient '200ppm/°C'
+PRP Terminal_Pitch '0.5mm'
+PRP Termination 'Convex'
+PRP Tolerance '5%'
+PRP Value '10K'
+PRP Voltage_Rating '50V'
+PRP Voltage_Rating_(DC) '100V'
+PRP Width '1mm'
+TOP 0 0.8112766 1.3179664 180 N 100 23 1
+TOP 1 0.8112766 1.33962 180 N 100 22 2
+TOP 2 0.8112766 1.359305 180 N 143 37 3
+TOP 3 0.8112766 1.3809586 180 N 143 38 4
+TOP 4 0.7679696 1.3809586 180 N 94 3 5
+TOP 5 0.7679696 1.359305 180 N 92 3 6
+TOP 6 0.7679696 1.33962 180 N 93 2 7
+TOP 7 0.7679696 1.3179664 180 N 91 2 8
+#
+# CMP 119
+CMP 22 2.22 0.6781052 90 N R17 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 2.22 0.6958217 270 N 143 48 1
+TOP 1 2.22 0.6603887 90 N 105 0 2
+#
+# CMP 120
+CMP 22 1.334995 1.9981102 180 N R16 1K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-071KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-1.00KLRCT-ND'
+PRP Value '1K'
+TOP 0 1.3527116 1.9981102 0 N 100 15 1
+TOP 1 1.3172784 1.9981102 180 N 51 0 2
+#
+# CMP 121
+CMP 22 1.4 2.1231052 270 N R15 0 ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Yageo'
+PRP Manufacturer_Part_Number 'RC0402JR-070RL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '311-0.0JRCT-ND'
+PRP Value '0'
+TOP 0 1.4 2.1053887 90 N 143 32 1
+TOP 1 1.4 2.1408217 270 N 10 0 2
+#
+# CMP 122
+CMP 22 0.5362731 1.7957775 270 N R14 10K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Samsung Electro-Mechanics'
+PRP Manufacturer_Part_Number 'RC1005F103CS'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '1276-3431-2-ND'
+PRP Value '10K'
+TOP 0 0.5362731 1.778061 90 N 106 1 1
+TOP 1 0.5362731 1.813494 270 N 144 189 2
+#
+# CMP 123
+CMP 22 0.6561631 1.7957675 90 N R13 10K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Samsung Electro-Mechanics'
+PRP Manufacturer_Part_Number 'RC1005F103CS'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '1276-3431-2-ND'
+PRP Value '10K'
+TOP 0 0.6561631 1.813484 270 N 143 36 1
+TOP 1 0.6561631 1.778051 90 N 107 1 2
+#
+# CMP 124
+CMP 22 0.5685531 1.5191575 90 N R12 910K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'YAGEO'
+PRP Manufacturer_Part_Number 'RC0402FR-07910KL'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'YAG3257CT-ND'
+PRP Value '910K'
+TOP 0 0.5685531 1.536874 270 N 108 0 1
+TOP 1 0.5685531 1.501441 90 N 97 5 2
+#
+# CMP 125
+CMP 22 0.6611631 1.5584375 270 N R11 10K ;0=1,1=0.0157
+PRP Height '0.4mm'
+PRP Manufacturer 'Samsung Electro-Mechanics'
+PRP Manufacturer_Part_Number 'RC1005F103CS'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '1276-3431-2-ND'
+PRP Value '10K'
+TOP 0 0.6611631 1.540721 90 N 144 206 1
+TOP 1 0.6611631 1.576154 270 N 109 0 2
+#
+# CMP 126
+CMP 11 0.8948031 0.2148425 180 N J14 Header_6X2_SMD ;0=1,1=0.0000
+PRP Category 'Headers and Wire Housings'
+PRP Color 'Black'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739673.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739673.pdf?src-supplier=Digi-Key'
+PRP Connector_Type 'Header'
+PRP Contact_Finish_-_Mating 'GOLD'
+PRP Contact_Material 'Bronze'
+PRP Contact_Mating_Length '0.23inch'
+PRP Contact_Plating 'Gold'
+PRP Contact_Shape 'Square'
+PRP Contact_Type 'Male Pin'
+PRP Content 'SPI'
+PRP Fastening_Type 'Pull'
+PRP Flammability_Rating 'UL94 V-0'
+PRP Gender 'Male'
+PRP Insulation_Color 'Black'
+PRP Insulation_Material 'Polymer'
+PRP Lead_Free 'Lead Free'
+PRP Manufacturer 'Samtec'
+PRP Manufacturer_Part_Number 'TSM-106-01-L-DV'
+PRP Max_Operating_Temperature '125°C'
+PRP Min_Operating_Temperature '-55°C'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '12'
+PRP Number_of_Positions '12'
+PRP Number_of_Rows '2'
+PRP Package_Quantity '1'
+PRP Packaging 'Rail/Tube'
+PRP Pitch '0.1inch'
+PRP Pricing '1=2.21000, 10=1.92300, 100=1.71800, 500=1.43168, 1000=1.22715, 5000=1.08807 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Row_Spacing '0.1inch'
+PRP Series 'TSM'
+PRP Stock '6386'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM10803-ND'
+PRP Termination 'Solder'
+TOP 0 1.1448031 0.3123225 180 N 48 0 1
+TOP 1 1.1448031 0.1173625 180 N 20 2 2
+TOP 2 1.0448031 0.3123225 180 N 133 0 3
+TOP 3 1.0448031 0.1173625 180 N 101 0 4
+TOP 4 0.9448031 0.3123225 180 N 132 0 5
+TOP 5 0.9448031 0.1173625 180 N 131 0 6
+TOP 6 0.8448031 0.3123225 180 N 134 0 7
+TOP 7 0.8448031 0.1173625 180 N 130 0 8
+TOP 8 0.7448031 0.3123225 180 N 144 215 9
+TOP 9 0.7448031 0.1173625 180 N 144 216 10
+TOP 10 0.6448031 0.3123225 180 N 142 12 11
+TOP 11 0.6448031 0.1173625 180 N 142 11 12
+#
+# CMP 127
+CMP 10 0.3548031 1.0548425 0 N J13 Header_3X2_SMD ;0=1,1=0.0000
+PRP Category 'Headers and Wire Housings'
+PRP Color 'Black'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/25616/0900766b81157e6c-25616863.pdf?src-supplier=Rs'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/25616/0900766b81157e6c-25616863.pdf?src-supplier=Rs'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739577.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739577.pdf?src-supplier=Digi-Key'
+PRP Contact_Material 'Bronze'
+PRP Contact_Mating_Length '0.23inch'
+PRP Contact_Plating 'Gold'
+PRP Contact_Type 'Male Pin'
+PRP Content 'VDD3/CLK'
+PRP Current_Rating '7A'
+PRP Depth '7.36mm'
+PRP Gender 'Male'
+PRP Housing_Color 'Black'
+PRP Housing_Material 'Polymer'
+PRP Lead_Free 'Lead Free'
+PRP Length '7.62mm'
+PRP Manufacturer 'Samtec'
+PRP Manufacturer_Part_Number 'TSM-103-01-L-DV'
+PRP Max_Current_Rating '7A'
+PRP Max_Operating_Temperature '125°C'
+PRP Max_Voltage_Rating_(AC) '475V'
+PRP Min_Operating_Temperature '-55°C'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '6'
+PRP Number_of_Positions '6'
+PRP Number_of_Rows '2'
+PRP Orientation 'Straight'
+PRP Package_Quantity '1'
+PRP Packaging 'Rail/Tube'
+PRP Pitch '2.54mm'
+PRP Pricing '1=1.17000, 10=0.99000, 100=0.88880, 500=0.72720, 1000=0.64640, 5000=0.56560, 10000=0.53732 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Row_Spacing '0.1inch'
+PRP Series 'TSM'
+PRP Stock '12257'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM10786-ND'
+PRP Termination 'Solder'
+PRP Voltage_Rating '475V'
+TOP 0 0.2548031 0.9573625 0 N 104 4 1
+TOP 1 0.2548031 1.1523225 0 N 2 0 2
+TOP 2 0.3548031 0.9573625 0 N 98 5 3
+TOP 3 0.3548031 1.1523225 0 N 5 0 4
+TOP 4 0.4548031 0.9573625 0 N 142 10 5
+TOP 5 0.4548031 1.1523225 0 N 0 56 6
+#
+# CMP 128
+CMP 8 0.0380931 1.3477325 180 N J12 Header_2X1_2.54MM ;0=2,1=0.0000
+PRP Category 'Connectors'
+PRP Color 'Black'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/741/xrxczzzsxxn-rc-st-11635-b-741243.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/741/xrxczzzsxxn-rc-st-11635-b-741243.pdf?src-supplier=Digi-Key'
+PRP Contact_Mating_Length '0.23inch'
+PRP Contact_Plating 'Gold'
+PRP Contact_Type 'Male Pin'
+PRP Content 'USB_I2C_EN'
+PRP Manufacturer 'Sullins'
+PRP Manufacturer_Part_Number 'PRPC002SAAN-RC'
+PRP Mounting_Technology 'Through Hole'
+PRP Number_of_Positions '2'
+PRP Number_of_Rows '1'
+PRP Package_Quantity '1'
+PRP Packaging 'Bulk'
+PRP Pitch '0.1inch'
+PRP Pricing '1=0.08000, 10=0.07300, 25=0.05400, 50=0.04640, 100=0.04490, 250=0.03872, 500=0.03716 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series '-'
+PRP Stock '31528'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'S1011EC-02-ND'
+PRP Termination 'Solder'
+TOP 0 0.0880931 1.3477325 180 N 110 0 1
+TOP 1 -0.0119069 1.3477325 180 N 144 229 2
+#
+# CMP 129
+CMP 9 2.8043331 0.5511825 0 N J11 Header_3X1_2.54MM ;0=2,1=0.0000
+PRP Category 'Connectors'
+PRP Color 'Black'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/741/xrxczzzsxxn-rc-st-11635-b-741242.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/741/xrxczzzsxxn-rc-st-11635-b-741242.pdf?src-supplier=Digi-Key'
+PRP Contact_Mating_Length '0.23inch'
+PRP Contact_Plating 'Gold'
+PRP Contact_Type 'Male Pin'
+PRP Content 'EN'
+PRP Manufacturer 'Sullins'
+PRP Manufacturer_Part_Number 'PRPC003SAAN-RC'
+PRP Mounting_Technology 'Through Hole'
+PRP Number_of_Positions '3'
+PRP Number_of_Rows '1'
+PRP Package_Quantity '1'
+PRP Packaging 'Bulk'
+PRP Pitch '0.1inch'
+PRP Pricing '1=0.12000, 10=0.10900, 25=0.08120, 50=0.06960, 100=0.06730, 250=0.05804, 500=0.05572 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series '-'
+PRP Stock '16156'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'S1011EC-03-ND'
+PRP Termination 'Solder'
+TOP 0 2.7043331 0.5511825 0 N 136 1 1
+TOP 1 2.8043331 0.5511825 0 N 135 0 2
+TOP 2 2.9043331 0.5511825 0 N 102 12 3
+#
+# CMP 130
+CMP 10 0.3548031 0.2148425 180 N J10 Header_3X2_SMD ;0=1,1=0.0000
+PRP Category 'Headers and Wire Housings'
+PRP Color 'Black'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/25616/0900766b81157e6c-25616863.pdf?src-supplier=Rs'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/25616/0900766b81157e6c-25616863.pdf?src-supplier=Rs'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739577.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/739/tsm-1xx-xx-xxx-xx-x-xxx-x-mkt-739577.pdf?src-supplier=Digi-Key'
+PRP Contact_Material 'Bronze'
+PRP Contact_Mating_Length '0.23inch'
+PRP Contact_Plating 'Gold'
+PRP Contact_Type 'Male Pin'
+PRP Content 'FTDI/JTAG EN'
+PRP Current_Rating '7A'
+PRP Depth '7.36mm'
+PRP Gender 'Male'
+PRP Housing_Color 'Black'
+PRP Housing_Material 'Polymer'
+PRP Lead_Free 'Lead Free'
+PRP Length '7.62mm'
+PRP Manufacturer 'Samtec'
+PRP Manufacturer_Part_Number 'TSM-103-01-L-DV'
+PRP Max_Current_Rating '7A'
+PRP Max_Operating_Temperature '125°C'
+PRP Max_Voltage_Rating_(AC) '475V'
+PRP Min_Operating_Temperature '-55°C'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '6'
+PRP Number_of_Positions '6'
+PRP Number_of_Rows '2'
+PRP Orientation 'Straight'
+PRP Package_Quantity '1'
+PRP Packaging 'Rail/Tube'
+PRP Pitch '2.54mm'
+PRP Pricing '1=1.17000, 10=0.99000, 100=0.88880, 500=0.72720, 1000=0.64640, 5000=0.56560, 10000=0.53732 (USD)'
+PRP Radiation_Hardening 'No'
+PRP Reach_SVHC_Compliant 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Row_Spacing '0.1inch'
+PRP Series 'TSM'
+PRP Stock '12257'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM10786-ND'
+PRP Termination 'Solder'
+PRP Voltage_Rating '475V'
+TOP 0 0.4548031 0.3123225 180 N 129 2 1
+TOP 1 0.4548031 0.1173625 180 N 144 234 2
+TOP 2 0.3548031 0.3123225 180 N 1 0 3
+TOP 3 0.3548031 0.1173625 180 N 100 25 4
+TOP 4 0.2548031 0.3123225 180 N 54 0 5
+TOP 5 0.2548031 0.1173625 180 N 144 238 6
+#
+# CMP 131
+CMP 12 -0.0845459 1.6535425 90 N J6 CX90B1-24P ;0=1,1=0.0000
+PRP ComponentLink1Description 'https://www.mouser.com/ds/2/445/632723x00011-782157.pdf?src-supplier=Mouser'
+PRP ComponentLink1URL 'https://www.mouser.com/ds/2/445/632723x00011-782157.pdf?src-supplier=Mouser'
+PRP ComponentLink2Description 'https://katalog.we-online.de/em/datasheet/632723x00011.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://katalog.we-online.de/em/datasheet/632723x00011.pdf?src-supplier=Digi-Key'
+PRP Manufacturer 'Hirose Electric Co Ltd'
+PRP Manufacturer_Part_Number 'CX90B1-24P'
+PRP Number_of_Contacts '24'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'H125778CT-ND'
+TOP 0 0.1418321 1.756889 0 N 144 197 A1
+TOP 1 0.1418321 1.7372039 0 N 83 3 A2
+TOP 2 0.1418321 1.7175189 0 N 84 3 A3
+TOP 3 0.1418321 1.6978338 0 N 72 8 A4
+TOP 4 0.1418321 1.6781488 0 N 139 1 A5
+TOP 5 0.1418321 1.6584638 0 N 73 2 A6
+TOP 6 0.1418321 1.6387787 0 N 74 2 A7
+TOP 7 0.1418321 1.6190937 0 N 0 54 A8
+TOP 8 0.1418321 1.5994086 0 N 72 9 A9
+TOP 9 0.1418321 1.5797236 0 N 88 3 A10
+TOP 10 0.1418321 1.5600386 0 N 87 3 A11
+TOP 11 0.1418321 1.5403535 0 N 144 225 A12
+TOP 12 0.0788399 1.550196 0 N 144 223 B1
+TOP 13 0.0788399 1.5698811 0 N 81 3 B2
+TOP 14 0.0788399 1.5895661 0 N 82 3 B3
+TOP 15 0.0788399 1.6092512 0 N 72 10 B4
+TOP 16 0.0788399 1.6289362 0 N 138 1 B5
+TOP 17 0.0788399 1.6486212 0 N 73 3 B6
+TOP 18 0.0788399 1.6683063 0 N 74 3 B7
+TOP 19 0.0788399 1.6879913 0 N 0 55 B8
+TOP 20 0.0788399 1.7076764 0 N 72 11 B9
+TOP 21 0.0788399 1.7273614 0 N 90 3 B10
+TOP 22 0.0788399 1.7470464 0 N 89 3 B11
+TOP 23 0.0788399 1.7667315 0 N 144 195 B12
+TOP 24 0.0380919 1.5118102 90 N 0 9 empty-1
+TOP 25 0.0355328 1.7952748 90 N 0 8 empty-2
+TOP 26 0.114273 1.8236212 0 N 144 191 Shell
+TOP 27 0.0886824 1.810826 270 N 144 193 Shell
+TOP 28 0.114273 1.4834638 0 N 144 228 Shell
+TOP 29 0.0886824 1.496259 270 N 144 226 Shell
+TOP 30 -0.0845459 1.8236212 0 N 144 194 Shell
+TOP 31 -0.0845459 1.4834638 0 N 144 227 Shell
+#
+# CMP 132
+CMP 24 2.6175231 2.2440975 0 N J4 QSE-020-01-F-D-A-K ;0=1,1=0.0000
+PRP Category 'Board to Board Connectors'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/6924/qte-xxx-xx-x-d-xxx-mkt-6924765.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/6924/qte-xxx-xx-x-d-xxx-mkt-6924765.pdf?src-supplier=Digi-Key'
+PRP Contact_Plating 'Gold'
+PRP Gender 'Male'
+PRP Manufacturer 'Samtec'
+PRP Manufacturer_Part_Number 'QTE-020-01-F-D-A'
+PRP Mated_Stacking_Heights '5mm'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '40'
+PRP Number_of_Positions '40'
+PRP Number_of_Rows '2'
+PRP Package_Quantity '1'
+PRP Packaging 'Tray'
+PRP Pitch '0.031inch'
+PRP Pricing '1=9.48000, 10=8.53000, 25=8.03560, 40=7.82950, 96=7.62344, 288=6.79931, 480=6.38725, 960=5.64550 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series 'QStrip® QTE'
+PRP Stock '1329'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM8846-ND'
+PRP Termination 'Solder'
+TOP 0 2.3183105 2.1313022 0 N 143 21 01
+TOP 1 2.3183105 2.3568928 270 N 33 0 02
+TOP 2 2.3498066 2.1313022 0 N 102 15 03
+TOP 3 2.3498066 2.3568928 270 N 34 0 04
+TOP 4 2.3813026 2.1313022 0 N 144 92 05
+TOP 5 2.3813026 2.3568928 270 N 144 93 06
+TOP 6 2.4127987 2.1313022 0 N 41 0 07
+TOP 7 2.4127987 2.3568928 270 N 35 0 08
+TOP 8 2.4442948 2.1313022 0 N 42 0 09
+TOP 9 2.4442948 2.3568928 270 N 36 0 10
+TOP 10 2.4757908 2.1313022 0 N 144 95 11
+TOP 11 2.4757908 2.3568928 270 N 144 91 12
+TOP 12 2.5072869 2.1313022 0 N 39 0 13
+TOP 13 2.5072869 2.3568928 270 N 25 0 14
+TOP 14 2.5387829 2.1313022 0 N 40 0 15
+TOP 15 2.5387829 2.3568928 270 N 26 0 16
+TOP 16 2.570279 2.1313022 0 N 144 79 17
+TOP 17 2.570279 2.3568928 270 N 144 76 18
+TOP 18 2.6017751 2.1313022 0 N 37 0 19
+TOP 19 2.6017751 2.3568928 270 N 43 0 20
+TOP 20 2.6332711 2.1313022 0 N 38 0 21
+TOP 21 2.6332711 2.3568928 270 N 44 0 22
+TOP 22 2.6647672 2.1313022 0 N 144 78 23
+TOP 23 2.6647672 2.3568928 270 N 144 73 24
+TOP 24 2.6962633 2.1313022 0 N 0 21 25
+TOP 25 2.6962633 2.3568928 270 N 45 0 26
+TOP 26 2.7277593 2.1313022 0 N 0 22 27
+TOP 27 2.7277593 2.3568928 270 N 46 0 28
+TOP 28 2.7592554 2.1313022 0 N 144 72 29
+TOP 29 2.7592554 2.3568928 270 N 144 74 30
+TOP 30 2.7907514 2.1313022 0 N 126 1 31
+TOP 31 2.7907514 2.3568928 270 N 94 1 32
+TOP 32 2.8222475 2.1313022 0 N 20 1 33
+TOP 33 2.8222475 2.3568928 270 N 92 1 34
+TOP 34 2.8537436 2.1313022 0 N 142 9 35
+TOP 35 2.8537436 2.3568928 270 N 0 23 36
+TOP 36 2.8852396 2.1313022 0 N 93 1 37
+TOP 37 2.8852396 2.3568928 270 N 127 1 38
+TOP 38 2.9167357 2.1313022 0 N 91 1 39
+TOP 39 2.9167357 2.3568928 270 N 129 1 40
+TOP 40 2.0269719 2.2440975 0 N 0 7 empty-1
+TOP 41 3.2080743 2.2440975 0 N 0 6 empty-2
+TOP 42 3.0137829 2.3490188 0 N 0 5 empty-3
+TOP 43 2.2212633 2.3490188 0 N 0 4 empty-4
+TOP 44 2.3000034 2.2440975 0 N 144 94 G1
+TOP 45 2.4925231 2.2440975 0 N 144 77 G2
+TOP 46 2.7425231 2.2440975 0 N 144 75 G3
+TOP 47 2.9350428 2.2440975 0 N 144 69 G4
+#
+# CMP 133
+CMP 4 1.5748031 0.8661417 0 N J3 DF40C-60DS-0.4V(51) ;0=1,1=0.0000
+PRP Category 'Headers and Wire Housings'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/46408/1824826-46408909.pdf?src-supplier=Element14'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/46408/1824826-46408909.pdf?src-supplier=Element14'
+PRP Connector_Type 'Receptacle'
+PRP Contact_Material 'Bronze'
+PRP Contact_Plating 'Gold'
+PRP Current_Rating '300mA'
+PRP Gender 'Receptacle'
+PRP Housing_Material 'Polymer'
+PRP Lead_Free 'Lead Free'
+PRP Manufacturer 'Hirose'
+PRP Manufacturer_Part_Number 'DF40C-60DS-0.4V(51)'
+PRP Mated_Stacking_Heights '1.5mm'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '60'
+PRP Number_of_Positions '60'
+PRP Number_of_Rows '2'
+PRP Package_Quantity '5000'
+PRP Packaging 'Tape and Reel'
+PRP Pitch '0.4mm'
+PRP Pricing '1=1.29000, 10=1.08900, 25=1.04440, 50=1.02220, 100=0.97770, 250=0.88880, 500=0.79992, 1000=0.71104, 2500=0.64438 (USD)'
+PRP Reach_SVHC_Compliant 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series 'DF40'
+PRP Stock '11621'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '26-DF40C-60DS-0.4V(51)CT-ND'
+PRP Termination 'SMD/SMT'
+PRP Voltage_Rating '30V'
+TOP 0 1.3464566 0.9267716 270 N 144 208 1
+TOP 1 1.3464566 0.8055118 270 N 144 209 2
+TOP 2 1.3622047 0.9267716 270 N 78 0 3
+TOP 3 1.3622047 0.8055118 270 N 134 1 4
+TOP 4 1.3779527 0.9267716 270 N 125 0 5
+TOP 5 1.3779527 0.8055118 270 N 133 1 6
+TOP 6 1.3937007 0.9267716 270 N 76 0 7
+TOP 7 1.3937007 0.8055118 270 N 132 1 8
+TOP 8 1.4094488 0.9267716 270 N 77 0 9
+TOP 9 1.4094488 0.8055118 270 N 131 1 10
+TOP 10 1.4251968 0.9267716 270 N 75 0 11
+TOP 11 1.4251968 0.8055118 270 N 130 1 12
+TOP 12 1.4409448 0.9267716 270 N 137 1 13
+TOP 13 1.4409448 0.8055118 270 N 48 1 14
+TOP 14 1.4566929 0.9267716 270 N 129 3 15
+TOP 15 1.4566929 0.8055118 270 N 20 3 16
+TOP 16 1.4724409 0.9267716 270 N 128 1 17
+TOP 17 1.4724409 0.8055118 270 N 101 1 18
+TOP 18 1.4881889 0.9267716 270 N 127 3 19
+TOP 19 1.4881889 0.8055118 270 N 0 78 20
+TOP 20 1.503937 0.9267716 270 N 126 2 21
+TOP 21 1.503937 0.8055118 270 N 0 77 22
+TOP 22 1.519685 0.9267716 270 N 93 3 23
+TOP 23 1.519685 0.8055118 270 N 0 76 24
+TOP 24 1.535433 0.9267716 270 N 91 3 25
+TOP 25 1.535433 0.8055118 270 N 0 75 26
+TOP 26 1.5511811 0.9267716 270 N 144 207 27
+TOP 27 1.5511811 0.8055118 270 N 0 74 28
+TOP 28 1.5669291 0.9267716 270 N 0 64 29
+TOP 29 1.5669291 0.8055118 270 N 0 73 30
+TOP 30 1.5826771 0.9267716 270 N 0 63 31
+TOP 31 1.5826771 0.8055118 270 N 0 72 32
+TOP 32 1.5984251 0.9267716 270 N 0 62 33
+TOP 33 1.5984251 0.8055118 270 N 0 71 34
+TOP 34 1.6141732 0.9267716 270 N 0 61 35
+TOP 35 1.6141732 0.8055118 270 N 0 70 36
+TOP 36 1.6299212 0.9267716 270 N 0 60 37
+TOP 37 1.6299212 0.8055118 270 N 0 69 38
+TOP 38 1.6456692 0.9267716 270 N 0 68 39
+TOP 39 1.6456692 0.8055118 270 N 5 1 40
+TOP 40 1.6614173 0.9267716 270 N 0 67 41
+TOP 41 1.6614173 0.8055118 270 N 2 1 42
+TOP 42 1.6771653 0.9267716 270 N 0 66 43
+TOP 43 1.6771653 0.8055118 270 N 144 156 44
+TOP 44 1.6929133 0.9267716 270 N 0 65 45
+TOP 45 1.6929133 0.8055118 270 N 97 6 46
+TOP 46 1.7086614 0.9267716 270 N 144 155 47
+TOP 47 1.7086614 0.8055118 270 N 135 1 48
+TOP 48 1.7244094 0.9267716 270 N 140 1 49
+TOP 49 1.7244094 0.8055118 270 N 144 159 50
+TOP 50 1.7401574 0.9267716 270 N 141 1 51
+TOP 51 1.7401574 0.8055118 270 N 118 4 52
+TOP 52 1.7559055 0.9267716 270 N 117 2 53
+TOP 53 1.7559055 0.8055118 270 N 118 3 54
+TOP 54 1.7716535 0.9267716 270 N 116 2 55
+TOP 55 1.7716535 0.8055118 270 N 115 3 56
+TOP 56 1.7874015 0.9267716 270 N 114 2 57
+TOP 57 1.7874015 0.8055118 270 N 113 3 58
+TOP 58 1.8031496 0.9267716 270 N 112 2 59
+TOP 59 1.8031496 0.8055118 270 N 111 1 60
+#
+# CMP 134
+CMP 4 1.5748031 1.6535433 0 N J2 DF40C-60DS-0.4V(51) ;0=1,1=0.0000
+PRP Category 'Headers and Wire Housings'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/46408/1824826-46408909.pdf?src-supplier=Element14'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/46408/1824826-46408909.pdf?src-supplier=Element14'
+PRP Connector_Type 'Receptacle'
+PRP Contact_Material 'Bronze'
+PRP Contact_Plating 'Gold'
+PRP Current_Rating '300mA'
+PRP Gender 'Receptacle'
+PRP Housing_Material 'Polymer'
+PRP Lead_Free 'Lead Free'
+PRP Manufacturer 'Hirose'
+PRP Manufacturer_Part_Number 'DF40C-60DS-0.4V(51)'
+PRP Mated_Stacking_Heights '1.5mm'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '60'
+PRP Number_of_Positions '60'
+PRP Number_of_Rows '2'
+PRP Package_Quantity '5000'
+PRP Packaging 'Tape and Reel'
+PRP Pitch '0.4mm'
+PRP Pricing '1=1.29000, 10=1.08900, 25=1.04440, 50=1.02220, 100=0.97770, 250=0.88880, 500=0.79992, 1000=0.71104, 2500=0.64438 (USD)'
+PRP Reach_SVHC_Compliant 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series 'DF40'
+PRP Stock '11621'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '26-DF40C-60DS-0.4V(51)CT-ND'
+PRP Termination 'SMD/SMT'
+PRP Voltage_Rating '30V'
+TOP 0 1.3464566 1.7141732 270 N 144 178 1
+TOP 1 1.3464566 1.5929134 270 N 144 203 2
+TOP 2 1.3622047 1.7141732 270 N 85 1 3
+TOP 3 1.3622047 1.5929134 270 N 0 82 4
+TOP 4 1.3779527 1.7141732 270 N 86 1 5
+TOP 5 1.3779527 1.5929134 270 N 0 81 6
+TOP 6 1.3937007 1.7141732 270 N 144 177 7
+TOP 7 1.3937007 1.5929134 270 N 144 202 8
+TOP 8 1.4094488 1.7141732 270 N 79 1 9
+TOP 9 1.4094488 1.5929134 270 N 0 80 10
+TOP 10 1.4251968 1.7141732 270 N 80 1 11
+TOP 11 1.4251968 1.5929134 270 N 0 79 12
+TOP 12 1.4409448 1.7141732 270 N 144 176 13
+TOP 13 1.4409448 1.5929134 270 N 144 200 14
+TOP 14 1.4566929 1.7141732 270 N 73 4 15
+TOP 15 1.4566929 1.5929134 270 N 95 1 16
+TOP 16 1.4724409 1.7141732 270 N 74 4 17
+TOP 17 1.4724409 1.5929134 270 N 96 1 18
+TOP 18 1.4881889 1.7141732 270 N 144 172 19
+TOP 19 1.4881889 1.5929134 270 N 144 198 20
+TOP 20 1.503937 1.7141732 270 N 45 1 21
+TOP 21 1.503937 1.5929134 270 N 43 1 22
+TOP 22 1.519685 1.7141732 270 N 46 1 23
+TOP 23 1.519685 1.5929134 270 N 44 1 24
+TOP 24 1.535433 1.7141732 270 N 144 175 25
+TOP 25 1.535433 1.5929134 270 N 144 199 26
+TOP 26 1.5511811 1.7141732 270 N 25 1 27
+TOP 27 1.5511811 1.5929134 270 N 41 1 28
+TOP 28 1.5669291 1.7141732 270 N 26 1 29
+TOP 29 1.5669291 1.5929134 270 N 42 1 30
+TOP 30 1.5826771 1.7141732 270 N 144 174 31
+TOP 31 1.5826771 1.5929134 270 N 144 201 32
+TOP 32 1.5984251 1.7141732 270 N 39 1 33
+TOP 33 1.5984251 1.5929134 270 N 37 1 34
+TOP 34 1.6141732 1.7141732 270 N 40 1 35
+TOP 35 1.6141732 1.5929134 270 N 38 1 36
+TOP 36 1.6299212 1.7141732 270 N 144 173 37
+TOP 37 1.6299212 1.5929134 270 N 144 110 38
+TOP 38 1.6456692 1.7141732 270 N 35 1 39
+TOP 39 1.6456692 1.5929134 270 N 33 1 40
+TOP 40 1.6614173 1.7141732 270 N 36 1 41
+TOP 41 1.6614173 1.5929134 270 N 34 1 42
+TOP 42 1.6771653 1.7141732 270 N 144 98 43
+TOP 43 1.6771653 1.5929134 270 N 144 109 44
+TOP 44 1.6929133 1.7141732 270 N 31 1 45
+TOP 45 1.6929133 1.5929134 270 N 29 1 46
+TOP 46 1.7086614 1.7141732 270 N 32 1 47
+TOP 47 1.7086614 1.5929134 270 N 30 1 48
+TOP 48 1.7244094 1.7141732 270 N 144 105 49
+TOP 49 1.7244094 1.5929134 270 N 144 107 50
+TOP 50 1.7401574 1.7141732 270 N 27 1 51
+TOP 51 1.7401574 1.5929134 270 N 3 1 52
+TOP 52 1.7559055 1.7141732 270 N 28 1 53
+TOP 53 1.7559055 1.5929134 270 N 4 1 54
+TOP 54 1.7716535 1.7141732 270 N 144 97 55
+TOP 55 1.7716535 1.5929134 270 N 144 106 56
+TOP 56 1.7874015 1.7141732 270 N 23 1 57
+TOP 57 1.7874015 1.5929134 270 N 21 1 58
+TOP 58 1.8031496 1.7141732 270 N 24 1 59
+TOP 59 1.8031496 1.5929134 270 N 22 1 60
+#
+# CMP 135
+CMP 24 0.5320831 2.2440975 0 N J1 QSE-020-01-F-D-A-K ;0=1,1=0.0000
+PRP Category 'Board to Board Connectors'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/6924/qte-xxx-xx-x-d-xxx-mkt-6924765.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/6924/qte-xxx-xx-x-d-xxx-mkt-6924765.pdf?src-supplier=Digi-Key'
+PRP Contact_Plating 'Gold'
+PRP Gender 'Male'
+PRP Manufacturer 'Samtec'
+PRP Manufacturer_Part_Number 'QTE-020-01-F-D-A'
+PRP Mated_Stacking_Heights '5mm'
+PRP Mounting_Technology 'Surface Mount'
+PRP Number_of_Contacts '40'
+PRP Number_of_Positions '40'
+PRP Number_of_Rows '2'
+PRP Package_Quantity '1'
+PRP Packaging 'Tray'
+PRP Pitch '0.031inch'
+PRP Pricing '1=9.48000, 10=8.53000, 25=8.03560, 40=7.82950, 96=7.62344, 288=6.79931, 480=6.38725, 960=5.64550 (USD)'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Series 'QStrip® QTE'
+PRP Stock '1329'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'SAM8846-ND'
+PRP Termination 'Solder'
+TOP 0 0.2328705 2.1313022 0 N 143 19 01
+TOP 1 0.2328705 2.3568928 270 N 0 14 02
+TOP 2 0.2643666 2.1313022 0 N 102 14 03
+TOP 3 0.2643666 2.3568928 270 N 0 15 04
+TOP 4 0.2958626 2.1313022 0 N 144 186 05
+TOP 5 0.2958626 2.3568928 270 N 144 187 06
+TOP 6 0.3273587 2.1313022 0 N 3 0 07
+TOP 7 0.3273587 2.3568928 270 N 0 16 08
+TOP 8 0.3588548 2.1313022 0 N 4 0 09
+TOP 9 0.3588548 2.3568928 270 N 0 17 10
+TOP 10 0.3903508 2.1313022 0 N 144 183 11
+TOP 11 0.3903508 2.3568928 270 N 144 180 12
+TOP 12 0.4218469 2.1313022 0 N 23 0 13
+TOP 13 0.4218469 2.3568928 270 N 27 0 14
+TOP 14 0.4533429 2.1313022 0 N 24 0 15
+TOP 15 0.4533429 2.3568928 270 N 28 0 16
+TOP 16 0.484839 2.1313022 0 N 144 182 17
+TOP 17 0.484839 2.3568928 270 N 144 179 18
+TOP 18 0.5163351 2.1313022 0 N 21 0 19
+TOP 19 0.5163351 2.3568928 270 N 29 0 20
+TOP 20 0.5478311 2.1313022 0 N 22 0 21
+TOP 21 0.5478311 2.3568928 270 N 30 0 22
+TOP 22 0.5793272 2.1313022 0 N 144 181 23
+TOP 23 0.5793272 2.3568928 270 N 144 169 24
+TOP 24 0.6108233 2.1313022 0 N 0 18 25
+TOP 25 0.6108233 2.3568928 270 N 31 0 26
+TOP 26 0.6423193 2.1313022 0 N 0 19 27
+TOP 27 0.6423193 2.3568928 270 N 32 0 28
+TOP 28 0.6738154 2.1313022 0 N 144 171 29
+TOP 29 0.6738154 2.3568928 270 N 144 170 30
+TOP 30 0.7053114 2.1313022 0 N 126 0 31
+TOP 31 0.7053114 2.3568928 270 N 94 0 32
+TOP 32 0.7368075 2.1313022 0 N 20 0 33
+TOP 33 0.7368075 2.3568928 270 N 92 0 34
+TOP 34 0.7683036 2.1313022 0 N 142 8 35
+TOP 35 0.7683036 2.3568928 270 N 144 166 36
+TOP 36 0.7997996 2.1313022 0 N 93 0 37
+TOP 37 0.7997996 2.3568928 270 N 127 0 38
+TOP 38 0.8312957 2.1313022 0 N 91 0 39
+TOP 39 0.8312957 2.3568928 270 N 129 0 40
+TOP 40 -0.0584681 2.2440975 0 N 0 3 empty-1
+TOP 41 1.1226343 2.2440975 0 N 0 2 empty-2
+TOP 42 0.9283429 2.3490188 0 N 0 1 empty-3
+TOP 43 0.1358233 2.3490188 0 N 0 0 empty-4
+TOP 44 0.2145634 2.2440975 0 N 144 188 G1
+TOP 45 0.4070831 2.2440975 0 N 144 185 G2
+TOP 46 0.6570831 2.2440975 0 N 144 168 G3
+TOP 47 0.8496028 2.2440975 0 N 144 167 G4
+#
+# CMP 136
+CMP 5 0.2942931 1.5404225 180 N D4 PUSB3F96X ;0=1,1=0.0000
+PRP Interface 'USB'
+PRP Manufacturer 'Nexperia USA Inc.'
+PRP Manufacturer_Part_Number 'PUSB3F96X'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '1727-2030-1-ND'
+TOP 0 0.3107301 1.5010524 180 N 81 0 1
+TOP 1 0.3107301 1.5207375 180 N 82 0 2
+TOP 2 0.3107301 1.5404225 180 N 144 220 3
+TOP 3 0.3107301 1.5601075 180 N 87 0 4
+TOP 4 0.3107301 1.5797926 180 N 88 0 5
+TOP 5 0.2778561 1.5797926 180 N 88 1 6
+TOP 6 0.2778561 1.5601075 180 N 87 1 7
+TOP 7 0.2778561 1.5404225 180 N 144 224 8
+TOP 8 0.2778561 1.5207375 180 N 82 1 9
+TOP 9 0.2778561 1.5010524 180 N 81 1 10
+#
+# CMP 137
+CMP 14 0.7452881 1.1738925 0 N D3 LTST-C191KGKT ;0=1,1=0.0000
+PRP Manufacturer 'Lite-On Inc.'
+PRP Manufacturer_Part_Number 'LTST-C191GKT'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '160-1443-1-ND'
+PRP Unit_Cost__Qty_1 '$0.68'
+PRP Unit_Cost__Qty_500 '$0.293'
+PRP Value 'LTST-C191KGKT'
+TOP 0 0.7718629 1.1738925 270 N 119 0 1
+TOP 1 0.7187133 1.1738925 270 N 144 213 2
+#
+# CMP 138
+CMP 5 0.2942931 1.7620325 0 N D2 PUSB3F96X ;0=1,1=0.0000
+PRP Interface 'USB'
+PRP Manufacturer 'Nexperia USA Inc.'
+PRP Manufacturer_Part_Number 'PUSB3F96X'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '1727-2030-1-ND'
+TOP 0 0.2778561 1.8014026 0 N 83 1 1
+TOP 1 0.2778561 1.7817175 0 N 84 1 2
+TOP 2 0.2778561 1.7620325 0 N 144 192 3
+TOP 3 0.2778561 1.7423475 0 N 89 1 4
+TOP 4 0.2778561 1.7226624 0 N 90 1 5
+TOP 5 0.3107301 1.7226624 0 N 90 2 6
+TOP 6 0.3107301 1.7423475 0 N 89 2 7
+TOP 7 0.3107301 1.7620325 0 N 144 190 8
+TOP 8 0.3107301 1.7817175 0 N 84 2 9
+TOP 9 0.3107301 1.8014026 0 N 83 2 10
+#
+# CMP 139
+CMP 14 0.7452881 1.1027325 0 N D1 LTST-C191KGKT ;0=1,1=0.0000
+PRP Manufacturer 'Lite-On Inc.'
+PRP Manufacturer_Part_Number 'LTST-C191GKT'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '160-1443-1-ND'
+PRP Unit_Cost__Qty_1 '$0.68'
+PRP Unit_Cost__Qty_500 '$0.293'
+PRP Value 'LTST-C191KGKT'
+TOP 0 0.7718629 1.1027325 270 N 120 1 1
+TOP 1 0.7187133 1.1027326 270 N 144 217 2
+#
+# CMP 140
+CMP 3 0.614995 1.2781052 0 N C15 1uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'Murata Electronics'
+PRP Manufacturer_Part_Number 'GRM155R61E105MA12D'
+PRP Package '0402'
+PRP Part_# 'E-CAP-042'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '490-10018-1-ND'
+PRP Value '1uF'
+TOP 0 0.5980659 1.2781052 180 N 144 214 1
+TOP 1 0.6319241 1.2781052 0 N 102 16 2
+#
+# CMP 141
+CMP 3 0.2942931 1.4027325 270 N C13 1uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'Murata Electronics'
+PRP Manufacturer_Part_Number 'GRM155R61E105MA12D'
+PRP Package '0402'
+PRP Part_# 'E-CAP-042'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '490-10018-1-ND'
+PRP Value '1uF'
+TOP 0 0.2942931 1.3858034 90 N 144 222 1
+TOP 1 0.2942931 1.4196616 270 N 72 5 2
+#
+# CMP 142
+CMP 3 0.7493931 1.6662125 270 N C7 4.7uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'C1005X5R1A475M050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-8023-1-ND'
+PRP Value '4.7uF'
+TOP 0 0.7493931 1.6492834 90 N 144 204 1
+TOP 1 0.7493931 1.6831416 270 N 143 34 2
+#
+# CMP 143
+CMP 3 2.2793331 0.5898425 0 N C6 4.7uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'C1005X5R1A475M050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-8023-1-ND'
+PRP Value '4.7uF'
+TOP 0 2.262404 0.5898425 180 N 144 153 1
+TOP 1 2.2962622 0.5898425 0 N 104 6 2
+#
+# CMP 144
+CMP 3 2.2799831 0.7188925 0 N C5 4.7uF ;0=1,1=0.0217
+PRP ComponentLink1Description 'New link'
+PRP ComponentLink1URL ''
+PRP Height '0.55mm'
+PRP Manufacturer 'TDK Corporation'
+PRP Manufacturer_Part_Number 'C1005X5R1A475M050BC'
+PRP Package '0402'
+PRP Part_# ''
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 '445-8023-1-ND'
+PRP Value '4.7uF'
+TOP 0 2.263054 0.7188925 180 N 144 151 1
+TOP 1 2.2969122 0.7188925 0 N 143 49 2
+#

@@ -1,0 +1,263 @@
+#
+#Component attribute names
+#
+@0 .comp_mount_type
+@1 .comp_height
+
+# CMP 0
+CMP 6 1.05177 0.66168 0 N T9 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.05177 0.66168 0 N 26 2 T9-1
+#
+# CMP 1
+CMP 6 1.10677 0.66168 0 N T8 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.10677 0.66168 0 N 27 2 T8-1
+#
+# CMP 2
+CMP 6 1.01677 0.46168 0 N T7 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.01677 0.46168 0 N 24 3 T7-1
+#
+# CMP 3
+CMP 6 1.07177 0.46168 0 N T6 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.07177 0.46168 0 N 25 3 T6-1
+#
+# CMP 4
+CMP 6 0.99177 0.37668 0 N T5 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.99177 0.37668 0 N 7 2 T5-1
+#
+# CMP 5
+CMP 6 1.10177 0.18168 0 N T4 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.10177 0.18168 0 N 8 1 T4-1
+#
+# CMP 6
+CMP 6 0.99177 0.31168 0 N T3 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 0.99177 0.31168 0 N 10 2 T3-1
+#
+# CMP 7
+CMP 6 1.17677 0.18168 0 N T2 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.17677 0.18168 0 N 11 1 T2-1
+#
+# CMP 8
+CMP 5 0.583555 0.7380219 180 N J1 1-84953-5 ;0=1,1=0.0000
+PRP Actuator_Color 'Black'
+PRP Actuator_Material 'Nylon,Glass,Polyamide'
+PRP Category 'FFC / FPC'
+PRP ComponentLink1Description 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669110.pdf?src-supplier=Digi-Key'
+PRP ComponentLink1URL 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669110.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2Description 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669111.pdf?src-supplier=Digi-Key'
+PRP ComponentLink2URL 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669111.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3Description 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669112.pdf?src-supplier=Digi-Key'
+PRP ComponentLink3URL 'https://datasheet.ciiva.com/669/eng-cd-84953-a3-669112.pdf?src-supplier=Digi-Key'
+PRP Connector_System 'Flex-to-Board'
+PRP Connector_Type 'Receptacle,Connector,Socket'
+PRP Contact_Current_Rating '1A'
+PRP Contact_Location 'Top'
+PRP Contact_Material 'Bronze'
+PRP Contact_Plating 'Tin,Bright'
+PRP Current_Rating '1A'
+PRP Depth '7.3mm'
+PRP ELV 'Compliant'
+PRP Flammability_Rating 'UL94 V-0'
+PRP Gender 'Receptacle'
+PRP Height '2.56mm'
+PRP Housing_Color 'Natural'
+PRP Housing_Material 'Polymer'
+PRP Length '22.92mm'
+PRP Manufacturer 'TE Connectivity'
+PRP Manufacturer_Part_Number '1-84953-5'
+PRP Mating_Alignment 'Yes (With)'
+PRP Max_Operating_Temperature '85°C'
+PRP Max_Voltage_Rating_(AC) '200V'
+PRP Min_Operating_Temperature '-40°C'
+PRP Mount 'Surface Mount'
+PRP Number_of_Contacts '15'
+PRP Number_of_Positions '15'
+PRP Number_of_Rows '1'
+PRP Orientation 'Right Angle'
+PRP Package_Quantity '1200'
+PRP Packaging 'Tape and Reel'
+PRP PCB_Mount_Alignment 'No (Without)'
+PRP PCB_Mount_Retention 'With'
+PRP PCB_Mounting_Orientation 'Right Angle'
+PRP Pitch '0.039inch'
+PRP Plating_Thickness '2um'
+PRP Pricing_1 '1=1.02000, 10=0.97700, 25=0.93400, 50=0.92100, 100=0.80470, 250=0.77460, 500=0.73158 (USD)'
+PRP Radiation_Hardening 'No'
+PRP RoHS 'Yes'
+PRP RoHS_Compliant 'Yes'
+PRP Sealable 'No (Without)'
+PRP Series 'FPC'
+PRP Shielding 'Unshielded'
+PRP Shrouded 'Yes (With)'
+PRP Stock_1 '9836'
+PRP Supplier_1 'Digi-Key'
+PRP Supplier_Part_Number_1 'A101405CT-ND'
+PRP Termination 'SMD/SMT'
+PRP Voltage_Rating '200V'
+PRP Width '0.2575inch'
+PRP Wire/Cable_Type 'Flat Flex'
+TOP 0 0.8591456 0.7380219 180 N 3 14 J1-1
+TOP 1 0.8197755 0.7380219 180 N 26 3 J1-2
+TOP 2 0.7804054 0.7380219 180 N 27 3 J1-3
+TOP 3 0.7410353 0.7380219 180 N 8 2 J1-4
+TOP 4 0.7016652 0.7380219 180 N 11 2 J1-5
+TOP 5 0.6622952 0.7380219 180 N 28 36 J1-6
+TOP 6 0.6229251 0.7380219 180 N 20 1 J1-7
+TOP 7 0.583555 0.7380219 180 N 21 1 J1-8
+TOP 8 0.5441849 0.7380219 180 N 28 39 J1-9
+TOP 9 0.5048148 0.7380219 180 N 18 1 J1-10
+TOP 10 0.4654448 0.7380219 180 N 19 1 J1-11
+TOP 11 0.4260747 0.7380219 180 N 28 40 J1-12
+TOP 12 0.3867046 0.7380219 180 N 22 1 J1-13
+TOP 13 0.3473345 0.7380219 180 N 23 1 J1-14
+TOP 14 0.3079644 0.7380219 180 N 28 41 J1-15
+TOP 15 0.9768621 0.8482581 180 N 28 38 J1-M1
+TOP 16 0.1902479 0.8482581 180 N 28 37 J1-M2
+#
+# CMP 9
+CMP 6 1.05177 0.37668 0 N T1 TP_S ;0=1,1=0.0000
+PRP Ceramic_Type ''
+PRP Current_Rating ''
+PRP Device_Marking ''
+PRP Distributor ''
+PRP Distributor_Art._Nbr. ''
+PRP ESR ''
+PRP Frequency ''
+PRP Height ''
+PRP Manufacturer ''
+PRP Manufacturer_Art._Nbr. ''
+PRP Package ''
+PRP Power_Rating ''
+PRP Price_Estim._@_100pcs ''
+PRP Tolerance ''
+PRP Value ''
+PRP Voltage_Rating ''
+TOP 0 1.05177 0.37668 0 N 4 1 T1-1
+#

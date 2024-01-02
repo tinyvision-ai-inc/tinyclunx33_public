@@ -1,0 +1,5 @@
+Layer Pairs Export File for PCB: E:\@@@@@Darial\@@@Venkat\Job18_NX Module\tiny_reference_design\Rev 1\PWB\PCB\tinyCamera.PcbDoc
+LayersSetName=Top_Bot_Plated_Thru_Holes|DrillFile=tinycamera v2.0-roundholes-plated.txt|DrillLayers=gtl,g1,g2,gbl
+LayersSetName=Top_Bot_Plated_Slot_Holes|DrillFile=tinycamera v2.0-slotholes-plated.txt|DrillLayers=gtl,g1,g2,gbl
+LayersSetName=Top_Bot_NonPlated_Thru_Holes|DrillFile=tinycamera v2.0-roundholes-nonplated.txt|DrillLayers=gtl,g1,g2,gbl
+LayersSetName=Top_Bot_NonPlated_Slot_Holes|DrillFile=tinycamera v2.0-slotholes-nonplated.txt|DrillLayers=gtl,g1,g2,gbl

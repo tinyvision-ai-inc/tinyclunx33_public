@@ -1,0 +1,10 @@
+Output: WireList Netlist
+Type  : WireListNetlist
+From  : Project [rpi_adapter.PrjPcb]
+   Generated File[tinyDualRPi Adapter v2.0.NET]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 7:40:57 AM On 12/19/2023
