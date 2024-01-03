@@ -6,6 +6,10 @@ and be transferred through to USB 5 Gbit/s or another interface of any kind.
 
 ![](images/som_mipi_architecture.png)
 
+On the Compute SoM variant, some differential pairs are used for the external
+RAM, absent from the Connectivity SoM variant, leading to 6 or 14 differential
+pairs available.
+
 ## Hardware integration
 
 Each MIPI interface can have more or less differential pairs for the data lanes,
