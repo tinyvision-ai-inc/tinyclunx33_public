@@ -1,10 +1,17 @@
 # SoM MIPI
 
 The differential pairs of the CrossLinkU-NX FPGA can be combined together into
-various number of MIPI interfaces of various sizes, the combo is summarized
-below.
+MIPI interfaces. These MIPI image signals can further be processed by the FPGA
+and be transferred through to USB 5 Gbit/s or another interface of any kind.
 
-Connectivity SoM Lanes and Clocks (14 pairs available):
+![](images/som_mipi_architecture.png)
+
+## Hardware integration
+
+Each MIPI interface can have more or less differential pairs for the data lanes,
+and always one dedicated pair for the associated clock signal.
+
+**Connectivity SoM** Lanes and Clocks (14 pairs available):
 
 | 1L + 1C | 2L + 1C | 4L + 1C | Total |
 |:-------:|:-------:|:-------:|:-----:|
@@ -16,7 +23,7 @@ Connectivity SoM Lanes and Clocks (14 pairs available):
 | 1x      | 4x      |         | 14    |
 | 7x      |         |         | 14    |
 
-Compute SoM Lanes and Clocks (6 pairs available, others used by the RAM):
+**Compute SoM** Lanes and Clocks (6 pairs available, others used by the RAM):
 
 | 1L + 1C | 2L + 1C | 4L + 1C | Total |
 |:-------:|:-------:|:-------:|:-----:|
@@ -25,8 +32,20 @@ Compute SoM Lanes and Clocks (6 pairs available, others used by the RAM):
 | 1x      | 1x      |         | 5     |
 | 3x      |         |         | 6     |
 
+## RTL integration
+
+TODO: describe the FIFO interfaces available to feed the data from MIPI into USB
+
+TODO: describe the MIPI data pipeline once released.
+
+## Zephyr integration
+
+TODO: evoke the UVC configuration possible/required to do once UVC is there
+
 ## Parts featured
 
 - Lattice Semiconductor
   [LIFCL-33U-8CTG104CAS](https://www.latticesemi.com/Products/FPGAandCPLD/CrossLink-NX)
   FPGA (search for 33U in this page).
+
+![](images/som_mipi_schematic.png)
