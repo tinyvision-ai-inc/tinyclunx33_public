@@ -4,10 +4,16 @@
 [Assembly](tinyCamera_v1.0_Assembly.pdf)
 
 The **tinyCamera** is a carrier for the tinyCLUNX33 SoM implementing an
-USB camera device out of the SoM with an inexpensive 4-layer board:
-A minimal yet complete example of hardware turning the SoM into a product.
+USB camera device:
+Example hardware turning the SoM into a product.
 
 ![](images/carrier_tinycamera.png)
+
+Features:
+- All SoM pins exposed, additional probing and voltage pins
+- Inexpensive 4-layer board
+- USB 5 Gbit/s integrated with a Type-C port controller
+- GPIO LED and push button
 
 Connectors:
 - 1 × USB Type-C connectors for the FPGA 5 Gbit/s interfaces
@@ -15,10 +21,6 @@ Connectors:
 - 1 × MIPI Hirose connector
 - 2 × IDC 1.27mm connector for JTAG, SPI flash, I2C, GPIO
 - Extra headers for EN signals and power rails
-
-Features:
-- USB 5 Gbit/s integrated with a Type-C port controller
-- GPIO LED and push button
 
 Mechanical:
 - Compact form factor fitting a small device
