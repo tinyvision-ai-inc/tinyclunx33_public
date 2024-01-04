@@ -3,10 +3,18 @@
 [Schematics](NXU_baseboard_v1.0_Schematic.pdf) |
 [Assembly](NXU_baseboard_v1.0_Assembly.pdf)
 
-The **baseboard** is a carrier for the tinyCLUNX33 SoM that brings all the pins
-out to headers and connectors for ease of debugging.
+The **BaseBoard** is a carrier for the tinyCLUNX33 SoM that eases product
+development and debugging:
+A development kit usable as factory programming/test rig.
 
 ![](images/carrier_baseboard.png)
+
+Features:
+- All SoM pins exposed, additional probing and voltage pins
+- Inexpensive 4-layer board, compact form-factor
+- USB 5 Gbit/s integrated with a Type-C port controller
+- GPIO LED and push button
+- FTDI chip for JTAG, Flash SPI, UART access over USB USB
 
 Connectors:
 - 2 × USB Type-C connectors for the FPGA 5 Gbit/s interfaces and FTDI debug
@@ -14,11 +22,6 @@ Connectors:
 - 1 × SMA connector for the high-speed clock export
 - 4 × headers for JTAG, SPI flash, I2C, GPIO
 - Extra headers for EN signals and power rails
-
-Features:
-- USB 5 Gbit/s integrated with a Type-C port controller
-- GPIO LED and push button
-- FTDI chip for JTAG, Flash SPI, UART access over USB USB
 
 Mechanical:
 - Components on one side with fewer exposed traces at the bottom

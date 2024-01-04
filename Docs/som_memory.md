@@ -31,7 +31,7 @@ RTL synthesis tools such as
 offer to place the Embedded Block RAM (EBR) and Distributed RAM as part of the
 RTL language.
 
-The LRAM have a blackbox-type module called NXLRAM that can be instancicated to
+The LRAM has a blackbox-type module called NXLRAM that can be instancicated to
 allocate a given NXLRAM block.
 
 The [RTL Reference Design](rtl_reference_design.md) shows a possible

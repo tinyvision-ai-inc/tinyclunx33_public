@@ -1,5 +1,10 @@
 # Zephyr integration
 
+![](images/som_zephyr_architecture.png)
+
+The [Zephyr RTOS](https://docs.zephyrproject.org/) has been ported the SoM on
+top of the [RTL Reference Design](rtl_reference_design.md).
+
 Including a soft CPU inside the hard USB23 core permits to control the register
 interface with RTL.
 A Zephyr firmware is provided for running on this CPU, with a
@@ -15,6 +20,6 @@ Until then, these repositories are requied:
 - [Zephyr fork](https://github.com/tinyvision-ai-inc/zephyr/tree/tinyclunx33) -
   in progress until it gets submitted upstream.
 
-- [Example project](https://github.com/josuah/tinyclunx33_zephyr_example) -
+- [Example project](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example) -
   with build instructions. The starting point for building Zephyr for the
   tinyCLUNX33.
