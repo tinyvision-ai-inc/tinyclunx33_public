@@ -3,7 +3,7 @@
 The LIFCL-33U FPGA part of the CrosslinkU-NX series contains a hard USB3 core
 capable of 5 Gbit/s transfers.
 
-![](images/som_usb_architecture.png)
+![](images/som_usb_architecture.drawio.png)
 
 ## Hardware integration
 
@@ -26,7 +26,7 @@ ignoring the extra Type-C functions.
 
 A CPU core is required to manage the complexity of the hard USB core.
 
-![](images/som_usb_rtl_integration.png)
+![](images/som_usb_rtl_integration.drawio.png)
 
 The data flow from the source to the USB bus is:
 
@@ -40,30 +40,27 @@ The data flow from the source to the USB bus is:
   address and length. For instance, 2 kBytes of LRAM, or 512 bytes directly
   from a peripheral.
 
-**Directly reading from an AXI pheripheral:**
+**USB webcam: USB23 directly reading from the camera ImageSensor:**
 ```
-VexRiscv        ImageSensor     ExternalRAM     USB23Core       Host
+VexRiscvCPU     ImageSensor     InternalRAM     USB23Core       Host
 (AXI Master)    (AXI Slave)     (AXI Slave)     (AXI Master)     │
  │               │               │               │               │
- │───LMMI:─go─read─ImageSensor──────────────────>│               │
+ │───read─request─ImageSensor───────────────────>│               │
  │               │<───────────────────AXI─read───│               │
  │               │───AXI─data───────────────────>│               │
  │               │               │               │──USB─data────>│
  │               │               │               │               │
 ```
 
-**Intermediate buffering into external memory:**
+**USB serial: USB23 reading from internal memory:**
 ```
-VexRiscv        ImageSensor     ExternalRAM     USB23Core       Host
+VexRiscvCPU     ImageSensor     InternalRAM     USB23Core       Host
 (AXI Master)    (AXI Slave)     (AXI Slave)     (AXI Master)     │
  │               │               │               │               │
- │─go─write─RAM─>│               │               │               │
- │               │──AXI─write───>│               │               │
- │               │──AXI─data────>│               │               │
- │               │               │               │               │
- │───LMMI:─go─read─ExternalRAM──────────────────>│               │
- │               │               │<────AXI─read──│               │
- │               │               │──AXI─data────>│               │
+ │───AXI─write──────────────────>│               │               │
+ │───read─request─InternalRAM───────────────────>│               │
+ │               │               │<───AXI─read───│               │
+ │               │               │───AXI─data───>│               │
  │               │               │               │──USB─data────>│
  │               │               │               │               │
 ```

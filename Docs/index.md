@@ -32,4 +32,4 @@ Development boards:
 - tinyCamera board as a basis of a compact camera device
 - extra adapter boards for various camera connectors and expansion
 
-![](images/som_block_diagram.png)
+![](images/tinyclunx33_block_diagram.drawio.png)

@@ -3,7 +3,7 @@
 The SoM uses a single source of power at 5V, and exports several power rails
 at lower voltage using LDO and Buck converters.
 
-![power rails cascade](images/som_power_rails.png)
+![](images/som_power_architecture.drawio.png)
 
 The SoM supports turning all power rails off, except a single Always ON (AON)
 rail, only powering one power domain of the FPGA.
