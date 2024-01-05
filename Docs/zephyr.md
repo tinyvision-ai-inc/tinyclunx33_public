@@ -1,9 +1,9 @@
 # Zephyr integration
 
-![](images/som_zephyr_architecture.png)
-
 The [Zephyr RTOS](https://docs.zephyrproject.org/) has been ported the SoM on
 top of the [RTL Reference Design](rtl_reference_design.md).
+
+![](images/zephyr_architecture.drawio.png)
 
 Including a soft CPU inside the hard USB23 core permits to control the register
 interface with RTL.
