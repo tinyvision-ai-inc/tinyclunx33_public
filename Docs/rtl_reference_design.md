@@ -8,7 +8,7 @@ TODO: Publish a block diagram of the various parts cores
 TODO: Publish a relatively recent estimation of the LUT usage.
 
 The new SoC is based on
-[VexRiscv]()'s
+[VexRiscv](https://github.com/SpinalHDL/VexRiscv)'s
 [Briey](https://github.com/SpinalHDL/VexRiscv#briey-soc).
 It integrates a minimum viable system able to run USB.
 
