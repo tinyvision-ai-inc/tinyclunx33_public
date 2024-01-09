@@ -3,7 +3,7 @@
 To facilitate the development of RTL projects, a Verilog implementation of a
 working System-on-Chip (SoC) is provided.
 
-The USB core requires fast access to a small local memory where TRB's can be stored and retrieved. Also, any USB transactions such as enumeration, CDC and otehr such low bandwidth tasks can use as a local scratch space where endpoint data is located.
+The USB core requires fast access to a small local memory where TRB's can be stored and retrieved. Also, any USB transactions such as enumeration, CDC and other such low bandwidth tasks can use as a local scratch space where endpoint data is located.
 For any higher bandwidth transfer, a full AXI64 slave is utilized that allows for fast transfer that can support the high bandwidth required to keep the USB pipe running without being throttled.
 
 ![](images/som_usb_axi_core.drawio.png)
