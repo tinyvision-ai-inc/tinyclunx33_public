@@ -3,14 +3,15 @@
 To facilitate the development of RTL projects, a Verilog implementation of a
 working System-on-Chip (SoC) is provided.
 
-TODO: Publish a block diagram of the various parts cores
+The USB core requires fast access to a small local memory where TRB's can be stored and retrieved. Also, any USB transactions such as enumeration, CDC and otehr such low bandwidth tasks can use as a local scratch space where endpoint data is located.
+For any higher bandwidth transfer, a full AXI64 slave is utilized that allows for fast transfer that can support the high bandwidth required to keep the USB pipe running without being throttled.
 
-TODO: Publish a relatively recent estimation of the LUT usage.
+![](images/som_usb_axi_core.drawio.png)
 
-The new SoC is based on
-[VexRiscv](https://github.com/SpinalHDL/VexRiscv)'s
-[Briey](https://github.com/SpinalHDL/VexRiscv#briey-soc).
-It integrates a minimum viable system able to run USB.
+This core design is quite compact and consumes <1K LUT and a few block RAM's depending on the amount selected.
+
+## Future Development
+A new SoC is based on [Briey](https://github.com/SpinalHDL/VexRiscv#briey-soc) integrates a minimum viable system able to run USB using SpinalHDL. THis can be extended and modified to suit the users requirements for compute and connectivity.
 
 A Radiant installation is only required for rebuilding the RTL.,
 provided as
@@ -24,8 +25,7 @@ TODO: remove \subpage fpga_top
 
 ## External interface
 
-A FIFO stream for piping data in/out USB3.
-- \subpage TODO
+The external interface for moving large amounts of data is a standard AXI64 slave. Specific configuration and addresses for AXI access are controlled by the corresponding USB endpoint configuration in the Zephyr driver.
 
 ## Internal fast AXI bus
 
