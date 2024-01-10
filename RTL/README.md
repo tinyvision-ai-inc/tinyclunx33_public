@@ -50,9 +50,12 @@ A License will be required, and can be requested to Lattice
 
 The produced FPGA bitfile then needs to be loaded into the FPGA.
 
+You may install the [ecpprog](https://github.com/gregdavill/ecpprog) project
+for an open-source programmer that works with the CrossLink family of devices.
+
 ```
 # Load the bitfile using the FTDI chip present on the Devkit baseboard
-ecpprog impl/
+ecpprog impl/*.bit
 ```
 
 As soon as the board restarts, it will load the hardware model with a
@@ -66,11 +69,14 @@ to drive the various peripherals.
 
 ```
 # Build the library matching the LiteX SoC configuration
-cd RTL
 make software
 
 # Compile the firmware
-cd ../Firmware/bare_metal_demo
+cd ../Firmware/example_minimal
+make
+
+# Program it onto the board after the bitfile
+ecpprog -o 0x00100000 firmware.bin
 ```
 
 ## Connecting over UART
