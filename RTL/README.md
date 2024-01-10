@@ -22,7 +22,7 @@ build and only modify the firmware.
 
 ```shell
 # Get the repository
-git clone https://github.com/tinyvision-ai-inc/tinyCLUNX33
+git clone --depth 1 https://github.com/tinyvision-ai-inc/tinyCLUNX33
 cd tinyCLUNX33/RTL
 
 # Optional: use a python virtual environment
@@ -31,6 +31,7 @@ python3 -m venv .venv
 
 # Install the LiteX RTL generator starting with its dependencies
 sudo apt install binutils-riscv64-unknown-elf
+sudo apt install gcc-riscv64-unknown-elf
 make setup
 
 # Generate the SoC with LiteX
