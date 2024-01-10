@@ -72,7 +72,7 @@ to drive the various peripherals.
 make software
 
 # Compile the firmware
-cd ../Firmware/example_minimal
+cd ../Firmware/example_i2c_init
 make
 
 # Program it onto the board after the bitfile
