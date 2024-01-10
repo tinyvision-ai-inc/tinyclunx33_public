@@ -1,0 +1,77 @@
+#---- VIRTUAL IOs----------------------------------------------------------------------------------#
+# for byte to pixel ports that will be connected to the FPGA logic and not to IO pads
+#ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports pixcnt_c_o*]
+#ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports pix_out_cntr_o*]
+#ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports wc_pix_sync_o*]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports fv_o]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports lv_o]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {p_odd_o*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {pd_o*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {pix_out_cntr_o*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {pixcnt_c_o*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {wc_pix_sync_o*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {dt_i*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports lp_av_en_i]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {payload_i*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {wc_i*}]
+
+#---- CLOCKS --------------------------------------------------------------------------------------#
+# change the clock frequency values :
+set BYTE_CLK_FREQ 92.812500
+set PIX_CLK_FREQ 74.250000
+set AXI_SLAVE "OFF"
+set AXI_MASTER "OFF"
+
+set BYTECLK_PERIOD [expr {double(round(1000000/$BYTE_CLK_FREQ))/1000}]
+set PIXELCLK_PERIOD [expr {double(round(1000000/$PIX_CLK_FREQ))/1000}]  
+
+if {$AXI_SLAVE=="ON"} {
+create_clock -name {axis_sclk_i} -period $BYTECLK_PERIOD [get_ports axis_sclk_i]
+}
+if {$AXI_SLAVE=="OFF"} {
+create_clock -name {clk_byte_i} -period $BYTECLK_PERIOD [get_ports clk_byte_i]
+}
+if {$AXI_MASTER=="ON"} {
+create_clock -name {axis_mclk_i} -period $PIXELCLK_PERIOD [get_ports axis_mclk_i]
+}
+if {$AXI_MASTER=="OFF"} {
+create_clock -name {clk_pixel_i} -period $PIXELCLK_PERIOD [get_ports clk_pixel_i]
+}
+
+######                                                                                       ######
+# NOTE:  The byte-to-pixel IP treats the byte clock and the pixel clock as asynchronous.          #
+#        Use "set_clock_groups -asynchronous" constraint only if the two clocks are asynchronous  #
+#        even for other logic outside the byte-to-pixel IP.                                       #
+#   set_clock_groups -group [get_clocks clk_byte_i] -group [get_clocks clk_pixel_i] -asynchronous #
+######                                                                                       ###### 
+
+#----TIMING CONSTRAINTS ---------------------------------------------------------------------------#
+# 1st stage of a 2-FF CDC register
+#  - payload_done_fdbk_meta_*.ff_inst/DF
+#  - lp_av_fdbk_meta_*.ff_inst/DF
+#  - fifo_almost_full_meta_*.ff_inst/DF
+set_false_path -to [get_pins -hierarchical {*_meta_reg.ff_inst/DF}]
+# set_false_path -to [get_pins -hierarchical {*_meta_c.ff_inst/DF}]
+
+# set_false_path -from [get_pins -hierarchical {lscc_byte2pixel_inst/lscc_byte2pixel_sync/fv_r_c.ff_inst/Q }]                   -to [get_pins -hierarchical {lscc_byte2pixel_inst/lscc_byte2pixel_sync/fv_meta_c.ff_inst/DF}]
+# set_false_path -from [get_pins -hierarchical {lscc_byte2pixel_inst/dataconvert.lscc_dataconvert/payload_en_done_c.ff_inst/Q}] -to [get_pins -hierarchical {lscc_byte2pixel_inst/dataconvert.lscc_dataconvert/payload_done_pix_meta_c.ff_inst/DF}]
+# set_false_path -from [get_pins -hierarchical {lscc_byte2pixel_inst/dataconvert.lscc_dataconvert/lp_av_stretch_c.ff_inst/Q}]   -to [get_pins -hierarchical {lscc_byte2pixel_inst/dataconvert.lscc_dataconvert/active_lp_pix_meta_c.ff_inst/DF}]
+
+set_false_path -to [get_pins -hierarchical lscc_byte2pixel_inst/genblk*.lscc_activevideo/genblk*.wc_rd_a_r*.ff_inst/DF]
+set_false_path -to [get_pins -hierarchical lscc_byte2pixel_inst/genblk*.lscc_activevideo/genblk*.wc_rd_b_r*.ff_inst/DF]
+#----uncomment these for 4 RX lane, RX gear16 ----#
+#set_false_path -to [get_pins -hierarchical lscc_byte2pixel_inst/genblk*.lscc_activevideo/genblk*.wc_rd_c_r*.ff_inst/DF]
+#set_false_path -to [get_pins -hierarchical lscc_byte2pixel_inst/genblk*.lscc_activevideo/genblk*.wc_rd_d_r*.ff_inst/DF]
+
+
+# multicycle path from wc_pix_sync* to pixcnt_c* and pix_out_cntr* #
+set_multicycle_path -setup -from [get_pins -hierarchical {wc_pix_sync*.ff_inst/Q}] -to [get_nets -hierarchical {pix_out_cntr*}] 7
+set_multicycle_path -hold  -from [get_pins -hierarchical {wc_pix_sync*.ff_inst/Q}] -to [get_nets -hierarchical {pix_out_cntr*}] 6
+
+### If using the encrypted IP, these CDC false_path constraints are not applied since it is within the encrypted block. ###
+###  Ignore these timing errors from the FIFO, or use set_clock_groups -asynchronous if there are no other logic 
+##   outside the IP treating the pixel clock and the byteclock as synchronous.
+set_false_path -to [get_pins -hierarchical genblk*.rp_sync1_r*.ff_inst/DF]
+set_false_path -to [get_pins -hierarchical genblk*.wp_sync1_r*.ff_inst/DF]
+
+#--------------------------------------------------------------------------------------------------#
