@@ -1,0 +1,30 @@
+[submodule "ip/verilog-i2c"]
+	path = ip/verilog-i2c
+	url = https://github.com/alexforencich/verilog-i2c.git
+[submodule "ip/ahb3lite_wb_bridge"]
+	path = ip/ahb3lite_wb_bridge
+	url = https://github.com/vfinotti/ahb3lite_wb_bridge.git
+[submodule "ip/verilog-axi"]
+	path = ip/verilog-axi
+	url = https://github.com/alexforencich/verilog-axi.git
+[submodule "ip/wb_intercon"]
+	path = ip/wb_intercon
+	url = https://github.com/olofk/wb_intercon.git
+[submodule "ip/wb_common"]
+	path = ip/wb_common
+	url = https://github.com/fusesoc/wb_common.git
+[submodule "ip/cdc_utils"]
+	path = ip/cdc_utils
+	url = https://github.com/fusesoc/cdc_utils.git
+[submodule "ip/verilog_arbiter"]
+	path = ip/verilog_arbiter
+	url = https://github.com/bmartini/verilog-arbiter.git
+[submodule "ip/fifo"]
+	path = ip/fifo
+	url = https://github.com/olofk/fifo.git
+[submodule "ip/wb_ram"]
+	path = ip/wb_ram
+	url = https://github.com/fusesoc/wb_ram.git
+[submodule "ip/wb2axip"]
+	path = ip/wb2axip
+	url = https://github.com/ZipCPU/wb2axip.git
