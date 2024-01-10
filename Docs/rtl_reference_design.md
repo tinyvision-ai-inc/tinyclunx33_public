@@ -6,7 +6,7 @@ working System-on-Chip (SoC) is provided.
 The USB core requires fast access to a small local memory where TRB's can be stored and retrieved. Also, any USB transactions such as enumeration, CDC and other such low bandwidth tasks can use as a local scratch space where endpoint data is located.
 For any higher bandwidth transfer, a full AXI64 slave is utilized that allows for fast transfer that can support the high bandwidth required to keep the USB pipe running without being throttled.
 
-![](images/som_usb_axi_core.drawio.png)
+![](images/rtl_reference_design.drawio.png)
 
 This core design is quite compact and consumes <1K LUT and a few block RAM's depending on the amount selected.
 
