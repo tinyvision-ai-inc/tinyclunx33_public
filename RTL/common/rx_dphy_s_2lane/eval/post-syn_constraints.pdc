@@ -1,0 +1,125 @@
+##..............................................................................................##
+# This file is provided for IP evaluation purposes only 
+##..............................................................................................##
+
+#  NOTE/S: 
+#      1) The net names might change depending on the synthesis tool or the selected strategy 
+#         settings. If the registered net name has changed, the suffixes *.ff_inst/D (pin output)
+#         or *.ff_inst/Q (pin input) might need to be added on the names and consequently, 
+#         "get_net" also needs to be changed to "get_pins".
+#      
+#      2) For encrypted files synthesized with Synplify Pro, the constraints are not properly 
+#         applied due to the hierarchy and net names getting obfuscated. Please ignore timing 
+#         timing violations on clock domain crossing signals as these are properly handled in the 
+#         design. This is an ongoing enhancement on the Radiant Software.
+
+
+###### virtual IOs to pass Map stage ######
+
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports lp_d0_tx_n_i]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports lp_d0_tx_en_i]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports lp_d0_tx_p_i]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports ref_dt_i*]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports tx_rdy_i]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports bd_o*]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports lp_d_rx_n_o*]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports lp_d_rx_p_o*]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports hs_sync_o]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports lp_en_o]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports lp_av_en_o]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports sp_en_o]
+
+# uncomment if hard D-PHY:
+# ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports pd_dphy_i]
+
+# uncomment if axi4-stream is enabled:
+# ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports axis_*]
+
+# uncomment if axi4-stream is disabled:
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {dt_o*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {ecc_o*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {vc_o*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {wc_o*}]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports payload_en_o*]
+ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports payload_o*]
+
+# uncomment if axi4-stream is disabled, 4-lane, rx_gear=16:
+# ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {dt2_o*}]
+# ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {ecc2_o*}]
+# ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {vc2_o*}]
+# ldc_set_attribute {VIRTUAL_IO=TRUE} [get_ports {wc2_o*}]
+
+###### define system level clocks ######
+# # if hard d-phy CIL-enabled:
+# create_clock -name {sync_clk_i} -period $SYNC_CLK_PERIOD [get_ports sync_clk_i]
+# # 
+# # if non-continuous clock mode :
+  create_clock -name {clk_lp_ctrl_i} -period 20 [get_ports clk_lp_ctrl_i]
+
+# # if LMMI is enabled :
+#    create_clock -name {lmmi_clk_i} -period 10 [get_ports lmmi_clk_i] 
+
+# # freerunning byteclk :
+   create_clock -name {clk_byte_fr_i} -period 10 [get_ports clk_byte_fr_i] 
+
+# # if synthesis tool is SynplifyPro: 
+# # create_clock -name {clk_p_io} -period <DPHY_CLK_PERIOD> [get_ports clk_p_io]
+# # hard D-PHY byte clock (high speed clock when clock lane is active)
+create_clock -name {clk_hs_o} -period 10 [get_pins -hierarchical UCRXWCHS]
+# # hard D-PHY word clock ( for data sampling)
+create_clock -name {clk_byte_o} -period 10 [get_pins -hierarchical URWDCKHS]
+# # soft D-PHY byteclock (D-PHY clock to CLKDIV output) : 
+# create_clock -name {ECLKOUT} -period 2.5 [get_pins -hierarchical ECLKOUT]
+# create_generated_clock -name {clk_byte_o} -source [get_pins -hierarchical ECLKOUT] -divide_by 4 [get_pins -hierarchical DIVOUT]
+
+###### false path constraints ######
+
+set_false_path -to [get_pins -hierarchical reset_mem*.ff_inst/LSR]
+
+
+# # if soft d-phy :
+# set_false_path -from [get_pins -hierarchical {lp_rx_p_i*.ff_inst/Q  lp_rx_n_i*.ff_inst/Q c_state*.ff_inst/Q term_en*.ff_inst/Q} ] -to [get_pins -hierarchical DATA_LANES*.u_delay_data_line/A]
+# # uncomment depending on number of lanes 
+#  set_false_path -through [get_pins -hierarchical {term_clk_en_o*.ff_inst/Q ]
+#  set_false_path -through [get_pins -hierarchical {term_d3_en_o*.ff_inst/Q ]
+#  set_false_path -through [get_pins -hierarchical {term_d2_en_o*.ff_inst/Q ]
+#  set_false_path -through [get_pins -hierarchical {term_d1_en_o*.ff_inst/Q ]
+#  set_false_path -through [get_pins -hierarchical {term_d0_en_o*.ff_inst/Q ]
+
+# # if hard d-phy : 
+# # termination enable -----
+set_false_path -through [get_pins -hierarchical {UCTXUPSC UTXSKD0N U1TXSK U2TXSKC U3TXSKC}]
+# # deserializer enable ----
+set_false_path -to [get_pins -hierarchical {UTXRD0EN U1TXREQ U2TXREQ U3TXREQ}]
+
+##### RX_FIFO false path constraints ######
+# # if RX_FIFO_TYPE == "PINGPONG" 
+set_false_path -from [get_nets -hierarchical {reset_pp*}]
+set_false_path -from [get_nets -hierarchical wr_pp_sel*] 
+
+# # if RX_FIFO and Clock Mode is Dual Clock  
+set_false_path -through [get_pins -hierarchical {fr_fifo*/Reset fr_fifo*/RPReset}]
+
+### # set_false_path  -from [get_nets -hierarchical {rd_addr_r*}] -to [get_nets -hierarchical {rp_sync1_r}]
+### set_false_path  -from [get_pins -hierarchical {rd_addr_r*.ff_inst/D}] -to [get_pins -hierarchical {rp_sync1_r*.ff_inst/Q}]
+### # set_false_path  -from [get_nets -hierarchical {wr_addr_r*}] -to [get_nets -hierarchical {wp_sync1_r*}]   
+### set_false_path  -from [get_pins -hierarchical {wr_addr_r*.ff_inst/D}] -to [get_pins -hierarchical {wp_sync1_r*.ff_inst/Q}]   
+### 
+### # set_false_path  -from [get_nets -hierarchical {wr_grey_sync_r* }] -to [get_nets -hierarchical {wp_sync1_r*}]      
+### set_false_path  -from [get_pins -hierarchical {wr_grey_sync_r*.ff_inst/D}] -to [get_pins -hierarchical {wp_sync1_r*.ff_inst/Q}]      
+### # set_false_path  -from [get_nets -hierarchical {rd_grey_sync_r* }] -to [get_nets -hierarchical {rp_sync1_r*}]   
+### set_false_path  -from [get_pins -hierarchical {rd_grey_sync_r*.ff_inst/D}] -to [get_pins -hierarchical {rp_sync1_r*.ff_inst/Q}]   
+
+###### constraint for the selection of the Hard D-PHY location ######
+# ldc_set_location -site {DPHY1} [get_cells lscc_dphy_rx_inst/*/*/*DPHY_inst]
+
+###### sample constraint to prevent nets from using primary clock tree  ######
+# ldc_set_attribute {USE_PRIMARY=FALSE} [get_nets -hierarchical stb_data_neg*]
+
+
+
+
+
+
+
+
