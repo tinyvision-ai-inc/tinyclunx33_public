@@ -22,6 +22,7 @@ and value for a given clock setup.
 | FPGA high frequency oscillator | 450 MHz    | FPGA fabric              |
 | FPGA low power oscillator      | 128 kHz    | FPGA fabric              |
 | FPGA GPLL                      | Selectable | FPGA fabric              |
+| MIPI clock                     | Selectable | RTL on the FPGA          |
 
 ## Hardware integration
 
@@ -40,6 +41,13 @@ a primary clock pin (PCLK), useable for DDR I/O.
 TODO: Hook an I2C core and integrate into the core SoM design
 
 ## Zephyr integration
+
+The Si5351 PLL is not yet integrated into Zephyr as a driver. Instead, it is
+called from the user code to generate the appropriate clock.
+
+The list of registers to configure over I2C was obtained using the
+[vendor tool](https://www.skyworksinc.com/Application-Pages/Clockbuilder-Pro-Software)
+in the meantime.
 
 TODO: Integrate the clock tree definition into a Device Tree.
 
