@@ -1,4 +1,6 @@
-# SoM Pinout
+# Pinout
+
+## Pinout of the two connectors
 
 The SoM communicates with the outside through twow Hirose DF40C 60-pins
 connectors, each with two rows of 30-pins.
@@ -48,6 +50,14 @@ The meaning of the labels in the "Pin" column is:
 - `.3` - Bank 3 I/O voltage level selectable between 1.2 V and 1.8 V
 
 TODO: Document the connectivity variant
+
+## Pinout of the FPGA
+| Bank   | Pin | Name(s)      | Signal        | Connected to  | At pin |
+|--------|-----|--------------|---------------|---------------|--------|
+| Bank 0 | C1  | VCCIO1       | PVDD_1        |               |        |
+| Bank 0 | A1  | PT38B, INITN | GPIO_A1_INITN |               |        |
+| TODO   |     |              |               |               |        |
+
 
 ## Parts featured
 
