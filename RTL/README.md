@@ -49,6 +49,9 @@ make
 This will have built the Verilog sources of a RISC-V CPU system.
 You can now use these updated sources in the next step.
 
+This will also build the `litex.overlay` and `litex.cfg` which can be passed
+to a Zephyr system for make the drivers match your custom architecture.
+
 
 ## Build the bitfile with Radiant
 
@@ -105,6 +108,8 @@ to drive the various peripherals (UART, I2C...).
 
 The USB driver is only implemented on top of
 [Zephyr](https://tinyclunx33.tinyvision.ai/md_zephyr.html).
+
+After performing the optional LiteX build steps at the top:
 
 ```
 # Build the library matching the LiteX SoC configuration
