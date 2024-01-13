@@ -1,13 +1,13 @@
-# Carrier BaseBoard
+# Carrier Devkit
 
-[Schematics](NXU_baseboard_v1.0_Schematic.pdf) |
-[Assembly](NXU_baseboard_v1.0_Assembly.pdf)
+[Schematics](NXU_devkit_v1.0_Schematic.pdf) |
+[Assembly](NXU_devkit_v1.0_Assembly.pdf)
 
-The **BaseBoard** is a carrier for the tinyCLUNX33 SoM that eases product
+The **Devkit** is a carrier for the tinyCLUNX33 SoM that eases product
 development and debugging:
 A development kit usable as factory programming/test rig.
 
-![](images/carrier_baseboard.png)
+![](images/carrier_devkit.png)
 
 Features:
 - All SoM pins exposed, additional probing and voltage pins
@@ -46,4 +46,4 @@ TODO: switch to v2 and document the pinout as tables
   [QSE-020-01-F-D-A-K](https://suddendocs.samtec.com/productspecs/qse-qte.pdf)
   High-Speed Socket connector
   
-![](images/carrier_baseboard_schematic.png)
+![](images/carrier_devkit_schematic.png)

@@ -45,7 +45,10 @@ A fast flash chip was selected to allow fast, direct (XIP) code execution.
 
 ## Hardware integration
 
-The flash offers a qSPI interface: 4 SPI data lines in half-duplex for 4x the
+The flash is already integrated internally in the SoM hardware.
+
+In addition, its qSPI interface may be accessed from the outside, for debugging
+or other purpose: 4 SPI data lines in half-duplex for 4x the
 throughput.
 
 It further provides Double Transmission Rate (DTR, also known as DDR) to send

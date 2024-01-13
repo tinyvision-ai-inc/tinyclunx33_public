@@ -12,6 +12,11 @@ product, or as a base to build upon.
 To build this component, refer to the
 [RTL build instructions](https://github.com/tinyvision-ai-inc/tinyCLUNX33/blob/main/RTL/README.md).
 
+For RTL engineers, the Reference Design is presented as a single module
+providing a data communication interface for the feed that goes through USB.
+
+TODO: present example Verilog instantiation illustrating this
+
 
 ## Data Pipeline (AXI64)
 

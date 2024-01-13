@@ -40,8 +40,11 @@ frequencies for supporting various hardware and protocols.
 
 ## Hardware integration
 
-The free output clock may be looped back to the external input clock pin, so
-that the PLL provides a clock with an arbitrary frequency directly to the FPGA.
+The USB differential clock generation is already integrated internally
+in the SoM.
+
+The extra free output clock may be looped back to the external input clock pin,
+so that the PLL provides a clock with an arbitrary frequency directly to the FPGA.
 
 It is also possible to use the free output clock pin elsewhere on the project.
 
