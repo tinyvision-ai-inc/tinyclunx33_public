@@ -57,6 +57,9 @@
         <Source name="src/wb_intercon.v" type="Verilog" type_short="Verilog">
             <Options/>
         </Source>
+        <Source name="src/wb_csr.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
         <Source name="common/rx_dphy_s_2lane/rx_dphy_s_2lane.ipx" type="IPX_Module" type_short="IPX">
             <Options/>
         </Source>
@@ -69,18 +72,18 @@
         <Source name="common/p2b_2lane/p2b_2lane.ipx" type="IPX_Module" type_short="IPX">
             <Options/>
         </Source>
+        <Source name="common/p2b_2l_yuv422_8/p2b_2l_yuv422_8.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
         <Source name="common/constraints/som_pre_synth.sdc" type="Pre-Synthesis Constraints File" type_short="SDC">
             <Options/>
         </Source>
-        <Source name="src/fpga_top_som.rvl" type="Reveal" type_short="Reveal">
+        <Source name="fpga_top_som.xcf" type="Programming Project File" type_short="Programming">
             <Options/>
         </Source>
-        <Source name="src/fpga_top_som.xcf" type="Programming Project File" type_short="Programming">
-            <Options/>
-        </Source>
-        <Source name="src/fpga_top_som.pdc" type="Physical Constraints File" type_short="PDC">
+        <Source name="fpga_top_som.pdc" type="Physical Constraints File" type_short="PDC">
             <Options/>
         </Source>
     </Implementation>
-    <Strategy name="Strategy1" file="fpga_top_som1.sty"/>
+    <Strategy name="Strategy1" file="fpga_top_som.sty"/>
 </RadiantProject>

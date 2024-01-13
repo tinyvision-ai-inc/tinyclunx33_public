@@ -10,6 +10,7 @@
 *.wlf
 *.fbi
 *.elf
+*.html
 *.history
 .metadata
 .recovery
