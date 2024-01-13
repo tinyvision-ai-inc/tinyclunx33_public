@@ -13,11 +13,12 @@ This allows staying in a deep sleep state until custom logic wakes the SoM.
 
 ## Rationale
 
-Under its power budget, most of the SoM power is expected to flow through the
-`P1VD` power rail which feeds the core of the FPGA fabric.
+One of the highest power usage is the FPGA fabric and its `P1VD` core power rail.
+This is the reason for the use of an efficient Diodes AP61102 buck converter for
+this rail.
 
-To reduce it further, the FPGA offers an Always ON (AON) power domain,
-able to keep operating while the rest of the FPGA goes entirely to sleep.
+To reduce it further, the FPGA chip features an Always ON (AON) power domain,
+able to keep a small part operating while the rest goes entirely to sleep.
 
 This small internal Always ON domain allows the user to write custom logic for
 waking up the rest of the FPGA, as well as the rest of the SoM altogether,
