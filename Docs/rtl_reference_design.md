@@ -17,6 +17,9 @@ providing a data communication interface for the feed that goes through USB.
 
 TODO: present example Verilog instantiation illustrating this
 
+The RTL reference design is made out of two independent parts (Data Pipeline,
+CPU SoC), and an interface for inserting custom data processing at ease:
+
 
 ## Data Pipeline (AXI64)
 
