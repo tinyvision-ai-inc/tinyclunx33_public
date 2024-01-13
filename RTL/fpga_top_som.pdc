@@ -67,7 +67,6 @@ ldc_set_location -site {D1} [get_ports TDO]
 create_clock -name {clk_2} -period 41.6666666666667 [get_ports clk_2]
 create_clock -name {clk_pixel_i} -period 12.5 [get_nets pixel_clk]
 create_clock -name {clk_byte_i} -period 20 [get_nets byte_clk*]
-set_clock_groups -group clk_pixel_i -group clk_byte_i -group [get_clocks clk_2] -group [get_clocks tx_clk] -group [get_clocks tx_clk_90] -group [get_clocks clk_60m] -group [get_clocks rvltck] -group [get_clocks lf_clk] -group [get_clocks hf_clk] -group [get_clocks i_pixel_to_mipi/byte_clk_o] -asynchronous
 #---- Byte2Pixel constraints --------------------------------------------------------------------------------------#
 ######                                                                                       ######
 # NOTE:  The byte-to-pixel IP treats the byte clock and the pixel clock as asynchronous.          #
