@@ -1,15 +1,12 @@
 *.bit
-*.bin
 *.ddt
 *.ini
-*.sty
 *.tcl
 *.tcr
 *.xml
 *.dmp
 *.wlf
 *.fbi
-*.elf
 *.html
 *.history
 .metadata
