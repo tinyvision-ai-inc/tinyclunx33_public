@@ -10,9 +10,25 @@ rail, only powering one power domain of the FPGA.
 
 This allows staying in a deep sleep state until custom logic wakes the SoM.
 
-## Hardware integration
 
-### Power rails
+## Rationale
+
+Under its power budget, most of the SoM power is expected to flow through the
+`P1VD` power rail which feeds the core of the FPGA fabric.
+
+To reduce it further, the FPGA offers an Always ON (AON) power domain,
+able to keep operating while the rest of the FPGA goes entirely to sleep.
+
+This small internal Always ON domain allows the user to write custom logic for
+waking up the rest of the FPGA, as well as the rest of the SoM altogether,
+to reduce the power usage to the bare minimum that this hardware is capable of.
+
+The SoM can also export its various internal power rails to the user design so
+that no extra LDO are required in the carrier board, or as reference voltage
+for communication with the SoM.
+
+
+## Hardware integration of Power Rail
 
 The SoM generates various voltage level useable by the user design within the
 current capability of the LDOs and buck converters.
@@ -49,7 +65,8 @@ current capability of the LDOs and buck converters.
   Drawing most of the current to power the FPGA core.
   Not available to the outside.
 
-### I/O voltage level
+
+## Hardware integration of I/O voltage levels
 
 The SoM allows to provide external reference voltages, directly applied to the
 FPGA I/O banks, thanks to 3 different pins used for different purposes at
@@ -63,13 +80,16 @@ different supported ranges:
 | Bank 2    | 1.2 V to 1.8 V    | Connectivity SoM variant differential pairs |
 | Bank 3    | 1.2 V to 1.8 V    | 6 differential pairs                        |
 
+
 ## RTL integration
 
 TODO: Describe the GPIO controller pin in use.
 
+
 ## Zephyr integration
 
 TODO: Describe the pinctrl DeviceTree integration.
+
 
 ## Parts featured
 

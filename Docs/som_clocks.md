@@ -24,6 +24,20 @@ and value for a given clock setup.
 | FPGA GPLL                      | Selectable | FPGA fabric              |
 | MIPI clock                     | Selectable | RTL on the FPGA          |
 
+
+## Rationale
+
+The USB3 protocol requires an accurate clock. For this purpose, an Si5351 clock
+generator chip is integrated onto the SoM offering 3 clock output, 2 of which
+transmitted as differential clock for high integrity/stability.
+
+This leaves-up yet another clock signal usable by the FPGA design or external
+PCB directly at a custom frequency.
+
+The FPGA further more provides internal PLL, offering a large range of
+frequencies for supporting various hardware and protocols.
+
+
 ## Hardware integration
 
 The free output clock may be looped back to the external input clock pin, so
@@ -33,12 +47,14 @@ It is also possible to use the free output clock pin elsewhere on the project.
 
 It is also possible to provide an external input clock source to the FPGA.
 
+
 ## RTL integration
 
 The FPGA can use the external input clock, routed to its pin `H8`, which is
-a primary clock pin (PCLK), useable for DDR I/O.
+a primary clock pin (PCLK), usable for DDR I/O.
 
 TODO: Hook an I2C core and integrate into the core SoM design
+
 
 ## Zephyr integration
 
@@ -52,6 +68,7 @@ in the meantime.
 TODO: Integrate the clock tree definition into a Device Tree.
 
 TODO: Write a driver to initialize the PLL and control free clock signal.
+
 
 ## Parts featured
 

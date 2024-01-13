@@ -10,6 +10,17 @@ On the Compute SoM variant, some differential pairs are used for the external
 RAM, absent from the Connectivity SoM variant, leading to 6 or 14 differential
 pairs available.
 
+
+## Rationale
+
+Image sensors and other high-throughput components often come with [MIPI]()
+interfaces or other form of differential pair signaling.
+
+FPGAs can adapt to the full range of diversity of these MIPI or other fast
+interfaces, allowing to integrate the diversity of custom sensors with an
+USB3 interface at 5 Gbit/s.
+
+
 ## Hardware integration
 
 Each MIPI interface can have more or less differential pairs for the data lanes,
@@ -36,15 +47,18 @@ and always one dedicated pair for the associated clock signal.
 | 1x      | 1x      |         | 5     |
 | 3x      |         |         | 6     |
 
+
 ## RTL integration
 
 TODO: describe the FIFO interfaces available to feed the data from MIPI into USB
 
 TODO: describe the MIPI data pipeline once released.
 
+
 ## Zephyr integration
 
 TODO: evoke the UVC configuration possible/required to do once UVC is there
+
 
 ## Parts featured
 

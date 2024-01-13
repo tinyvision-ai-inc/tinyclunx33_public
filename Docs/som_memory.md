@@ -18,11 +18,28 @@ HyperRAM memory installed and interconnected with the FPGA.
 | Large RAM (LRAM)              | 5   | 512 kbit    | 2560 kbit / 320 kByte |
 | External OctalRAM or HyperRAM | 1   | 64 Mbit     | 64 Mbit / 8 MByte     |
 
+
+## Rationale
+
+By providing various amount of memory in its fabric, the FPGA can provide
+memory where it is needed by the CPU, or RTL.
+
+Image processing algorithms might require to operate on several rows of data,
+more than what the internal FPGA memory might offer. For these use-cases, the
+*Compute* variant offers an external OctalSPI or HyperRAM chip that can be
+immediately used by the custom RTL.
+
+The *Connectivity allocates the unused as extra MIPI lines.
+
+
 ## Hardware integration
 
-TODO: Can the memory be directly accessed from the outside to communicate with
-the FPGA through shared memory pages the ring the bell to notify new memory
-is available? Some "letterbox" model.
+When using the *Compute* variant of the tinyCLUNX33, an OctalSPI or HyperRAM is
+available as buffer for processing the data or any purpose by the SoM.
+
+It would then be already hooked to the FPGA pins, with the right
+[pinout](pinout.md).
+
 
 ## RTL Integration
 
@@ -36,6 +53,7 @@ allocate a given NXLRAM block.
 
 The [RTL Reference Design](rtl_reference_design.md) shows a possible
 integration of the NXLRAM as well as a controller for the external RAM chip.
+
 
 ## Parts featured
 

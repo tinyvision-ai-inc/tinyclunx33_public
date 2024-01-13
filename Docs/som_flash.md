@@ -22,7 +22,7 @@ It can be installed as part of
 then called this way:
 
 ```
-ecpprog -s -o 0x000000 file_to_program.bin
+ecpprog -o 0x000000 file_to_program.bin
 ```
 
 The `-o 0x000000` can be adapted to any local offset *within* the flash,
@@ -30,16 +30,34 @@ to allow multiple binary images to cohabitate.
 
 The regular Radiant programmer can also be used as usual for Lattice parts.
 
+
+## Rationale
+
+At every startup, the FPGA reads the bitfile from the flash, which features
+the RTL design setting the FPGA function, and lets the FPGA start with it.
+
+The FPGA does not use the Flash further during its operation, letting it free
+for use by the rest of the RTL design. This permits to use the flash as a
+storage for code provided to a small (i.e. RISC-V) CPU inside the FPGA.
+
+A fast flash chip was selected to allow fast, direct (XIP) code execution.
+
+
 ## Hardware integration
 
-The QSPI bus used by the flash can be reused for different purpose when the
-flash is not used. For instance, if running the firmware without XIP.
+The flash offers a qSPI interface: 4 SPI data lines in half-duplex for 4x the
+throughput.
+
+It further provides Double Transmission Rate (DTR, also known as DDR) to send
+twice the amount of data per clock.
+
 
 ## RTL integration
 
 TODO: add the new QSPI DDR flash controller and map it to AXI for XIP
 
 TODO: hook the QSPI bus as a regular SPI peripheral
+
 
 ## Zephyr integration
 
@@ -56,6 +74,7 @@ flash0: flash@20100000 {
 	status = "okay";
 };
 ```
+
 
 ## Parts featured
 

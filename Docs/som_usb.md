@@ -5,6 +5,22 @@ capable of 5 Gbit/s transfers.
 
 ![](images/som_usb_architecture.drawio.png)
 
+
+## Rationale
+
+Although it is possible to implement USB3 completely in RTL, or add an external
+chip dedicated to USB, doing so requires processing power and hardware resources.
+
+USB2 also almost always requires a PHY.
+
+By providing an integrated hardware USB3 and USB2 core and PHY, the
+[Lattice CrossLinkU-NX](https://www.latticesemi.com/-/media/LatticeSemi/Images/Blogs/2023/Accelerate-USB-enabled-Designs-with-Lattice-CrossLinkU-NX-FPGAs.ashx)
+FPGA used by the SoM uses fewer board or RTL resources, saving more for the application.
+
+This combines the low part count and flexibility of RTL on an FPGA with the
+power and throughput efficiency of a separate ASIC.
+
+
 ## Hardware integration
 
 An external PHY is not required as the LIFCL-33U provides an integrated
@@ -22,9 +38,10 @@ In the case of Type-C, an intermediate Type-C management chip can optionally be
 used to offer extended power capability of the device, but is not required if
 ignoring the extra Type-C functions.
 
+
 ## RTL integration
 
-A CPU core is required to manage the complexity of the hard USB core.
+A CPU core is preferred to manage the Lattice USB23 register interfae.
 
 ![](images/som_usb_rtl_integration.drawio.png)
 
@@ -69,7 +86,17 @@ The [RTL Reference Design](rtl_reference_design.md) implements this entire
 system, and the data flow can be controlled by software, which covers the
 enumeration and subsequent transfer of data with the USB endpoints.
 
-TODO: Complete the integration of the new RTL VexRiscv core
+- A small local memory provides fast transfer for USB Transfer Requests (TRB's),
+  part of the DMA mechanism: data can be stored by the CPU and retrieved by the
+  USB23 core.
+
+- USB transactions (enumeration, CDC, other low bandwidth tasks) can also use as
+  a local scratch space where endpoint data is located.
+
+- For any higher bandwidth transfer, a full AXI64 slave is utilized that allows
+  for fast transfer at high bandwidth required to keep the USB pipe running
+  without being throttled.
+
 
 ## Zephyr integration
 
@@ -89,8 +116,9 @@ for configuring USB.
 
 TODO: Send a merge request for the Zephyr driver and link it there
 
-TODO: Provide a sample repository with a complete Zephyr firmware, along with
-binaries, and publish a link here.
+An example Zephyr firmware with the USB core enabled is provided as example:
+[tinyclunx33_zephyr_example](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example).
+
 
 ## Parts featured
 

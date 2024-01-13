@@ -1,8 +1,11 @@
 # RTL Reference Design
 
-- The USB core requires fast access to a small local memory where TRB's can be stored and retrieved.
-- Any USB transactions (enumeration, CDC, other low bandwidth tasks) can use as a local scratch space where endpoint data is located.
-For any higher bandwidth transfer, a full AXI64 slave is utilized that allows for fast transfer that can support the high bandwidth required to keep the USB pipe running without being throttled.
+The RTL Reference Design is a set of Verilog sources (sometimes generated from
+another HDL) providing common design elements for building an application on
+top of the SoM hardware.
+
+Once completed, it will usable as a stand-alone design for implementing a
+product, or as a base to build upon.
 
 ![](images/rtl_reference_design.drawio.png)
 
@@ -76,41 +79,3 @@ Helper cores available MIPI/USB/RAM:
   external chip on the *Compute* variant.
 
 - TODO: pixel, MIPI and image data processing utilities.
-
-
-## Usage Statistics
-
-Early estimation of the complete resource usage for a demo project performing.
-
-These will vary a lot as the project will evolve, either up or down.
-
-```
-Device utilization summary:
-
-   VHI                   1/1           100% used
-   SIOLOGIC              3/52            6% used
-   DCS                   1/1           100% used
-   EBR                  18/64           28% used
-   MULT9                12/128           9% used
-   MULT18                6/64            9% used
-   MULT18X36             2/32            6% used
-   REG18                10/128           8% used
-   PREADD9              12/128           9% used
-   LRAM                  1/5            20% used
-   DIFFIO18              6/16           38% used
-                         6/16           37% bonded
-   IOLOGIC               7/32           22% used
-   SEIO18               15/32           47% used
-                        15/32           47% bonded
-   SEIO33               11/51           22% used
-                        11/19           58% bonded
-   ECLKDIV               2/12           17% used
-   ECLKSYNC              2/12           17% used
-   OSCD                  1/1           100% used
-   PLL                   1/1           100% used
-   APIO                 10/16           63% used
-   USB23                 1/1           100% used
-   SLICE              8331/13824        60% used
-     LUT              7727/27648        28% used
-     REG              4379/27648        16% used
-```
