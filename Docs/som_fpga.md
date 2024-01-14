@@ -34,6 +34,20 @@ a system, on top of which the application can be implemented.
 | USB2/USB3 MAC+PHY        | 1                     |
 
 
+## Troubleshooting
+
+
+### Q: I loaded a bad bitfile on my board and now the programmer refuses to program now!
+
+Yes, this happens. Do not do it again! Here is the process to unlock your board:
+
+1. Power off immediately, a bad bitfile may have bad pin allocations which can damage the SoM.
+2. Short the `PROGn` pin on the `J14` header to Ground with a wire.
+3. Power up the board. 
+4. Check that the DONE LED is not lit up.
+5. Your board should now be ready to get programmed.
+
+
 ## Parts featured
 
 - Lattice Semiconductor
