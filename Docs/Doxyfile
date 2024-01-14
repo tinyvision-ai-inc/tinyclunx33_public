@@ -6,12 +6,12 @@ FILE_PATTERNS          = *.v *.vh *.sv *.svh *.md
 EXTENSION_MAPPING      = v=C++ vh=C++ sv=C++ svh=C++
 IMAGE_PATH             = images pinout
 USE_MDFILE_AS_MAINPAGE = index.md
-HTML_EXTRA_FILES       = ../Schematics/SoM/v2/tinyCLUNX33_v2.0_Schematic.pdf \
-                         ../Schematics/SoM/v2/tinyCLUNX33_v2.0_Assembly.pdf \
-                         ../Schematics/Devkit/v1/NXU_devkit_v1.0_Schematic.pdf \
-                         ../Schematics/Devkit/v1/NXU_devkit_v1.0_Assembly.pdf \
-                         ../Schematics/tinyCamera/v1/tinyCamera_v1.0_Assembly.pdf \
-                         ../Schematics/tinyCamera/v1/tinyCamera_v1.0_Schematic.pdf
+HTML_EXTRA_FILES       = ../Hardware/SoM/v2/tinyCLUNX33_v2.0_Schematic.pdf \
+                         ../Hardware/SoM/v2/tinyCLUNX33_v2.0_Assembly.pdf \
+                         ../Hardware/Devkit/v1/NXU_devkit_v1.0_Schematic.pdf \
+                         ../Hardware/Devkit/v1/NXU_devkit_v1.0_Assembly.pdf \
+                         ../Hardware/tinyCamera/v1/tinyCamera_v1.0_Assembly.pdf \
+                         ../Hardware/tinyCamera/v1/tinyCamera_v1.0_Schematic.pdf
 HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
                          doxygen-awesome-css/doxygen-awesome-sidebar-only.css
 HTML_COLORSTYLE        = LIGHT
