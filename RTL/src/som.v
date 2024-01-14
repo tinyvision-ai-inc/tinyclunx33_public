@@ -9,7 +9,7 @@
 // Filename   : som.v
 // Device     : build
 // LiteX sha1 : 91fbc79a
-// Date       : 2024-01-10 02:12:04
+// Date       : 2024-01-14 22:58:45
 //------------------------------------------------------------------------------
 
 `timescale 1ns / 1ps
@@ -124,8 +124,6 @@ MainSoC
 └─── ctrl (SoCController)
 └─── cpu (VexRiscv)
 │    └─── [VexRiscv]
-└─── rom (SRAM)
-└─── sram (SRAM)
 └─── uart_phy (RS232PHY)
 │    └─── tx (RS232PHYTX)
 │    │    └─── clk_phase_accum (RS232ClkPhaseAccum)
@@ -426,20 +424,6 @@ reg    [31:0] bus_errors = 32'd0;
 reg           bus_errors_re = 1'd0;
 wire   [31:0] bus_errors_status;
 wire          bus_errors_we;
-reg    [29:0] comb_self0 = 30'd0;
-reg    [31:0] comb_self1 = 32'd0;
-reg     [3:0] comb_self10 = 4'd0;
-reg     [3:0] comb_self11 = 4'd0;
-reg     [3:0] comb_self12 = 4'd0;
-reg     [3:0] comb_self13 = 4'd0;
-reg     [3:0] comb_self2 = 4'd0;
-reg           comb_self3 = 1'd0;
-reg           comb_self4 = 1'd0;
-reg           comb_self5 = 1'd0;
-reg     [2:0] comb_self6 = 3'd0;
-reg     [1:0] comb_self7 = 2'd0;
-reg     [3:0] comb_self8 = 4'd0;
-reg     [3:0] comb_self9 = 4'd0;
 reg    [19:0] count = 20'd1000000;
 wire          cpu_rst;
 wire   [31:0] csrbank0_bus_errors_r;
@@ -778,29 +762,7 @@ reg           main_ram_cs = 1'd0;
 wire   [31:0] main_ram_datain;
 wire   [31:0] main_ram_dataout;
 reg           main_ram_wren = 1'd0;
-reg    [13:0] mainsoc_adr = 14'd0;
-reg           mainsoc_adr_burst = 1'd0;
-wire          mainsoc_adr_burst_wrap;
-reg    [29:0] mainsoc_adr_counter = 30'd0;
-wire   [29:0] mainsoc_adr_counter_base;
-reg     [3:0] mainsoc_adr_counter_offset = 4'd0;
-reg           mainsoc_adr_latched = 1'd0;
-wire   [29:0] mainsoc_adr_next;
-wire    [3:0] mainsoc_adr_offset_lsb;
-wire   [29:0] mainsoc_adr_offset_msb;
-wire   [31:0] mainsoc_dat_r;
-reg           mainsoc_ram_bus_ack = 1'd0;
-wire   [29:0] mainsoc_ram_bus_adr;
-wire    [1:0] mainsoc_ram_bus_bte;
-wire    [2:0] mainsoc_ram_bus_cti;
-wire          mainsoc_ram_bus_cyc;
-wire   [31:0] mainsoc_ram_bus_dat_r;
-wire   [31:0] mainsoc_ram_bus_dat_w;
-reg           mainsoc_ram_bus_err = 1'd0;
-wire    [3:0] mainsoc_ram_bus_sel;
-wire          mainsoc_ram_bus_stb;
-wire          mainsoc_ram_bus_we;
-reg     [5:0] master = 6'd0;
+reg     [3:0] master = 4'd0;
 wire          oe;
 wire          por_clk;
 reg           port_ar_first = 1'd0;
@@ -901,30 +863,6 @@ wire   [63:0] r_converter_source_source_payload_data;
 wire          r_converter_source_source_ready;
 wire          r_converter_source_source_valid;
 wire          r_converter_source_valid;
-reg     [9:0] ram_adr = 10'd0;
-reg           ram_adr_burst = 1'd0;
-wire          ram_adr_burst_wrap;
-reg    [29:0] ram_adr_counter = 30'd0;
-wire   [29:0] ram_adr_counter_base;
-reg     [3:0] ram_adr_counter_offset = 4'd0;
-reg           ram_adr_latched = 1'd0;
-wire   [29:0] ram_adr_next;
-wire    [3:0] ram_adr_offset_lsb;
-wire   [29:0] ram_adr_offset_msb;
-reg           ram_bus_ram_bus_ack = 1'd0;
-wire   [29:0] ram_bus_ram_bus_adr;
-wire    [1:0] ram_bus_ram_bus_bte;
-wire    [2:0] ram_bus_ram_bus_cti;
-wire          ram_bus_ram_bus_cyc;
-wire   [31:0] ram_bus_ram_bus_dat_r;
-wire   [31:0] ram_bus_ram_bus_dat_w;
-reg           ram_bus_ram_bus_err = 1'd0;
-wire    [3:0] ram_bus_ram_bus_sel;
-wire          ram_bus_ram_bus_stb;
-wire          ram_bus_ram_bus_we;
-wire   [31:0] ram_dat_r;
-wire   [31:0] ram_dat_w;
-reg     [3:0] ram_we = 4'd0;
 reg           regs0 = 1'd0;
 reg           regs1 = 1'd0;
 wire    [2:0] request;
@@ -969,6 +907,14 @@ wire          sdrio_clk_6;
 wire          sdrio_clk_7;
 wire          sdrio_clk_8;
 wire          sdrio_clk_9;
+reg    [29:0] self0 = 30'd0;
+reg    [31:0] self1 = 32'd0;
+reg     [3:0] self2 = 4'd0;
+reg           self3 = 1'd0;
+reg           self4 = 1'd0;
+reg           self5 = 1'd0;
+reg     [2:0] self6 = 3'd0;
+reg     [1:0] self7 = 2'd0;
 reg           serial_tx_rs232phytx_next_value1 = 1'd0;
 reg           serial_tx_rs232phytx_next_value_ce1 = 1'd0;
 reg           shared_ack = 1'd0;
@@ -982,7 +928,7 @@ wire          shared_err;
 wire    [3:0] shared_sel;
 wire          shared_stb;
 wire          shared_we;
-reg     [5:0] slaves = 6'd0;
+reg     [3:0] slaves = 4'd0;
 reg           soc_rst = 1'd0;
 reg           spiflash_core_cs = 1'd0;
 wire          spiflash_core_internal_port_sink_first;
@@ -1064,8 +1010,6 @@ wire          spiflash_core_user_port_source_last;
 wire   [31:0] spiflash_core_user_port_source_payload_data;
 wire          spiflash_core_user_port_source_ready;
 wire          spiflash_core_user_port_source_valid;
-reg     [3:0] sync_self0 = 4'd0;
-reg     [3:0] sync_self1 = 4'd0;
 wire          sys_clk_1;
 wire          sys_rst_1;
 reg           timer_en_re = 1'd0;
@@ -1262,7 +1206,7 @@ reg           usb23_trigger_d = 1'd0;
 wire          usb23_usb0;
 wire          usb23_usb1;
 wire          usb23_usb2;
-reg    [31:0] vexriscv = 32'd0;
+reg    [31:0] vexriscv = 32'd537919488;
 wire          w_converter_converter_first;
 wire          w_converter_converter_last;
 reg           w_converter_converter_mux = 1'd0;
@@ -1837,14 +1781,14 @@ always @(*) begin
         end
     endcase
 end
-assign shared_adr = comb_self0;
-assign shared_dat_w = comb_self1;
-assign shared_sel = comb_self2;
-assign shared_cyc = comb_self3;
-assign shared_stb = comb_self4;
-assign shared_we = comb_self5;
-assign shared_cti = comb_self6;
-assign shared_bte = comb_self7;
+assign shared_adr = self0;
+assign shared_dat_w = self1;
+assign shared_sel = self2;
+assign shared_cyc = self3;
+assign shared_stb = self4;
+assign shared_we = self5;
+assign shared_cti = self6;
+assign shared_bte = self7;
 assign ibus_dat_r = shared_dat_r;
 assign dbus_dat_r = shared_dat_r;
 assign adapted_interface_adapted_interface_dat_r = shared_dat_r;
@@ -1856,28 +1800,12 @@ assign dbus_err = (shared_err & (grant == 1'd1));
 assign adapted_interface_adapted_interface_err = (shared_err & (grant == 2'd2));
 assign request = {adapted_interface_adapted_interface_cyc, dbus_cyc, ibus_cyc};
 always @(*) begin
-    master <= 6'd0;
-    master[0] <= (shared_adr[29:14] == 1'd0);
-    master[1] <= (shared_adr[29:10] == 17'd65536);
-    master[2] <= (shared_adr[29:22] == 6'd32);
-    master[3] <= (shared_adr[29:14] == 15'd16384);
-    master[4] <= (shared_adr[29:26] == 4'd11);
-    master[5] <= (shared_adr[29:14] == 16'd57344);
+    master <= 4'd0;
+    master[0] <= (shared_adr[29:22] == 6'd32);
+    master[1] <= (shared_adr[29:14] == 15'd16384);
+    master[2] <= (shared_adr[29:26] == 4'd11);
+    master[3] <= (shared_adr[29:14] == 16'd57344);
 end
-assign mainsoc_ram_bus_adr = shared_adr;
-assign mainsoc_ram_bus_dat_w = shared_dat_w;
-assign mainsoc_ram_bus_sel = shared_sel;
-assign mainsoc_ram_bus_stb = shared_stb;
-assign mainsoc_ram_bus_we = shared_we;
-assign mainsoc_ram_bus_cti = shared_cti;
-assign mainsoc_ram_bus_bte = shared_bte;
-assign ram_bus_ram_bus_adr = shared_adr;
-assign ram_bus_ram_bus_dat_w = shared_dat_w;
-assign ram_bus_ram_bus_sel = shared_sel;
-assign ram_bus_ram_bus_stb = shared_stb;
-assign ram_bus_ram_bus_we = shared_we;
-assign ram_bus_ram_bus_cti = shared_cti;
-assign ram_bus_ram_bus_bte = shared_bte;
 assign spiflash_core_litespimmap_bus_adr = shared_adr;
 assign spiflash_core_litespimmap_bus_dat_w = shared_dat_w;
 assign spiflash_core_litespimmap_bus_sel = shared_sel;
@@ -1906,20 +1834,18 @@ assign interface0_stb = shared_stb;
 assign interface0_we = shared_we;
 assign interface0_cti = shared_cti;
 assign interface0_bte = shared_bte;
-assign mainsoc_ram_bus_cyc = (shared_cyc & master[0]);
-assign ram_bus_ram_bus_cyc = (shared_cyc & master[1]);
-assign spiflash_core_litespimmap_bus_cyc = (shared_cyc & master[2]);
-assign main_ram_bus_cyc = (shared_cyc & master[3]);
-assign port_bus_cyc = (shared_cyc & master[4]);
-assign interface0_cyc = (shared_cyc & master[5]);
-assign shared_err = (((((mainsoc_ram_bus_err | ram_bus_ram_bus_err) | spiflash_core_litespimmap_bus_err) | main_ram_bus_err) | port_bus_err) | interface0_err);
+assign spiflash_core_litespimmap_bus_cyc = (shared_cyc & master[0]);
+assign main_ram_bus_cyc = (shared_cyc & master[1]);
+assign port_bus_cyc = (shared_cyc & master[2]);
+assign interface0_cyc = (shared_cyc & master[3]);
+assign shared_err = (((spiflash_core_litespimmap_bus_err | main_ram_bus_err) | port_bus_err) | interface0_err);
 assign wait_1 = ((shared_stb & shared_cyc) & (~shared_ack));
 always @(*) begin
     error <= 1'd0;
     shared_ack <= 1'd0;
     shared_dat_r <= 32'd0;
-    shared_ack <= (((((mainsoc_ram_bus_ack | ram_bus_ram_bus_ack) | spiflash_core_litespimmap_bus_ack) | main_ram_bus_ack) | port_bus_ack) | interface0_ack);
-    shared_dat_r <= (((((({32{slaves[0]}} & mainsoc_ram_bus_dat_r) | ({32{slaves[1]}} & ram_bus_ram_bus_dat_r)) | ({32{slaves[2]}} & spiflash_core_litespimmap_bus_dat_r)) | ({32{slaves[3]}} & main_ram_bus_dat_r)) | ({32{slaves[4]}} & port_bus_dat_r)) | ({32{slaves[5]}} & interface0_dat_r));
+    shared_ack <= (((spiflash_core_litespimmap_bus_ack | main_ram_bus_ack) | port_bus_ack) | interface0_ack);
+    shared_dat_r <= (((({32{slaves[0]}} & spiflash_core_litespimmap_bus_dat_r) | ({32{slaves[1]}} & main_ram_bus_dat_r)) | ({32{slaves[2]}} & port_bus_dat_r)) | ({32{slaves[3]}} & interface0_dat_r));
     if (done) begin
         shared_dat_r <= 32'd4294967295;
         shared_ack <= 1'd1;
@@ -1928,68 +1854,6 @@ always @(*) begin
 end
 assign done = (count == 1'd0);
 assign bus_errors_status = bus_errors;
-always @(*) begin
-    mainsoc_adr_burst <= 1'd0;
-    case (mainsoc_ram_bus_cti)
-        2'd2: begin
-            mainsoc_adr_burst <= 1'd1;
-        end
-        3'd7: begin
-            mainsoc_adr_burst <= 1'd0;
-        end
-        default: begin
-            mainsoc_adr_burst <= 1'd0;
-        end
-    endcase
-end
-assign mainsoc_adr_burst_wrap = (mainsoc_ram_bus_bte[0] | mainsoc_ram_bus_bte[1]);
-assign mainsoc_adr_counter_base = {mainsoc_ram_bus_adr[29:4], (mainsoc_ram_bus_adr & (~comb_self8))};
-assign mainsoc_adr_offset_lsb = ((mainsoc_adr_counter + mainsoc_adr_counter_offset) & comb_self9);
-assign mainsoc_adr_offset_msb = (mainsoc_adr_counter & (~comb_self10));
-assign mainsoc_adr_next = (mainsoc_adr_offset_msb + mainsoc_adr_offset_lsb);
-always @(*) begin
-    mainsoc_adr <= 14'd0;
-    mainsoc_adr <= mainsoc_ram_bus_adr[13:0];
-    if ((mainsoc_adr_burst & mainsoc_adr_latched)) begin
-        mainsoc_adr <= mainsoc_adr_next[13:0];
-    end
-end
-assign mainsoc_ram_bus_dat_r = mainsoc_dat_r;
-always @(*) begin
-    ram_adr_burst <= 1'd0;
-    case (ram_bus_ram_bus_cti)
-        2'd2: begin
-            ram_adr_burst <= 1'd1;
-        end
-        3'd7: begin
-            ram_adr_burst <= 1'd0;
-        end
-        default: begin
-            ram_adr_burst <= 1'd0;
-        end
-    endcase
-end
-assign ram_adr_burst_wrap = (ram_bus_ram_bus_bte[0] | ram_bus_ram_bus_bte[1]);
-assign ram_adr_counter_base = {ram_bus_ram_bus_adr[29:4], (ram_bus_ram_bus_adr & (~comb_self11))};
-assign ram_adr_offset_lsb = ((ram_adr_counter + ram_adr_counter_offset) & comb_self12);
-assign ram_adr_offset_msb = (ram_adr_counter & (~comb_self13));
-assign ram_adr_next = (ram_adr_offset_msb + ram_adr_offset_lsb);
-always @(*) begin
-    ram_we <= 4'd0;
-    ram_we[0] <= (((ram_bus_ram_bus_cyc & ram_bus_ram_bus_stb) & ram_bus_ram_bus_we) & ram_bus_ram_bus_sel[0]);
-    ram_we[1] <= (((ram_bus_ram_bus_cyc & ram_bus_ram_bus_stb) & ram_bus_ram_bus_we) & ram_bus_ram_bus_sel[1]);
-    ram_we[2] <= (((ram_bus_ram_bus_cyc & ram_bus_ram_bus_stb) & ram_bus_ram_bus_we) & ram_bus_ram_bus_sel[2]);
-    ram_we[3] <= (((ram_bus_ram_bus_cyc & ram_bus_ram_bus_stb) & ram_bus_ram_bus_we) & ram_bus_ram_bus_sel[3]);
-end
-always @(*) begin
-    ram_adr <= 10'd0;
-    ram_adr <= ram_bus_ram_bus_adr[9:0];
-    if ((ram_adr_burst & ram_adr_latched)) begin
-        ram_adr <= ram_adr_next[9:0];
-    end
-end
-assign ram_bus_ram_bus_dat_r = ram_dat_r;
-assign ram_dat_w = ram_bus_ram_bus_dat_w;
 always @(*) begin
     rs232phytx_next_state <= 1'd0;
     serial_tx_rs232phytx_next_value1 <= 1'd0;
@@ -3048,250 +2912,114 @@ assign interface6_bank_bus_dat_w = dat_w;
 assign interface7_bank_bus_dat_w = dat_w;
 assign dat_r = (((((((interface0_bank_bus_dat_r | interface1_bank_bus_dat_r) | interface2_bank_bus_dat_r) | interface3_bank_bus_dat_r) | interface4_bank_bus_dat_r) | interface5_bank_bus_dat_r) | interface6_bank_bus_dat_r) | interface7_bank_bus_dat_r);
 always @(*) begin
-    comb_self0 <= 30'd0;
+    self0 <= 30'd0;
     case (grant)
         1'd0: begin
-            comb_self0 <= ibus_adr;
+            self0 <= ibus_adr;
         end
         1'd1: begin
-            comb_self0 <= dbus_adr;
+            self0 <= dbus_adr;
         end
         default: begin
-            comb_self0 <= adapted_interface_adapted_interface_adr;
+            self0 <= adapted_interface_adapted_interface_adr;
         end
     endcase
 end
 always @(*) begin
-    comb_self1 <= 32'd0;
+    self1 <= 32'd0;
     case (grant)
         1'd0: begin
-            comb_self1 <= ibus_dat_w;
+            self1 <= ibus_dat_w;
         end
         1'd1: begin
-            comb_self1 <= dbus_dat_w;
+            self1 <= dbus_dat_w;
         end
         default: begin
-            comb_self1 <= adapted_interface_adapted_interface_dat_w;
+            self1 <= adapted_interface_adapted_interface_dat_w;
         end
     endcase
 end
 always @(*) begin
-    comb_self2 <= 4'd0;
+    self2 <= 4'd0;
     case (grant)
         1'd0: begin
-            comb_self2 <= ibus_sel;
+            self2 <= ibus_sel;
         end
         1'd1: begin
-            comb_self2 <= dbus_sel;
+            self2 <= dbus_sel;
         end
         default: begin
-            comb_self2 <= adapted_interface_adapted_interface_sel;
+            self2 <= adapted_interface_adapted_interface_sel;
         end
     endcase
 end
 always @(*) begin
-    comb_self3 <= 1'd0;
+    self3 <= 1'd0;
     case (grant)
         1'd0: begin
-            comb_self3 <= ibus_cyc;
+            self3 <= ibus_cyc;
         end
         1'd1: begin
-            comb_self3 <= dbus_cyc;
+            self3 <= dbus_cyc;
         end
         default: begin
-            comb_self3 <= adapted_interface_adapted_interface_cyc;
+            self3 <= adapted_interface_adapted_interface_cyc;
         end
     endcase
 end
 always @(*) begin
-    comb_self4 <= 1'd0;
+    self4 <= 1'd0;
     case (grant)
         1'd0: begin
-            comb_self4 <= ibus_stb;
+            self4 <= ibus_stb;
         end
         1'd1: begin
-            comb_self4 <= dbus_stb;
+            self4 <= dbus_stb;
         end
         default: begin
-            comb_self4 <= adapted_interface_adapted_interface_stb;
+            self4 <= adapted_interface_adapted_interface_stb;
         end
     endcase
 end
 always @(*) begin
-    comb_self5 <= 1'd0;
+    self5 <= 1'd0;
     case (grant)
         1'd0: begin
-            comb_self5 <= ibus_we;
+            self5 <= ibus_we;
         end
         1'd1: begin
-            comb_self5 <= dbus_we;
+            self5 <= dbus_we;
         end
         default: begin
-            comb_self5 <= adapted_interface_adapted_interface_we;
+            self5 <= adapted_interface_adapted_interface_we;
         end
     endcase
 end
 always @(*) begin
-    comb_self6 <= 3'd0;
+    self6 <= 3'd0;
     case (grant)
         1'd0: begin
-            comb_self6 <= ibus_cti;
+            self6 <= ibus_cti;
         end
         1'd1: begin
-            comb_self6 <= dbus_cti;
+            self6 <= dbus_cti;
         end
         default: begin
-            comb_self6 <= adapted_interface_adapted_interface_cti;
+            self6 <= adapted_interface_adapted_interface_cti;
         end
     endcase
 end
 always @(*) begin
-    comb_self7 <= 2'd0;
+    self7 <= 2'd0;
     case (grant)
         1'd0: begin
-            comb_self7 <= ibus_bte;
+            self7 <= ibus_bte;
         end
         1'd1: begin
-            comb_self7 <= dbus_bte;
+            self7 <= dbus_bte;
         end
         default: begin
-            comb_self7 <= adapted_interface_adapted_interface_bte;
-        end
-    endcase
-end
-always @(*) begin
-    comb_self8 <= 4'd0;
-    case (mainsoc_ram_bus_bte)
-        1'd0: begin
-            comb_self8 <= 1'd0;
-        end
-        1'd1: begin
-            comb_self8 <= 2'd3;
-        end
-        2'd2: begin
-            comb_self8 <= 3'd7;
-        end
-        default: begin
-            comb_self8 <= 4'd15;
-        end
-    endcase
-end
-always @(*) begin
-    comb_self9 <= 4'd0;
-    case (mainsoc_ram_bus_bte)
-        1'd0: begin
-            comb_self9 <= 1'd0;
-        end
-        1'd1: begin
-            comb_self9 <= 2'd3;
-        end
-        2'd2: begin
-            comb_self9 <= 3'd7;
-        end
-        default: begin
-            comb_self9 <= 4'd15;
-        end
-    endcase
-end
-always @(*) begin
-    comb_self10 <= 4'd0;
-    case (mainsoc_ram_bus_bte)
-        1'd0: begin
-            comb_self10 <= 1'd0;
-        end
-        1'd1: begin
-            comb_self10 <= 2'd3;
-        end
-        2'd2: begin
-            comb_self10 <= 3'd7;
-        end
-        default: begin
-            comb_self10 <= 4'd15;
-        end
-    endcase
-end
-always @(*) begin
-    comb_self11 <= 4'd0;
-    case (ram_bus_ram_bus_bte)
-        1'd0: begin
-            comb_self11 <= 1'd0;
-        end
-        1'd1: begin
-            comb_self11 <= 2'd3;
-        end
-        2'd2: begin
-            comb_self11 <= 3'd7;
-        end
-        default: begin
-            comb_self11 <= 4'd15;
-        end
-    endcase
-end
-always @(*) begin
-    comb_self12 <= 4'd0;
-    case (ram_bus_ram_bus_bte)
-        1'd0: begin
-            comb_self12 <= 1'd0;
-        end
-        1'd1: begin
-            comb_self12 <= 2'd3;
-        end
-        2'd2: begin
-            comb_self12 <= 3'd7;
-        end
-        default: begin
-            comb_self12 <= 4'd15;
-        end
-    endcase
-end
-always @(*) begin
-    comb_self13 <= 4'd0;
-    case (ram_bus_ram_bus_bte)
-        1'd0: begin
-            comb_self13 <= 1'd0;
-        end
-        1'd1: begin
-            comb_self13 <= 2'd3;
-        end
-        2'd2: begin
-            comb_self13 <= 3'd7;
-        end
-        default: begin
-            comb_self13 <= 4'd15;
-        end
-    endcase
-end
-always @(*) begin
-    sync_self0 <= 4'd0;
-    case (mainsoc_ram_bus_bte)
-        1'd0: begin
-            sync_self0 <= 1'd0;
-        end
-        1'd1: begin
-            sync_self0 <= 2'd3;
-        end
-        2'd2: begin
-            sync_self0 <= 3'd7;
-        end
-        default: begin
-            sync_self0 <= 4'd15;
-        end
-    endcase
-end
-always @(*) begin
-    sync_self1 <= 4'd0;
-    case (ram_bus_ram_bus_bte)
-        1'd0: begin
-            sync_self1 <= 1'd0;
-        end
-        1'd1: begin
-            sync_self1 <= 2'd3;
-        end
-        2'd2: begin
-            sync_self1 <= 3'd7;
-        end
-        default: begin
-            sync_self1 <= 4'd15;
+            self7 <= adapted_interface_adapted_interface_bte;
         end
     endcase
 end
@@ -3479,50 +3207,6 @@ always @(posedge sys_clk_1) begin
         if (bus_error) begin
             bus_errors <= (bus_errors + 1'd1);
         end
-    end
-    if (((mainsoc_ram_bus_cyc & mainsoc_ram_bus_stb) & mainsoc_adr_burst)) begin
-        mainsoc_adr_latched <= 1'd1;
-        if (mainsoc_adr_latched) begin
-            mainsoc_adr_counter <= (mainsoc_adr_counter + 1'd1);
-        end else begin
-            mainsoc_adr_counter_offset <= (mainsoc_ram_bus_adr & sync_self0);
-            mainsoc_adr_counter <= (mainsoc_adr_counter_base + {{29{1'd0}}, (~mainsoc_ram_bus_we)});
-        end
-        if ((mainsoc_ram_bus_cti == 3'd7)) begin
-            mainsoc_adr_latched <= 1'd0;
-            mainsoc_adr_counter <= 1'd0;
-            mainsoc_adr_counter_offset <= 1'd0;
-        end
-    end else begin
-        mainsoc_adr_latched <= 1'd0;
-        mainsoc_adr_counter <= 1'd0;
-        mainsoc_adr_counter_offset <= 1'd0;
-    end
-    mainsoc_ram_bus_ack <= 1'd0;
-    if (((mainsoc_ram_bus_cyc & mainsoc_ram_bus_stb) & ((~mainsoc_ram_bus_ack) | mainsoc_adr_burst))) begin
-        mainsoc_ram_bus_ack <= 1'd1;
-    end
-    if (((ram_bus_ram_bus_cyc & ram_bus_ram_bus_stb) & ram_adr_burst)) begin
-        ram_adr_latched <= 1'd1;
-        if (ram_adr_latched) begin
-            ram_adr_counter <= (ram_adr_counter + 1'd1);
-        end else begin
-            ram_adr_counter_offset <= (ram_bus_ram_bus_adr & sync_self1);
-            ram_adr_counter <= (ram_adr_counter_base + {{29{1'd0}}, (~ram_bus_ram_bus_we)});
-        end
-        if ((ram_bus_ram_bus_cti == 3'd7)) begin
-            ram_adr_latched <= 1'd0;
-            ram_adr_counter <= 1'd0;
-            ram_adr_counter_offset <= 1'd0;
-        end
-    end else begin
-        ram_adr_latched <= 1'd0;
-        ram_adr_counter <= 1'd0;
-        ram_adr_counter_offset <= 1'd0;
-    end
-    ram_bus_ram_bus_ack <= 1'd0;
-    if (((ram_bus_ram_bus_cyc & ram_bus_ram_bus_stb) & ((~ram_bus_ram_bus_ack) | ram_adr_burst))) begin
-        ram_bus_ram_bus_ack <= 1'd1;
     end
     {tx_tick, tx_phase} <= 23'd8246337;
     if (tx_enable) begin
@@ -3947,14 +3631,6 @@ always @(posedge sys_clk_1) begin
         scratch_re <= 1'd0;
         bus_errors_re <= 1'd0;
         bus_errors <= 32'd0;
-        mainsoc_ram_bus_ack <= 1'd0;
-        mainsoc_adr_latched <= 1'd0;
-        mainsoc_adr_counter <= 30'd0;
-        mainsoc_adr_counter_offset <= 4'd0;
-        ram_bus_ram_bus_ack <= 1'd0;
-        ram_adr_latched <= 1'd0;
-        ram_adr_counter <= 30'd0;
-        ram_adr_counter_offset <= 4'd0;
         serial_tx <= 1'd1;
         tx_tick <= 1'd0;
         rx_tick <= 1'd0;
@@ -4056,7 +3732,7 @@ always @(posedge sys_clk_1) begin
         axi2axilite_state <= 2'd0;
         axilite2wishbone_state <= 3'd0;
         grant <= 2'd0;
-        slaves <= 6'd0;
+        slaves <= 4'd0;
         count <= 20'd1000000;
         rs232phytx_state <= 1'd0;
         rs232phyrx_state <= 1'd0;
@@ -4072,44 +3748,6 @@ end
 //------------------------------------------------------------------------------
 // Specialized Logic
 //------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Memory rom: 7419-words x 32-bit
-//------------------------------------------------------------------------------
-// Port 0 | Read: Sync  | Write: ---- | 
-reg [31:0] rom[0:7418];
-initial begin
-	$readmemh("som_rom.init", rom);
-end
-reg [31:0] rom_dat0;
-always @(posedge sys_clk_1) begin
-	rom_dat0 <= rom[mainsoc_adr];
-end
-assign mainsoc_dat_r = rom_dat0;
-
-
-//------------------------------------------------------------------------------
-// Memory sram: 1024-words x 32-bit
-//------------------------------------------------------------------------------
-// Port 0 | Read: Sync  | Write: Sync | Mode: Write-First | Write-Granularity: 8 
-reg [31:0] sram[0:1023];
-initial begin
-	$readmemh("som_sram.init", sram);
-end
-reg [9:0] sram_adr0;
-always @(posedge sys_clk_1) begin
-	if (ram_we[0])
-		sram[ram_adr][7:0] <= ram_dat_w[7:0];
-	if (ram_we[1])
-		sram[ram_adr][15:8] <= ram_dat_w[15:8];
-	if (ram_we[2])
-		sram[ram_adr][23:16] <= ram_dat_w[23:16];
-	if (ram_we[3])
-		sram[ram_adr][31:24] <= ram_dat_w[31:24];
-	sram_adr0 <= ram_adr;
-end
-assign ram_dat_r = sram[sram_adr0];
-
 
 //------------------------------------------------------------------------------
 // Memory storage: 16-words x 10-bit
@@ -4232,5 +3870,5 @@ assign inferedsdrtristate3__i = spiflash4x_dq[3];
 endmodule
 
 // -----------------------------------------------------------------------------
-//  Auto-Generated by LiteX on 2024-01-10 02:12:04.
+//  Auto-Generated by LiteX on 2024-01-14 22:58:45.
 //------------------------------------------------------------------------------

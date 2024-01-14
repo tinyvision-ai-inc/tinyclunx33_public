@@ -33,7 +33,7 @@ software: $(LITEX_SOC_PY)
 
 gateware: $(LITEX_SOC_PY)
 	cd litex && $(PYTHON) ../python/litex_top_som.py
-	touch litex/build/csr.som.json
+	cp litex/build/som/gateware/som.v src
 
 litex.overlay litex.conf: gateware
 	$(PYTHON) python/litex_json2dts_zephyr.py --dts=litex.overlay --config=litex.conf litex/build/csr.som.json
