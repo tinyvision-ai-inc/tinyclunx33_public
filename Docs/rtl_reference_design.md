@@ -83,7 +83,7 @@ Helper cores available MIPI/USB/RAM:
 - **Wrappers around the AXI64 port** offering a FIFO or Stream based interface
   rather than an AXI one.
 
-- **OctalSPI and HyperRAM** controllers for facilitating the access to this
+- **[OctalSPI and HyperRAM](som_memory.md)** controllers for facilitating the access to this
   external chip on the *Compute* variant.
 
 - TODO: pixel, MIPI and image data processing utilities.

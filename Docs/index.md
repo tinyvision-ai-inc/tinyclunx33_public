@@ -16,7 +16,7 @@ Connector:
 
 2 flavors:
 - Connectivity: 14 diff pairs, no SSRAM
-- Compute: 8 diff pairs, 32 MB oSPI/HyperRAM @ <0.5GBps
+- Compute: 8 diff pairs, 32 MB [oSPI/HyperRAM](som_memory.md) @ <0.5GBps
 
 I/O interfaces:
 - 3x fully programmable clocks
