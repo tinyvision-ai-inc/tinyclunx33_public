@@ -3,9 +3,9 @@
 The FPGA features two internal oscillators and an internal PLL to further
 synthesize a clock signal out of the available sources.
 
-An external Si5351A PLL is responsible for generating the USB reference clock,
-as well as one extra clock signals for custom use. Clocks are synthesized out
-of a 25 MHz Crystal Oscillator on the SoM.
+An external Si5351A PLL is responsible for generating the differential USB3
+reference clock, and has one remaining clock signals free to use.
+Clocks are synthesized out of a 25 MHz Crystal Oscillator on the SoM.
 
 ![](images/som_clock_tree.drawio.png)
 
@@ -23,19 +23,6 @@ and value for a given clock setup.
 | FPGA low power oscillator      | 128 kHz    | FPGA fabric              |
 | FPGA GPLL                      | Selectable | FPGA fabric              |
 | MIPI clock                     | Selectable | RTL on the FPGA          |
-
-
-## Rationale
-
-The USB3 protocol requires an accurate clock. For this purpose, an Si5351 clock
-generator chip is integrated onto the SoM offering 3 clock output, 2 of which
-transmitted as differential clock for high integrity/stability.
-
-This leaves-up yet another clock signal usable by the FPGA design or external
-PCB directly at a custom frequency.
-
-The FPGA further more provides internal PLL, offering a large range of
-frequencies for supporting various hardware and protocols.
 
 
 ## Hardware integration

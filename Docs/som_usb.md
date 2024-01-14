@@ -6,21 +6,6 @@ capable of 5 Gbit/s transfers.
 ![](images/som_usb_architecture.drawio.png)
 
 
-## Rationale
-
-Although it is possible to implement USB3 completely in RTL, or add an external
-chip dedicated to USB, doing so requires processing power and hardware resources.
-
-USB2 also almost always requires a PHY.
-
-By providing an integrated hardware USB3 and USB2 core and PHY, the
-[Lattice CrossLinkU-NX](https://www.latticesemi.com/-/media/LatticeSemi/Images/Blogs/2023/Accelerate-USB-enabled-Designs-with-Lattice-CrossLinkU-NX-FPGAs.ashx)
-FPGA used by the SoM uses fewer board or RTL resources, saving more for the application.
-
-This combines the low part count and flexibility of RTL on an FPGA with the
-power and throughput efficiency of a separate ASIC.
-
-
 ## Hardware integration
 
 An external PHY is not required as the LIFCL-33U provides an integrated

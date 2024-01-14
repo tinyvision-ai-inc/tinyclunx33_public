@@ -11,16 +11,6 @@ RAM, absent from the Connectivity SoM variant, leading to 6 or 14 differential
 pairs available.
 
 
-## Rationale
-
-Image sensors and other high-throughput components often come with [MIPI]()
-interfaces or other form of differential pair signaling.
-
-FPGAs can adapt to the full range of diversity of these MIPI or other fast
-interfaces, allowing to integrate the diversity of custom sensors with an
-USB3 interface at 5 Gbit/s.
-
-
 ## Hardware integration
 
 Each MIPI interface can have more or less differential pairs for the data lanes,

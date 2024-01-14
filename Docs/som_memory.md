@@ -8,8 +8,8 @@ larger memory buffers, such as entire frames, or as CPU main memory.
 
 ![](images/som_memory_architecture.drawio.png)
 
-The "compute" variant of the SoM additionally has an external Octal SPI or
-[HyperRAM](https://www.infineon.com/HYPERRAM) memory installed and interconnected with the FPGA.
+The *Compute* variant of the SoM additionally has an external OctalSPI or
+HyperRAM memory installed and interconnected with the FPGA.
 
 | Name                          | Num | Size (each) | Size (total)          |
 |-------------------------------|-----|-------------|-----------------------|
@@ -19,22 +19,9 @@ The "compute" variant of the SoM additionally has an external Octal SPI or
 | External OctalRAM or HyperRAM | 1   | 64 Mbit     | 64 Mbit / 8 MByte     |
 
 
-## Rationale
-
-By providing various amount of memory in its fabric, the FPGA can provide
-memory where it is needed by the CPU, or RTL.
-
-Image processing algorithms might require to operate on several rows of data,
-more than what the internal FPGA memory might offer. For these use-cases, the
-*Compute* variant offers an external OctalSPI or [HyperRAM](https://www.infineon.com/HYPERRAM) chip that can be
-immediately used by the custom RTL.
-
-The *Connectivity allocates the unused as extra MIPI lines.
-
-
 ## Hardware integration
 
-When using the *Compute* variant of the tinyCLUNX33, an OctalSPI or [HyperRAM](https://www.infineon.com/HYPERRAM) is
+When using the *Compute* variant of the tinyCLUNX33, an OctalSPI or HyperRAM is
 available as buffer for processing the data or any purpose by the SoM.
 
 It would then be already hooked to the FPGA pins, with the right
@@ -67,6 +54,6 @@ integration of the NXLRAM as well as a controller for the external RAM chip.
 
 - AP Memory
   [APS25616N](https://www.apmemory.com/wp-content/uploads/APM_PSRAM_OPI_Xccela-APS256XXN-OBRx-v1.0-PKG.pdf)
-  Double-Data-Rate Octal SPI PSRAM
+  Double-Data-Rate OctalSPI PSRAM
 
 ![](images/som_ram_schematic.png)

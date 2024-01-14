@@ -12,12 +12,12 @@ A development kit usable as factory programming/test rig.
 Features:
 - All SoM pins exposed, additional probing and voltage pins
 - Inexpensive 4-layer board, compact form-factor
-- USB 5 Gbit/s integrated with a Type-C port controller
+- USB3 at 5 Gbit/s integrated with a Type-C port controller
 - GPIO LED and push button
-- FTDI chip for JTAG, Flash SPI, UART access over USB USB
+- FTDI chip for JTAG, Flash SPI, UART access over USB
 
 Connectors:
-- 2 × USB Type-C connectors for the FPGA 5 Gbit/s interfaces and FTDI debug
+- 2 × USB-C connectors for the FPGA 5 Gbit/s interfaces and FTDI debug
 - 2 × QSE expansion connectors for adapter boards (RPi FPC Camera, custom...)
 - 1 × SMA connector for the high-speed clock export
 - 4 × headers for JTAG, SPI flash, I2C, GPIO

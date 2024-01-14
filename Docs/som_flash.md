@@ -1,7 +1,8 @@
 # SoM Flash
 
 A 16 MByte (128 Mbit) QSPI flash with Dual Transmission Rate (DTR) can store the
-FPGA bitfile as well as a firmware for running on the soft core.
+FPGA bitfile as well as a storing the firmware that the soft CPU core can
+execute in-place (XIP).
 
 ![](images/som_flash_architecture.drawio.png)
 
@@ -29,18 +30,6 @@ The `-o 0x000000` can be adapted to any local offset *within* the flash,
 to allow multiple binary images to cohabitate.
 
 The regular Radiant programmer can also be used as usual for Lattice parts.
-
-
-## Rationale
-
-At every startup, the FPGA reads the bitfile from the flash, which features
-the RTL design setting the FPGA function, and lets the FPGA start with it.
-
-The FPGA does not use the Flash further during its operation, letting it free
-for use by the rest of the RTL design. This permits to use the flash as a
-storage for code provided to a small (i.e. RISC-V) CPU inside the FPGA.
-
-A fast flash chip was selected to allow fast, direct (XIP) code execution.
 
 
 ## Hardware integration

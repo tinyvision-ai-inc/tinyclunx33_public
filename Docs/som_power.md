@@ -11,24 +11,6 @@ rail, only powering one power domain of the FPGA.
 This allows staying in a deep sleep state until custom logic wakes the SoM.
 
 
-## Rationale
-
-One of the highest power usage is the FPGA fabric and its `P1VD` core power rail.
-This is the reason for the use of an efficient Diodes AP61102 buck converter for
-this rail.
-
-To reduce it further, the FPGA chip features an Always ON (AON) power domain,
-able to keep a small part operating while the rest goes entirely to sleep.
-
-This small internal Always ON domain allows the user to write custom logic for
-waking up the rest of the FPGA, as well as the rest of the SoM altogether,
-to reduce the power usage to the bare minimum that this hardware is capable of.
-
-The SoM can also export its various internal power rails to the user design so
-that no extra LDO are required in the carrier board, or as reference voltage
-for communication with the SoM.
-
-
 ## Hardware integration of Power Rail
 
 The SoM generates various voltage level useable by the user design within the

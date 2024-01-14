@@ -9,14 +9,6 @@ that is attached to it. Upon power on, the FPGA will load it out of the first
 512 kBytes, and operate the custom hardware described on that flash.
 
 
-## Rationale
-
-The CrossLink-NX FPGAs are already used in the field for embedded vision.
-
-With the low power budget for which Lattice FPGA's are known for, this permits
-an USB-powered device to integrate and process fast streams of data.
-
-
 ## Hardware integration
 
 As seen in the [SoM Power](som_power.md) page, the I/O voltage levels of the
