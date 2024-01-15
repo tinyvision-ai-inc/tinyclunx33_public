@@ -31,11 +31,11 @@ Mechanical:
 
 ## Revisions
 
-| Name | Distributed  | Debug Plug | Label on Board           | SYZYGY        |
-|------|--------------|------------|--------------------------|---------------|
-| `v1` | Never        | Micro USB  | no                       | incompatible  |
-| `v2` | Early users  | USB-C      | "tiny SoM Developer Kit" | no            |
-| `v3` | Not yet      | USB-C      | TBD                      | STD v1.1.1    |
+| Rev | Distributed  | Debug Plug | Label on Board           | SYZYGY        |
+|-----|--------------|------------|--------------------------|---------------|
+| v1  | never        | micro USB  | none                     | incompatible  |
+| v2  | early users  | USB-C      | "tiny SoM Developer Kit" | incompatible  |
+| v3  | not yet      | USB-C      | TBD                      | STD v1.1.1    |
 
 
 ## Parts featured
