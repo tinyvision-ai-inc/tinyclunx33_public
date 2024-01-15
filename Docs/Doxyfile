@@ -8,8 +8,8 @@ IMAGE_PATH             = images pinout
 USE_MDFILE_AS_MAINPAGE = index.md
 HTML_EXTRA_FILES       = ../Hardware/SoM/v2/tinyCLUNX33_v2.0_Schematic.pdf \
                          ../Hardware/SoM/v2/tinyCLUNX33_v2.0_Assembly.pdf \
-                         ../Hardware/Devkit/v1/NXU_devkit_v1.0_Schematic.pdf \
-                         ../Hardware/Devkit/v1/NXU_devkit_v1.0_Assembly.pdf \
+                         ../Hardware/Devkit/v2/NXU_devkit_v2.0_Schematic.pdf \
+                         ../Hardware/Devkit/v2/NXU_devkit_v2.0_Assembly.pdf \
                          ../Hardware/tinyCamera/v1/tinyCamera_v1.0_Assembly.pdf \
                          ../Hardware/tinyCamera/v1/tinyCamera_v1.0_Schematic.pdf
 HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \

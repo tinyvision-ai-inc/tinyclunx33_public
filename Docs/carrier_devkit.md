@@ -28,9 +28,15 @@ Mechanical:
 - No-tool setup of the SoM helping factory programming
 - Mounting holes for securing the board in a rig or enclosure
 
-## Pinout
 
-TODO: switch to v2 and document the pinout as tables
+## Revisions
+
+| Name | Distributed  | Debug Plug | Label on Board           | SYZYGY        |
+|------|--------------|------------|--------------------------|---------------|
+| `v1` | Never        | Micro USB  | no                       | incompatible  |
+| `v2` | Early users  | USB-C      | "tiny SoM Developer Kit" | no            |
+| `v3` | Not yet      | USB-C      | TBD                      | STD v1.1.1    |
+
 
 ## Parts featured
 
