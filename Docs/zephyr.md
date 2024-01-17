@@ -22,11 +22,9 @@ Zephyr sill missing support for it.
 
 ## Example project
 
-[code](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example) -
-  with build instructions. The starting point for building Zephyr for the
-  tinyCLUNX33.
+[code](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example)
 
-An example project is provided in order to:
+An example project is provided with build instructions in order to:
 
 - Test the USB device driver, with an USB CDC and soon USB UVC interface
 
@@ -34,8 +32,11 @@ An example project is provided in order to:
   the debug logs, or send commands to the Zephyr shell (both through the
   same UART) such as an I2C scan or raw register writes.
 
+- Act as a staring point for new firmware, updated to match the latest RTL
+  and driver: same code tinyVision uses for writing and testing USB3.
 
-## Accessing Zephyr logs and shell
+
+## Debug logs and shell
 
 The FTDI chip present on the Devkit provides ways to:
 
