@@ -52,3 +52,10 @@ of the Devkit as described
 
 For users of different systems, it is possible to use any tool of your choice
 supporting JTAG (for when it is ready) and UART.
+
+```
+# Get the logs from the Zephyr console, and access the debug shell
+picocom -g zephyrshell.log -b 115200 /dev/ttyUSB1
+```
+
+You may have to press "Enter" to get the prompt `uart:~$` to appear.
