@@ -127,6 +127,34 @@ $
 If you see something different than earlier, it means there was some transmission issues and running slower is a temporary fix.
 
 
+### flash ID: 0xFF 0xFF 0xFF
+
+If the flash ID is always returning as `0xFF 0xFF 0xFF`, but the IDCODE is correct, then
+the communication between the FTDI and the SoM went fine in general, and specifically failed for the flash.
+
+```
+$ ecpprog -s -t
+init..
+IDCODE: 0x010fb043 does not match :(
+flash ID: 0xFF 0xFF 0xFF
+Bye.
+$
+```
+
+This could be due to a faulty flash part, or signals being held by something.
+Make sure that no wire are connected to the flash debug headers on the Devkit.
+
+If the RTL interefer with these signals, such as a wrong pinout, you may then:
+
+1. Disconnect all USB cables to cut the power
+2. Hold the SW2 button down,
+3. Connect the FTDI debug USB interface to the host.
+4. Launch the programming command again.
+5. Release the SW2 button only now.
+
+This should ensure that the FPGA stays down as the FTDI operates.
+
+
 ### Can't find iCE FTDI USB device
 
 This message from `ecpprog` means it cannot recognize the FTDI progrrammer
