@@ -33,3 +33,21 @@ An example project is provided in order to:
 - Communicate with an UART (baud rate 115200) through the FTDI to get
   the debug logs, or send commands to the Zephyr shell (both through the
   same UART) such as an I2C scan or raw register writes.
+
+
+## Accessing Zephyr logs and shell
+
+The FTDI chip present on the Devkit provides ways to:
+
+- [program the flash](som_flash.md)
+
+- Access the soft CPU JTAG interface (work in progress, not ready yet)
+
+- Access a debug UART interface (baud rate 115200)
+
+These can be accessed by connecting an USB2 cable to the Debug USB interace
+of the Devkit as described
+[here](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example).
+
+For users of different systems, it is possible to use any tool of your choice
+supporting JTAG (for when it is ready) and UART.
