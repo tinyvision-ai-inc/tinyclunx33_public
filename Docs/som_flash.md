@@ -68,6 +68,40 @@ flash0: flash@20100000 {
 ```
 
 
+## Troubleshooting
+
+The `ecpprog` tool might show error messages about the `IDCODE` not being recognized.
+The LIFCL-33U FPGA part [not yet integrated](https://github.com/gregdavill/ecpprog/pull/20) into ecpprog.
+This is not a problem, the tool should still work besides this.
+If it does not, there is likely an unrelated error happening.
+
+It is possible to test that the ecpprog tool can access the FPGA part:
+
+```
+$ ecpprog -t
+init..
+IDCODE: 0x010fb043 does not match :(
+flash ID: 0xEF 0x70 0x18
+Bye.
+$
+```
+
+If you observe something different for the flash ID, then there could be a transmission problem, or a faulty Flash part.
+You can test to run the tool slower:
+
+```
+$ ecpprog -s -t
+init..
+IDCODE: 0x010fb043 does not match :(
+flash ID: 0xEF 0x70 0x18
+Bye.
+$
+```
+
+If you see something different than earlier, then the problem is likely that the FTDI has some difficulty to reach the FPGA.
+You could check that the module is corectly fitted, or if you have any jumper wires connected to the Flash pins.
+
+
 ## Parts featured
 
 - Winbond
