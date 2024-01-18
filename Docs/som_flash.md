@@ -14,6 +14,9 @@ In the default RTL, the flash is mapped at address `0x2000_0000`.
 0x20*0_0000 -- Free area at the end of the flash for custom
 ```
 
+
+## Programming with ecpprog
+
 The command [`ecpprog`](https://github.com/gregdavill/ecpprog) permits to send
 a bitfile to the SoM by using the FTDI present on the
 [BaseBoard](carrier_baseboard.md).
@@ -29,7 +32,30 @@ ecpprog -o 0x000000 file_to_program.bin
 The `-o 0x000000` can be adapted to any local offset *within* the flash,
 to allow multiple binary images to cohabitate.
 
+
+## Programming with Lattice Radiant Programmer
+
 The regular Radiant programmer can also be used as usual for Lattice parts.
+
+1. Download, install and run [Lattice Radiant](https://www.latticesemi.com/Products/DesignSoftwareAndIP/FPGAandLDS/Radiant)
+
+2. From the toolbar, select `Tools > Programmer`, the Programmer will start
+
+3. From the programmer, a table of operations will be shown full-width, with various fields that can be set:
+   Set "Device Family" to "LIFCL", "Device" to "LIFCL-33U", "Operation" will open a window
+
+4. From the window that opens, set to "Operation" to "Erase, Program, Verify Quad 1", "Programming file" to the file you want to load.
+
+5. Clic on the "Load From File" button to let Radiant Programmer fill the remaining fields, and click "Ok"
+
+6. Back to the main window, select the green "Program Device" icon on the toolbar.
+
+7. The "Status" field should become green with the text "PASS" on it.
+
+This also permits to set the flash to Quad Enable (QE) mode, as required by the
+[RTL Reference Design](rtl_reference_design.md).
+
+![](images/lattice_radiant_programmer_set_quad_enable_mode.png)
 
 
 ## Hardware integration
