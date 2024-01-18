@@ -1,6 +1,6 @@
 # RTL Reference Design
 
-[Code](https://github.com/tinyvision-ai-inc/tinyclunx33/tree/main/RTL/) |
+[Source](https://github.com/tinyvision-ai-inc/tinyclunx33/tree/main/RTL/) |
 [Release](https://github.com/tinyvision-ai-inc/tinyclunx33/releases/) |
 [Zephyr Example](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
 
@@ -120,6 +120,8 @@ Make sure to also load a
 matchiing the RTL Reference Design version you programmed.
 
 Check also the [flash offset at which you program things](som_flash.md).
+
+Make sure to power cycle the board right after programming it.
 
 The RTL Reference Design uses a flash in qSPI mode.
 For this to work, a special Quad Enable (QE) bit needs to be set in the flash

@@ -29,6 +29,8 @@ then called this way:
 ecpprog -o 0x000000 file_to_program.bin
 ```
 
+The power cycle the board to let the FPGA start.
+
 The `-o 0x000000` can be adapted to any local offset *within* the flash,
 to allow multiple binary images to cohabitate.
 
@@ -51,6 +53,8 @@ The regular Radiant programmer can also be used as usual for Lattice parts.
 6. Back to the main window, select the green "Program Device" icon on the toolbar.
 
 7. The "Status" field should become green with the text "PASS" on it.
+
+8. Power cycle the board to let the FPGA start.
 
 This also permits to set the flash to Quad Enable (QE) mode, as required by the
 [RTL Reference Design](rtl_reference_design.md).
