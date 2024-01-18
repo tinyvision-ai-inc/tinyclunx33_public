@@ -1,5 +1,9 @@
 # RTL Reference Design
 
+[Source](https://github.com/tinyvision-ai-inc/tinyclunx33/tree/main/RTL/) |
+[Release](https://github.com/tinyvision-ai-inc/tinyclunx33/releases/) |
+[Zephyr Example](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
+
 The RTL Reference Design is a set of Verilog sources (sometimes generated from
 another HDL) providing common design elements for building an application on
 top of the SoM hardware.
@@ -91,22 +95,62 @@ Helper cores available MIPI/USB/RAM:
 
 ## Troubleshooting
 
-### Q: My bitfile does not work!
+### The DONE LED is not being lit
 
-There are many possibilites! Here are a few:
-
-Check for the DONE LED being lit. 
+If the FPGA bitfile gets loaded successfully and is being enabled in the FPGA,
+then the DONE LED will be lit-up.
 
 If it is not lit, you probably did not program the FPGA properly.
 Please program the FPGA using the [instructions provided](som_flash.md).
 
-If it is lit, check the following:
+- A **valid** FPGA image that was **incorrectly** programmed would lead to the
+  DONE LED staying off.
+
+- An **invalid** FPGA image that was **correctly** programmed would lead to the
+  DONE LED staying off.
+
+- A **valid** FPGA image that was **correctly** programmed but with a bug
+  inside the RTL is still expected to have the DONE LED lit-up
+
+
+### The DONE LED is lit but the RTL Reference Design does not work
+
+Make sure to also load a
+[Zephyr Example Release](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
+matchiing the RTL Reference Design version you programmed.
+
+Check also the [flash offset at which you program things](som_flash.md).
+
+Make sure to power cycle the board right after programming it.
+
+The RTL Reference Design uses a flash in qSPI mode.
+For this to work, a special Quad Enable (QE) bit needs to be set in the flash
+via SPI commands, i.e. done by the FTDI.
+
+Once this is active, this stays in the flash until it is changed.
+This is usually done by tinytVision.ai at the factory.
+
+If you are an early user, you might require to do this yourself.
+
+This can be done, for instance, with the Radiant Programmer software part
+of the Radiant package, instead of using `ecpprog`.
+
+The [flash documentation](som_flash.md) explains how to use the
+Radiant Programmer to do it.
+
+
+### The DONE LED is lit but my custom RTL Design does not work
+
+There are many possibilites! Here are a few:
 
 - Have you simulated your design successfully?
   If not, you go to Jail: miss a turn, go back to start, pay a penalty, simulate and come back here.
+
 - Have you provided the right pin constraints?
   Incorrect pin constraints can cause the board to lock up (but not brick!).
+
 - Are your clocks properly constrained?
+
 - Do you have any timing violations?
   If so, resolve them.
 

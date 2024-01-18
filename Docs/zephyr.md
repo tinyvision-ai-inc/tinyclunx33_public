@@ -1,5 +1,9 @@
 # Zephyr integration
 
+[Source]((https://github.com/tinyvision-ai-inc/zephyr/) |
+[Example]((https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/) |
+[Release](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
+
 The [Zephyr RTOS](https://docs.zephyrproject.org/) has been ported the SoM on
 top of the [RTL Reference Design](rtl_reference_design.md), allowing to control
 the USB core, configure the peripherals and external chis, as well as execute
@@ -10,8 +14,6 @@ custom application.
 
 ## Zephyr fork
 
-[code](https://github.com/tinyvision-ai-inc/zephyr/tree/tinyclunx33)
-
 An
 [usb driver](https://github.com/tinyvision-ai-inc/zephyr/blob/tinyclunx33/drivers/usb/udc/udc_usb23.c)
 is being implemented with the goal to be upstreamed in Zephyr.
@@ -21,8 +23,6 @@ Zephyr sill missing support for it.
 
 
 ## Example project
-
-[code](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example)
 
 An example project is provided with build instructions in order to:
 
@@ -54,6 +54,8 @@ For users of different systems, it is possible to use any tool of your choice
 supporting JTAG (for when it is ready) and UART.
 
 ```
+# First, power cycle the board to let the FPGA start
+
 # Get the logs from the Zephyr console, and access the debug shell
 picocom -g zephyrshell.log -b 115200 /dev/ttyUSB1
 ```
