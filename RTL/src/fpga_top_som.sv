@@ -1,12 +1,10 @@
 /**
- * @page fpga_top_som
- * @brief Top level file for the FPGA
- */
+* @page fpga_top_som
+* @brief Top level file for the FPGA
+*/
 `default_nettype wire
 
 module fpga_top_som (
-  input  wire       gpio_b1             , // Debug
-  output wire       gpio_g1             , // Camera enable
   input  wire       button_n            , // Reset button from devboard
   input  wire       clk_2               , // Clock from PLL, usually set to 24MHz as this is a common value
   input  wire       uart_rxd            ,
@@ -16,14 +14,14 @@ module fpga_top_som (
   output wire       spiflash_clk        ,
   output wire       spiflash_cs_n       ,
   inout  wire [3:0] spiflash_dq         ,
-  inout  wire       cam0_clk_p          ,
-  inout  wire       cam0_clk_m          ,
-  inout  wire [1:0] cam0_dat_p          ,
-  inout  wire [1:0] cam0_dat_m          ,
-  inout  wire       tx0_clk_p           ,
-  inout  wire       tx0_clk_m           ,
-  inout  wire [1:0] tx0_dat_p           ,
-  inout  wire [1:0] tx0_dat_m           ,
+  inout  wire       mipi_rx_clk_p       ,
+  inout  wire       mipi_rx_clk_m       ,
+  inout  wire [1:0] mipi_rx_dat_p       ,
+  inout  wire [1:0] mipi_rx_dat_m       ,
+  inout  wire       mipi_tx_clk_p       ,
+  inout  wire       mipi_tx_clk_m       ,
+  inout  wire [1:0] mipi_tx_dat_p       ,
+  inout  wire [1:0] mipi_tx_dat_m       ,
   inout  wire       VBUS_i              ,
   inout  wire       usb23_DMP           ,
   inout  wire       usb23_DP            ,
@@ -36,19 +34,19 @@ module fpga_top_som (
   output wire       usb23_TXPP_o
 );
 
-`ifdef FAST_SIM
-  localparam NUM_COLS = 40;
-  localparam NUM_ROWS = 30;
-  localparam F_PORCH = 2;
-  localparam V_SYNCH = 2;
-  localparam V_BACK_PORCH = 4;
-`else 
-  localparam NUM_COLS = 1920;
-  localparam NUM_ROWS = 1080;
-  localparam F_PORCH = 100;
-  localparam V_SYNCH = 100;
-  localparam V_BACK_PORCH = 500;
-`endif
+  `ifdef FAST_SIM
+    localparam NUM_COLS     = 40;
+    localparam NUM_ROWS     = 30;
+    localparam F_PORCH      = 2 ;
+    localparam V_SYNCH      = 2 ;
+    localparam V_BACK_PORCH = 4 ;
+  `else
+    localparam NUM_COLS     = 1920;
+    localparam NUM_ROWS     = 1080;
+    localparam F_PORCH      = 100 ;
+    localparam V_SYNCH      = 100 ;
+    localparam V_BACK_PORCH = 500 ;
+  `endif
 
   localparam PIXEL_BITS = 'd10;
 
@@ -83,7 +81,7 @@ module fpga_top_som (
   );
 
   logic pixel_rst_n;
-  fpga_reset pix_rst_sync (.clk(pixel_clk), .reset_n_i(pll_lock), .reset_n_o(pixel_rst_n));
+  fpga_reset pix_rst_sync (.clk(pixel_clk), .reset_n_i(pll_lock), .reset_n_o(pixel_rst_n)); 
   logic byte_rst_n;
   fpga_reset byte_rst_sync (.clk(byte_clk), .reset_n_i(pll_lock), .reset_n_o(byte_rst_n));
 
@@ -113,7 +111,7 @@ module fpga_top_som (
 ------------------------------------------------------------------------------*/
   wire wb_clk = usb_clk;
   wire wb_rst = usb_rst;
-`include "wb_intercon.vh"
+  `include "wb_intercon.vh"
 
 /*------------------------------------------------------------------------------
 --  LiteX design
@@ -190,13 +188,13 @@ module fpga_top_som (
     .wishbone0_dat_r(wb_s2m_wb0_dat),
     .wishbone0_err  (wb_s2m_wb0_err),
     .usb230_irq     (irq_usb23     ),
-    .framectl0_irq  (irq_frame | gpio_b1  ), // OR the 2 to test IRQ's in the lab
+    .framectl0_irq  (irq_frame     ),
     .*
   );
-  
+
   // Wishbone is 32 bit aligned
   assign wb_m2s_wb0_adr = {wb_adr[29:0], 2'b0};
-  
+
 /*------------------------------------------------------------------------------
 --  Wishbone Scratch RAM for testing: this will eventually turn into the access port
 --  to communicate with teh AXI side of the design.
@@ -240,7 +238,7 @@ module fpga_top_som (
   wire [               7:0] gain_chan_1           ;
   wire [               7:0] gain_chan_2           ;
   wire [               7:0] gain_chan_3           ;
-  parameter                   ACCUM_OUT_BITS = 10      ;
+  parameter                 ACCUM_OUT_BITS    = 10;
 
   wb_csr #(
     .MAX_COL_PIXELS(NUM_COLS),
@@ -283,7 +281,7 @@ module fpga_top_som (
 
 
 /*------------------------------------------------------------------------------
---  Streamlogic core: operates on a different clock domain, add a CDC
+--  Image processing core can operate in a different clock domain:
 ------------------------------------------------------------------------------*/
   wire [31:0] wb_m2s_sl_pxl_adr;
   wire [31:0] wb_m2s_sl_pxl_dat;
@@ -294,8 +292,8 @@ module fpga_top_som (
   wire [31:0] wb_s2m_sl_pxl_dat;
   wire        wb_s2m_sl_pxl_ack;
   wb_cdc_mod i_wb_sl_cdc (
-    .wbm_clk  (wb_clk            ),
-    .wbm_rst  (wb_rst            ),
+    .wbm_clk  (wb_clk           ),
+    .wbm_rst  (wb_rst           ),
     .wbm_adr_i(wb_m2s_sl_adr    ),
     .wbm_dat_i(wb_m2s_sl_dat    ),
     .wbm_sel_i(wb_m2s_sl_sel    ),
@@ -304,8 +302,8 @@ module fpga_top_som (
     .wbm_stb_i(wb_m2s_sl_stb    ),
     .wbm_dat_o(wb_s2m_sl_dat    ),
     .wbm_ack_o(wb_s2m_sl_ack    ),
-    .wbs_clk  (pixel_clk         ),
-    .wbs_rst  (~pixel_rst_n      ),
+    .wbs_clk  (pixel_clk        ),
+    .wbs_rst  (~pixel_rst_n     ),
     .wbs_adr_o(wb_m2s_sl_pxl_adr),
     .wbs_dat_o(wb_m2s_sl_pxl_dat),
     .wbs_sel_o(wb_m2s_sl_pxl_sel),
@@ -505,16 +503,16 @@ module fpga_top_som (
   wire [2*8-1:0] rx_payload          ;
   wire           rx_payload_en       ;
   wire [    5:0] rx_dt               ;
-  
+
   mipi_to_pixel #(
     .NUM_RX_LANE(2         ),
     .RX_GEAR    (8         ),
     .DT_WIDTH   (PIXEL_BITS)
   ) i_mipi_to_pixel (
-    .rx_clk_p     (cam0_clk_p   ),
-    .rx_clk_n     (cam0_clk_m   ),
-    .rx_d_p       (cam0_dat_p   ),
-    .rx_d_n       (cam0_dat_m   ),
+    .rx_clk_p     (mipi_rx_clk_p),
+    .rx_clk_n     (mipi_rx_clk_m),
+    .rx_d_p       (mipi_rx_dat_p),
+    .rx_d_n       (mipi_rx_dat_m),
     .sync_clk     (sync_clk     ),
     .rst_n        (usb_rst_n    ),
     .pll_lock     (pll_lock     ),
@@ -538,12 +536,12 @@ module fpga_top_som (
   );
 
   // Accumulate the RGB pixels for AWB
-  wire [$clog2(NUM_COLS)-1:0] trim_left      = 0       ;
-  wire [$clog2(NUM_COLS)-1:0] width          = NUM_COLS;
-  wire [$clog2(NUM_ROWS)-1:0] trim_top       = 0       ;
-  wire [$clog2(NUM_ROWS)-1:0] height         = NUM_ROWS;
+  wire [$clog2(NUM_COLS)-1:0] trim_left = 0       ;
+  wire [$clog2(NUM_COLS)-1:0] width     = NUM_COLS;
+  wire [$clog2(NUM_ROWS)-1:0] trim_top  = 0       ;
+  wire [$clog2(NUM_ROWS)-1:0] height    = NUM_ROWS;
 
-  logic                      avg_valid;
+  logic avg_valid;
   als_top #(
     .PIXEL_BITS    (PIXEL_BITS    ),
     .ACCUM_OUT_BITS(ACCUM_OUT_BITS),
@@ -571,62 +569,62 @@ module fpga_top_som (
 
   assign irq_frame = avg_valid;
 
-//`define SEL_DT_RAW10
 
-`ifdef SEL_DT_RAW10
+`define SEL_DT_RAW10
 
-  localparam          DT_SEL     = "DT_RAW10";
-  localparam          DT_RAW10   = 6'h2B          ;
-  localparam          DT_WIDTH   = 10             ;
-  wire [        15:0] tx_byte_wc = (NUM_COLS*10)/8; // 1920*10/8
-  wire [         5:0] tx_byte_dt = DT_RAW10       ;
-  wire [DT_WIDTH-1:0] patt_data     ;
-  wire [DT_WIDTH-1:0] tx_data    = patt_data      ;
+  `ifdef SEL_DT_RAW10
 
-`else
+    localparam          DT_SEL     = "DT_RAW10";
+    localparam          DT_RAW10   = 6'h2B          ;
+    localparam          DT_WIDTH   = 10             ;
+    wire [        15:0] tx_byte_wc = (NUM_COLS*10)/8; // 1920*10/8
+    wire [         5:0] tx_byte_dt = DT_RAW10       ;
+    wire [DT_WIDTH-1:0] patt_data                   ;
+    //wire [DT_WIDTH-1:0] tx_data    = patt_data      ;
 
-  localparam          DT_SEL       = "DT_YUV_422_8";
-  localparam          DT_YUV_422_8 = 6'h1E       ;
-  localparam          DT_WIDTH     = 16          ;
-  wire [        15:0] tx_byte_wc   = NUM_COLS*2  ; // YUV_8 has 16 bits per pixel
-  wire [         5:0] tx_byte_dt   = DT_YUV_422_8;
-  wire [DT_WIDTH-1:0] patt_data     ;
-  wire [DT_WIDTH-1:0] tx_data      = {patt_data[9:2], 8'ha0};
-  
- `endif
+  `else
+
+    localparam          DT_SEL       = "DT_YUV_422_8";
+    localparam          DT_YUV_422_8 = 6'h1E                  ;
+    localparam          DT_WIDTH     = 16                     ;
+    wire [        15:0] tx_byte_wc   = NUM_COLS*2             ; // YUV_8 has 16 bits per pixel
+    wire [         5:0] tx_byte_dt   = DT_YUV_422_8           ;
+    wire [DT_WIDTH-1:0] patt_data                             ;
+    //wire [DT_WIDTH-1:0] tx_data      = {patt_data[9:2], 8'ha0};
+
+  `endif
 
   // Pattern generator
-  logic               patt_fv, patt_lv;
-  wire                tx_fv, tx_lv;
-  wire                tx_init_done;
-  
-colorbar_gen_alt #(
-  .h_active     (NUM_COLS),
-  .v_active     (NUM_ROWS),
-  .V_FRONT_PORCH('d1     ),
-  .V_SYNCH      ('d1     ),
-  .V_BACK_PORCH ('d5     )
-) i_colorbar_gen (
-  .rstn(tx_init_done),
-  .clk (pixel_clk   ),
-  .data(patt_data   ),
-  .fv  (patt_fv     ),
-  .lv  (patt_lv     )
-);
-  
+  logic patt_fv, patt_lv;
+  wire  tx_fv, tx_lv;
+  wire  tx_init_done;
+
+  colorbar_gen_alt #(
+    .h_active     (NUM_COLS),
+    .v_active     (NUM_ROWS),
+    .V_FRONT_PORCH('d1     ),
+    .V_SYNCH      ('d1     ),
+    .V_BACK_PORCH ('d5     )
+  ) i_colorbar_gen (
+    .rstn(tx_init_done),
+    .clk (pixel_clk   ),
+    .data(patt_data   ),
+    .fv  (patt_fv     ),
+    .lv  (patt_lv     )
+  );
+
 /*
-  // Passthrough:
-	assign tx_fv = pixel_fv;
-	assign tx_lv = pixel_lv;
+  // Pattern generator
+  assign tx_fv = patt_fv;
+  assign tx_lv = patt_lv;
 
 */
-
-
-  // Pattern generator
-  assign tx_fv   = patt_fv;
-  assign tx_lv   = patt_lv;
-
-    // One shot to increase the FV length
+  // Passthrough:
+  assign tx_fv = pixel_fv;
+  assign tx_lv = pixel_lv;
+  assign tx_data = pixel_data;
+ 
+  // One shot to increase the FV length: this appears to be required to enable the Tx P2B block to work properly.
   logic tx_fv_ext;
   one_shot #(.PERIOD(100)) i_one_shot (
     .clk       (sync_clk   ),
@@ -653,17 +651,17 @@ colorbar_gen_alt #(
     .tx_rdy       (tx_rdy           ),
     .byte_dt      (tx_byte_dt       ),
     .byte_wc      (tx_byte_wc       ),
-    .tx_clk_p     (tx0_clk_p        ),
-    .tx_clk_n     (tx0_clk_m        ),
-    .tx_d_p       (tx0_dat_p        ),
-    .tx_d_n       (tx0_dat_m        )
+    .tx_clk_p     (mipi_tx_clk_p    ),
+    .tx_clk_n     (mipi_tx_clk_m    ),
+    .tx_d_p       (mipi_tx_dat_p    ),
+    .tx_d_n       (mipi_tx_dat_m    )
   );
 
 /*------------------------------------------------------------------------------
 --  Other assignments
 ------------------------------------------------------------------------------*/
   //assign gpio_b1 = tx_fv;
-  assign gpio_g1 = tx_lv;
+  //assign gpio_g1 = tx_lv;
 
 endmodule
 `define nettype wire

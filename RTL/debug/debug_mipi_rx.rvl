@@ -1,0 +1,128 @@
+<Project SigType="0" Date="2024-01-17" ModBy="Inserter" Name="E:/Data/local_github/tinyCLUNX33_new/RTL/debug_mipi_rx.rvl">
+    <IP Version="1_6_042617"/>
+    <Design DeviceName="LIFCL-33U" Synthesis="lse" DeviceFamily="LIFCL" JTAG="hard" DesignName="fpga_top_som" DesignEntry="Schematic/Verilog HDL"/>
+    <Core InsertDataset="0" Reveal_sig="543353993" ID="0" Insert="1" Name="pixel_clk">
+        <Setting>
+            <Clock SampleEnable="0" SampleClk="pixel_clk" EnableClk_Pri="0" EnableClk=""/>
+            <TraceBuffer Implementation="0" IncTrigSig="0" hasTimeStamp="0" BufferDepth="256" BitTimeStamp="0"/>
+            <Capture MinSamplesPerTrig="8" Mode="1"/>
+            <Event MaxEventCnt="8" CntEnable="0"/>
+            <TrigOut Polarity="0" TrigOutNetType="1" EnableTrigOut="0" MinPulseWidth="0" TrigOutNet="reveal_debug_fpga_top_som_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Type="SIG" Name="pixel_lv"/>
+                <Sig Type="SIG" Name="pixel_fv"/>
+                <Bus Name="pixel_data">
+                    <Sig Type="SIG" Name="pixel_data:0"/>
+                    <Sig Type="SIG" Name="pixel_data:1"/>
+                    <Sig Type="SIG" Name="pixel_data:2"/>
+                    <Sig Type="SIG" Name="pixel_data:3"/>
+                    <Sig Type="SIG" Name="pixel_data:4"/>
+                    <Sig Type="SIG" Name="pixel_data:5"/>
+                    <Sig Type="SIG" Name="pixel_data:6"/>
+                    <Sig Type="SIG" Name="pixel_data:7"/>
+                    <Sig Type="SIG" Name="pixel_data:8"/>
+                    <Sig Type="SIG" Name="pixel_data:9"/>
+                </Bus>
+            </Trace>
+            <Trigger>
+                <TU Sig="rx_payload_en,rx_lp_en," ID="1" Serialbits="0" Type="0"/>
+                <TU Sig="pixel_lv,pixel_fv," ID="2" Serialbits="0" Type="0"/>
+                <TE MaxEvnCnt="1" Resource="0" ID="1" MaxSequence="2"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+    <Core InsertDataset="0" Reveal_sig="543353994" ID="1" Insert="1" Name="rx_byte_clk">
+        <Setting>
+            <Clock SampleEnable="0" SampleClk="i_mipi_to_pixel/byte_clk" EnableClk_Pri="0" EnableClk=""/>
+            <TraceBuffer Implementation="0" IncTrigSig="0" hasTimeStamp="0" BufferDepth="256" BitTimeStamp="0"/>
+            <Capture MinSamplesPerTrig="8" Mode="1"/>
+            <Event MaxEventCnt="8" CntEnable="0"/>
+            <TrigOut Polarity="0" TrigOutNetType="1" EnableTrigOut="0" MinPulseWidth="0" TrigOutNet="reveal_debug_fpga_top_som_LA1_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/tx_rdy_i"/>
+                <Bus Name="i_mipi_to_pixel/rx_wc">
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:0"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:1"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:2"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:3"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:4"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:5"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:6"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:7"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:8"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:9"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:10"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:11"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:12"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:13"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:14"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_wc:15"/>
+                </Bus>
+                <Bus Name="i_mipi_to_pixel/rx_term_d_en">
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_term_d_en:0"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_term_d_en:1"/>
+                </Bus>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/rx_term_clk_en"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/rx_sp_en"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload_en"/>
+                <Bus Name="i_mipi_to_pixel/rx_payload">
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:0"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:1"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:2"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:3"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:4"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:5"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:6"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:7"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:8"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:9"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:10"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:11"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:12"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:13"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:14"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_payload:15"/>
+                </Bus>
+                <Bus Name="i_mipi_to_pixel/rx_lp_hs_state_d">
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_lp_hs_state_d:0"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_lp_hs_state_d:1"/>
+                </Bus>
+                <Bus Name="i_mipi_to_pixel/rx_lp_hs_state_clk">
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_lp_hs_state_clk:0"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_lp_hs_state_clk:1"/>
+                </Bus>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/rx_lp_en"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/rx_lp_av_en_d"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/rx_lp_av_en"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/rx_hs_sync"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/rx_hs_d_en"/>
+                <Bus Name="i_mipi_to_pixel/rx_dt">
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_dt:0"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_dt:1"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_dt:2"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_dt:3"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_dt:4"/>
+                    <Sig Type="SIG" Name="i_mipi_to_pixel/rx_dt:5"/>
+                </Bus>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/rx_active_payload"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/hs_sync"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/hs_d_en"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/sync_rst_n"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/byte_clk_rst_n"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/pll_lock"/>
+            </Trace>
+            <Trigger>
+                <TU Sig="i_mipi_to_pixel/rx_sp_en,i_mipi_to_pixel/rx_lp_en," ID="1" Serialbits="0" Type="0"/>
+                <TU Sig="i_mipi_to_pixel/rx_term_clk_en,(BUS)i_mipi_to_pixel/rx_term_d_en[1:0]," ID="2" Serialbits="0" Type="0"/>
+                <TE MaxEvnCnt="1" Resource="0" ID="1" MaxSequence="2"/>
+                <TE MaxEvnCnt="1" Resource="0" ID="2" MaxSequence="2"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

@@ -1,39 +1,28 @@
-ldc_set_sysconfig {CONFIGIO_VOLTAGE_BANK0=3.3 CONFIGIO_VOLTAGE_BANK1=3.3 CONFIG_IOSLEW=FAST BOOTMODE=DUAL MCCLK_FREQ=28.1 TRANSFR=OFF COMPRESS_CONFIG=ON MASTER_SPI_PORT=DISABLE INITN_PORT=DISABLE}
-ldc_set_vcc -bank 0 3.3
-ldc_set_vcc -bank 1 3.3
-ldc_set_vcc -bank 2 1.2
-ldc_set_vcc -bank 3 1.8
+ldc_set_sysconfig {CONFIGIO_VOLTAGE_BANK0=1.8 CONFIGIO_VOLTAGE_BANK1=1.8 CONFIG_IOSLEW=FAST BOOTMODE=DUAL MCCLK_FREQ=28.1 TRANSFR=OFF COMPRESS_CONFIG=ON MASTER_SPI_PORT=DISABLE INITN_PORT=DISABLE}
+ldc_set_vcc -bank 0 1.8
+ldc_set_vcc -bank 1 1.8
+ldc_set_vcc -bank 2 1.8
+ldc_set_vcc -bank 3 1.2
 ldc_set_vcc -bank 4 1.8
 ldc_set_location -site {E1} [get_ports scl]
 ldc_set_location -site {E2} [get_ports sda]
 ldc_set_port -iobuf {PULLMODE=NONE OPENDRAIN=ON} [get_ports scl]
 ldc_set_port -iobuf {PULLMODE=NONE OPENDRAIN=ON} [get_ports sda]
-# Note: Do not use clk_0 as it doesnt work on the PLL!
-#ldc_set_location -site {N8} [get_ports clk_0]
-#ldc_set_port -iobuf {IO_TYPE=LVCMOS18H} [get_ports clk_0]
+# Clock input from the PLL:
 ldc_set_location -site {H8} [get_ports clk_2]
 ldc_set_port -iobuf {IO_TYPE=LVCMOS18H} [get_ports clk_2]
-ldc_set_location -site {A1} [get_ports button_n]
-ldc_set_location -site {G8} [get_ports uart_rxd]
-ldc_set_location -site {M8} [get_ports uart_txd]
-ldc_set_port -iobuf {IO_TYPE=LVCMOS18H} [get_ports uart_rxd]
-ldc_set_port -iobuf {IO_TYPE=LVCMOS18H} [get_ports uart_txd]
-# 2L MIPI #1
+# GPIO:
 ldc_set_location -site {G1} [get_ports gpio_g1]
 ldc_set_location -site {B1} [get_ports gpio_b1]
-ldc_set_location -site {J1} [get_ports cam0_clk_p]
-ldc_set_location -site {H1} [get_ports cam0_clk_m]
-ldc_set_location -site {M3} [get_ports {cam0_dat_p[1]}]
-ldc_set_location -site {M2} [get_ports {cam0_dat_m[1]}]
-ldc_set_location -site {L4} [get_ports {cam0_dat_p[0]}]
-ldc_set_location -site {L3} [get_ports {cam0_dat_m[0]}]
-# 2L MIPI #2
-ldc_set_location -site {N3} [get_ports tx0_clk_p]
-ldc_set_location -site {N2} [get_ports tx0_clk_m]
-ldc_set_location -site {M5} [get_ports {tx0_dat_p[0]}]
-ldc_set_location -site {M4} [get_ports {tx0_dat_m[0]}]
-ldc_set_location -site {N5} [get_ports {tx0_dat_p[1]}]
-ldc_set_location -site {N4} [get_ports {tx0_dat_m[1]}]
+ldc_set_location -site {A3} [get_ports gpio_a3]
+ldc_set_location -site {A3} [get_ports led]
+ldc_set_location -site {A1} [get_ports button_n]
+ldc_set_location -site {B1} [get_ports button2_n]
+ldc_set_port -iobuf {PULLMODE=UP} [get_ports button_n]
+ldc_set_port -iobuf {PULLMODE=UP} [get_ports button2_n]
+# Debug UART: Note that these pins are shared with GPIO!
+ldc_set_location -site {B1} [get_ports uart_rxd]
+ldc_set_location -site {G1} [get_ports uart_txd]
 # qSPI Flash
 ldc_set_location -site {B4} [get_ports spiflash_clk]
 ldc_set_location -site {B3} [get_ports spiflash_cs_n]
@@ -41,11 +30,10 @@ ldc_set_location -site {D4} [get_ports {spiflash_dq[0]}]
 ldc_set_location -site {D3} [get_ports {spiflash_dq[1]}]
 ldc_set_location -site {E4} [get_ports {spiflash_dq[2]}]
 ldc_set_location -site {E3} [get_ports {spiflash_dq[3]}]
-ldc_set_port -iobuf {IO_TYPE=LVCMOS33} [get_ports spiflash_*]
-# No pullup on v1 of the SoM: workaround by pulling this up on the FPGA
+ldc_set_port -iobuf {IO_TYPE=LVCMOS18} [get_ports spiflash_*]
 ldc_set_port -iobuf {PULLMODE=UP} [get_ports {spiflash_dq[*]}]
-ldc_set_port -iobuf {SLEWRATE=FAST} [get_ports spiflash_clk]
 ldc_set_port -iobuf {SLEWRATE=FAST} [get_ports spiflash_cs_n]
+ldc_set_port -iobuf {SLEWRATE=FAST} [get_ports spiflash_clk]
 # USB23 constraints
 ldc_set_location -site {D7} [get_ports usb23_DP]
 ldc_set_location -site {E7} [get_ports usb23_DMP]
@@ -63,10 +51,34 @@ ldc_set_location -site {D2} [get_ports TDI]
 ldc_set_location -site {B2} [get_ports TMS]
 ldc_set_location -site {D1} [get_ports TDO]
 # Clock constraints
-# change the clock frequency values :
+# change the clock frequency values as needed here:
 create_clock -name {clk_2} -period 41.6666666666667 [get_ports clk_2]
+set_clock_groups -group [get_clocks clk_2] -group [get_clocks clk_60m] -group [get_clocks lf_clk] -group [get_clocks hf_clk] -group [get_clocks pixel_clk_keep] -group [get_clocks rvltck] -group [get_clocks {tx_clk tx_clk_90}] -asynchronous
+#set_clock_groups -group [get_clocks clk_2] -group [get_clocks clk_60m] -group [get_clocks u_int_osc_lf_clk_out_o] -group [get_clocks u_int_osc_hf_clk_out_o] -group [get_clocks rvltck] -asynchronous
+# This constraint set applies to the 2 Lane MIPI in, 2 Lane MIPI out adapter.
+# 2L MIPI receive is mapped as follows:
+# DIFF 0: MIPI Lane 0
+# DIFF 1: MIPI Clock
+# DIFF 2: MIPI Lane 1
+ldc_set_location -site {M7} [get_ports mipi_rx_clk_p]
+ldc_set_location -site {M6} [get_ports mipi_rx_clk_m]
+ldc_set_location -site {N7} [get_ports {mipi_rx_dat_p[0]}]
+ldc_set_location -site {N6} [get_ports {mipi_rx_dat_m[0]}]
+ldc_set_location -site {L7} [get_ports {mipi_rx_dat_p[1]}]
+ldc_set_location -site {L6} [get_ports {mipi_rx_dat_m[1]}]
+# 2L MIPI transmit:
+# DIFF 3: MIPI Lane 0
+# DIFF 5: MIPI Clock
+# DIFF 4: MIPI Lane 1
+ldc_set_location -site {J6} [get_ports mipi_tx_clk_p]
+ldc_set_location -site {H6} [get_ports mipi_tx_clk_m]
+ldc_set_location -site {F7} [get_ports {mipi_tx_dat_p[0]}]
+ldc_set_location -site {E6} [get_ports {mipi_tx_dat_m[0]}]
+ldc_set_location -site {G7} [get_ports {mipi_tx_dat_p[1]}]
+ldc_set_location -site {G6} [get_ports {mipi_tx_dat_m[1]}]
 create_clock -name {clk_pixel_i} -period 12.5 [get_nets pixel_clk]
-create_clock -name {clk_byte_i} -period 20 [get_nets byte_clk*]
+#create_clock -name {clk_byte_i} -period 20 [get_nets byte_clk*]
+#set_clock_groups -group clk_pixel_i -group clk_byte_i -group [get_clocks clk_2] -group [get_clocks tx_clk] -group [get_clocks tx_clk_90] -group [get_clocks clk_60m] -group [get_clocks rvltck] -group [get_clocks lf_clk] -group [get_clocks hf_clk] -group [get_clocks i_pixel_to_mipi/byte_clk_o] -asynchronous
 #---- Byte2Pixel constraints --------------------------------------------------------------------------------------#
 ######                                                                                       ######
 # NOTE:  The byte-to-pixel IP treats the byte clock and the pixel clock as asynchronous.          #

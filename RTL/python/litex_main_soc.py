@@ -242,7 +242,8 @@ class MainSoC(ZephyrSoC, SoCCore):
         self.add_i2c()
         # Note: can change to DDR by setting rate="1:2", will need some changes to suport this."
         #self.add_spi_flash(mode="4x", module=Flash(default_read_cmd=Codes.READ_1_1_1_FAST), clk_freq=sys_clk_freq, rate="1:1", with_master=False)
-        self.add_spi_flash(mode="4x", module=Flash(default_read_cmd=Codes.READ_1_1_2), clk_freq=sys_clk_freq, rate="1:1", with_master=False)
+        self.add_spi_flash(mode="4x", module=Flash(default_read_cmd=Codes.READ_1_1_4), clk_freq=sys_clk_freq, rate="1:1", with_master=False)
+
         self.add_main_ram()
         self.add_wb_slave_port(0xb0000000)
         self.add_axi_master_port(width=64)
