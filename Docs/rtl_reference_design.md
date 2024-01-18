@@ -1,5 +1,9 @@
 # RTL Reference Design
 
+[Code](https://github.com/tinyvision-ai-inc/tinyclunx33/tree/main/RTL/) |
+[Release](https://github.com/tinyvision-ai-inc/tinyclunx33/releases/) |
+[Zephyr Example](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
+
 The RTL Reference Design is a set of Verilog sources (sometimes generated from
 another HDL) providing common design elements for building an application on
 top of the SoM hardware.
@@ -110,6 +114,12 @@ Please program the FPGA using the [instructions provided](som_flash.md).
 
 
 ### The DONE LED is lit but the RTL Reference Design does not work
+
+Make sure to also load a
+[Zephyr Example Release](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
+matchiing the RTL Reference Design version you programmed.
+
+Check also the [flash offset at which you program things](som_flash.md).
 
 The RTL Reference Design uses a flash in qSPI mode.
 For this to work, a special Quad Enable (QE) bit needs to be set in the flash
