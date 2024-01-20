@@ -1,7 +1,7 @@
 # Carrier Devkit
 
-[Schematics](NXU_devkit_v1.0_Schematic.pdf) |
-[Assembly](NXU_devkit_v1.0_Assembly.pdf)
+[Schematics](NXU_devkit_v2.0_Schematic.pdf) |
+[Assembly](NXU_devkit_v2.0_Assembly.pdf)
 
 The **Devkit** is a carrier for the tinyCLUNX33 SoM that eases product
 development and debugging:
