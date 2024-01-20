@@ -1,6 +1,6 @@
 [Doc](https://tinyclunx33.tinyvision.ai/) |
-[Hardware](https://github.com/tinyvision-ai-inc/tinyCLUNX33/tree/main/Schematics) |
-[Firmware](https://docs.zephyrproject.org/latest/boards/riscv/tinyclunx33/doc/index.html) |
+[Hardware](https://github.com/tinyvision-ai-inc/tinyCLUNX33/tree/main/Hardware) |
+[Firmware](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example) |
 [Schematic](tinyCLUNX33_v2.0_Schematic.pdf) |
 [Assembly](tinyCLUNX33_v2.0_Assembly.pdf) |
 [Discord](https://discord.gg/yjVc6P3sCt)

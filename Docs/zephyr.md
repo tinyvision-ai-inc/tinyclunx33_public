@@ -1,7 +1,7 @@
 # Zephyr integration
 
-[Source]((https://github.com/tinyvision-ai-inc/zephyr/) |
-[Example]((https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/) |
+[Source](https://github.com/tinyvision-ai-inc/zephyr/) |
+[Example](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/) |
 [Release](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
 
 The [Zephyr RTOS](https://docs.zephyrproject.org/) has been ported the SoM on
