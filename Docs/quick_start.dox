@@ -1,4 +1,4 @@
-# Quick Start
+/** @page "quick_start" Quick Start
 
 These are the instructions to be able to quickly test the
 hardware, gateware, and firmware.
@@ -43,3 +43,5 @@ picocom -b 115200 /dev/ttyUSB1
 ```
 
 Then, pressing "Enter" should give an access to the Zephyr shell, displaying only `uart:$`.
+
+*/

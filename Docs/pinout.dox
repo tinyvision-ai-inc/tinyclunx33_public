@@ -1,4 +1,4 @@
-# Pinout
+/** @page "pinout"  Pinout
 
 ## Pinout of the two connectors
 
@@ -147,3 +147,4 @@ TODO: Document the connectivity variant
 
 ![](images/som_connectors_schematic.png)
 
+*/

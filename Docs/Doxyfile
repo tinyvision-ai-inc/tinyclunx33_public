@@ -1,20 +1,30 @@
 PROJECT_NAME           = "tinyCLUNX33"
 PROJECT_BRIEF          = System on Module with CrosslinkU-NX
 OPTIMIZE_OUTPUT_FOR_C  = YES
-INPUT                  = ../RTL/blink_led/src/ .
-FILE_PATTERNS          = *.v *.vh *.sv *.svh *.md
+FILE_PATTERNS          = *.v *.vh *.sv *.svh *.dox
 EXTENSION_MAPPING      = v=C++ vh=C++ sv=C++ svh=C++
-IMAGE_PATH             = images pinout
-USE_MDFILE_AS_MAINPAGE = index.md
-HTML_EXTRA_FILES       = ../Hardware/SoM/v2/tinyCLUNX33_v2.0_Schematic.pdf \
-                         ../Hardware/SoM/v2/tinyCLUNX33_v2.0_Assembly.pdf \
-                         ../Hardware/Devkit/v2/NXU_devkit_v2.0_Schematic.pdf \
-                         ../Hardware/Devkit/v2/NXU_devkit_v2.0_Assembly.pdf \
-                         ../Hardware/tinyCamera/v1/tinyCamera_v1.0_Assembly.pdf \
-                         ../Hardware/tinyCamera/v1/tinyCamera_v1.0_Schematic.pdf
-HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
-                         doxygen-awesome-css/doxygen-awesome-sidebar-only.css
+IMAGE_PATH             = images
 HTML_COLORSTYLE        = LIGHT
 GENERATE_TREEVIEW      = YES
 DISABLE_INDEX          = NO
 FULL_SIDEBAR           = NO
+
+INPUT = \
+. \
+../RTL/blink_led/src/
+
+HTML_EXTRA_FILES  = \
+../Hardware/SoM/v1/tinyCLUNX33_v1.0_Schematic.pdf \
+../Hardware/SoM/v1/tinyCLUNX33_v1.0_Assembly.pdf \
+../Hardware/SoM/v2/tinyCLUNX33_v2.0_Schematic.pdf \
+../Hardware/SoM/v2/tinyCLUNX33_v2.0_Assembly.pdf \
+../Hardware/Devkit/v1/NXU_devkit_v1.0_Schematic.pdf \
+../Hardware/Devkit/v1/NXU_devkit_v1.0_Assembly.pdf \
+../Hardware/Devkit/v2/NXU_devkit_v2.0_Schematic.pdf \
+../Hardware/Devkit/v2/NXU_devkit_v2.0_Assembly.pdf \
+../Hardware/tinyCamera/v1/tinyCamera_v1.0_Assembly.pdf \
+../Hardware/tinyCamera/v1/tinyCamera_v1.0_Schematic.pdf
+
+HTML_EXTRA_STYLESHEET = \
+doxygen-awesome-css/doxygen-awesome.css \
+doxygen-awesome-css/doxygen-awesome-sidebar-only.css

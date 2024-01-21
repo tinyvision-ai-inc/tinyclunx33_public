@@ -1,4 +1,4 @@
-# SoM Flash
+/** @page "som_flash" SoM Flash
 
 A 16 MByte (128 Mbit) QSPI flash with Dual Transmission Rate (DTR) can store the
 FPGA bitfile as well as a storing the firmware that the soft CPU core can
@@ -19,7 +19,7 @@ In the default RTL, the flash is mapped at address `0x2000_0000`.
 
 The command [`ecpprog`](https://github.com/gregdavill/ecpprog) permits to send
 a bitfile to the SoM by using the FTDI present on the
-[BaseBoard](carrier_baseboard.md).
+[BaseBoard](carrier_baseboard.dox).
 
 It can be installed as part of
 [OSS Cad Suite](https://github.com/YosysHQ/oss-cad-suite-build#installation)
@@ -57,7 +57,7 @@ The regular Radiant programmer can also be used as usual for Lattice parts.
 8. Power cycle the board to let the FPGA start.
 
 This also permits to set the flash to Quad Enable (QE) mode, as required by the
-[RTL Reference Design](rtl_reference_design.md).
+[RTL Reference Design](rtl_reference_design.dox).
 
 ![](images/lattice_radiant_programmer_set_quad_enable_mode.png)
 
@@ -100,7 +100,7 @@ flash0: flash@20100000 {
 
 ## Troubleshooting
 
-This assumes that the [tinyCLUNX33 Devkit](carrier_devkit.md) is used for
+This assumes that the [tinyCLUNX33 Devkit](carrier_devkit.dox) is used for
 accessing and programming the flash.
 
 
@@ -213,7 +213,7 @@ that `ecpprog` uses under the hood.
 ### Probing the flash
 
 To investigate further, it is possible to read what the flash using the 
-flash debug header of the [tinyCLUNX33 Devkit](carrier_devkit.md).
+flash debug header of the [tinyCLUNX33 Devkit](carrier_devkit.dox).
 These would allow to connect a logic analyzer and dump the SPI signals as the
 FTDI operates.
 
@@ -232,3 +232,5 @@ is another device containing an FTDI connected to your workstation?
   QSPI DTR flash
 
 ![](images/som_flash_schematic.png)
+
+*/

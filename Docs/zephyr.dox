@@ -1,11 +1,11 @@
-# Zephyr integration
+/** @page "zephyr" Zephyr integration
 
 [Source](https://github.com/tinyvision-ai-inc/zephyr/) |
 [Example](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/) |
 [Release](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
 
 The [Zephyr RTOS](https://docs.zephyrproject.org/) has been ported the SoM on
-top of the [RTL Reference Design](rtl_reference_design.md), allowing to control
+top of the [RTL Reference Design](rtl_reference_design.dox), allowing to control
 the USB core, configure the peripherals and external chis, as well as execute
 custom application.
 
@@ -40,7 +40,7 @@ An example project is provided with build instructions in order to:
 
 The FTDI chip present on the Devkit provides ways to:
 
-- [program the flash](som_flash.md)
+- [program the flash](som_flash.dox)
 
 - Access the soft CPU JTAG interface (work in progress, not ready yet)
 
@@ -61,3 +61,5 @@ picocom -g zephyrshell.log -b 115200 /dev/ttyUSB1
 ```
 
 You may have to press "Enter" to get the prompt `uart:~$` to appear.
+
+*/
