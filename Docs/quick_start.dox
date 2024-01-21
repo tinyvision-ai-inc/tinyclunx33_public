@@ -1,5 +1,7 @@
 /** @page "quick_start" Quick Start
 
+> **This only apply to the latest version of the [Devkit](carrier_devkit.dox) and SoM**
+
 These are the instructions to be able to quickly test the
 hardware, gateware, and firmware.
 
@@ -10,10 +12,10 @@ Linux terminal, Mac OSX terminal, Windows with
 [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build)'s MinGW.
 
 ```bash
-# Get the correct version number from https://github.com/tinyvision-ai-inc/tinyCLUNX33/releases
+# Latest number from https://github.com/tinyvision-ai-inc/tinyCLUNX33/releases
 gw=v1.2.3
 
-# Get the correct version number from https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases
+# Latest number from https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases
 fw=v1.2.3
 
 # check that the QE mode is "enabled"
