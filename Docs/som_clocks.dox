@@ -1,4 +1,4 @@
-/** @page "som_clocks" SoM Clocks
+/** @page "md_som_clocks" SoM Clocks
 
 The FPGA features two internal oscillators and an internal PLL to further
 synthesize a clock signal out of the available sources.
