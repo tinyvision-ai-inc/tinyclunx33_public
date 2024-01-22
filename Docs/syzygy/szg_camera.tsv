@@ -1,0 +1,26 @@
+5	D0P	SLVS0_P	
+6	S1	FLASH	
+7	D0N	SLVS0_N	
+8	S3	RESET_B	
+9	D2P	SLVS1_P	
+10	S5	TRIGGER	
+11	D2N	SLVS1_N	
+12	S7	SHUTTER	
+13	D4P	SLVS2_P	
+14	S9	FOCUS_SDA	For use with an optional Autofocus Lens mount.
+15	D4N	SLVS2_N	
+16	S11	FOCUS_SCL	For use with an optional Autofocus Lens mount.
+17	D6P	SLVS3_P	
+18	S13	FOCUS_SDI	For use with an optional Autofocus Lens mount.
+19	D6N	SLVS3_N	
+20	S15	FOCUS_SDO	For use with an optional Autofocus Lens mount.
+21	S16	SDATA	
+22	S17	FOCUS_SCK	For use with an optional Autofocus Lens mount.
+23	S18	SCLK	
+24	S19	FOCUS_SS_B	For use with an optional Autofocus Lens mount.
+25	S20	SADDR	
+26	S21	FOCUS_RST_B	For use with an optional Autofocus Lens mount.
+27	S22	PGOOD	
+33	P2C_CLKp	SLVSC_P	
+34	C2P_CLKp	EXTCLK	
+35	P2C_CLKn	SLVSC_N	
