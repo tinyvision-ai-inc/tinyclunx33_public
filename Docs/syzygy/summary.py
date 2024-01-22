@@ -15,7 +15,7 @@ def parse_pinout_table(table) -> None:
 def parse_pod_table(table) -> None:
     for k, v in table.items():
         v['pin_name'] = v['src'][0]
-        v['pin_signal'] = v['src'][1]
+        v['pin_signal'] = v['src'][1] if len(v['src']) > 1 else '-'
 
 def merge_pod_table(pinout, pod, name) -> None:
     for k, v in pod.items():
@@ -33,7 +33,7 @@ def main(argv):
         parse_pod_table(pod)
         merge_pod_table(pinout, pod, path)
     print('\t\t', end='')
-    print('\t'.join(s[4:-4] for s in argv[2:]))
+    print('\t'.join(s[:-4] for s in argv[2:]))
     for k, v in pinout.items():
         print(k, end='\t')
         print(v['pin_name'], end='\t')
