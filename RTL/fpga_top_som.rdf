@@ -81,13 +81,10 @@
         <Source name="common/one_shot.sv" type="Verilog" type_short="Verilog">
             <Options VerilogStandard="System Verilog"/>
         </Source>
-        <Source name="constraints/mipi_in_out_adapter.pdc" type="Physical Constraints File" type_short="PDC" excluded="TRUE">
-            <Options/>
-        </Source>
         <Source name="debug_mipi_rx.rva" type="Reveal Analyzer Project File" type_short="RVA">
             <Options/>
         </Source>
-        <Source name="debug_mipi_rx.rvl" type="Reveal" type_short="Reveal">
+        <Source name="debug_mipi_rx.rvl" type="Reveal" type_short="Reveal" excluded="TRUE">
             <Options/>
         </Source>
         <Source name="fpga_top_som.pdc" type="Physical Constraints File" type_short="PDC">
