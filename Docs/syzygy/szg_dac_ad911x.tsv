@@ -1,0 +1,19 @@
+5	S0	DB0	
+6	S1	DB1	
+7	S2	DB2	
+8	S3	DB3	
+9	S4	DB4	
+10	S5	DB5	
+11	S6	DB6	
+12	S7	DB7	
+13	S8	DB8	
+14	S9	DB9	
+15	S10	DB10	
+16	S11	DB11	
+17	S12	CS_B/PWRDN	
+18	S13	SCLK/CLKMD	
+19	S14	SDIO/FORMAT	
+20	S15	OPAMP_ENABLE	Assert (1) to enable both DAC I and DAC Q outputs. Deassert (0) to place both op-amps in power-down.
+21	S16	RESET/PINMD	
+33	P2C_CLKp	DCLKIO	Optional clock output (See schematics and DAC datasheet)
+34	C2P_CLKp	CLKIN	Input clock to DAC through CLKIN level translator (U3)

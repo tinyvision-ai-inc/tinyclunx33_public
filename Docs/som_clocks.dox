@@ -43,10 +43,14 @@ It is also possible to provide an external input clock source to the FPGA.
 The FPGA can use the external input clock, routed to its pin `H8`, which is
 a primary clock pin (PCLK), usable for DDR I/O.
 
-TODO: Hook an I2C core and integrate into the core SoM design
+The FPGA is able to use the clock signals as a basis for implementing a timer
+core.
 
 
 ## Zephyr integration
+
+The timer cores are further providing Zephyr with timers, used for ensuring
+a constant system tick interrupt part of RTOS scheduling.
 
 The Si5351 PLL is not yet integrated into Zephyr as a driver. Instead, it is
 called from the user code to generate the appropriate clock.
