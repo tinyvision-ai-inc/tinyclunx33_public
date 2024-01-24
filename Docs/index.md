@@ -35,3 +35,19 @@ Development boards:
 - extra adapter boards for various camera connectors and expansion
 
  ![](images/tinyclunx33_block_diagram.drawio.png)
+
+
+## Revisions
+
+| Rev | Distributed | Sch       | Asm       |
+|-----|-------------|-----------|-----------|
+| v1  | never       | [pdf][s1] | [pdf][a1] |
+| v2  | early users | [pdf][s2] | [pdf][a2] |
+| v3  | not yet     | [pdf][s3] | [pdf][a3] |
+
+[s1]: tinyCLUNX33_v1.0_Schematic.pdf
+[a1]: tinyCLUNX33_v1.0_Assembly.pdf
+[s2]: tinyCLUNX33_v2.0_Schematic.pdf
+[a2]: tinyCLUNX33_v2.0_Assembly.pdf
+[s3]: tinyCLUNX33_v3.0_Schematic.pdf
+[a3]: tinyCLUNX33_v3.0_Assembly.pdf
