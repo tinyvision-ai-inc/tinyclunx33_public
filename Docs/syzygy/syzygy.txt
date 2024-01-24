@@ -14,7 +14,7 @@
 13  S8_D4P    SLVS2_P      DB8             SDO              RXD1          CAM1_LANE1_P    DIFF4_PCLK_P  DIFF10_P
 14  S9_D5P    FOCUS_SDA    DB9             OUT2B+           TXD2          CAM2_LANE1_P    DIFF5_PCLK_P  DIFF11_PCLK_P
 15  S10_D4N   SLVS2_N      DB10            CS_B             RXD0          CAM1_LANE1_N    DIFF4_PCLK_N  DIFF10_N
-16  S11_D5N   FOCUS_SCL    DB11            OUT2B-           TXD3          CAM2_LANE1_N    -             DIFF11_PCLK_N
+16  S11_D5N   FOCUS_SCL    DB11            OUT2B-           TXD3          CAM2_LANE1_N    DIFF5_PCLK_N  DIFF11_PCLK_N
 17  S12_D6P   SLVS3_P      CS_B/PWRDN      SCLK             EEPROM_SCL    CAM2_CLK_P      -             DIFF12_P
 18  S13_D7P   FOCUS_SDI    SCLK/CLKMD      -                MDC           CAM3_LANE0_P    -             DIFF13_PCLK_P
 19  S14_D6N   SLVS3_N      SDIO/FORMAT     SDI              EEPROM_SDA    CAM2_CLK_N      -             DIFF12_N

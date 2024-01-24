@@ -1,4 +1,4 @@
-/** @page "md_som_mipi" SoM MIPI
+# SoM MIPI
 
 The differential pairs of the CrossLinkU-NX FPGA can be combined together into
 MIPI interfaces. These MIPI image signals can further be processed by the FPGA
@@ -57,5 +57,3 @@ TODO: evoke the UVC configuration possible/required to do once UVC is there
   FPGA (search for 33U in this page).
 
 ![](images/som_mipi_schematic.png)
-
-*/

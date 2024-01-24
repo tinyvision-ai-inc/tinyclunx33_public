@@ -1,4 +1,4 @@
-/** @page "md_som_memory" SoM Memory
+# SoM Memory
 
 The FPGA fabric features several Distributed RAM and Embedded Block RAM (EBR)
 that can be used through the RTL.
@@ -25,7 +25,7 @@ When using the *Compute* variant of the tinyCLUNX33, an OctalSPI or HyperRAM is
 available as buffer for processing the data or any purpose by the SoM.
 
 It would then be already hooked to the FPGA pins, with the right
-[pinout](pinout.dox).
+[pinout](pinout.md).
 
 
 ## RTL Integration
@@ -38,7 +38,7 @@ RTL language.
 The LRAM has a blackbox-type module called NXLRAM that can be instancicated to
 allocate a given NXLRAM block.
 
-The [RTL Reference Design](rtl_reference_design.dox) shows a possible
+The [RTL Reference Design](rtl_reference_design.md) shows a possible
 integration of the NXLRAM as well as a controller for the external RAM chip.
 
 
@@ -57,5 +57,3 @@ integration of the NXLRAM as well as a controller for the external RAM chip.
   Double-Data-Rate OctalSPI PSRAM
 
 ![](images/som_ram_schematic.png)
-
-*/

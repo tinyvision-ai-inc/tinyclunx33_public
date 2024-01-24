@@ -1,4 +1,4 @@
-/** @mainpage tinyCLUNX33
+# tinyCLUNX33
 
 [Doc](https://tinyclunx33.tinyvision.ai/) |
 [Hardware](https://github.com/tinyvision-ai-inc/tinyCLUNX33/tree/main/Hardware) |
@@ -18,7 +18,7 @@ Connector:
 
 2 flavors:
 - Connectivity: 14 diff pairs, no SSRAM
-- Compute: 8 diff pairs, 32 MB [oSPI/HyperRAM](som_memory.dox) @ <0.5GBps
+- Compute: 8 diff pairs, 32 MB [oSPI/HyperRAM](som_memory.md) @ <0.5GBps
 
 I/O interfaces:
 - 3x fully programmable clocks
@@ -34,6 +34,4 @@ Development boards:
 - tinyCamera board as a basis of a compact camera device
 - extra adapter boards for various camera connectors and expansion
 
-![](images/tinyclunx33_block_diagram.drawio.png)
-
-*/
+ ![](images/tinyclunx33_block_diagram.drawio.png)

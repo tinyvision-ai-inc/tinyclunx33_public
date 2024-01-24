@@ -1,4 +1,4 @@
-/** @page "md_som_power" SoM Power
+# SoM Power
 
 The SoM uses a single source of power at 5V, and exports several power rails
 at lower voltage using LDO and Buck converters.
@@ -82,5 +82,3 @@ TODO: Describe the pinctrl DeviceTree integration.
 - Texas Instrument [TPS7A02](https://www.ti.com/lit/ds/symlink/tps7a02.pdf) nanopower LDO
 
 ![](images/som_power_schematic.png)
-
-*/

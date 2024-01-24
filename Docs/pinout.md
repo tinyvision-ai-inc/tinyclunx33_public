@@ -1,4 +1,4 @@
-/** @page "md_pinout"  Pinout
+# Pinout
 
 ## Pinout of the two connectors
 
@@ -146,5 +146,3 @@ TODO: Document the connectivity variant
   60 pin connectors (x2)
 
 ![](images/som_connectors_schematic.png)
-
-*/

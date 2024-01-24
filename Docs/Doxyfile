@@ -1,8 +1,9 @@
 PROJECT_NAME           = "tinyCLUNX33"
 PROJECT_BRIEF          = System on Module with CrosslinkU-NX
 OPTIMIZE_OUTPUT_FOR_C  = YES
-FILE_PATTERNS          = *.v *.vh *.sv *.svh *.dox
+FILE_PATTERNS          = *.v *.vh *.sv *.svh *.md
 EXTENSION_MAPPING      = v=C++ vh=C++ sv=C++ svh=C++
+USE_MDFILE_AS_MAINPAGE = index.md
 IMAGE_PATH             = images
 HTML_COLORSTYLE        = LIGHT
 GENERATE_TREEVIEW      = YES

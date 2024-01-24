@@ -1,4 +1,4 @@
-/** @page "md_carrier_devkit" Carrier Devkit
+# Carrier Devkit
 
 [Schematics](NXU_devkit_v2.0_Schematic.pdf) |
 [Assembly](NXU_devkit_v2.0_Assembly.pdf)
@@ -31,13 +31,18 @@ Mechanical:
 
 ## Revisions
 
-@subpage md_carrier_devkit_prev
+| Rev | Distributed  | Debug Plug | Label on Board           | SYZYGY        | Sch       | Asm       |
+|-----|--------------|------------|--------------------------|---------------|-----------|-----------|
+| v1  | never        | micro USB  | none                     | incompatible  | [pdf][s1] | [pdf][a1] |
+| v2  | early users  | USB-C      | "tiny SoM Developer Kit" | incompatible  | [pdf][s2] | [pdf][a2] |
+| v3  | not yet      | USB-C      | TBD                      | STD v1.1.1    | [pdf][s3] | [pdf][a3] |
 
-| Rev | Distributed  | Debug Plug | Label on Board           | SYZYGY        |
-|-----|--------------|------------|--------------------------|---------------|
-| v1  | never        | micro USB  | none                     | incompatible  |
-| v2  | early users  | USB-C      | "tiny SoM Developer Kit" | incompatible  |
-| v3  | not yet      | USB-C      | TBD                      | STD v1.1.1    |
+[s1]: NXU_devkit_v1.0_Schematic.pdf
+[a1]: NXU_devkit_v1.0_Assembly.pdf
+[s2]: NXU_devkit_v2.0_Schematic.pdf
+[a2]: NXU_devkit_v2.0_Assembly.pdf
+[s3]: NXU_devkit_v3.0_Schematic.pdf
+[a3]: NXU_devkit_v3.0_Assembly.pdf
 
 
 ## Parts featured
@@ -55,5 +60,3 @@ Mechanical:
   High-Speed Socket connector
   
 ![](images/carrier_devkit_schematic.png)
-
-*/

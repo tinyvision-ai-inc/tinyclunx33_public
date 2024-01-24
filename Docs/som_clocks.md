@@ -1,4 +1,4 @@
-/** @page "md_som_clocks" SoM Clocks
+# SoM Clocks
 
 The FPGA features two internal oscillators and an internal PLL to further
 synthesize a clock signal out of the available sources.
@@ -79,5 +79,3 @@ TODO: Write a driver to initialize the PLL and control free clock signal.
   I2C level shifter
 
 ![](images/som_clocks_schematic.png)
-
-*/

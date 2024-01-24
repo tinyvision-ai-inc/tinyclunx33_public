@@ -1,4 +1,4 @@
-/** @page "md_carrier_tinycamera" Carrier tinyCamera
+# Carrier tinyCamera
 
 [Schematics](tinyCamera_v1.0_Schematic.pdf) |
 [Assembly](tinyCamera_v1.0_Assembly.pdf)
@@ -46,5 +46,3 @@ TODO: switch to v2 and document the pinout as tables
   Type-C Dual Role Port Controller
 
 ![](images/carrier_tinycamera_schematic.png)
-
-*/

@@ -1,4 +1,4 @@
-/** @page "md_rtl_reference_design" RTL Reference Design
+# RTL Reference Design
 
 [Source](https://github.com/tinyvision-ai-inc/tinyclunx33/tree/main/RTL/) |
 [Release](https://github.com/tinyvision-ai-inc/tinyclunx33/releases/) |
@@ -14,7 +14,7 @@ product, or as a base to build upon.
 ![](images/rtl_reference_design.drawio.png)
 
 To build this component, refer to the
-[RTL build instructions](https://github.com/tinyvision-ai-inc/tinyCLUNX33/blob/main/RTL/README.dox).
+[RTL build instructions](https://github.com/tinyvision-ai-inc/tinyCLUNX33/blob/main/RTL/README.md).
 
 For RTL engineers, the Reference Design is presented as a single module
 providing a data communication interface for the feed that goes through USB.
@@ -64,11 +64,11 @@ Internal Wishbone cores:
 - **Main CPU RAM** controller, memory-mapped to the Wishbone bus for use by the CPU and its firmware.
 
 - **qSPI DTR Flash** controller, memory-mapped to the wishbone bus so that the CPU
-  can execute its firmware from flash (XIP). See [SoC Flash](soc_flash.dox).
+  can execute its firmware from flash (XIP). See [SoC Flash](soc_flash.md).
 
 - **Timer** controller, used as systick by the Zephyr RTOS.
 
-- **I2C** controller, used to program the external [Si5351 PLL](som_clocks.dox),
+- **I2C** controller, used to program the external [Si5351 PLL](som_clocks.md),
   MIPI image sensors, USB-C port controller, or anything else connected to I2C.
 
 - **UART** controller, used for printing debug logs or configuration shell.
@@ -87,7 +87,7 @@ Helper cores available MIPI/USB/RAM:
 - **Wrappers around the AXI64 port** offering a FIFO or Stream based interface
   rather than an AXI one.
 
-- **[OctalSPI and HyperRAM](som_memory.dox)** controllers for facilitating the access to this
+- **[OctalSPI and HyperRAM](som_memory.md)** controllers for facilitating the access to this
   external chip on the *Compute* variant.
 
 - TODO: pixel, MIPI and image data processing utilities.
@@ -101,7 +101,7 @@ If the FPGA bitfile gets loaded successfully and is being enabled in the FPGA,
 then the DONE LED will be lit-up.
 
 If it is not lit, you probably did not program the FPGA properly.
-Please program the FPGA using the [instructions provided](som_flash.dox).
+Please program the FPGA using the [instructions provided](som_flash.md).
 
 - A **valid** FPGA image that was **incorrectly** programmed would lead to the
   DONE LED staying off.
@@ -119,7 +119,7 @@ Make sure to also load a
 [Zephyr Example Release](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
 matchiing the RTL Reference Design version you programmed.
 
-Check also the [flash offset at which you program things](som_flash.dox).
+Check also the [flash offset at which you program things](som_flash.md).
 
 Make sure to power cycle the board right after programming it.
 
@@ -135,7 +135,7 @@ If you are an early user, you might require to do this yourself.
 This can be done, for instance, with the Radiant Programmer software part
 of the Radiant package, instead of using `ecpprog`.
 
-The [flash documentation](som_flash.dox) explains how to use the
+The [flash documentation](som_flash.md) explains how to use the
 Radiant Programmer to do it.
 
 
@@ -175,6 +175,4 @@ For any changes to the FPGA or to recompile the FPGA or to use it for debug, you
 Note that you may require additional licenses to complete your work.
 For example, MIPI related components, which you can request from Lattice.
 
-For more details on how to flash the firmware, please refer to [SoM Flash](som_flash.dox).
-
-*/
+For more details on how to flash the firmware, please refer to [SoM Flash](som_flash.md).

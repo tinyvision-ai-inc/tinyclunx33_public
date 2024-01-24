@@ -1,4 +1,4 @@
-/** @page "md_som_usb" SoM USB
+# SoM USB
 
 The LIFCL-33U FPGA part of the CrosslinkU-NX series contains a hard USB3 core
 capable of 5 Gbit/s transfers.
@@ -67,7 +67,7 @@ VexRiscvCPU     ImageSensor     InternalRAM     USB23Core       Host
  │               │               │               │               │
 ```
 
-The [RTL Reference Design](rtl_reference_design.dox) implements this entire
+The [RTL Reference Design](rtl_reference_design.md) implements this entire
 system, and the data flow can be controlled by software, which covers the
 enumeration and subsequent transfer of data with the USB endpoints.
 
@@ -116,5 +116,3 @@ An example Zephyr firmware with the USB core enabled is provided as example:
   Physical core for USB2 and USB3 at 5 Gbit/s
 
 ![](images/som_usb_schematic.png)
-
-*/
