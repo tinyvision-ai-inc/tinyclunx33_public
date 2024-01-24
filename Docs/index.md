@@ -30,7 +30,7 @@ Firmware/RTL:
 - No code, graphical RTL generator with large # of IP blocks (under development)
 
 Development boards:
-- development baseboard for programming/debug
+- devkit for programming/debug
 - tinyCamera board as a basis of a compact camera device
 - extra adapter boards for various camera connectors and expansion
 

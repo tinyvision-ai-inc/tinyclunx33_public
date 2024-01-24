@@ -19,7 +19,7 @@ In the default RTL, the flash is mapped at address `0x2000_0000`.
 
 The command [`ecpprog`](https://github.com/gregdavill/ecpprog) permits to send
 a bitfile to the SoM by using the FTDI present on the
-[BaseBoard](carrier_baseboard.md).
+[Devkit](carrier_devkit.md).
 
 It can be installed as part of
 [OSS Cad Suite](https://github.com/YosysHQ/oss-cad-suite-build#installation)
