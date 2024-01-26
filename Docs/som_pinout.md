@@ -1,4 +1,4 @@
-# Pinout
+# SoM Pinout
 
 ## Pinout of the two connectors
 

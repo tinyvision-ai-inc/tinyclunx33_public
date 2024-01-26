@@ -25,7 +25,7 @@ When using the *Compute* variant of the tinyCLUNX33, an OctalSPI or HyperRAM is
 available as buffer for processing the data or any purpose by the SoM.
 
 It would then be already hooked to the FPGA pins, with the right
-[pinout](pinout.md).
+[pinout](som_pinout.md).
 
 
 ## RTL Integration
