@@ -31,7 +31,7 @@ Mechanical:
 
 ## Quick Start
 
-> **This only apply to the latest version of the [Devkit](carrier_devkit.md) and SoM**
+> **This only applies to the latest version of the [Devkit](carrier_devkit.md) and SoM**
 
 These are the instructions to be able to quickly test the
 hardware, gateware, and firmware.
