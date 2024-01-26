@@ -36,8 +36,7 @@ Development boards:
 
  ![](images/tinyclunx33_block_diagram.drawio.png)
 
-
-## Revisions
+Hardware revisions:
 
 | Rev | Distributed | Sch       | Asm       |
 |-----|-------------|-----------|-----------|
