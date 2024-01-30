@@ -53,7 +53,7 @@ integration of the NXLRAM as well as a controller for the external RAM chip.
   HyperRAM
 
 - AP Memory
-  [APS25616N](https://www.apmemory.com/wp-content/uploads/APM_PSRAM_OPI_Xccela-APS256XXN-OBRx-v1.0-PKG.pdf)
-  Double-Data-Rate OctalSPI PSRAM
+  [APS256XXN-OB9-G](https://www.apmemory.com/wp-content/uploads/APM_PSRAM_OPI_Xccela-APS256XXN-OBRx-v1.0-PKG.pdf)
+  Double-Data-Rate HPI (x16) PSRAM
 
 ![](images/som_ram_schematic.png)
