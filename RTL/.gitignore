@@ -21,3 +21,10 @@ __pycache__
 /temp
 /sim/*
 !/sim/Makefile
+
+# Spinal
+.bsp/
+target/
+project/boot/
+project/project/
+project/plugins/project/

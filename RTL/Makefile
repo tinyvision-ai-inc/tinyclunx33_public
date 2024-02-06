@@ -28,6 +28,9 @@ litex/litex_setup.py:
 	mkdir -p litex
 	wget -O $@ $(LITEX_SETUP_URL)
 
+spinal:
+	sbt run build
+
 software: $(LITEX_SOC_PY)
 	cd litex && $(PYTHON) ../python/litex_top_software.py
 
@@ -35,5 +38,8 @@ gateware: $(LITEX_SOC_PY)
 	cd litex && $(PYTHON) ../python/litex_top_som.py
 	cp litex/build/som/gateware/som.v src
 
-litex.overlay litex.conf: gateware
+litex litex.overlay litex.conf: gateware
 	$(PYTHON) python/litex_json2dts_zephyr.py --dts=litex.overlay --config=litex.conf litex/build/csr.som.json
+
+
+.PHONY: spinal litex
