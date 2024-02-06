@@ -29,7 +29,7 @@ litex/litex_setup.py:
 	wget -O $@ $(LITEX_SETUP_URL)
 
 spinal:
-	sbt run build
+	sbt run
 
 software: $(LITEX_SOC_PY)
 	cd litex && $(PYTHON) ../python/litex_top_software.py
