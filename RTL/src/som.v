@@ -8,8 +8,8 @@
 //
 // Filename   : som.v
 // Device     : build
-// LiteX sha1 : 91fbc79a
-// Date       : 2024-02-06 23:46:41
+// LiteX sha1 : b19d992f
+// Date       : 2024-01-17 10:00:21
 //------------------------------------------------------------------------------
 
 `timescale 1ns / 1ps
@@ -294,6 +294,14 @@ wire    [3:0] adapted_interface_w_payload_strb;
 reg           adapted_interface_w_ready = 1'd0;
 wire          adapted_interface_w_valid;
 wire   [13:0] adr;
+reg    [29:0] array_muxed0 = 30'd0;
+reg    [31:0] array_muxed1 = 32'd0;
+reg     [3:0] array_muxed2 = 4'd0;
+reg           array_muxed3 = 1'd0;
+reg           array_muxed4 = 1'd0;
+reg           array_muxed5 = 1'd0;
+reg     [2:0] array_muxed6 = 3'd0;
+reg     [1:0] array_muxed7 = 2'd0;
 reg     [1:0] axi2axilite_next_state = 2'd0;
 reg     [1:0] axi2axilite_state = 2'd0;
 reg     [2:0] axilite2wishbone_next_state = 3'd0;
@@ -762,7 +770,6 @@ reg           main_ram_cs = 1'd0;
 wire   [31:0] main_ram_datain;
 wire   [31:0] main_ram_dataout;
 reg           main_ram_wren = 1'd0;
-reg     [3:0] master = 4'd0;
 wire          oe;
 wire          por_clk;
 reg           port_ar_first = 1'd0;
@@ -907,14 +914,6 @@ wire          sdrio_clk_6;
 wire          sdrio_clk_7;
 wire          sdrio_clk_8;
 wire          sdrio_clk_9;
-reg    [29:0] self0 = 30'd0;
-reg    [31:0] self1 = 32'd0;
-reg     [3:0] self2 = 4'd0;
-reg           self3 = 1'd0;
-reg           self4 = 1'd0;
-reg           self5 = 1'd0;
-reg     [2:0] self6 = 3'd0;
-reg     [1:0] self7 = 2'd0;
 reg           serial_tx_rs232phytx_next_value1 = 1'd0;
 reg           serial_tx_rs232phytx_next_value_ce1 = 1'd0;
 reg           shared_ack = 1'd0;
@@ -928,7 +927,8 @@ wire          shared_err;
 wire    [3:0] shared_sel;
 wire          shared_stb;
 wire          shared_we;
-reg     [3:0] slaves = 4'd0;
+reg     [3:0] slave_sel = 4'd0;
+reg     [3:0] slave_sel_r = 4'd0;
 reg           soc_rst = 1'd0;
 reg           spiflash_core_cs = 1'd0;
 wire          spiflash_core_internal_port_sink_first;
@@ -1781,14 +1781,14 @@ always @(*) begin
         end
     endcase
 end
-assign shared_adr = self0;
-assign shared_dat_w = self1;
-assign shared_sel = self2;
-assign shared_cyc = self3;
-assign shared_stb = self4;
-assign shared_we = self5;
-assign shared_cti = self6;
-assign shared_bte = self7;
+assign shared_adr = array_muxed0;
+assign shared_dat_w = array_muxed1;
+assign shared_sel = array_muxed2;
+assign shared_cyc = array_muxed3;
+assign shared_stb = array_muxed4;
+assign shared_we = array_muxed5;
+assign shared_cti = array_muxed6;
+assign shared_bte = array_muxed7;
 assign ibus_dat_r = shared_dat_r;
 assign dbus_dat_r = shared_dat_r;
 assign adapted_interface_adapted_interface_dat_r = shared_dat_r;
@@ -1800,11 +1800,11 @@ assign dbus_err = (shared_err & (grant == 1'd1));
 assign adapted_interface_adapted_interface_err = (shared_err & (grant == 2'd2));
 assign request = {adapted_interface_adapted_interface_cyc, dbus_cyc, ibus_cyc};
 always @(*) begin
-    master <= 4'd0;
-    master[0] <= (shared_adr[29:22] == 6'd32);
-    master[1] <= (shared_adr[29:14] == 15'd16384);
-    master[2] <= (shared_adr[29:26] == 4'd11);
-    master[3] <= (shared_adr[29:14] == 16'd57344);
+    slave_sel <= 4'd0;
+    slave_sel[0] <= (shared_adr[29:22] == 6'd32);
+    slave_sel[1] <= (shared_adr[29:14] == 15'd16384);
+    slave_sel[2] <= (shared_adr[29:26] == 4'd11);
+    slave_sel[3] <= (shared_adr[29:14] == 16'd57344);
 end
 assign spiflash_core_litespimmap_bus_adr = shared_adr;
 assign spiflash_core_litespimmap_bus_dat_w = shared_dat_w;
@@ -1834,10 +1834,10 @@ assign interface0_stb = shared_stb;
 assign interface0_we = shared_we;
 assign interface0_cti = shared_cti;
 assign interface0_bte = shared_bte;
-assign spiflash_core_litespimmap_bus_cyc = (shared_cyc & master[0]);
-assign main_ram_bus_cyc = (shared_cyc & master[1]);
-assign port_bus_cyc = (shared_cyc & master[2]);
-assign interface0_cyc = (shared_cyc & master[3]);
+assign spiflash_core_litespimmap_bus_cyc = (shared_cyc & slave_sel[0]);
+assign main_ram_bus_cyc = (shared_cyc & slave_sel[1]);
+assign port_bus_cyc = (shared_cyc & slave_sel[2]);
+assign interface0_cyc = (shared_cyc & slave_sel[3]);
 assign shared_err = (((spiflash_core_litespimmap_bus_err | main_ram_bus_err) | port_bus_err) | interface0_err);
 assign wait_1 = ((shared_stb & shared_cyc) & (~shared_ack));
 always @(*) begin
@@ -1845,7 +1845,7 @@ always @(*) begin
     shared_ack <= 1'd0;
     shared_dat_r <= 32'd0;
     shared_ack <= (((spiflash_core_litespimmap_bus_ack | main_ram_bus_ack) | port_bus_ack) | interface0_ack);
-    shared_dat_r <= (((({32{slaves[0]}} & spiflash_core_litespimmap_bus_dat_r) | ({32{slaves[1]}} & main_ram_bus_dat_r)) | ({32{slaves[2]}} & port_bus_dat_r)) | ({32{slaves[3]}} & interface0_dat_r));
+    shared_dat_r <= (((({32{slave_sel_r[0]}} & spiflash_core_litespimmap_bus_dat_r) | ({32{slave_sel_r[1]}} & main_ram_bus_dat_r)) | ({32{slave_sel_r[2]}} & port_bus_dat_r)) | ({32{slave_sel_r[3]}} & interface0_dat_r));
     if (done) begin
         shared_dat_r <= 32'd4294967295;
         shared_ack <= 1'd1;
@@ -2912,114 +2912,114 @@ assign interface6_bank_bus_dat_w = dat_w;
 assign interface7_bank_bus_dat_w = dat_w;
 assign dat_r = (((((((interface0_bank_bus_dat_r | interface1_bank_bus_dat_r) | interface2_bank_bus_dat_r) | interface3_bank_bus_dat_r) | interface4_bank_bus_dat_r) | interface5_bank_bus_dat_r) | interface6_bank_bus_dat_r) | interface7_bank_bus_dat_r);
 always @(*) begin
-    self0 <= 30'd0;
+    array_muxed0 <= 30'd0;
     case (grant)
         1'd0: begin
-            self0 <= ibus_adr;
+            array_muxed0 <= ibus_adr;
         end
         1'd1: begin
-            self0 <= dbus_adr;
+            array_muxed0 <= dbus_adr;
         end
         default: begin
-            self0 <= adapted_interface_adapted_interface_adr;
+            array_muxed0 <= adapted_interface_adapted_interface_adr;
         end
     endcase
 end
 always @(*) begin
-    self1 <= 32'd0;
+    array_muxed1 <= 32'd0;
     case (grant)
         1'd0: begin
-            self1 <= ibus_dat_w;
+            array_muxed1 <= ibus_dat_w;
         end
         1'd1: begin
-            self1 <= dbus_dat_w;
+            array_muxed1 <= dbus_dat_w;
         end
         default: begin
-            self1 <= adapted_interface_adapted_interface_dat_w;
+            array_muxed1 <= adapted_interface_adapted_interface_dat_w;
         end
     endcase
 end
 always @(*) begin
-    self2 <= 4'd0;
+    array_muxed2 <= 4'd0;
     case (grant)
         1'd0: begin
-            self2 <= ibus_sel;
+            array_muxed2 <= ibus_sel;
         end
         1'd1: begin
-            self2 <= dbus_sel;
+            array_muxed2 <= dbus_sel;
         end
         default: begin
-            self2 <= adapted_interface_adapted_interface_sel;
+            array_muxed2 <= adapted_interface_adapted_interface_sel;
         end
     endcase
 end
 always @(*) begin
-    self3 <= 1'd0;
+    array_muxed3 <= 1'd0;
     case (grant)
         1'd0: begin
-            self3 <= ibus_cyc;
+            array_muxed3 <= ibus_cyc;
         end
         1'd1: begin
-            self3 <= dbus_cyc;
+            array_muxed3 <= dbus_cyc;
         end
         default: begin
-            self3 <= adapted_interface_adapted_interface_cyc;
+            array_muxed3 <= adapted_interface_adapted_interface_cyc;
         end
     endcase
 end
 always @(*) begin
-    self4 <= 1'd0;
+    array_muxed4 <= 1'd0;
     case (grant)
         1'd0: begin
-            self4 <= ibus_stb;
+            array_muxed4 <= ibus_stb;
         end
         1'd1: begin
-            self4 <= dbus_stb;
+            array_muxed4 <= dbus_stb;
         end
         default: begin
-            self4 <= adapted_interface_adapted_interface_stb;
+            array_muxed4 <= adapted_interface_adapted_interface_stb;
         end
     endcase
 end
 always @(*) begin
-    self5 <= 1'd0;
+    array_muxed5 <= 1'd0;
     case (grant)
         1'd0: begin
-            self5 <= ibus_we;
+            array_muxed5 <= ibus_we;
         end
         1'd1: begin
-            self5 <= dbus_we;
+            array_muxed5 <= dbus_we;
         end
         default: begin
-            self5 <= adapted_interface_adapted_interface_we;
+            array_muxed5 <= adapted_interface_adapted_interface_we;
         end
     endcase
 end
 always @(*) begin
-    self6 <= 3'd0;
+    array_muxed6 <= 3'd0;
     case (grant)
         1'd0: begin
-            self6 <= ibus_cti;
+            array_muxed6 <= ibus_cti;
         end
         1'd1: begin
-            self6 <= dbus_cti;
+            array_muxed6 <= dbus_cti;
         end
         default: begin
-            self6 <= adapted_interface_adapted_interface_cti;
+            array_muxed6 <= adapted_interface_adapted_interface_cti;
         end
     endcase
 end
 always @(*) begin
-    self7 <= 2'd0;
+    array_muxed7 <= 2'd0;
     case (grant)
         1'd0: begin
-            self7 <= ibus_bte;
+            array_muxed7 <= ibus_bte;
         end
         1'd1: begin
-            self7 <= dbus_bte;
+            array_muxed7 <= dbus_bte;
         end
         default: begin
-            self7 <= adapted_interface_adapted_interface_bte;
+            array_muxed7 <= adapted_interface_adapted_interface_bte;
         end
     endcase
 end
@@ -3195,7 +3195,7 @@ always @(posedge sys_clk_1) begin
             end
         end
     endcase
-    slaves <= master;
+    slave_sel_r <= slave_sel;
     if (wait_1) begin
         if ((~done)) begin
             count <= (count - 1'd1);
@@ -3732,7 +3732,7 @@ always @(posedge sys_clk_1) begin
         axi2axilite_state <= 2'd0;
         axilite2wishbone_state <= 3'd0;
         grant <= 2'd0;
-        slaves <= 4'd0;
+        slave_sel_r <= 4'd0;
         count <= 20'd1000000;
         rs232phytx_state <= 1'd0;
         rs232phyrx_state <= 1'd0;
@@ -3870,5 +3870,5 @@ assign inferedsdrtristate3__i = spiflash4x_dq[3];
 endmodule
 
 // -----------------------------------------------------------------------------
-//  Auto-Generated by LiteX on 2024-02-06 23:46:41.
+//  Auto-Generated by LiteX on 2024-01-17 10:00:21.
 //------------------------------------------------------------------------------
