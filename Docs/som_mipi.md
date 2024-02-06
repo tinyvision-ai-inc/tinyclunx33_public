@@ -13,6 +13,8 @@ pairs available.
 
 ## Hardware integration
 
+The MIPI pins are capable of 1.2 Gbit/s I/O in differential mode.
+
 Each MIPI interface can have more or less differential pairs for the data lanes,
 and always one dedicated pair for the associated clock signal.
 

@@ -27,8 +27,8 @@ and value for a given clock setup.
 
 ## Hardware integration
 
-The USB differential clock generation is already integrated internally
-in the SoM.
+The USB differential clock generation is already integrated in the SoM.
+Here is the description of how it works internally.
 
 The extra free output clock may be looped back to the external input clock pin,
 so that the PLL provides a clock with an arbitrary frequency directly to the FPGA.
@@ -39,6 +39,9 @@ It is also possible to provide an external input clock source to the FPGA.
 
 
 ## RTL integration
+
+The clocks are already integrated in the RTL.
+Here is the description of how it works internally.
 
 The FPGA can use the external input clock, routed to its pin `H8`, which is
 a primary clock pin (PCLK), usable for DDR I/O.
