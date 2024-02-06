@@ -2,7 +2,7 @@
 	path = Docs/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
 [submodule "RTL/VexRiscv"]
-	path = RTL/ext/VexRiscv
+	path = RTL/ip/VexRiscv
 	url = https://github.com/SpinalHDL/VexRiscv
 [submodule "ip/verilog-i2c"]
 	path = RTL/ip/verilog-i2c

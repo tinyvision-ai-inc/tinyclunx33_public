@@ -16,7 +16,7 @@ lazy val root = (project in file("."))
     Compile / scalaSource := baseDirectory.value / "spinal"
   )
   .dependsOn(
-    RootProject(file("ext/VexRiscv"))
+    RootProject(file("ip/VexRiscv"))
   )
 
 fork := true
