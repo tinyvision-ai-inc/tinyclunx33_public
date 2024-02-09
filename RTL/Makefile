@@ -28,7 +28,7 @@ litex/litex_setup.py:
 	mkdir -p litex
 	wget -O $@ $(LITEX_SETUP_URL)
 
-spinal:
+spinal src/TinyClunx.v: spinal/TinyClunx.scala
 	sbt run
 
 software: $(LITEX_SOC_PY)
@@ -40,6 +40,5 @@ gateware: $(LITEX_SOC_PY)
 
 litex litex.overlay litex.conf: gateware
 	$(PYTHON) python/litex_json2dts_zephyr.py --dts=litex.overlay --config=litex.conf litex/build/csr.som.json
-
 
 .PHONY: spinal litex
