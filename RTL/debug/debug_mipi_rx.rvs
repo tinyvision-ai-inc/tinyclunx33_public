@@ -1,15 +1,15 @@
-<Project Date="2024-01-18" ModBy="Analyzer" Name="E:/Data/local_github/tinyCLUNX33_new/RTL/debug_mipi_rx.rvs">
+<Project Date="2024-02-08" ModBy="Analyzer" Name="E:/Data/local_github/tinyCLUNX33_tag_v3/RTL/debug/debug_mipi_rx.rvs">
  <Core Name="pixel_clk">
   <Setting>
    <Capture NumTrigsCap="1" SamplesPerTrig="256"/>
    <Event CntEnableRun="0" EventCnt="0"/>
-   <TrigSetting PreTrgSamples="" TURadix="0" AND_ALL="0" PostTrgSamples=""/>
+   <TrigSetting PostTrgSamples="" AND_ALL="0" PreTrgSamples="" TURadix="0"/>
   </Setting>
   <Dataset Name="Base">
    <Trace>
     <Sig Name="pixel_lv"/>
     <Sig Name="pixel_fv"/>
-    <Bus Radix="0" Name="pixel_data">
+    <Bus Name="pixel_data" Radix="0">
      <Sig Name="pixel_data:0"/>
      <Sig Name="pixel_data:1"/>
      <Sig Name="pixel_data:2"/>
@@ -21,11 +21,14 @@
      <Sig Name="pixel_data:8"/>
      <Sig Name="pixel_data:9"/>
     </Bus>
+    <Sig Name="i_mipi_to_pixel/rst_n"/>
+    <Sig Name="i_mipi_to_pixel/pll_lock"/>
    </Trace>
    <Trigger>
-    <TU Value="10" Operator="0" ID="1" Radix="0" Name="TU1" Index="1"/>
-    <TU Value="11" Operator="6" ID="2" Radix="0" Name="TU2" Index="2"/>
-    <TE Enable="1" ID="1" Expression="TU2" Name="TE1" Index="1"/>
+    <TU ID="1" Value="10" Operator="0" Index="1" Name="TU1" Radix="0"/>
+    <TU ID="2" Value="11" Operator="6" Index="2" Name="TU2" Radix="0"/>
+    <TE Expression="TU1" ID="1" Enable="1" Index="1" Name="TE1"/>
+    <TE Expression="TU2" ID="2" Enable="1" Index="1" Name="TE2"/>
    </Trigger>
   </Dataset>
  </Core>
@@ -33,12 +36,12 @@
   <Setting>
    <Capture NumTrigsCap="1" SamplesPerTrig="256"/>
    <Event CntEnableRun="0" EventCnt="0"/>
-   <TrigSetting PreTrgSamples="" TURadix="0" AND_ALL="0" PostTrgSamples=""/>
+   <TrigSetting PostTrgSamples="" AND_ALL="0" PreTrgSamples="" TURadix="0"/>
   </Setting>
   <Dataset Name="Base">
    <Trace>
     <Sig Name="i_mipi_to_pixel/tx_rdy_i"/>
-    <Bus Radix="0" Name="i_mipi_to_pixel/rx_wc">
+    <Bus Name="i_mipi_to_pixel/rx_wc" Radix="0">
      <Sig Name="i_mipi_to_pixel/rx_wc:0"/>
      <Sig Name="i_mipi_to_pixel/rx_wc:1"/>
      <Sig Name="i_mipi_to_pixel/rx_wc:2"/>
@@ -56,14 +59,14 @@
      <Sig Name="i_mipi_to_pixel/rx_wc:14"/>
      <Sig Name="i_mipi_to_pixel/rx_wc:15"/>
     </Bus>
-    <Bus Radix="0" Name="i_mipi_to_pixel/rx_term_d_en">
+    <Bus Name="i_mipi_to_pixel/rx_term_d_en" Radix="0">
      <Sig Name="i_mipi_to_pixel/rx_term_d_en:0"/>
      <Sig Name="i_mipi_to_pixel/rx_term_d_en:1"/>
     </Bus>
     <Sig Name="i_mipi_to_pixel/rx_term_clk_en"/>
     <Sig Name="i_mipi_to_pixel/rx_sp_en"/>
     <Sig Name="i_mipi_to_pixel/rx_payload_en"/>
-    <Bus Radix="0" Name="i_mipi_to_pixel/rx_payload">
+    <Bus Name="i_mipi_to_pixel/rx_payload" Radix="0">
      <Sig Name="i_mipi_to_pixel/rx_payload:0"/>
      <Sig Name="i_mipi_to_pixel/rx_payload:1"/>
      <Sig Name="i_mipi_to_pixel/rx_payload:2"/>
@@ -81,11 +84,11 @@
      <Sig Name="i_mipi_to_pixel/rx_payload:14"/>
      <Sig Name="i_mipi_to_pixel/rx_payload:15"/>
     </Bus>
-    <Bus Radix="0" Name="i_mipi_to_pixel/rx_lp_hs_state_d">
+    <Bus Name="i_mipi_to_pixel/rx_lp_hs_state_d" Radix="0">
      <Sig Name="i_mipi_to_pixel/rx_lp_hs_state_d:0"/>
      <Sig Name="i_mipi_to_pixel/rx_lp_hs_state_d:1"/>
     </Bus>
-    <Bus Radix="0" Name="i_mipi_to_pixel/rx_lp_hs_state_clk">
+    <Bus Name="i_mipi_to_pixel/rx_lp_hs_state_clk" Radix="0">
      <Sig Name="i_mipi_to_pixel/rx_lp_hs_state_clk:0"/>
      <Sig Name="i_mipi_to_pixel/rx_lp_hs_state_clk:1"/>
     </Bus>
@@ -94,7 +97,7 @@
     <Sig Name="i_mipi_to_pixel/rx_lp_av_en"/>
     <Sig Name="i_mipi_to_pixel/rx_hs_sync"/>
     <Sig Name="i_mipi_to_pixel/rx_hs_d_en"/>
-    <Bus Radix="0" Name="i_mipi_to_pixel/rx_dt">
+    <Bus Name="i_mipi_to_pixel/rx_dt" Radix="0">
      <Sig Name="i_mipi_to_pixel/rx_dt:0"/>
      <Sig Name="i_mipi_to_pixel/rx_dt:1"/>
      <Sig Name="i_mipi_to_pixel/rx_dt:2"/>
@@ -110,10 +113,10 @@
     <Sig Name="i_mipi_to_pixel/pll_lock"/>
    </Trace>
    <Trigger>
-    <TU Value="01" Operator="0" ID="1" Radix="0" Name="TU1" Index="1"/>
-    <TU Value="000" Operator="0" ID="2" Radix="0" Name="TU2" Index="2"/>
-    <TE Enable="1" ID="1" Expression="TU1" Name="TE1" Index="1"/>
-    <TE Enable="1" ID="2" Expression="TU2" Name="TE2" Index="2"/>
+    <TU ID="1" Value="01" Operator="0" Index="1" Name="TU1" Radix="0"/>
+    <TU ID="2" Value="000" Operator="0" Index="2" Name="TU2" Radix="0"/>
+    <TE Expression="TU1" ID="1" Enable="1" Index="1" Name="TE1"/>
+    <TE Expression="TU2" ID="2" Enable="1" Index="2" Name="TE2"/>
    </Trigger>
   </Dataset>
  </Core>

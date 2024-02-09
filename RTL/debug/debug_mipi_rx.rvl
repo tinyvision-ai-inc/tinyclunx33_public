@@ -1,13 +1,13 @@
-<Project SigType="0" Date="2024-01-17" ModBy="Inserter" Name="E:/Data/local_github/tinyCLUNX33_new/RTL/debug_mipi_rx.rvl">
+<Project Date="2024-02-08" ModBy="Inserter" Name="E:/Data/local_github/tinyCLUNX33_tag_v3/RTL/debug/debug_mipi_rx.rvl" SigType="0">
     <IP Version="1_6_042617"/>
-    <Design DeviceName="LIFCL-33U" Synthesis="lse" DeviceFamily="LIFCL" JTAG="hard" DesignName="fpga_top_som" DesignEntry="Schematic/Verilog HDL"/>
-    <Core InsertDataset="0" Reveal_sig="543353993" ID="0" Insert="1" Name="pixel_clk">
+    <Design DesignEntry="Schematic/Verilog HDL" DeviceName="LIFCL-33U" DeviceFamily="LIFCL" Synthesis="synplify" JTAG="hard" DesignName="fpga_top_som"/>
+    <Core ID="0" InsertDataset="0" Reveal_sig="546394194" Name="pixel_clk" Insert="1">
         <Setting>
-            <Clock SampleEnable="0" SampleClk="pixel_clk" EnableClk_Pri="0" EnableClk=""/>
-            <TraceBuffer Implementation="0" IncTrigSig="0" hasTimeStamp="0" BufferDepth="256" BitTimeStamp="0"/>
+            <Clock EnableClk_Pri="0" SampleClk="pixel_clk" EnableClk="" SampleEnable="0"/>
+            <TraceBuffer hasTimeStamp="0" BufferDepth="256" Implementation="0" IncTrigSig="0" BitTimeStamp="0"/>
             <Capture MinSamplesPerTrig="8" Mode="1"/>
             <Event MaxEventCnt="8" CntEnable="0"/>
-            <TrigOut Polarity="0" TrigOutNetType="1" EnableTrigOut="0" MinPulseWidth="0" TrigOutNet="reveal_debug_fpga_top_som_LA0_net"/>
+            <TrigOut TrigOutNet="reveal_debug_fpga_top_som_LA0_net" Polarity="0" TrigOutNetType="1" MinPulseWidth="0" EnableTrigOut="0"/>
             <DistRAM Disable="0"/>
         </Setting>
         <Dataset Name="Base">
@@ -26,21 +26,24 @@
                     <Sig Type="SIG" Name="pixel_data:8"/>
                     <Sig Type="SIG" Name="pixel_data:9"/>
                 </Bus>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/rst_n"/>
+                <Sig Type="SIG" Name="i_mipi_to_pixel/pll_lock"/>
             </Trace>
             <Trigger>
-                <TU Sig="rx_payload_en,rx_lp_en," ID="1" Serialbits="0" Type="0"/>
-                <TU Sig="pixel_lv,pixel_fv," ID="2" Serialbits="0" Type="0"/>
-                <TE MaxEvnCnt="1" Resource="0" ID="1" MaxSequence="2"/>
+                <TU Type="0" Sig="rx_payload_en,rx_lp_en," ID="1" Serialbits="0"/>
+                <TU Type="0" Sig="pixel_lv,pixel_fv," ID="2" Serialbits="0"/>
+                <TE ID="1" MaxEvnCnt="1" Resource="0" MaxSequence="2"/>
+                <TE ID="2" MaxEvnCnt="1" Resource="0" MaxSequence="2"/>
             </Trigger>
         </Dataset>
     </Core>
-    <Core InsertDataset="0" Reveal_sig="543353994" ID="1" Insert="1" Name="rx_byte_clk">
+    <Core ID="1" InsertDataset="0" Reveal_sig="546394195" Name="rx_byte_clk" Insert="1">
         <Setting>
-            <Clock SampleEnable="0" SampleClk="i_mipi_to_pixel/byte_clk" EnableClk_Pri="0" EnableClk=""/>
-            <TraceBuffer Implementation="0" IncTrigSig="0" hasTimeStamp="0" BufferDepth="256" BitTimeStamp="0"/>
+            <Clock EnableClk_Pri="0" SampleClk="i_mipi_to_pixel/byte_clk" EnableClk="" SampleEnable="0"/>
+            <TraceBuffer hasTimeStamp="0" BufferDepth="256" Implementation="0" IncTrigSig="0" BitTimeStamp="0"/>
             <Capture MinSamplesPerTrig="8" Mode="1"/>
             <Event MaxEventCnt="8" CntEnable="0"/>
-            <TrigOut Polarity="0" TrigOutNetType="1" EnableTrigOut="0" MinPulseWidth="0" TrigOutNet="reveal_debug_fpga_top_som_LA1_net"/>
+            <TrigOut TrigOutNet="reveal_debug_fpga_top_som_LA1_net" Polarity="0" TrigOutNetType="1" MinPulseWidth="0" EnableTrigOut="0"/>
             <DistRAM Disable="0"/>
         </Setting>
         <Dataset Name="Base">
@@ -118,10 +121,10 @@
                 <Sig Type="SIG" Name="i_mipi_to_pixel/pll_lock"/>
             </Trace>
             <Trigger>
-                <TU Sig="i_mipi_to_pixel/rx_sp_en,i_mipi_to_pixel/rx_lp_en," ID="1" Serialbits="0" Type="0"/>
-                <TU Sig="i_mipi_to_pixel/rx_term_clk_en,(BUS)i_mipi_to_pixel/rx_term_d_en[1:0]," ID="2" Serialbits="0" Type="0"/>
-                <TE MaxEvnCnt="1" Resource="0" ID="1" MaxSequence="2"/>
-                <TE MaxEvnCnt="1" Resource="0" ID="2" MaxSequence="2"/>
+                <TU Type="0" Sig="i_mipi_to_pixel/rx_sp_en,i_mipi_to_pixel/rx_lp_en," ID="1" Serialbits="0"/>
+                <TU Type="0" Sig="i_mipi_to_pixel/rx_term_clk_en,(BUS)i_mipi_to_pixel/rx_term_d_en[1:0]," ID="2" Serialbits="0"/>
+                <TE ID="1" MaxEvnCnt="1" Resource="0" MaxSequence="2"/>
+                <TE ID="2" MaxEvnCnt="1" Resource="0" MaxSequence="2"/>
             </Trigger>
         </Dataset>
     </Core>
