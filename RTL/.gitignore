@@ -9,13 +9,14 @@
 *.fbi
 *.html
 *.history
+*.log
 .metadata
 .recovery
 __pycache__
 /.venv
 /build
 /impl
-/impl_1
+/impl_no_mipi
 /litex
 /transcript
 /temp

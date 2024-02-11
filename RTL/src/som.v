@@ -9,7 +9,7 @@
 // Filename   : som.v
 // Device     : build
 // LiteX sha1 : b19d992f
-// Date       : 2024-01-17 10:00:21
+// Date       : 2024-02-10 20:02:23
 //------------------------------------------------------------------------------
 
 `timescale 1ns / 1ps
@@ -19,50 +19,6 @@
 //------------------------------------------------------------------------------
 
 module som (
-    input  wire   [31:0] axi0_araddr,
-    input  wire    [1:0] axi0_arburst,
-    input  wire    [3:0] axi0_arcache,
-    input  wire    [7:0] axi0_arid,
-    input  wire    [7:0] axi0_arlen,
-    input  wire    [1:0] axi0_arlock,
-    input  wire    [2:0] axi0_arprot,
-    input  wire    [3:0] axi0_arqos,
-    output wire          axi0_arready,
-    input  wire    [3:0] axi0_arregion,
-    input  wire    [2:0] axi0_arsize,
-    input  wire          axi0_aruser,
-    input  wire          axi0_arvalid,
-    input  wire   [31:0] axi0_awaddr,
-    input  wire    [1:0] axi0_awburst,
-    input  wire    [3:0] axi0_awcache,
-    input  wire    [7:0] axi0_awid,
-    input  wire    [7:0] axi0_awlen,
-    input  wire    [1:0] axi0_awlock,
-    input  wire    [2:0] axi0_awprot,
-    input  wire    [3:0] axi0_awqos,
-    output wire          axi0_awready,
-    input  wire    [3:0] axi0_awregion,
-    input  wire    [2:0] axi0_awsize,
-    input  wire          axi0_awuser,
-    input  wire          axi0_awvalid,
-    output wire    [7:0] axi0_bid,
-    input  wire          axi0_bready,
-    output wire    [1:0] axi0_bresp,
-    output wire          axi0_buser,
-    output wire          axi0_bvalid,
-    output wire   [63:0] axi0_rdata,
-    output wire    [7:0] axi0_rid,
-    output wire          axi0_rlast,
-    input  wire          axi0_rready,
-    output wire    [1:0] axi0_rresp,
-    output wire          axi0_ruser,
-    output wire          axi0_rvalid,
-    input  wire   [63:0] axi0_wdata,
-    input  wire          axi0_wlast,
-    output wire          axi0_wready,
-    input  wire    [7:0] axi0_wstrb,
-    input  wire          axi0_wuser,
-    input  wire          axi0_wvalid,
     input  wire          framectl0_irq,
     inout  wire          i2c0_scl,
     inout  wire          i2c0_sda,
@@ -96,23 +52,6 @@ module som (
 MainSoC
 └─── crg (CRG)
 └─── bus (SoCBusHandler)
-│    └─── axiconverter_0* (AXIConverter)
-│    │    └─── axidownconverter_0* (AXIDownConverter)
-│    │    │    └─── strideconverter_0* (StrideConverter)
-│    │    │    │    └─── converter_0* (Converter)
-│    │    │    │    │    └─── _downconverter_0* (_DownConverter)
-│    │    │    └─── strideconverter_1* (StrideConverter)
-│    │    │    │    └─── converter_0* (Converter)
-│    │    │    │    │    └─── _upconverter_0* (_UpConverter)
-│    └─── axi2wishbone_0* (AXI2Wishbone)
-│    │    └─── axi2axilite_0* (AXI2AXILite)
-│    │    │    └─── buffer_0* (Buffer)
-│    │    │    │    └─── pipe_valid (PipeValid)
-│    │    │    │    └─── pipeline (Pipeline)
-│    │    │    └─── axiburst2beat_0* (AXIBurst2Beat)
-│    │    │    └─── fsm (FSM)
-│    │    └─── axilite2wishbone_0* (AXILite2Wishbone)
-│    │    │    └─── fsm (FSM)
 │    └─── _interconnect (InterconnectShared)
 │    │    └─── arbiter (Arbiter)
 │    │    │    └─── rr (RoundRobin)
@@ -162,7 +101,6 @@ MainSoC
 └─── main_ram (NXLRAM)
 │    └─── [SP512K]
 └─── verilogwbport_0* (VerilogWBPort)
-└─── verilogaxiport_0* (VerilogAXIPort)
 └─── usb23 (USB23)
 │    └─── ev (EventManager)
 │    │    └─── eventsourceprocess_0* (EventSourceProcess)
@@ -224,75 +162,6 @@ reg           _r_status = 1'd0;
 wire          _r_we;
 reg           _w_re = 1'd0;
 reg     [2:0] _w_storage = 3'd5;
-wire          adapted_interface_adapted_interface_ack;
-reg    [29:0] adapted_interface_adapted_interface_adr = 30'd0;
-reg     [1:0] adapted_interface_adapted_interface_bte = 2'd0;
-reg     [2:0] adapted_interface_adapted_interface_cti = 3'd0;
-reg           adapted_interface_adapted_interface_cyc = 1'd0;
-wire   [31:0] adapted_interface_adapted_interface_dat_r;
-reg    [31:0] adapted_interface_adapted_interface_dat_w = 32'd0;
-wire          adapted_interface_adapted_interface_err;
-reg     [3:0] adapted_interface_adapted_interface_sel = 4'd0;
-reg           adapted_interface_adapted_interface_stb = 1'd0;
-reg           adapted_interface_adapted_interface_we = 1'd0;
-wire          adapted_interface_ar_first;
-wire          adapted_interface_ar_last;
-wire          adapted_interface_ar_param_dest;
-wire          adapted_interface_ar_param_id;
-wire          adapted_interface_ar_param_user;
-reg    [31:0] adapted_interface_ar_payload_addr = 32'd0;
-reg     [1:0] adapted_interface_ar_payload_burst = 2'd0;
-wire    [3:0] adapted_interface_ar_payload_cache;
-wire    [7:0] adapted_interface_ar_payload_len;
-wire          adapted_interface_ar_payload_lock;
-wire    [2:0] adapted_interface_ar_payload_prot;
-wire    [3:0] adapted_interface_ar_payload_qos;
-wire    [3:0] adapted_interface_ar_payload_region;
-reg     [2:0] adapted_interface_ar_payload_size = 3'd0;
-reg           adapted_interface_ar_ready = 1'd0;
-wire          adapted_interface_ar_valid;
-wire          adapted_interface_aw_first;
-wire          adapted_interface_aw_last;
-wire          adapted_interface_aw_param_dest;
-wire          adapted_interface_aw_param_id;
-wire          adapted_interface_aw_param_user;
-reg    [31:0] adapted_interface_aw_payload_addr = 32'd0;
-reg     [1:0] adapted_interface_aw_payload_burst = 2'd0;
-wire    [3:0] adapted_interface_aw_payload_cache;
-wire    [7:0] adapted_interface_aw_payload_len;
-wire          adapted_interface_aw_payload_lock;
-wire    [2:0] adapted_interface_aw_payload_prot;
-wire    [3:0] adapted_interface_aw_payload_qos;
-wire    [3:0] adapted_interface_aw_payload_region;
-reg     [2:0] adapted_interface_aw_payload_size = 3'd0;
-reg           adapted_interface_aw_ready = 1'd0;
-wire          adapted_interface_aw_valid;
-reg           adapted_interface_b_first = 1'd0;
-reg           adapted_interface_b_last = 1'd0;
-reg           adapted_interface_b_param_dest = 1'd0;
-reg           adapted_interface_b_param_id = 1'd0;
-reg           adapted_interface_b_param_user = 1'd0;
-reg     [1:0] adapted_interface_b_payload_resp = 2'd0;
-wire          adapted_interface_b_ready;
-reg           adapted_interface_b_valid = 1'd0;
-reg           adapted_interface_r_first = 1'd0;
-reg           adapted_interface_r_last = 1'd0;
-reg           adapted_interface_r_param_dest = 1'd0;
-reg           adapted_interface_r_param_id = 1'd0;
-reg           adapted_interface_r_param_user = 1'd0;
-reg    [31:0] adapted_interface_r_payload_data = 32'd0;
-reg     [1:0] adapted_interface_r_payload_resp = 2'd0;
-wire          adapted_interface_r_ready;
-reg           adapted_interface_r_valid = 1'd0;
-wire          adapted_interface_w_first;
-wire          adapted_interface_w_last;
-wire          adapted_interface_w_param_dest;
-wire          adapted_interface_w_param_id;
-wire          adapted_interface_w_param_user;
-wire   [31:0] adapted_interface_w_payload_data;
-wire    [3:0] adapted_interface_w_payload_strb;
-reg           adapted_interface_w_ready = 1'd0;
-wire          adapted_interface_w_valid;
 wire   [13:0] adr;
 reg    [29:0] array_muxed0 = 30'd0;
 reg    [31:0] array_muxed1 = 32'd0;
@@ -302,131 +171,6 @@ reg           array_muxed4 = 1'd0;
 reg           array_muxed5 = 1'd0;
 reg     [2:0] array_muxed6 = 3'd0;
 reg     [1:0] array_muxed7 = 2'd0;
-reg     [1:0] axi2axilite_next_state = 2'd0;
-reg     [1:0] axi2axilite_state = 2'd0;
-reg     [2:0] axilite2wishbone_next_state = 3'd0;
-reg     [2:0] axilite2wishbone_state = 3'd0;
-reg    [31:0] bridge_ar_payload_addr = 32'd0;
-reg           bridge_ar_ready = 1'd0;
-reg           bridge_ar_valid = 1'd0;
-reg    [31:0] bridge_aw_payload_addr = 32'd0;
-reg           bridge_aw_ready = 1'd0;
-reg           bridge_aw_valid = 1'd0;
-wire          bridge_axi2axi_lite_ax_beat_first;
-wire          bridge_axi2axi_lite_ax_beat_last;
-wire          bridge_axi2axi_lite_ax_beat_param_id;
-wire   [31:0] bridge_axi2axi_lite_ax_beat_payload_addr;
-reg           bridge_axi2axi_lite_ax_beat_ready = 1'd0;
-wire          bridge_axi2axi_lite_ax_beat_valid;
-reg           bridge_axi2axi_lite_ax_burst_first = 1'd0;
-reg           bridge_axi2axi_lite_ax_burst_last = 1'd0;
-reg           bridge_axi2axi_lite_ax_burst_param_dest = 1'd0;
-reg           bridge_axi2axi_lite_ax_burst_param_id = 1'd0;
-reg           bridge_axi2axi_lite_ax_burst_param_user = 1'd0;
-reg    [31:0] bridge_axi2axi_lite_ax_burst_payload_addr = 32'd0;
-reg     [1:0] bridge_axi2axi_lite_ax_burst_payload_burst = 2'd0;
-reg     [3:0] bridge_axi2axi_lite_ax_burst_payload_cache = 4'd0;
-reg     [7:0] bridge_axi2axi_lite_ax_burst_payload_len = 8'd0;
-reg           bridge_axi2axi_lite_ax_burst_payload_lock = 1'd0;
-reg     [2:0] bridge_axi2axi_lite_ax_burst_payload_prot = 3'd0;
-reg     [3:0] bridge_axi2axi_lite_ax_burst_payload_qos = 4'd0;
-reg     [3:0] bridge_axi2axi_lite_ax_burst_payload_region = 4'd0;
-reg     [2:0] bridge_axi2axi_lite_ax_burst_payload_size = 3'd0;
-wire          bridge_axi2axi_lite_ax_burst_ready;
-reg           bridge_axi2axi_lite_ax_burst_valid = 1'd0;
-reg     [7:0] bridge_axi2axi_lite_beat_count = 8'd0;
-reg  signed  [12:0] bridge_axi2axi_lite_beat_offset = 13'd0;
-wire   [11:0] bridge_axi2axi_lite_beat_size;
-wire   [11:0] bridge_axi2axi_lite_beat_wrap;
-reg           bridge_axi2axi_lite_cmd_done = 1'd0;
-reg           bridge_axi2axi_lite_cmd_done_axi2axilite_next_value0 = 1'd0;
-reg           bridge_axi2axi_lite_cmd_done_axi2axilite_next_value_ce0 = 1'd0;
-reg           bridge_axi2axi_lite_last_ar_aw_n = 1'd0;
-reg           bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value1 = 1'd0;
-reg           bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value_ce1 = 1'd0;
-wire          bridge_axi2axi_lite_pipe_valid_sink_first;
-wire          bridge_axi2axi_lite_pipe_valid_sink_last;
-wire          bridge_axi2axi_lite_pipe_valid_sink_param_dest;
-wire          bridge_axi2axi_lite_pipe_valid_sink_param_id;
-wire          bridge_axi2axi_lite_pipe_valid_sink_param_user;
-wire   [31:0] bridge_axi2axi_lite_pipe_valid_sink_payload_addr;
-wire    [1:0] bridge_axi2axi_lite_pipe_valid_sink_payload_burst;
-wire    [3:0] bridge_axi2axi_lite_pipe_valid_sink_payload_cache;
-wire    [7:0] bridge_axi2axi_lite_pipe_valid_sink_payload_len;
-wire          bridge_axi2axi_lite_pipe_valid_sink_payload_lock;
-wire    [2:0] bridge_axi2axi_lite_pipe_valid_sink_payload_prot;
-wire    [3:0] bridge_axi2axi_lite_pipe_valid_sink_payload_qos;
-wire    [3:0] bridge_axi2axi_lite_pipe_valid_sink_payload_region;
-wire    [2:0] bridge_axi2axi_lite_pipe_valid_sink_payload_size;
-wire          bridge_axi2axi_lite_pipe_valid_sink_ready;
-wire          bridge_axi2axi_lite_pipe_valid_sink_valid;
-reg           bridge_axi2axi_lite_pipe_valid_source_first = 1'd0;
-reg           bridge_axi2axi_lite_pipe_valid_source_last = 1'd0;
-reg           bridge_axi2axi_lite_pipe_valid_source_param_dest = 1'd0;
-reg           bridge_axi2axi_lite_pipe_valid_source_param_id = 1'd0;
-reg           bridge_axi2axi_lite_pipe_valid_source_param_user = 1'd0;
-reg    [31:0] bridge_axi2axi_lite_pipe_valid_source_payload_addr = 32'd0;
-reg     [1:0] bridge_axi2axi_lite_pipe_valid_source_payload_burst = 2'd0;
-reg     [3:0] bridge_axi2axi_lite_pipe_valid_source_payload_cache = 4'd0;
-reg     [7:0] bridge_axi2axi_lite_pipe_valid_source_payload_len = 8'd0;
-reg           bridge_axi2axi_lite_pipe_valid_source_payload_lock = 1'd0;
-reg     [2:0] bridge_axi2axi_lite_pipe_valid_source_payload_prot = 3'd0;
-reg     [3:0] bridge_axi2axi_lite_pipe_valid_source_payload_qos = 4'd0;
-reg     [3:0] bridge_axi2axi_lite_pipe_valid_source_payload_region = 4'd0;
-reg     [2:0] bridge_axi2axi_lite_pipe_valid_source_payload_size = 3'd0;
-wire          bridge_axi2axi_lite_pipe_valid_source_ready;
-reg           bridge_axi2axi_lite_pipe_valid_source_valid = 1'd0;
-wire          bridge_axi2axi_lite_sink_sink_first;
-wire          bridge_axi2axi_lite_sink_sink_last;
-wire          bridge_axi2axi_lite_sink_sink_param_dest;
-wire          bridge_axi2axi_lite_sink_sink_param_id;
-wire          bridge_axi2axi_lite_sink_sink_param_user;
-wire   [31:0] bridge_axi2axi_lite_sink_sink_payload_addr;
-wire    [1:0] bridge_axi2axi_lite_sink_sink_payload_burst;
-wire    [3:0] bridge_axi2axi_lite_sink_sink_payload_cache;
-wire    [7:0] bridge_axi2axi_lite_sink_sink_payload_len;
-wire          bridge_axi2axi_lite_sink_sink_payload_lock;
-wire    [2:0] bridge_axi2axi_lite_sink_sink_payload_prot;
-wire    [3:0] bridge_axi2axi_lite_sink_sink_payload_qos;
-wire    [3:0] bridge_axi2axi_lite_sink_sink_payload_region;
-wire    [2:0] bridge_axi2axi_lite_sink_sink_payload_size;
-wire          bridge_axi2axi_lite_sink_sink_ready;
-wire          bridge_axi2axi_lite_sink_sink_valid;
-wire          bridge_axi2axi_lite_source_source_first;
-wire          bridge_axi2axi_lite_source_source_last;
-wire          bridge_axi2axi_lite_source_source_param_dest;
-wire          bridge_axi2axi_lite_source_source_param_id;
-wire          bridge_axi2axi_lite_source_source_param_user;
-wire   [31:0] bridge_axi2axi_lite_source_source_payload_addr;
-wire    [1:0] bridge_axi2axi_lite_source_source_payload_burst;
-wire    [3:0] bridge_axi2axi_lite_source_source_payload_cache;
-wire    [7:0] bridge_axi2axi_lite_source_source_payload_len;
-wire          bridge_axi2axi_lite_source_source_payload_lock;
-wire    [2:0] bridge_axi2axi_lite_source_source_payload_prot;
-wire    [3:0] bridge_axi2axi_lite_source_source_payload_qos;
-wire    [3:0] bridge_axi2axi_lite_source_source_payload_region;
-wire    [2:0] bridge_axi2axi_lite_source_source_payload_size;
-reg           bridge_axi2axi_lite_source_source_ready = 1'd0;
-wire          bridge_axi2axi_lite_source_source_valid;
-reg    [31:0] bridge_axi_lite2wishbone_data = 32'd0;
-reg    [31:0] bridge_axi_lite2wishbone_data_axilite2wishbone_next_value1 = 32'd0;
-reg           bridge_axi_lite2wishbone_data_axilite2wishbone_next_value_ce1 = 1'd0;
-reg           bridge_axi_lite2wishbone_last_ar_aw_n = 1'd0;
-reg           bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value0 = 1'd0;
-reg           bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value_ce0 = 1'd0;
-wire   [31:0] bridge_axi_lite2wishbone_r_addr;
-wire   [31:0] bridge_axi_lite2wishbone_w_addr;
-reg     [1:0] bridge_b_payload_resp = 2'd0;
-wire          bridge_b_ready;
-reg           bridge_b_valid = 1'd0;
-reg    [31:0] bridge_r_payload_data = 32'd0;
-reg     [1:0] bridge_r_payload_resp = 2'd0;
-reg           bridge_r_ready = 1'd0;
-reg           bridge_r_valid = 1'd0;
-reg    [31:0] bridge_w_payload_data = 32'd0;
-reg     [3:0] bridge_w_payload_strb = 4'd0;
-reg           bridge_w_ready = 1'd0;
-reg           bridge_w_valid = 1'd0;
 wire          bus_error;
 reg    [31:0] bus_errors = 32'd0;
 reg           bus_errors_re = 1'd0;
@@ -599,7 +343,7 @@ reg           framectl_status_status = 1'd0;
 wire          framectl_status_we;
 wire          framectl_trigger;
 reg           framectl_trigger_d = 1'd0;
-reg     [1:0] grant = 2'd0;
+reg           grant = 1'd0;
 wire          ibus_ack;
 wire   [29:0] ibus_adr;
 wire    [1:0] ibus_bte;
@@ -772,46 +516,6 @@ wire   [31:0] main_ram_dataout;
 reg           main_ram_wren = 1'd0;
 wire          oe;
 wire          por_clk;
-reg           port_ar_first = 1'd0;
-reg           port_ar_last = 1'd0;
-reg           port_ar_param_dest = 1'd0;
-wire          port_ar_param_id;
-wire          port_ar_param_user;
-wire   [31:0] port_ar_payload_addr;
-wire    [1:0] port_ar_payload_burst;
-wire    [3:0] port_ar_payload_cache;
-wire    [7:0] port_ar_payload_len;
-wire          port_ar_payload_lock;
-wire    [2:0] port_ar_payload_prot;
-wire    [3:0] port_ar_payload_qos;
-wire    [3:0] port_ar_payload_region;
-wire    [2:0] port_ar_payload_size;
-wire          port_ar_ready;
-wire          port_ar_valid;
-reg           port_aw_first = 1'd0;
-reg           port_aw_last = 1'd0;
-reg           port_aw_param_dest = 1'd0;
-wire          port_aw_param_id;
-wire          port_aw_param_user;
-wire   [31:0] port_aw_payload_addr;
-wire    [1:0] port_aw_payload_burst;
-wire    [3:0] port_aw_payload_cache;
-wire    [7:0] port_aw_payload_len;
-wire          port_aw_payload_lock;
-wire    [2:0] port_aw_payload_prot;
-wire    [3:0] port_aw_payload_qos;
-wire    [3:0] port_aw_payload_region;
-wire    [2:0] port_aw_payload_size;
-wire          port_aw_ready;
-wire          port_aw_valid;
-wire          port_b_first;
-wire          port_b_last;
-wire          port_b_param_dest;
-wire          port_b_param_id;
-wire          port_b_param_user;
-wire    [1:0] port_b_payload_resp;
-wire          port_b_ready;
-wire          port_b_valid;
 wire          port_bus_ack;
 wire   [29:0] port_bus_adr;
 wire    [1:0] port_bus_bte;
@@ -823,56 +527,9 @@ wire          port_bus_err;
 wire    [3:0] port_bus_sel;
 wire          port_bus_stb;
 wire          port_bus_we;
-wire          port_r_first;
-wire          port_r_last;
-reg           port_r_param_dest = 1'd0;
-reg           port_r_param_id = 1'd0;
-reg           port_r_param_user = 1'd0;
-wire   [63:0] port_r_payload_data;
-reg     [1:0] port_r_payload_resp = 2'd0;
-wire          port_r_ready;
-wire          port_r_valid;
-reg           port_w_first = 1'd0;
-wire          port_w_last;
-reg           port_w_param_dest = 1'd0;
-reg           port_w_param_id = 1'd0;
-wire          port_w_param_user;
-wire   [63:0] port_w_payload_data;
-wire    [7:0] port_w_payload_strb;
-wire          port_w_ready;
-wire          port_w_valid;
-reg           r_converter_converter_demux = 1'd0;
-wire          r_converter_converter_load_part;
-wire          r_converter_converter_sink_first;
-wire          r_converter_converter_sink_last;
-wire   [31:0] r_converter_converter_sink_payload_data;
-wire          r_converter_converter_sink_ready;
-wire          r_converter_converter_sink_valid;
-reg           r_converter_converter_source_first = 1'd0;
-reg           r_converter_converter_source_last = 1'd0;
-reg    [63:0] r_converter_converter_source_payload_data = 64'd0;
-reg     [1:0] r_converter_converter_source_payload_valid_token_count = 2'd0;
-wire          r_converter_converter_source_ready;
-wire          r_converter_converter_source_valid;
-reg           r_converter_converter_strobe_all = 1'd0;
-wire          r_converter_sink_first;
-wire          r_converter_sink_last;
-wire   [31:0] r_converter_sink_payload_data;
-wire          r_converter_sink_ready;
-wire          r_converter_sink_valid;
-wire          r_converter_source_first;
-wire          r_converter_source_last;
-reg    [63:0] r_converter_source_payload_data = 64'd0;
-wire          r_converter_source_ready;
-wire          r_converter_source_source_first;
-wire          r_converter_source_source_last;
-wire   [63:0] r_converter_source_source_payload_data;
-wire          r_converter_source_source_ready;
-wire          r_converter_source_source_valid;
-wire          r_converter_source_valid;
 reg           regs0 = 1'd0;
 reg           regs1 = 1'd0;
-wire    [2:0] request;
+wire    [1:0] request;
 wire          reset;
 reg           reset_re = 1'd0;
 reg     [1:0] reset_storage = 2'd0;
@@ -1207,37 +864,6 @@ wire          usb23_usb0;
 wire          usb23_usb1;
 wire          usb23_usb2;
 reg    [31:0] vexriscv = 32'd537919488;
-wire          w_converter_converter_first;
-wire          w_converter_converter_last;
-reg           w_converter_converter_mux = 1'd0;
-wire          w_converter_converter_sink_first;
-wire          w_converter_converter_sink_last;
-reg    [71:0] w_converter_converter_sink_payload_data = 72'd0;
-wire          w_converter_converter_sink_ready;
-wire          w_converter_converter_sink_valid;
-wire          w_converter_converter_source_first;
-wire          w_converter_converter_source_last;
-reg    [35:0] w_converter_converter_source_payload_data = 36'd0;
-wire          w_converter_converter_source_payload_valid_token_count;
-wire          w_converter_converter_source_ready;
-wire          w_converter_converter_source_valid;
-wire          w_converter_sink_first;
-wire          w_converter_sink_last;
-wire   [63:0] w_converter_sink_payload_data;
-wire    [7:0] w_converter_sink_payload_strb;
-wire          w_converter_sink_ready;
-wire          w_converter_sink_valid;
-wire          w_converter_source_first;
-wire          w_converter_source_last;
-wire   [31:0] w_converter_source_payload_data;
-wire    [3:0] w_converter_source_payload_strb;
-wire          w_converter_source_ready;
-wire          w_converter_source_source_first;
-wire          w_converter_source_source_last;
-wire   [35:0] w_converter_source_source_payload_data;
-wire          w_converter_source_source_ready;
-wire          w_converter_source_source_valid;
-wire          w_converter_source_valid;
 wire          wait_1;
 wire          we;
 reg           wishbone2csr_next_state = 1'd0;
@@ -1259,528 +885,6 @@ end
 assign sys_clk_1 = sys_clk;
 assign por_clk = sys_clk;
 assign sys_rst_1 = int_rst;
-assign adapted_interface_aw_valid = port_aw_valid;
-assign port_aw_ready = adapted_interface_aw_ready;
-assign adapted_interface_aw_first = port_aw_first;
-assign adapted_interface_aw_last = port_aw_last;
-assign adapted_interface_aw_payload_lock = port_aw_payload_lock;
-assign adapted_interface_aw_payload_prot = port_aw_payload_prot;
-assign adapted_interface_aw_payload_cache = port_aw_payload_cache;
-assign adapted_interface_aw_payload_qos = port_aw_payload_qos;
-assign adapted_interface_aw_payload_region = port_aw_payload_region;
-assign adapted_interface_aw_param_id = port_aw_param_id;
-assign adapted_interface_aw_param_dest = port_aw_param_dest;
-assign adapted_interface_aw_param_user = port_aw_param_user;
-always @(*) begin
-    adapted_interface_aw_payload_addr <= 32'd0;
-    adapted_interface_aw_payload_addr <= port_aw_payload_addr;
-    adapted_interface_aw_payload_addr[2:0] <= 1'd0;
-end
-assign adapted_interface_aw_payload_len = (((port_aw_payload_len + 1'd1) <<< 1'd1) - 1'd1);
-always @(*) begin
-    adapted_interface_aw_payload_size <= 3'd0;
-    if ((port_aw_payload_size <= 2'd2)) begin
-        adapted_interface_aw_payload_size <= port_aw_payload_size;
-    end else begin
-        adapted_interface_aw_payload_size <= 2'd2;
-    end
-end
-always @(*) begin
-    adapted_interface_aw_payload_burst <= 2'd0;
-    case (port_aw_payload_burst)
-        1'd0: begin
-            adapted_interface_aw_payload_burst <= 1'd1;
-        end
-        1'd1: begin
-            adapted_interface_aw_payload_burst <= 1'd1;
-        end
-        2'd2: begin
-            adapted_interface_aw_payload_burst <= 2'd2;
-        end
-        2'd3: begin
-            adapted_interface_aw_payload_burst <= 2'd3;
-        end
-    endcase
-end
-assign w_converter_sink_valid = port_w_valid;
-assign port_w_ready = w_converter_sink_ready;
-assign w_converter_sink_first = port_w_first;
-assign w_converter_sink_last = port_w_last;
-assign w_converter_sink_payload_data = port_w_payload_data;
-assign w_converter_sink_payload_strb = port_w_payload_strb;
-assign adapted_interface_w_valid = w_converter_source_valid;
-assign w_converter_source_ready = adapted_interface_w_ready;
-assign adapted_interface_w_first = w_converter_source_first;
-assign adapted_interface_w_last = w_converter_source_last;
-assign adapted_interface_w_payload_data = w_converter_source_payload_data;
-assign adapted_interface_w_payload_strb = w_converter_source_payload_strb;
-assign adapted_interface_w_param_id = port_w_param_id;
-assign adapted_interface_w_param_dest = port_w_param_dest;
-assign adapted_interface_w_param_user = port_w_param_user;
-assign port_b_valid = adapted_interface_b_valid;
-assign adapted_interface_b_ready = port_b_ready;
-assign port_b_first = adapted_interface_b_first;
-assign port_b_last = adapted_interface_b_last;
-assign port_b_payload_resp = adapted_interface_b_payload_resp;
-assign port_b_param_id = adapted_interface_b_param_id;
-assign port_b_param_dest = adapted_interface_b_param_dest;
-assign port_b_param_user = adapted_interface_b_param_user;
-assign adapted_interface_ar_valid = port_ar_valid;
-assign port_ar_ready = adapted_interface_ar_ready;
-assign adapted_interface_ar_first = port_ar_first;
-assign adapted_interface_ar_last = port_ar_last;
-assign adapted_interface_ar_payload_lock = port_ar_payload_lock;
-assign adapted_interface_ar_payload_prot = port_ar_payload_prot;
-assign adapted_interface_ar_payload_cache = port_ar_payload_cache;
-assign adapted_interface_ar_payload_qos = port_ar_payload_qos;
-assign adapted_interface_ar_payload_region = port_ar_payload_region;
-assign adapted_interface_ar_param_id = port_ar_param_id;
-assign adapted_interface_ar_param_dest = port_ar_param_dest;
-assign adapted_interface_ar_param_user = port_ar_param_user;
-always @(*) begin
-    adapted_interface_ar_payload_addr <= 32'd0;
-    adapted_interface_ar_payload_addr <= port_ar_payload_addr;
-    adapted_interface_ar_payload_addr[2:0] <= 1'd0;
-end
-assign adapted_interface_ar_payload_len = (((port_ar_payload_len + 1'd1) <<< 1'd1) - 1'd1);
-always @(*) begin
-    adapted_interface_ar_payload_size <= 3'd0;
-    if ((port_ar_payload_size <= 2'd2)) begin
-        adapted_interface_ar_payload_size <= port_ar_payload_size;
-    end else begin
-        adapted_interface_ar_payload_size <= 2'd2;
-    end
-end
-always @(*) begin
-    adapted_interface_ar_payload_burst <= 2'd0;
-    case (port_ar_payload_burst)
-        1'd0: begin
-            adapted_interface_ar_payload_burst <= 1'd1;
-        end
-        1'd1: begin
-            adapted_interface_ar_payload_burst <= 1'd1;
-        end
-        2'd2: begin
-            adapted_interface_ar_payload_burst <= 2'd2;
-        end
-        2'd3: begin
-            adapted_interface_ar_payload_burst <= 2'd3;
-        end
-    endcase
-end
-assign r_converter_sink_valid = adapted_interface_r_valid;
-assign adapted_interface_r_ready = r_converter_sink_ready;
-assign r_converter_sink_first = adapted_interface_r_first;
-assign r_converter_sink_last = adapted_interface_r_last;
-assign r_converter_sink_payload_data = adapted_interface_r_payload_data;
-assign port_r_valid = r_converter_source_valid;
-assign r_converter_source_ready = port_r_ready;
-assign port_r_first = r_converter_source_first;
-assign port_r_last = r_converter_source_last;
-assign port_r_payload_data = r_converter_source_payload_data;
-assign w_converter_converter_sink_valid = w_converter_sink_valid;
-assign w_converter_converter_sink_first = w_converter_sink_first;
-assign w_converter_converter_sink_last = w_converter_sink_last;
-assign w_converter_sink_ready = w_converter_converter_sink_ready;
-always @(*) begin
-    w_converter_converter_sink_payload_data <= 72'd0;
-    w_converter_converter_sink_payload_data[31:0] <= w_converter_sink_payload_data[31:0];
-    w_converter_converter_sink_payload_data[35:32] <= w_converter_sink_payload_strb[3:0];
-    w_converter_converter_sink_payload_data[67:36] <= w_converter_sink_payload_data[63:32];
-    w_converter_converter_sink_payload_data[71:68] <= w_converter_sink_payload_strb[7:4];
-end
-assign w_converter_source_valid = w_converter_source_source_valid;
-assign w_converter_source_first = w_converter_source_source_first;
-assign w_converter_source_last = w_converter_source_source_last;
-assign w_converter_source_source_ready = w_converter_source_ready;
-assign {w_converter_source_payload_strb, w_converter_source_payload_data} = w_converter_source_source_payload_data;
-assign w_converter_source_source_valid = w_converter_converter_source_valid;
-assign w_converter_converter_source_ready = w_converter_source_source_ready;
-assign w_converter_source_source_first = w_converter_converter_source_first;
-assign w_converter_source_source_last = w_converter_converter_source_last;
-assign w_converter_source_source_payload_data = w_converter_converter_source_payload_data;
-assign w_converter_converter_first = (w_converter_converter_mux == 1'd0);
-assign w_converter_converter_last = (w_converter_converter_mux == 1'd1);
-assign w_converter_converter_source_valid = w_converter_converter_sink_valid;
-assign w_converter_converter_source_first = (w_converter_converter_sink_first & w_converter_converter_first);
-assign w_converter_converter_source_last = (w_converter_converter_sink_last & w_converter_converter_last);
-assign w_converter_converter_sink_ready = (w_converter_converter_last & w_converter_converter_source_ready);
-always @(*) begin
-    w_converter_converter_source_payload_data <= 36'd0;
-    case (w_converter_converter_mux)
-        1'd0: begin
-            w_converter_converter_source_payload_data <= w_converter_converter_sink_payload_data[35:0];
-        end
-        default: begin
-            w_converter_converter_source_payload_data <= w_converter_converter_sink_payload_data[71:36];
-        end
-    endcase
-end
-assign w_converter_converter_source_payload_valid_token_count = w_converter_converter_last;
-assign r_converter_converter_sink_valid = r_converter_sink_valid;
-assign r_converter_converter_sink_first = r_converter_sink_first;
-assign r_converter_converter_sink_last = r_converter_sink_last;
-assign r_converter_sink_ready = r_converter_converter_sink_ready;
-assign r_converter_converter_sink_payload_data = {r_converter_sink_payload_data};
-assign r_converter_source_valid = r_converter_source_source_valid;
-assign r_converter_source_first = r_converter_source_source_first;
-assign r_converter_source_last = r_converter_source_source_last;
-assign r_converter_source_source_ready = r_converter_source_ready;
-always @(*) begin
-    r_converter_source_payload_data <= 64'd0;
-    r_converter_source_payload_data[31:0] <= r_converter_source_source_payload_data[31:0];
-    r_converter_source_payload_data[63:32] <= r_converter_source_source_payload_data[63:32];
-end
-assign r_converter_source_source_valid = r_converter_converter_source_valid;
-assign r_converter_converter_source_ready = r_converter_source_source_ready;
-assign r_converter_source_source_first = r_converter_converter_source_first;
-assign r_converter_source_source_last = r_converter_converter_source_last;
-assign r_converter_source_source_payload_data = r_converter_converter_source_payload_data;
-assign r_converter_converter_sink_ready = ((~r_converter_converter_strobe_all) | r_converter_converter_source_ready);
-assign r_converter_converter_source_valid = r_converter_converter_strobe_all;
-assign r_converter_converter_load_part = (r_converter_converter_sink_valid & r_converter_converter_sink_ready);
-assign bridge_axi2axi_lite_sink_sink_valid = bridge_axi2axi_lite_ax_burst_valid;
-assign bridge_axi2axi_lite_ax_burst_ready = bridge_axi2axi_lite_sink_sink_ready;
-assign bridge_axi2axi_lite_sink_sink_first = bridge_axi2axi_lite_ax_burst_first;
-assign bridge_axi2axi_lite_sink_sink_last = bridge_axi2axi_lite_ax_burst_last;
-assign bridge_axi2axi_lite_sink_sink_payload_addr = bridge_axi2axi_lite_ax_burst_payload_addr;
-assign bridge_axi2axi_lite_sink_sink_payload_burst = bridge_axi2axi_lite_ax_burst_payload_burst;
-assign bridge_axi2axi_lite_sink_sink_payload_len = bridge_axi2axi_lite_ax_burst_payload_len;
-assign bridge_axi2axi_lite_sink_sink_payload_size = bridge_axi2axi_lite_ax_burst_payload_size;
-assign bridge_axi2axi_lite_sink_sink_payload_lock = bridge_axi2axi_lite_ax_burst_payload_lock;
-assign bridge_axi2axi_lite_sink_sink_payload_prot = bridge_axi2axi_lite_ax_burst_payload_prot;
-assign bridge_axi2axi_lite_sink_sink_payload_cache = bridge_axi2axi_lite_ax_burst_payload_cache;
-assign bridge_axi2axi_lite_sink_sink_payload_qos = bridge_axi2axi_lite_ax_burst_payload_qos;
-assign bridge_axi2axi_lite_sink_sink_payload_region = bridge_axi2axi_lite_ax_burst_payload_region;
-assign bridge_axi2axi_lite_sink_sink_param_id = bridge_axi2axi_lite_ax_burst_param_id;
-assign bridge_axi2axi_lite_sink_sink_param_dest = bridge_axi2axi_lite_ax_burst_param_dest;
-assign bridge_axi2axi_lite_sink_sink_param_user = bridge_axi2axi_lite_ax_burst_param_user;
-assign bridge_b_ready = 1'd1;
-assign bridge_axi2axi_lite_pipe_valid_sink_ready = ((~bridge_axi2axi_lite_pipe_valid_source_valid) | bridge_axi2axi_lite_pipe_valid_source_ready);
-assign bridge_axi2axi_lite_pipe_valid_sink_valid = bridge_axi2axi_lite_sink_sink_valid;
-assign bridge_axi2axi_lite_sink_sink_ready = bridge_axi2axi_lite_pipe_valid_sink_ready;
-assign bridge_axi2axi_lite_pipe_valid_sink_first = bridge_axi2axi_lite_sink_sink_first;
-assign bridge_axi2axi_lite_pipe_valid_sink_last = bridge_axi2axi_lite_sink_sink_last;
-assign bridge_axi2axi_lite_pipe_valid_sink_payload_addr = bridge_axi2axi_lite_sink_sink_payload_addr;
-assign bridge_axi2axi_lite_pipe_valid_sink_payload_burst = bridge_axi2axi_lite_sink_sink_payload_burst;
-assign bridge_axi2axi_lite_pipe_valid_sink_payload_len = bridge_axi2axi_lite_sink_sink_payload_len;
-assign bridge_axi2axi_lite_pipe_valid_sink_payload_size = bridge_axi2axi_lite_sink_sink_payload_size;
-assign bridge_axi2axi_lite_pipe_valid_sink_payload_lock = bridge_axi2axi_lite_sink_sink_payload_lock;
-assign bridge_axi2axi_lite_pipe_valid_sink_payload_prot = bridge_axi2axi_lite_sink_sink_payload_prot;
-assign bridge_axi2axi_lite_pipe_valid_sink_payload_cache = bridge_axi2axi_lite_sink_sink_payload_cache;
-assign bridge_axi2axi_lite_pipe_valid_sink_payload_qos = bridge_axi2axi_lite_sink_sink_payload_qos;
-assign bridge_axi2axi_lite_pipe_valid_sink_payload_region = bridge_axi2axi_lite_sink_sink_payload_region;
-assign bridge_axi2axi_lite_pipe_valid_sink_param_id = bridge_axi2axi_lite_sink_sink_param_id;
-assign bridge_axi2axi_lite_pipe_valid_sink_param_dest = bridge_axi2axi_lite_sink_sink_param_dest;
-assign bridge_axi2axi_lite_pipe_valid_sink_param_user = bridge_axi2axi_lite_sink_sink_param_user;
-assign bridge_axi2axi_lite_source_source_valid = bridge_axi2axi_lite_pipe_valid_source_valid;
-assign bridge_axi2axi_lite_pipe_valid_source_ready = bridge_axi2axi_lite_source_source_ready;
-assign bridge_axi2axi_lite_source_source_first = bridge_axi2axi_lite_pipe_valid_source_first;
-assign bridge_axi2axi_lite_source_source_last = bridge_axi2axi_lite_pipe_valid_source_last;
-assign bridge_axi2axi_lite_source_source_payload_addr = bridge_axi2axi_lite_pipe_valid_source_payload_addr;
-assign bridge_axi2axi_lite_source_source_payload_burst = bridge_axi2axi_lite_pipe_valid_source_payload_burst;
-assign bridge_axi2axi_lite_source_source_payload_len = bridge_axi2axi_lite_pipe_valid_source_payload_len;
-assign bridge_axi2axi_lite_source_source_payload_size = bridge_axi2axi_lite_pipe_valid_source_payload_size;
-assign bridge_axi2axi_lite_source_source_payload_lock = bridge_axi2axi_lite_pipe_valid_source_payload_lock;
-assign bridge_axi2axi_lite_source_source_payload_prot = bridge_axi2axi_lite_pipe_valid_source_payload_prot;
-assign bridge_axi2axi_lite_source_source_payload_cache = bridge_axi2axi_lite_pipe_valid_source_payload_cache;
-assign bridge_axi2axi_lite_source_source_payload_qos = bridge_axi2axi_lite_pipe_valid_source_payload_qos;
-assign bridge_axi2axi_lite_source_source_payload_region = bridge_axi2axi_lite_pipe_valid_source_payload_region;
-assign bridge_axi2axi_lite_source_source_param_id = bridge_axi2axi_lite_pipe_valid_source_param_id;
-assign bridge_axi2axi_lite_source_source_param_dest = bridge_axi2axi_lite_pipe_valid_source_param_dest;
-assign bridge_axi2axi_lite_source_source_param_user = bridge_axi2axi_lite_pipe_valid_source_param_user;
-assign bridge_axi2axi_lite_beat_size = (1'd1 <<< bridge_axi2axi_lite_source_source_payload_size);
-assign bridge_axi2axi_lite_beat_wrap = (bridge_axi2axi_lite_source_source_payload_len <<< bridge_axi2axi_lite_source_source_payload_size);
-assign bridge_axi2axi_lite_ax_beat_valid = (bridge_axi2axi_lite_source_source_valid | (~bridge_axi2axi_lite_ax_beat_first));
-assign bridge_axi2axi_lite_ax_beat_first = (bridge_axi2axi_lite_beat_count == 1'd0);
-assign bridge_axi2axi_lite_ax_beat_last = (bridge_axi2axi_lite_beat_count == bridge_axi2axi_lite_source_source_payload_len);
-assign bridge_axi2axi_lite_ax_beat_payload_addr = ($signed({1'd0, bridge_axi2axi_lite_source_source_payload_addr}) + bridge_axi2axi_lite_beat_offset);
-assign bridge_axi2axi_lite_ax_beat_param_id = bridge_axi2axi_lite_source_source_param_id;
-always @(*) begin
-    bridge_axi2axi_lite_source_source_ready <= 1'd0;
-    if (bridge_axi2axi_lite_ax_beat_ready) begin
-        if (bridge_axi2axi_lite_ax_beat_last) begin
-            bridge_axi2axi_lite_source_source_ready <= 1'd1;
-        end
-    end
-end
-always @(*) begin
-    adapted_interface_ar_ready <= 1'd0;
-    adapted_interface_aw_ready <= 1'd0;
-    adapted_interface_b_param_id <= 1'd0;
-    adapted_interface_b_payload_resp <= 2'd0;
-    adapted_interface_b_valid <= 1'd0;
-    adapted_interface_r_last <= 1'd0;
-    adapted_interface_r_param_id <= 1'd0;
-    adapted_interface_r_payload_data <= 32'd0;
-    adapted_interface_r_payload_resp <= 2'd0;
-    adapted_interface_r_valid <= 1'd0;
-    adapted_interface_w_ready <= 1'd0;
-    axi2axilite_next_state <= 2'd0;
-    bridge_ar_payload_addr <= 32'd0;
-    bridge_ar_valid <= 1'd0;
-    bridge_aw_payload_addr <= 32'd0;
-    bridge_aw_valid <= 1'd0;
-    bridge_axi2axi_lite_ax_beat_ready <= 1'd0;
-    bridge_axi2axi_lite_ax_burst_first <= 1'd0;
-    bridge_axi2axi_lite_ax_burst_last <= 1'd0;
-    bridge_axi2axi_lite_ax_burst_param_dest <= 1'd0;
-    bridge_axi2axi_lite_ax_burst_param_id <= 1'd0;
-    bridge_axi2axi_lite_ax_burst_param_user <= 1'd0;
-    bridge_axi2axi_lite_ax_burst_payload_addr <= 32'd0;
-    bridge_axi2axi_lite_ax_burst_payload_burst <= 2'd0;
-    bridge_axi2axi_lite_ax_burst_payload_cache <= 4'd0;
-    bridge_axi2axi_lite_ax_burst_payload_len <= 8'd0;
-    bridge_axi2axi_lite_ax_burst_payload_lock <= 1'd0;
-    bridge_axi2axi_lite_ax_burst_payload_prot <= 3'd0;
-    bridge_axi2axi_lite_ax_burst_payload_qos <= 4'd0;
-    bridge_axi2axi_lite_ax_burst_payload_region <= 4'd0;
-    bridge_axi2axi_lite_ax_burst_payload_size <= 3'd0;
-    bridge_axi2axi_lite_ax_burst_valid <= 1'd0;
-    bridge_axi2axi_lite_cmd_done_axi2axilite_next_value0 <= 1'd0;
-    bridge_axi2axi_lite_cmd_done_axi2axilite_next_value_ce0 <= 1'd0;
-    bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value1 <= 1'd0;
-    bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value_ce1 <= 1'd0;
-    bridge_r_ready <= 1'd0;
-    bridge_w_payload_data <= 32'd0;
-    bridge_w_payload_strb <= 4'd0;
-    bridge_w_valid <= 1'd0;
-    axi2axilite_next_state <= axi2axilite_state;
-    case (axi2axilite_state)
-        1'd1: begin
-            bridge_ar_valid <= (bridge_axi2axi_lite_ax_beat_valid & (~bridge_axi2axi_lite_cmd_done));
-            bridge_ar_payload_addr <= bridge_axi2axi_lite_ax_beat_payload_addr;
-            bridge_axi2axi_lite_ax_beat_ready <= (bridge_ar_ready & (~bridge_axi2axi_lite_cmd_done));
-            if ((bridge_axi2axi_lite_ax_beat_valid & bridge_axi2axi_lite_ax_beat_last)) begin
-                if (bridge_ar_ready) begin
-                    bridge_axi2axi_lite_ax_beat_ready <= 1'd0;
-                    bridge_axi2axi_lite_cmd_done_axi2axilite_next_value0 <= 1'd1;
-                    bridge_axi2axi_lite_cmd_done_axi2axilite_next_value_ce0 <= 1'd1;
-                end
-            end
-            adapted_interface_r_valid <= bridge_r_valid;
-            adapted_interface_r_last <= bridge_axi2axi_lite_cmd_done;
-            adapted_interface_r_payload_resp <= 1'd0;
-            adapted_interface_r_param_id <= bridge_axi2axi_lite_ax_beat_param_id;
-            adapted_interface_r_payload_data <= bridge_r_payload_data;
-            bridge_r_ready <= adapted_interface_r_ready;
-            if (((adapted_interface_r_valid & adapted_interface_r_last) & adapted_interface_r_ready)) begin
-                bridge_axi2axi_lite_ax_beat_ready <= 1'd1;
-                axi2axilite_next_state <= 1'd0;
-            end
-        end
-        2'd2: begin
-            bridge_aw_valid <= (bridge_axi2axi_lite_ax_beat_valid & (~bridge_axi2axi_lite_cmd_done));
-            bridge_aw_payload_addr <= bridge_axi2axi_lite_ax_beat_payload_addr;
-            bridge_axi2axi_lite_ax_beat_ready <= (bridge_aw_ready & (~bridge_axi2axi_lite_cmd_done));
-            if ((bridge_axi2axi_lite_ax_beat_valid & bridge_axi2axi_lite_ax_beat_last)) begin
-                if (bridge_aw_ready) begin
-                    bridge_axi2axi_lite_ax_beat_ready <= 1'd0;
-                    bridge_axi2axi_lite_cmd_done_axi2axilite_next_value0 <= 1'd1;
-                    bridge_axi2axi_lite_cmd_done_axi2axilite_next_value_ce0 <= 1'd1;
-                end
-            end
-            bridge_w_valid <= adapted_interface_w_valid;
-            bridge_w_payload_data <= adapted_interface_w_payload_data;
-            bridge_w_payload_strb <= adapted_interface_w_payload_strb;
-            adapted_interface_w_ready <= bridge_w_ready;
-            if (((adapted_interface_w_valid & adapted_interface_w_last) & adapted_interface_w_ready)) begin
-                axi2axilite_next_state <= 2'd3;
-            end
-        end
-        2'd3: begin
-            adapted_interface_b_valid <= 1'd1;
-            adapted_interface_b_payload_resp <= 1'd0;
-            adapted_interface_b_param_id <= bridge_axi2axi_lite_ax_beat_param_id;
-            if (adapted_interface_b_ready) begin
-                bridge_axi2axi_lite_ax_beat_ready <= 1'd1;
-                axi2axilite_next_state <= 1'd0;
-            end
-        end
-        default: begin
-            bridge_axi2axi_lite_cmd_done_axi2axilite_next_value0 <= 1'd0;
-            bridge_axi2axi_lite_cmd_done_axi2axilite_next_value_ce0 <= 1'd1;
-            if ((adapted_interface_ar_valid & adapted_interface_aw_valid)) begin
-                if (bridge_axi2axi_lite_last_ar_aw_n) begin
-                    bridge_axi2axi_lite_ax_burst_valid <= adapted_interface_aw_valid;
-                    adapted_interface_aw_ready <= bridge_axi2axi_lite_ax_burst_ready;
-                    bridge_axi2axi_lite_ax_burst_first <= adapted_interface_aw_first;
-                    bridge_axi2axi_lite_ax_burst_last <= adapted_interface_aw_last;
-                    bridge_axi2axi_lite_ax_burst_payload_addr <= adapted_interface_aw_payload_addr;
-                    bridge_axi2axi_lite_ax_burst_payload_burst <= adapted_interface_aw_payload_burst;
-                    bridge_axi2axi_lite_ax_burst_payload_len <= adapted_interface_aw_payload_len;
-                    bridge_axi2axi_lite_ax_burst_payload_size <= adapted_interface_aw_payload_size;
-                    bridge_axi2axi_lite_ax_burst_payload_lock <= adapted_interface_aw_payload_lock;
-                    bridge_axi2axi_lite_ax_burst_payload_prot <= adapted_interface_aw_payload_prot;
-                    bridge_axi2axi_lite_ax_burst_payload_cache <= adapted_interface_aw_payload_cache;
-                    bridge_axi2axi_lite_ax_burst_payload_qos <= adapted_interface_aw_payload_qos;
-                    bridge_axi2axi_lite_ax_burst_payload_region <= adapted_interface_aw_payload_region;
-                    bridge_axi2axi_lite_ax_burst_param_id <= adapted_interface_aw_param_id;
-                    bridge_axi2axi_lite_ax_burst_param_dest <= adapted_interface_aw_param_dest;
-                    bridge_axi2axi_lite_ax_burst_param_user <= adapted_interface_aw_param_user;
-                    bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value1 <= 1'd0;
-                    bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value_ce1 <= 1'd1;
-                    axi2axilite_next_state <= 2'd2;
-                end else begin
-                    bridge_axi2axi_lite_ax_burst_valid <= adapted_interface_ar_valid;
-                    adapted_interface_ar_ready <= bridge_axi2axi_lite_ax_burst_ready;
-                    bridge_axi2axi_lite_ax_burst_first <= adapted_interface_ar_first;
-                    bridge_axi2axi_lite_ax_burst_last <= adapted_interface_ar_last;
-                    bridge_axi2axi_lite_ax_burst_payload_addr <= adapted_interface_ar_payload_addr;
-                    bridge_axi2axi_lite_ax_burst_payload_burst <= adapted_interface_ar_payload_burst;
-                    bridge_axi2axi_lite_ax_burst_payload_len <= adapted_interface_ar_payload_len;
-                    bridge_axi2axi_lite_ax_burst_payload_size <= adapted_interface_ar_payload_size;
-                    bridge_axi2axi_lite_ax_burst_payload_lock <= adapted_interface_ar_payload_lock;
-                    bridge_axi2axi_lite_ax_burst_payload_prot <= adapted_interface_ar_payload_prot;
-                    bridge_axi2axi_lite_ax_burst_payload_cache <= adapted_interface_ar_payload_cache;
-                    bridge_axi2axi_lite_ax_burst_payload_qos <= adapted_interface_ar_payload_qos;
-                    bridge_axi2axi_lite_ax_burst_payload_region <= adapted_interface_ar_payload_region;
-                    bridge_axi2axi_lite_ax_burst_param_id <= adapted_interface_ar_param_id;
-                    bridge_axi2axi_lite_ax_burst_param_dest <= adapted_interface_ar_param_dest;
-                    bridge_axi2axi_lite_ax_burst_param_user <= adapted_interface_ar_param_user;
-                    bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value1 <= 1'd1;
-                    bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value_ce1 <= 1'd1;
-                    axi2axilite_next_state <= 1'd1;
-                end
-            end else begin
-                if (adapted_interface_ar_valid) begin
-                    bridge_axi2axi_lite_ax_burst_valid <= adapted_interface_ar_valid;
-                    adapted_interface_ar_ready <= bridge_axi2axi_lite_ax_burst_ready;
-                    bridge_axi2axi_lite_ax_burst_first <= adapted_interface_ar_first;
-                    bridge_axi2axi_lite_ax_burst_last <= adapted_interface_ar_last;
-                    bridge_axi2axi_lite_ax_burst_payload_addr <= adapted_interface_ar_payload_addr;
-                    bridge_axi2axi_lite_ax_burst_payload_burst <= adapted_interface_ar_payload_burst;
-                    bridge_axi2axi_lite_ax_burst_payload_len <= adapted_interface_ar_payload_len;
-                    bridge_axi2axi_lite_ax_burst_payload_size <= adapted_interface_ar_payload_size;
-                    bridge_axi2axi_lite_ax_burst_payload_lock <= adapted_interface_ar_payload_lock;
-                    bridge_axi2axi_lite_ax_burst_payload_prot <= adapted_interface_ar_payload_prot;
-                    bridge_axi2axi_lite_ax_burst_payload_cache <= adapted_interface_ar_payload_cache;
-                    bridge_axi2axi_lite_ax_burst_payload_qos <= adapted_interface_ar_payload_qos;
-                    bridge_axi2axi_lite_ax_burst_payload_region <= adapted_interface_ar_payload_region;
-                    bridge_axi2axi_lite_ax_burst_param_id <= adapted_interface_ar_param_id;
-                    bridge_axi2axi_lite_ax_burst_param_dest <= adapted_interface_ar_param_dest;
-                    bridge_axi2axi_lite_ax_burst_param_user <= adapted_interface_ar_param_user;
-                    bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value1 <= 1'd1;
-                    bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value_ce1 <= 1'd1;
-                    axi2axilite_next_state <= 1'd1;
-                end else begin
-                    if (adapted_interface_aw_valid) begin
-                        bridge_axi2axi_lite_ax_burst_valid <= adapted_interface_aw_valid;
-                        adapted_interface_aw_ready <= bridge_axi2axi_lite_ax_burst_ready;
-                        bridge_axi2axi_lite_ax_burst_first <= adapted_interface_aw_first;
-                        bridge_axi2axi_lite_ax_burst_last <= adapted_interface_aw_last;
-                        bridge_axi2axi_lite_ax_burst_payload_addr <= adapted_interface_aw_payload_addr;
-                        bridge_axi2axi_lite_ax_burst_payload_burst <= adapted_interface_aw_payload_burst;
-                        bridge_axi2axi_lite_ax_burst_payload_len <= adapted_interface_aw_payload_len;
-                        bridge_axi2axi_lite_ax_burst_payload_size <= adapted_interface_aw_payload_size;
-                        bridge_axi2axi_lite_ax_burst_payload_lock <= adapted_interface_aw_payload_lock;
-                        bridge_axi2axi_lite_ax_burst_payload_prot <= adapted_interface_aw_payload_prot;
-                        bridge_axi2axi_lite_ax_burst_payload_cache <= adapted_interface_aw_payload_cache;
-                        bridge_axi2axi_lite_ax_burst_payload_qos <= adapted_interface_aw_payload_qos;
-                        bridge_axi2axi_lite_ax_burst_payload_region <= adapted_interface_aw_payload_region;
-                        bridge_axi2axi_lite_ax_burst_param_id <= adapted_interface_aw_param_id;
-                        bridge_axi2axi_lite_ax_burst_param_dest <= adapted_interface_aw_param_dest;
-                        bridge_axi2axi_lite_ax_burst_param_user <= adapted_interface_aw_param_user;
-                        bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value1 <= 1'd0;
-                        bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value_ce1 <= 1'd1;
-                        axi2axilite_next_state <= 2'd2;
-                    end
-                end
-            end
-        end
-    endcase
-end
-assign bridge_axi_lite2wishbone_r_addr = (bridge_ar_payload_addr - 1'd0);
-assign bridge_axi_lite2wishbone_w_addr = (bridge_aw_payload_addr - 1'd0);
-always @(*) begin
-    adapted_interface_adapted_interface_adr <= 30'd0;
-    adapted_interface_adapted_interface_cyc <= 1'd0;
-    adapted_interface_adapted_interface_dat_w <= 32'd0;
-    adapted_interface_adapted_interface_sel <= 4'd0;
-    adapted_interface_adapted_interface_stb <= 1'd0;
-    adapted_interface_adapted_interface_we <= 1'd0;
-    axilite2wishbone_next_state <= 3'd0;
-    bridge_ar_ready <= 1'd0;
-    bridge_aw_ready <= 1'd0;
-    bridge_axi_lite2wishbone_data_axilite2wishbone_next_value1 <= 32'd0;
-    bridge_axi_lite2wishbone_data_axilite2wishbone_next_value_ce1 <= 1'd0;
-    bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value0 <= 1'd0;
-    bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value_ce0 <= 1'd0;
-    bridge_b_payload_resp <= 2'd0;
-    bridge_b_valid <= 1'd0;
-    bridge_r_payload_data <= 32'd0;
-    bridge_r_payload_resp <= 2'd0;
-    bridge_r_valid <= 1'd0;
-    bridge_w_ready <= 1'd0;
-    axilite2wishbone_next_state <= axilite2wishbone_state;
-    case (axilite2wishbone_state)
-        1'd1: begin
-            adapted_interface_adapted_interface_stb <= 1'd1;
-            adapted_interface_adapted_interface_cyc <= 1'd1;
-            adapted_interface_adapted_interface_adr <= bridge_axi_lite2wishbone_r_addr[31:2];
-            adapted_interface_adapted_interface_sel <= 4'd15;
-            if (adapted_interface_adapted_interface_ack) begin
-                bridge_ar_ready <= 1'd1;
-                bridge_axi_lite2wishbone_data_axilite2wishbone_next_value1 <= adapted_interface_adapted_interface_dat_r;
-                bridge_axi_lite2wishbone_data_axilite2wishbone_next_value_ce1 <= 1'd1;
-                axilite2wishbone_next_state <= 2'd2;
-            end
-        end
-        2'd2: begin
-            bridge_r_valid <= 1'd1;
-            bridge_r_payload_resp <= 1'd0;
-            bridge_r_payload_data <= bridge_axi_lite2wishbone_data;
-            if (bridge_r_ready) begin
-                axilite2wishbone_next_state <= 1'd0;
-            end
-        end
-        2'd3: begin
-            adapted_interface_adapted_interface_stb <= bridge_w_valid;
-            adapted_interface_adapted_interface_cyc <= bridge_w_valid;
-            adapted_interface_adapted_interface_we <= 1'd1;
-            adapted_interface_adapted_interface_adr <= bridge_axi_lite2wishbone_w_addr[31:2];
-            adapted_interface_adapted_interface_sel <= bridge_w_payload_strb;
-            adapted_interface_adapted_interface_dat_w <= bridge_w_payload_data;
-            if (adapted_interface_adapted_interface_ack) begin
-                bridge_aw_ready <= 1'd1;
-                bridge_w_ready <= 1'd1;
-                axilite2wishbone_next_state <= 3'd4;
-            end
-        end
-        3'd4: begin
-            bridge_b_valid <= 1'd1;
-            bridge_b_payload_resp <= 1'd0;
-            if (bridge_b_ready) begin
-                axilite2wishbone_next_state <= 1'd0;
-            end
-        end
-        default: begin
-            if ((bridge_ar_valid & bridge_aw_valid)) begin
-                if (bridge_axi_lite2wishbone_last_ar_aw_n) begin
-                    bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value0 <= 1'd0;
-                    bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value_ce0 <= 1'd1;
-                    axilite2wishbone_next_state <= 2'd3;
-                end else begin
-                    bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value0 <= 1'd1;
-                    bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value_ce0 <= 1'd1;
-                    axilite2wishbone_next_state <= 1'd1;
-                end
-            end else begin
-                if (bridge_ar_valid) begin
-                    bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value0 <= 1'd1;
-                    bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value_ce0 <= 1'd1;
-                    axilite2wishbone_next_state <= 1'd1;
-                end else begin
-                    if (bridge_aw_valid) begin
-                        bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value0 <= 1'd0;
-                        bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value_ce0 <= 1'd1;
-                        axilite2wishbone_next_state <= 2'd3;
-                    end
-                end
-            end
-        end
-    endcase
-end
 assign shared_adr = array_muxed0;
 assign shared_dat_w = array_muxed1;
 assign shared_sel = array_muxed2;
@@ -1791,14 +895,11 @@ assign shared_cti = array_muxed6;
 assign shared_bte = array_muxed7;
 assign ibus_dat_r = shared_dat_r;
 assign dbus_dat_r = shared_dat_r;
-assign adapted_interface_adapted_interface_dat_r = shared_dat_r;
 assign ibus_ack = (shared_ack & (grant == 1'd0));
 assign dbus_ack = (shared_ack & (grant == 1'd1));
-assign adapted_interface_adapted_interface_ack = (shared_ack & (grant == 2'd2));
 assign ibus_err = (shared_err & (grant == 1'd0));
 assign dbus_err = (shared_err & (grant == 1'd1));
-assign adapted_interface_adapted_interface_err = (shared_err & (grant == 2'd2));
-assign request = {adapted_interface_adapted_interface_cyc, dbus_cyc, ibus_cyc};
+assign request = {dbus_cyc, ibus_cyc};
 always @(*) begin
     slave_sel <= 4'd0;
     slave_sel[0] <= (shared_adr[29:22] == 6'd32);
@@ -2396,50 +1497,6 @@ assign wishbone0_we = port_bus_we;
 assign wishbone0_cti = port_bus_cti;
 assign wishbone0_bte = port_bus_bte;
 assign port_bus_err = wishbone0_err;
-assign port_aw_valid = axi0_awvalid;
-assign port_aw_payload_addr = axi0_awaddr;
-assign port_aw_payload_burst = axi0_awburst;
-assign port_aw_payload_len = axi0_awlen;
-assign port_aw_payload_size = axi0_awsize;
-assign port_aw_payload_lock = axi0_awlock;
-assign port_aw_payload_prot = axi0_awprot;
-assign port_aw_payload_cache = axi0_awcache;
-assign port_aw_payload_qos = axi0_awqos;
-assign port_aw_payload_region = axi0_awregion;
-assign port_aw_param_id = axi0_awid;
-assign port_aw_param_user = axi0_awuser;
-assign axi0_awready = port_aw_ready;
-assign port_w_valid = axi0_wvalid;
-assign port_w_payload_data = axi0_wdata;
-assign port_w_payload_strb = axi0_wstrb;
-assign port_w_param_user = axi0_wuser;
-assign port_w_last = axi0_wlast;
-assign axi0_wready = port_w_ready;
-assign axi0_bvalid = port_b_valid;
-assign axi0_bresp = port_b_payload_resp;
-assign axi0_bid = port_b_param_id;
-assign axi0_buser = port_b_param_user;
-assign port_b_ready = axi0_bready;
-assign port_ar_valid = axi0_arvalid;
-assign port_ar_payload_addr = axi0_araddr;
-assign port_ar_payload_burst = axi0_arburst;
-assign port_ar_payload_len = axi0_arlen;
-assign port_ar_payload_size = axi0_arsize;
-assign port_ar_payload_lock = axi0_arlock;
-assign port_ar_payload_prot = axi0_arprot;
-assign port_ar_payload_cache = axi0_arcache;
-assign port_ar_payload_qos = axi0_arqos;
-assign port_ar_payload_region = axi0_arregion;
-assign port_ar_param_id = axi0_arid;
-assign port_ar_param_user = axi0_aruser;
-assign axi0_arready = port_ar_ready;
-assign axi0_rvalid = port_r_valid;
-assign axi0_rresp = port_r_payload_resp;
-assign axi0_rdata = port_r_payload_data;
-assign axi0_rid = port_r_param_id;
-assign axi0_ruser = port_r_param_user;
-assign axi0_rlast = port_r_last;
-assign port_r_ready = axi0_rready;
 assign usb23_trigger = usb230_irq;
 assign usb23_usb0 = usb23_status;
 assign usb23_usb1 = usb23_pending;
@@ -2917,11 +1974,8 @@ always @(*) begin
         1'd0: begin
             array_muxed0 <= ibus_adr;
         end
-        1'd1: begin
-            array_muxed0 <= dbus_adr;
-        end
         default: begin
-            array_muxed0 <= adapted_interface_adapted_interface_adr;
+            array_muxed0 <= dbus_adr;
         end
     endcase
 end
@@ -2931,11 +1985,8 @@ always @(*) begin
         1'd0: begin
             array_muxed1 <= ibus_dat_w;
         end
-        1'd1: begin
-            array_muxed1 <= dbus_dat_w;
-        end
         default: begin
-            array_muxed1 <= adapted_interface_adapted_interface_dat_w;
+            array_muxed1 <= dbus_dat_w;
         end
     endcase
 end
@@ -2945,11 +1996,8 @@ always @(*) begin
         1'd0: begin
             array_muxed2 <= ibus_sel;
         end
-        1'd1: begin
-            array_muxed2 <= dbus_sel;
-        end
         default: begin
-            array_muxed2 <= adapted_interface_adapted_interface_sel;
+            array_muxed2 <= dbus_sel;
         end
     endcase
 end
@@ -2959,11 +2007,8 @@ always @(*) begin
         1'd0: begin
             array_muxed3 <= ibus_cyc;
         end
-        1'd1: begin
-            array_muxed3 <= dbus_cyc;
-        end
         default: begin
-            array_muxed3 <= adapted_interface_adapted_interface_cyc;
+            array_muxed3 <= dbus_cyc;
         end
     endcase
 end
@@ -2973,11 +2018,8 @@ always @(*) begin
         1'd0: begin
             array_muxed4 <= ibus_stb;
         end
-        1'd1: begin
-            array_muxed4 <= dbus_stb;
-        end
         default: begin
-            array_muxed4 <= adapted_interface_adapted_interface_stb;
+            array_muxed4 <= dbus_stb;
         end
     endcase
 end
@@ -2987,11 +2029,8 @@ always @(*) begin
         1'd0: begin
             array_muxed5 <= ibus_we;
         end
-        1'd1: begin
-            array_muxed5 <= dbus_we;
-        end
         default: begin
-            array_muxed5 <= adapted_interface_adapted_interface_we;
+            array_muxed5 <= dbus_we;
         end
     endcase
 end
@@ -3001,11 +2040,8 @@ always @(*) begin
         1'd0: begin
             array_muxed6 <= ibus_cti;
         end
-        1'd1: begin
-            array_muxed6 <= dbus_cti;
-        end
         default: begin
-            array_muxed6 <= adapted_interface_adapted_interface_cti;
+            array_muxed6 <= dbus_cti;
         end
     endcase
 end
@@ -3015,11 +2051,8 @@ always @(*) begin
         1'd0: begin
             array_muxed7 <= ibus_bte;
         end
-        1'd1: begin
-            array_muxed7 <= dbus_bte;
-        end
         default: begin
-            array_muxed7 <= adapted_interface_adapted_interface_bte;
+            array_muxed7 <= dbus_bte;
         end
     endcase
 end
@@ -3064,133 +2097,18 @@ always @(posedge sdrio_clk) begin
 end
 
 always @(posedge sys_clk_1) begin
-    port_r_payload_resp <= adapted_interface_r_payload_resp;
-    port_r_param_user <= adapted_interface_r_param_user;
-    port_r_param_dest <= adapted_interface_r_param_dest;
-    port_r_param_id <= adapted_interface_r_param_id;
-    if ((w_converter_converter_source_valid & w_converter_converter_source_ready)) begin
-        if (w_converter_converter_last) begin
-            w_converter_converter_mux <= 1'd0;
-        end else begin
-            w_converter_converter_mux <= (w_converter_converter_mux + 1'd1);
-        end
-    end
-    if (r_converter_converter_source_ready) begin
-        r_converter_converter_strobe_all <= 1'd0;
-    end
-    if (r_converter_converter_load_part) begin
-        if (((r_converter_converter_demux == 1'd1) | r_converter_converter_sink_last)) begin
-            r_converter_converter_demux <= 1'd0;
-            r_converter_converter_strobe_all <= 1'd1;
-        end else begin
-            r_converter_converter_demux <= (r_converter_converter_demux + 1'd1);
-        end
-    end
-    if ((r_converter_converter_source_valid & r_converter_converter_source_ready)) begin
-        if ((r_converter_converter_sink_valid & r_converter_converter_sink_ready)) begin
-            r_converter_converter_source_first <= r_converter_converter_sink_first;
-            r_converter_converter_source_last <= r_converter_converter_sink_last;
-        end else begin
-            r_converter_converter_source_first <= 1'd0;
-            r_converter_converter_source_last <= 1'd0;
-        end
-    end else begin
-        if ((r_converter_converter_sink_valid & r_converter_converter_sink_ready)) begin
-            r_converter_converter_source_first <= (r_converter_converter_sink_first | r_converter_converter_source_first);
-            r_converter_converter_source_last <= (r_converter_converter_sink_last | r_converter_converter_source_last);
-        end
-    end
-    if (r_converter_converter_load_part) begin
-        case (r_converter_converter_demux)
-            1'd0: begin
-                r_converter_converter_source_payload_data[31:0] <= r_converter_converter_sink_payload_data;
-            end
-            1'd1: begin
-                r_converter_converter_source_payload_data[63:32] <= r_converter_converter_sink_payload_data;
-            end
-        endcase
-    end
-    if (r_converter_converter_load_part) begin
-        r_converter_converter_source_payload_valid_token_count <= (r_converter_converter_demux + 1'd1);
-    end
-    if (((~bridge_axi2axi_lite_pipe_valid_source_valid) | bridge_axi2axi_lite_pipe_valid_source_ready)) begin
-        bridge_axi2axi_lite_pipe_valid_source_valid <= bridge_axi2axi_lite_pipe_valid_sink_valid;
-        bridge_axi2axi_lite_pipe_valid_source_first <= bridge_axi2axi_lite_pipe_valid_sink_first;
-        bridge_axi2axi_lite_pipe_valid_source_last <= bridge_axi2axi_lite_pipe_valid_sink_last;
-        bridge_axi2axi_lite_pipe_valid_source_payload_addr <= bridge_axi2axi_lite_pipe_valid_sink_payload_addr;
-        bridge_axi2axi_lite_pipe_valid_source_payload_burst <= bridge_axi2axi_lite_pipe_valid_sink_payload_burst;
-        bridge_axi2axi_lite_pipe_valid_source_payload_len <= bridge_axi2axi_lite_pipe_valid_sink_payload_len;
-        bridge_axi2axi_lite_pipe_valid_source_payload_size <= bridge_axi2axi_lite_pipe_valid_sink_payload_size;
-        bridge_axi2axi_lite_pipe_valid_source_payload_lock <= bridge_axi2axi_lite_pipe_valid_sink_payload_lock;
-        bridge_axi2axi_lite_pipe_valid_source_payload_prot <= bridge_axi2axi_lite_pipe_valid_sink_payload_prot;
-        bridge_axi2axi_lite_pipe_valid_source_payload_cache <= bridge_axi2axi_lite_pipe_valid_sink_payload_cache;
-        bridge_axi2axi_lite_pipe_valid_source_payload_qos <= bridge_axi2axi_lite_pipe_valid_sink_payload_qos;
-        bridge_axi2axi_lite_pipe_valid_source_payload_region <= bridge_axi2axi_lite_pipe_valid_sink_payload_region;
-        bridge_axi2axi_lite_pipe_valid_source_param_id <= bridge_axi2axi_lite_pipe_valid_sink_param_id;
-        bridge_axi2axi_lite_pipe_valid_source_param_dest <= bridge_axi2axi_lite_pipe_valid_sink_param_dest;
-        bridge_axi2axi_lite_pipe_valid_source_param_user <= bridge_axi2axi_lite_pipe_valid_sink_param_user;
-    end
-    if ((bridge_axi2axi_lite_ax_beat_valid & bridge_axi2axi_lite_ax_beat_ready)) begin
-        if (bridge_axi2axi_lite_ax_beat_last) begin
-            bridge_axi2axi_lite_beat_count <= 1'd0;
-            bridge_axi2axi_lite_beat_offset <= 1'd0;
-        end else begin
-            bridge_axi2axi_lite_beat_count <= (bridge_axi2axi_lite_beat_count + 1'd1);
-            if ((((bridge_axi2axi_lite_source_source_payload_burst == 1'd1) & 1'd1) | ((bridge_axi2axi_lite_source_source_payload_burst == 2'd2) & 1'd1))) begin
-                bridge_axi2axi_lite_beat_offset <= (bridge_axi2axi_lite_beat_offset + $signed({1'd0, bridge_axi2axi_lite_beat_size}));
-            end
-        end
-        if (((bridge_axi2axi_lite_source_source_payload_burst == 2'd2) & 1'd1)) begin
-            if (((bridge_axi2axi_lite_ax_beat_payload_addr & bridge_axi2axi_lite_beat_wrap) == bridge_axi2axi_lite_beat_wrap)) begin
-                bridge_axi2axi_lite_beat_offset <= (bridge_axi2axi_lite_beat_offset - $signed({1'd0, bridge_axi2axi_lite_beat_wrap}));
-            end
-        end
-    end
-    axi2axilite_state <= axi2axilite_next_state;
-    if (bridge_axi2axi_lite_cmd_done_axi2axilite_next_value_ce0) begin
-        bridge_axi2axi_lite_cmd_done <= bridge_axi2axi_lite_cmd_done_axi2axilite_next_value0;
-    end
-    if (bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value_ce1) begin
-        bridge_axi2axi_lite_last_ar_aw_n <= bridge_axi2axi_lite_last_ar_aw_n_axi2axilite_next_value1;
-    end
-    axilite2wishbone_state <= axilite2wishbone_next_state;
-    if (bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value_ce0) begin
-        bridge_axi_lite2wishbone_last_ar_aw_n <= bridge_axi_lite2wishbone_last_ar_aw_n_axilite2wishbone_next_value0;
-    end
-    if (bridge_axi_lite2wishbone_data_axilite2wishbone_next_value_ce1) begin
-        bridge_axi_lite2wishbone_data <= bridge_axi_lite2wishbone_data_axilite2wishbone_next_value1;
-    end
     case (grant)
         1'd0: begin
             if ((~request[0])) begin
                 if (request[1]) begin
                     grant <= 1'd1;
-                end else begin
-                    if (request[2]) begin
-                        grant <= 2'd2;
-                    end
                 end
             end
         end
         1'd1: begin
             if ((~request[1])) begin
-                if (request[2]) begin
-                    grant <= 2'd2;
-                end else begin
-                    if (request[0]) begin
-                        grant <= 1'd0;
-                    end
-                end
-            end
-        end
-        2'd2: begin
-            if ((~request[2])) begin
                 if (request[0]) begin
                     grant <= 1'd0;
-                end else begin
-                    if (request[1]) begin
-                        grant <= 1'd1;
-                    end
                 end
             end
         end
@@ -3693,28 +2611,6 @@ always @(posedge sys_clk_1) begin
         spiflash_core_litespimmap_storage <= 8'd8;
         spiflash_core_litespimmap_re <= 1'd0;
         main_ram_bus_ack <= 1'd0;
-        port_r_payload_resp <= 2'd0;
-        w_converter_converter_mux <= 1'd0;
-        r_converter_converter_source_payload_data <= 64'd0;
-        r_converter_converter_source_payload_valid_token_count <= 2'd0;
-        r_converter_converter_demux <= 1'd0;
-        r_converter_converter_strobe_all <= 1'd0;
-        bridge_axi2axi_lite_pipe_valid_source_valid <= 1'd0;
-        bridge_axi2axi_lite_pipe_valid_source_payload_addr <= 32'd0;
-        bridge_axi2axi_lite_pipe_valid_source_payload_burst <= 2'd0;
-        bridge_axi2axi_lite_pipe_valid_source_payload_len <= 8'd0;
-        bridge_axi2axi_lite_pipe_valid_source_payload_size <= 3'd0;
-        bridge_axi2axi_lite_pipe_valid_source_payload_lock <= 1'd0;
-        bridge_axi2axi_lite_pipe_valid_source_payload_prot <= 3'd0;
-        bridge_axi2axi_lite_pipe_valid_source_payload_cache <= 4'd0;
-        bridge_axi2axi_lite_pipe_valid_source_payload_qos <= 4'd0;
-        bridge_axi2axi_lite_pipe_valid_source_payload_region <= 4'd0;
-        bridge_axi2axi_lite_beat_count <= 8'd0;
-        bridge_axi2axi_lite_beat_offset <= 13'd0;
-        bridge_axi2axi_lite_cmd_done <= 1'd0;
-        bridge_axi2axi_lite_last_ar_aw_n <= 1'd0;
-        bridge_axi_lite2wishbone_data <= 32'd0;
-        bridge_axi_lite2wishbone_last_ar_aw_n <= 1'd0;
         usb23_pending <= 1'd0;
         usb23_trigger_d <= 1'd0;
         usb23_status_re <= 1'd0;
@@ -3729,9 +2625,7 @@ always @(posedge sys_clk_1) begin
         framectl_pending_r <= 1'd0;
         framectl_enable_storage <= 1'd0;
         framectl_enable_re <= 1'd0;
-        axi2axilite_state <= 2'd0;
-        axilite2wishbone_state <= 3'd0;
-        grant <= 2'd0;
+        grant <= 1'd0;
         slave_sel_r <= 4'd0;
         count <= 20'd1000000;
         rs232phytx_state <= 1'd0;
@@ -3870,5 +2764,5 @@ assign inferedsdrtristate3__i = spiflash4x_dq[3];
 endmodule
 
 // -----------------------------------------------------------------------------
-//  Auto-Generated by LiteX on 2024-01-17 10:00:21.
+//  Auto-Generated by LiteX on 2024-02-10 20:02:23.
 //------------------------------------------------------------------------------

@@ -226,9 +226,11 @@ class MainSoC(ZephyrSoC, SoCCore):
         #"cpu_variant": "lite",
         #"bus_interconnect":"crossbar",
         "bus_bursting": True,
+        "integrated_sram_size": 0x0, # Replaced with the NXLRAM
         "cpu_reset_address": 0x2010_0000,
         "irq_n_irqs": 16,
     }
+
     def __init__(self, name, sys_clk_freq=None, rom_size=0, sram_size=0, **kwargs):
         self.platform = litex_soc_gen.Platform("build", soc_io, name=name)
         self.crg = CRG(self.platform.request("sys_clk"), self.platform.request("sys_rst"))
@@ -241,12 +243,9 @@ class MainSoC(ZephyrSoC, SoCCore):
 
         self.add_i2c()
         # Note: can change to DDR by setting rate="1:2", will need some changes to suport this."
-        #self.add_spi_flash(mode="4x", module=Flash(default_read_cmd=Codes.READ_1_1_1_FAST), clk_freq=sys_clk_freq, rate="1:1", with_master=False)
         self.add_spi_flash(mode="4x", module=Flash(default_read_cmd=Codes.READ_1_1_4), clk_freq=sys_clk_freq, rate="1:1", with_master=False)
-
         self.add_main_ram()
-        self.add_wb_slave_port(0xb0000000)
-        self.add_axi_master_port(width=64)
+        self.add_wb_slave_port(origin=0xb0000000, size=0x0f000000)
         self.add_usb23()
         self.add_framectl()
 

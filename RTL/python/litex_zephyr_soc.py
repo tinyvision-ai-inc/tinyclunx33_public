@@ -7,6 +7,8 @@ from litex.soc.cores.gpio import *
 from litex.soc.cores.pwm import PWM
 from litex.soc.cores.spi import SPIMaster
 from litex.soc.cores.bitbang import I2CMaster, I2CMasterSim
+from litex.soc.integration.builder import Builder
+from litex.soc.integration.soc_core import SoCCore
 
 
 class ZephyrSoC:

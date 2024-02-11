@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE		ispXCF	SYSTEM	"IspXCF.dtd" >
-<ispXCF version="R2023.1">
+<ispXCF version="R2023.2">
 	<Comment></Comment>
 	<Chain>
 		<Comm>JTAG2SPI</Comm>
@@ -24,6 +24,7 @@
 			<Operation>Erase,Program,Verify</Operation>
 			<Option>
 				<SVFVendor>JTAG STANDARD</SVFVendor>
+				<SVFProcessor>SVF Processor</SVFProcessor>
 				<Usercode>0x00000000</Usercode>
 				<AccessMode>Direct Programming</AccessMode>
 			</Option>
@@ -51,6 +52,7 @@
 						<IOState>HighZ</IOState>
 						<PreloadLength>362</PreloadLength>
 						<IOVectorData>0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</IOVectorData>
+						<SVFProcessor>SVF Processor</SVFProcessor>
 						<AccessMode>Direct Programming</AccessMode>
 					</Option>
 				</Device>
@@ -85,6 +87,7 @@
 					</LocalChainList>
 					<Option>
 						<SVFVendor>JTAG STANDARD</SVFVendor>
+						<SVFProcessor>SVF Processor</SVFProcessor>
 					</Option>
 				</Device>
 			</FPGADevice>
@@ -104,6 +107,6 @@
 	<CableOptions>
 		<CableName>USB2</CableName>
 		<PortAdd>FTUSB-0</PortAdd>
-		<USBID>UPduino v3.0 Location 0000 Serial </USBID>
+		<USBID>tinyCLUNXdevkit A Location 0000 Serial A</USBID>
 	</CableOptions>
 </ispXCF>
