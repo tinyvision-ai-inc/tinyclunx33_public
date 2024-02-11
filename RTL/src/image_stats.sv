@@ -38,7 +38,7 @@ module chan_accum #(parameter ACCUM_BITS = 22, PIXEL_BITS = 10) (
 endmodule
 
 
-module als_top #(
+module image_stats #(
 	// # of bits per pixel:
 	parameter PIXEL_BITS     = 10  ,
 	// Maximum # of rows/columns to be processed

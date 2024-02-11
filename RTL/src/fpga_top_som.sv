@@ -542,7 +542,7 @@ module fpga_top_som (
   wire [$clog2(NUM_ROWS)-1:0] height    = NUM_ROWS;
 
   logic avg_valid;
-  als_top #(
+  image_stats #(
     .PIXEL_BITS    (PIXEL_BITS    ),
     .ACCUM_OUT_BITS(ACCUM_OUT_BITS),
     .MAX_ROWS      (NUM_ROWS      ),
