@@ -47,6 +47,12 @@ Yes, this happens. Do not do it again! Here is the process to unlock your board:
 4. Check that the DONE LED is not lit up.
 5. Your board should now be ready to get programmed.
 
+### Q: Radiant Programmer complains that it could not read the IDCODE
+
+This means it could at least reach the FTDI, but something went wrong for communicating with the FPGA.
+
+You may need to verify which FTDI interface this was. Try changing from `FTUSB-1` to `FTUSB-0` for instance.
+
 
 ## Parts featured
 
