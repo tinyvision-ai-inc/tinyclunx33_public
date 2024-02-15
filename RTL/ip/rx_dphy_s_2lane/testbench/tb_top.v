@@ -610,8 +610,6 @@ generate
           dsi_ch0.dphy_active = 1;
           $display("%t Activating DSI model\n", $time);
           @(negedge dsi_ch0.dphy_active);
-          #10;
-          $fclose(f);
           #100000;
           text_comp_t;
           #10
@@ -690,8 +688,6 @@ generate
             u_csi2_model.dphy_active = 1;
             $display("%t Activating CSI2 model\n", $time);
             @(negedge u_csi2_model.dphy_active);
-            #10;
-            $fclose(f);
             #100000;
         text_comp_t;
           #10
@@ -910,7 +906,7 @@ task datachack(
         end
         else if (DATA_WIDTH == 24) begin
           if (first_byte_data_r) begin
-            $fwrite(f,"%0x\n%0x\n",byte_data_temp_w[15:8],byte_data_temp_w[23:16]);
+            $fwrite(f,"%0x\n%0x\n%0x\n",byte_data_temp_w[15:8],byte_data_temp_w[23:16]);
           end
           else begin
             $fwrite(f,"%0x\n%0x\n%0x\n",byte_data_temp_w[7:0],byte_data_temp_w[15:8],byte_data_temp_w[23:16]);
@@ -926,7 +922,7 @@ task datachack(
         end
         else if (DATA_WIDTH == 48) begin
             if (first_byte_data_r) begin
-              $fwrite(f,"%0x\n%0x\n",                               byte_data_temp_w[31:24],
+              $fwrite(f,"%0x\n%0x\n%0x\n",                          byte_data_temp_w[31:24],
                                                                     byte_data_temp_w[47:40]);
             end
             else begin
@@ -951,7 +947,7 @@ task datachack(
           end
           else begin
             if (first_byte_data_r) begin
-              $fwrite(f,"%0x\n%0x\n%0x\n%0x\n",                     byte_data_temp_w[15: 8],
+              $fwrite(f,"%0x\n%0x\n%0x\n%0x\n%0x\n%0x\n%0x\n%0x\n", byte_data_temp_w[15: 8],
                                                                     byte_data_temp_w[31:24],
                                                                     byte_data_temp_w[47:40],
                                                                     byte_data_temp_w[63:56]);

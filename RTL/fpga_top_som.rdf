@@ -96,6 +96,12 @@
         <Source name="src/constraints/fpga_top_som.sdc" type="Pre-Synthesis Constraints File" type_short="SDC">
             <Options/>
         </Source>
+        <Source name="src/debug/debug_mipi_rx.rvl" type="Reveal" type_short="Reveal" excluded="TRUE">
+            <Options/>
+        </Source>
+        <Source name="src/debug/untitled.rva" type="Reveal Analyzer Project File" type_short="RVA">
+            <Options/>
+        </Source>
     </Implementation>
     <Strategy name="Strategy1" file="fpga_top_som.sty"/>
 </RadiantProject>

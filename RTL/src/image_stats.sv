@@ -2,7 +2,7 @@
  * The accumulator block does what it says! Just accumulate any incoming data and double buffer
  * it on the output when the stream ends.
  */
-`default_nettype none
+`default_nettype wire
 
 module chan_accum #(parameter ACCUM_BITS = 22, PIXEL_BITS = 10) (
 	input  wire                  clk    ,

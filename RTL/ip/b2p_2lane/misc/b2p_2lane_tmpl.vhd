@@ -14,6 +14,12 @@ component b2p_2lane is
         lv_o: out std_logic;
         pd_o: out std_logic_vector(9 downto 0);
         p_odd_o: out std_logic_vector(1 downto 0);
+        write_cycle_o: out std_logic_vector(3 downto 0);
+        mem_we_o: out std_logic;
+        mem_re_o: out std_logic;
+        read_cycle_o: out std_logic_vector(1 downto 0);
+        fifo_empty_o: out std_logic;
+        fifo_full_o: out std_logic;
         pixcnt_c_o: out std_logic_vector(18 downto 0);
         pix_out_cntr_o: out std_logic_vector(15 downto 0);
         wc_pix_sync_o: out std_logic_vector(15 downto 0)
@@ -35,6 +41,12 @@ __: b2p_2lane port map(
     lv_o=>,
     pd_o=>,
     p_odd_o=>,
+    write_cycle_o=>,
+    mem_we_o=>,
+    mem_re_o=>,
+    read_cycle_o=>,
+    fifo_empty_o=>,
+    fifo_full_o=>,
     pixcnt_c_o=>,
     pix_out_cntr_o=>,
     wc_pix_sync_o=>

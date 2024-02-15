@@ -94,7 +94,12 @@ if (RX_TYPE == "DSI") begin: dsi_data
                   write_to_file("received_data.log", data2);
                if (p_odd_i == 2'b00)
                   write_to_file("received_data.log", data3);
-                actual_pixel_count = actual_pixel_count + 4 - p_odd_i;
+// Loyce: 20230830
+// Fixed wrong logic for counting for the received pixel
+// Previous implementation is wrong to use 4-p_odd_i. If p_odd_i === 2'b11,
+// 3 pixels are valid, but the logic will only add 1 to the counter.
+//                actual_pixel_count = actual_pixel_count + 4 - p_odd_i;
+                actual_pixel_count = actual_pixel_count + {~|p_odd_i,p_odd_i};
             end
         end
     end
@@ -135,20 +140,40 @@ else begin: csi_data
             end
             
             else if(line_valid_i ==1 && frame_valid_i==1 && NUM_PIXELS==4) begin
-                data = pixel_data_i[(PD_BUS_WIDTH/2)-1:0] ; 
-                data1 = pixel_data_i[PD_BUS_WIDTH-1:(PD_BUS_WIDTH/2)] ; 
-                data2 = pixel_data_i[(PD_BUS_WIDTH+(PD_BUS_WIDTH/2))-1:PD_BUS_WIDTH] ; 
-                data3 = pixel_data_i[(2*PD_BUS_WIDTH)-1:(PD_BUS_WIDTH+(PD_BUS_WIDTH/2))] ; 
-                //p_odd: 00- all pix valid.   01- only pix0 valid
-	           //        10- only pix0&1 vld  11- only pix0,1 &2 are valid
+// Loyce: Fix CSI 4 pixels issue
+//                data = pixel_data_i[(PD_BUS_WIDTH/2)-1:0] ; 
+//                data1 = pixel_data_i[PD_BUS_WIDTH-1:(PD_BUS_WIDTH/2)] ; 
+//                data2 = pixel_data_i[(PD_BUS_WIDTH+(PD_BUS_WIDTH/2))-1:PD_BUS_WIDTH] ; 
+//                data3 = pixel_data_i[(2*PD_BUS_WIDTH)-1:(PD_BUS_WIDTH+(PD_BUS_WIDTH/2))] ; 
+//                //p_odd: 00- all pix valid.   01- only pix0 valid
+//	           //        10- only pix0&1 vld  11- only pix0,1 &2 are valid
+//                write_to_file("received_data.log", data);
+//                if (p_odd_i !== 2'b01)
+//                  write_to_file("received_data.log", data1);
+//                if ((p_odd_i == 2'b00) || (p_odd_i == 2'b11))
+//                  write_to_file("received_data.log", data2);
+//                if (p_odd_i == 2'b00)
+//                  write_to_file("received_data.log", data3);
+//                actual_pixel_count = actual_pixel_count + 4 - p_odd_i; 
+              data   = pixel_data_i[(PD_BUS_WIDTH*NUM_TX_CH/4)-1:0] ;
+              data1  = pixel_data_i[PD_BUS_WIDTH*NUM_TX_CH/2-1:PD_BUS_WIDTH*NUM_TX_CH/4] ;
+              data2  = pixel_data_i[PD_BUS_WIDTH*NUM_TX_CH*3/4-1:PD_BUS_WIDTH*NUM_TX_CH/2] ;
+              data3  = pixel_data_i[PD_BUS_WIDTH*NUM_TX_CH-1:PD_BUS_WIDTH*NUM_TX_CH*3/4] ;
+               //p_odd: 00- all pix valid.   01- only pix0 valid
+	           //       10- only pix0&1 vld  11- only pix0,1 &2 are valid
                 write_to_file("received_data.log", data);
-                if (p_odd_i !== 2'b01)
+               if (p_odd_i !== 2'b01)
                   write_to_file("received_data.log", data1);
-                if ((p_odd_i == 2'b00) || (p_odd_i == 2'b11))
+               if ((p_odd_i == 2'b00) || (p_odd_i == 2'b11))
                   write_to_file("received_data.log", data2);
-                if (p_odd_i == 2'b00)
+               if (p_odd_i == 2'b00)
                   write_to_file("received_data.log", data3);
-                actual_pixel_count = actual_pixel_count + 4 - p_odd_i; 
+// Loyce: 20230830
+// Fixed wrong logic for counting for the received pixel
+// Previous implementation is wrong to use 4-p_odd_i. If p_odd_i === 2'b11,
+// 3 pixels are valid, but the logic will only add 1 to the counter.
+//                actual_pixel_count = actual_pixel_count + 4 - p_odd_i;
+                actual_pixel_count = actual_pixel_count + {~|p_odd_i,p_odd_i};
             end
         end
     end

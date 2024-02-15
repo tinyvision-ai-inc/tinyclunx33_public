@@ -12,6 +12,12 @@
         .lv_o( ),
         .pd_o( ),
         .p_odd_o( ),
+        .write_cycle_o( ),
+        .mem_we_o( ),
+        .mem_re_o( ),
+        .read_cycle_o( ),
+        .fifo_empty_o( ),
+        .fifo_full_o( ),
         .pixcnt_c_o( ),
         .pix_out_cntr_o( ),
         .wc_pix_sync_o( ));

@@ -66,7 +66,7 @@ module wb_intercon
 wb_mux
   #(.num_slaves (4),
     .MATCH_ADDR ({32'hb0000000, 32'hb1000000, 32'hb2000000, 32'hb3000000}),
-    .MATCH_MASK ({32'hff000000, 32'hffff0000, 32'hffff0000, 32'hffff0000}))
+    .MATCH_MASK ({32'hff000000, 32'hff000001, 32'hffff0000, 32'hffff0000}))
  wb_mux_wb0
    (.wb_clk_i  (wb_clk_i),
     .wb_rst_i  (wb_rst_i),

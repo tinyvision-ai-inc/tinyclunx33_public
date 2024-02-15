@@ -195,9 +195,6 @@ initial begin
             cont_clk_en = 0;
          end
       join
-      #10;
-      $fclose(f);
-
 end
 
 initial begin

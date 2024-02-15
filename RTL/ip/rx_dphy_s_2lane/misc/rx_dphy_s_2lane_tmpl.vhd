@@ -10,6 +10,7 @@ component rx_dphy_s_2lane is
         clk_byte_fr_i: in std_logic;
         reset_n_i: in std_logic;
         reset_lp_n_i: in std_logic;
+        reset_byte_n_i: in std_logic;
         reset_byte_fr_n_i: in std_logic;
         clk_p_io: inout std_logic;
         clk_n_io: inout std_logic;
@@ -44,10 +45,7 @@ component rx_dphy_s_2lane is
         rxfullfr1_o: out std_logic;
         rxque_curstate_o: out std_logic_vector(1 downto 0);
         rxque_empty_o: out std_logic;
-        rxque_full_o: out std_logic;
-        fifo_dly_err_o: out std_logic;
-        fifo_undflw_err_o: out std_logic;
-        fifo_ovflw_err_o: out std_logic
+        rxque_full_o: out std_logic
     );
 end component;
 
@@ -62,6 +60,7 @@ __: rx_dphy_s_2lane port map(
     clk_byte_fr_i=>,
     reset_n_i=>,
     reset_lp_n_i=>,
+    reset_byte_n_i=>,
     reset_byte_fr_n_i=>,
     clk_p_io=>,
     clk_n_io=>,
@@ -96,8 +95,5 @@ __: rx_dphy_s_2lane port map(
     rxfullfr1_o=>,
     rxque_curstate_o=>,
     rxque_empty_o=>,
-    rxque_full_o=>,
-    fifo_dly_err_o=>,
-    fifo_undflw_err_o=>,
-    fifo_ovflw_err_o=>
+    rxque_full_o=>
 );

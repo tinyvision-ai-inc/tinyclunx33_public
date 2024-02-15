@@ -2,7 +2,7 @@
 <RadiantProject version="4.2" radiant="2023.2.0.38.1" title="fpga_top_som" device="LIFCL-33U-7CTG104C" performance_grade="7_High-Performance_1.0V" default_implementation="impl_no_mipi">
     <Options/>
     <Implementation title="impl_no_mipi" dir="impl_no_mipi" description="impl_no_mipi" synthesis="lse" default_strategy="Strategy1">
-        <Options def_top="fpga_top_som_no_mipi">
+        <Options def_top="TinyClunx">
             <Option name="include path" value="ip/wb_common;src"/>
             <Option name="top" value="fpga_top_som_no_mipi"/>
         </Options>

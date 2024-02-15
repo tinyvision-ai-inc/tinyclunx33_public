@@ -98,6 +98,14 @@ static void RegTest(void) {
 	// Scratch RAM
 	adr = WISHBONE_BASE_ADDR + 0x01000000;
 	reg_32b_write(adr, 0xdeadfeed);
+	reg_32b_read(adr, &val);
+	printf("Read back 0x%x from 0x%x\n\r", val, adr);
+
+	// TPG
+	adr = WISHBONE_BASE_ADDR + 0x01100000;
+	reg_32b_write(adr, 0xdeadfeed);
+	reg_32b_read(adr, &val);
+	printf("Read back 0x%x from 0x%x\n\r", val, adr);
 
 	// CSR
 	adr = WISHBONE_BASE_ADDR+0x02000000;

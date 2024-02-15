@@ -293,8 +293,6 @@ initial begin
       end
     end
    dphy_active = 0;
-   #10;
-   $fclose(f);
 end
 
 generate
