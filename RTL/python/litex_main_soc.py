@@ -283,7 +283,7 @@ class MainSoC(ZephyrSoC, SoCCore):
         self.bus.add_slave(name=f"ahb{id}", slave=port.bus, region=region)
 
     def add_wb_master_port(self, id=0, width=32):
-        self.platform.request("wishbone", id)
+        pads = self.platform.request("wishbone", id)
         port = VerilogWBPort(pads, width=width, mode="slave")
         self.submodules += port
         self.bus.add_master(name=f"wb{id}", master=port.bus)
