@@ -11,6 +11,8 @@ LITEX_SOC_PY += python/litex_top_som.py
 
 all: litex.overlay litex.conf
 
+-include config.mk
+
 setup: litex/litex_setup.py
 	$(PYTHON) -m pip install meson ninja
 	mkdir -p litex
@@ -37,6 +39,9 @@ software: $(LITEX_SOC_PY)
 gateware: $(LITEX_SOC_PY)
 	cd litex && $(PYTHON) ../python/litex_top_som.py
 	cp litex/build/som/gateware/som.v src
+
+wishbone src/wb_intercon.v: src/wb_intercon.cfg
+	python ip/wb_intercon/sw/wb_intercon_gen src/wb_intercon.cfg src/wb_intercon.v
 
 litex litex.overlay litex.conf: gateware
 	$(PYTHON) python/litex_json2dts_zephyr.py --dts=litex.overlay --config=litex.conf litex/build/csr.som.json
