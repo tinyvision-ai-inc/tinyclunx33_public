@@ -30,8 +30,8 @@ litex/litex_setup.py:
 	mkdir -p litex
 	wget -O $@ $(LITEX_SETUP_URL)
 
-spinal src/TinyClunx.v: spinal/TinyClunx.scala
-	sbt run
+spinal src/TinyClunx.v: spinal/TinyClunx/src/main/scala/TinyClunx.scala
+	sbt  "runMain TinyClunx.TinyClunx"
 
 software: $(LITEX_SOC_PY)
 	cd litex && $(PYTHON) ../python/litex_top_software.py
