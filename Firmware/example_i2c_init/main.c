@@ -325,18 +325,20 @@ int main(void)
 
 	//CsrRegTest();
 
+	// Bump Flash clock speed
+	spiflash_phy_clk_divisor_write(2);
+
 	uart_init();
+
 
 	// Initialize the PLL
 	i2c_init();
 	busy_wait(200); // Wait for the PLL to lock and switch clocks
 
-	// Bump up Flash clock speed
-	//spiflash_phy_clk_divisor_write(0);
-
-	printf("\n\rINFO: Initializing the camera sensor on expansion port 0, sensor 0\n\r");
+	//printf("\n\rINFO: Initializing the camera sensor on expansion port 0, sensor 0\n\r");
 	sel_cam(0, 0);
 	SensorInit();
+
 
 	help();
 	prompt();

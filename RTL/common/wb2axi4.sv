@@ -14,7 +14,7 @@ module wb2axi4 #(
     output      reg                          o_axi_awvalid, // Write address valid
     input  wire                              i_axi_awready, // Slave is ready to accept
     output wire     [    C_AXI_ID_WIDTH-1:0] o_axi_awid   , // Write ID
-    output wire     [  C_AXI_ADDR_WIDTH-1:0] o_axi_awaddr , // Write address
+    output      reg [  C_AXI_ADDR_WIDTH-1:0] o_axi_awaddr , // Write address
     output wire     [                   7:0] o_axi_awlen  , // Write Burst Length
     output wire     [                   2:0] o_axi_awsize , // Write Burst size
     output wire     [                   1:0] o_axi_awburst, // Write Burst type
@@ -25,9 +25,9 @@ module wb2axi4 #(
     // AXI write data channel signals
     output      reg                          o_axi_wvalid , // Write valid
     input  wire                              i_axi_wready , // Write data ready
-    output wire     [  C_AXI_DATA_WIDTH-1:0] o_axi_wdata  , // Write data
-    output wire     [C_AXI_DATA_WIDTH/8-1:0] o_axi_wstrb  , // Write strobes
-    output wire                              o_axi_wlast  , // Last write transaction
+    output      reg [  C_AXI_DATA_WIDTH-1:0] o_axi_wdata  , // Write data
+    output      reg [C_AXI_DATA_WIDTH/8-1:0] o_axi_wstrb  , // Write strobes
+    output      reg                          o_axi_wlast  , // Last write transaction
     // AXI write response channel signals
     input  wire                              i_axi_bvalid , // Write reponse valid
     output      reg                          o_axi_bready , // Response ready
@@ -37,7 +37,7 @@ module wb2axi4 #(
     output      reg                          o_axi_arvalid, // Read address valid
     input  wire                              i_axi_arready, // Read address ready
     output wire     [    C_AXI_ID_WIDTH-1:0] o_axi_arid   , // Read ID
-    output wire     [  C_AXI_ADDR_WIDTH-1:0] o_axi_araddr , // Read address
+    output      reg [  C_AXI_ADDR_WIDTH-1:0] o_axi_araddr , // Read address
     output wire     [                   7:0] o_axi_arlen  , // Read Burst Length
     output wire     [                   2:0] o_axi_arsize , // Read Burst size
     output wire     [                   1:0] o_axi_arburst, // Read Burst type
@@ -102,82 +102,69 @@ module wb2axi4 #(
     enum {S_IDLE, S_WAIT_RD, S_SEND_WR, S_WAIT_BSEND} n_state;
     enum {A_IDLE, A_WAIT} addr_state;
 
+    // Convert betweeen 64 and 32 bits
+    wire odd_addr = wb_adr_i[2];
+
     always_ff @( posedge i_clk) begin
         if (i_reset) begin 
             n_state <= S_IDLE;
             addr_state <= A_IDLE;
+            o_axi_awvalid <= 0;
+            o_axi_arvalid <= 0;
+            o_axi_wvalid <= 0;
+            wb_ack_o <= 1'b0;
+
         end else begin
 
+            // Defaults
+            o_axi_awvalid <= 0;
+            o_axi_arvalid <= 0;
+            o_axi_wvalid  <= 0;
+            wb_ack_o <= 1'b0;
+            o_axi_rready  <= 1'b1;
+            o_axi_bready  <= 1'b1;
+
+            // Write port:
+            o_axi_awaddr <= wb_adr_i;
+            o_axi_wdata  <= odd_addr ? {wb_data_i, 32'd0} : {32'd0, wb_data_i};
+            o_axi_wstrb  <= odd_addr ? {wb_sel_i, 4'b0} : {4'b0, wb_sel_i};
+
+            // Read address port:
+            o_axi_araddr <= wb_adr_i;
+            wb_data_o    <= odd_addr ? i_axi_rdata[63:32] : i_axi_rdata[31:0];
+            
             case (addr_state)
-                A_IDLE: if (valid & ( (wb_we_i & i_axi_awready)| (~wb_we_i & i_axi_arready) )) addr_state <= A_WAIT;
+                A_IDLE: if (valid & ( (wb_we_i & i_axi_awready)| (~wb_we_i & i_axi_arready) )) begin
+                    o_axi_awvalid <=  wb_we_i;
+                    o_axi_arvalid <= ~wb_we_i;
+                    addr_state <= A_WAIT;
+                end
                 A_WAIT: if ( (wb_we_i & i_axi_bvalid) | (~wb_we_i & i_axi_rvalid) ) addr_state <= A_IDLE;
             endcase
 
             case (n_state)
                 S_IDLE : begin
                     if (valid) begin
+                        o_axi_wvalid <= wb_we_i;
                         if (wb_we_i & i_axi_wready) n_state <= S_WAIT_BSEND;
                         else if (~wb_we_i)          n_state <= S_WAIT_RD;
                     end
                 end
 
-                S_WAIT_RD :    if (i_axi_rvalid) n_state  <= S_IDLE;
+                S_WAIT_RD : begin
+                   if (i_axi_rvalid) n_state  <= S_IDLE;
+                   wb_ack_o <= i_axi_rvalid;
+               end
 
-                S_WAIT_BSEND : if (i_axi_bvalid) n_state  <= S_IDLE;
+                S_WAIT_BSEND : begin
+                    o_axi_bready <= 1'b1;
+                    if (i_axi_bvalid) n_state  <= S_IDLE;
+                    wb_ack_o <= i_axi_bvalid;
+                end
 
             endcase
         end
     end
-
-    always_comb begin
-        o_axi_awvalid = 1'b0;
-        o_axi_wvalid  = 1'b0;
-        o_axi_arvalid = 1'b0;
-        o_axi_rready  = 1'b1;
-        o_axi_bready  = 1'b1;
-        wb_ack_o      = 1'b0;
-
-        case (addr_state)
-            A_IDLE : begin
-                if (valid) begin
-                    o_axi_awvalid =  wb_we_i;
-                    o_axi_arvalid = ~wb_we_i;
-                end
-            end
-
-            A_WAIT: begin
-            end
-
-        endcase
-
-        case (n_state)
-            S_IDLE : begin
-                o_axi_wvalid = valid & wb_we_i;
-            end
-
-            S_WAIT_RD : begin
-                wb_ack_o = i_axi_rvalid;
-            end
-
-            S_WAIT_BSEND : begin
-                o_axi_bready = 1'b1;
-                wb_ack_o     = i_axi_bvalid;
-            end
-        endcase
-    end
-    // Convert betweeen 64 and 32 bits
-    wire odd_addr = wb_adr_i[2];
-
-    // Command port:
-    assign o_axi_awaddr = wb_adr_i;
-
-    // Write port:
-    assign o_axi_wdata = odd_addr ? {wb_data_i, 32'd0} : {32'd0, wb_data_i};
-    assign o_axi_wstrb = odd_addr ? {wb_sel_i, 4'b0} : {4'b0, wb_sel_i};
-
-    // Read address port:
-    assign o_axi_araddr = wb_adr_i;
-    assign wb_data_o    = odd_addr ? i_axi_rdata[63:32] : i_axi_rdata[31:0];
 
 endmodule
 `default_nettype    wire

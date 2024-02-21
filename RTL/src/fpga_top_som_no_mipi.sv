@@ -67,58 +67,63 @@ module fpga_top_som_no_mipi (
   assign reset = ~reset_n;
 
   // A PLL generates various frequencies for the design:
-  wire pll_lock, clk_60m, sync_clk, pixel_clk, camera_mclk, tx_clk, tx_clk_90, byte_clk;
+  wire pll_lock, clk_60m, clk_50m, clk_100m, clk_200m, clk_200m_90;
   main_pll u_main_pll (
     .clki_i  (clk_2    ),
     .rstn_i  (reset_n  ),
     .clkop_o (clk_60m  ), // 60 MHz
-    .clkos_o (pixel_clk), // 100 MHz
-    .clkos2_o(sync_clk ), // 100 MHz
-    .clkos3_o(byte_clk ), // 50 MHz
-    .clkos4_o(tx_clk   ), // 200 MHz
-    .clkos5_o(tx_clk_90), // 200 MHz
+    .clkos_o (clk_50m), // 50 MHz
+    .clkos2_o(clk_100m ), // 100 MHz
+    //.clkos3_o(byte_clk ), // 50 MHz
+    .clkos4_o(clk_200m   ), // 200 MHz
+    .clkos5_o(clk_200m_90), // 200 MHz
     .lock_o  (pll_lock )
   );
 
+  wire sync_clk = clk_50m;
+  wire pixel_clk = clk_100m;
+  wire byte_clk = clk_50m;
   logic pixel_rst_n;
   fpga_reset pix_rst_sync (.clk(pixel_clk), .reset_n_i(pll_lock), .reset_n_o(pixel_rst_n)); 
   logic byte_rst_n;
   fpga_reset byte_rst_sync (.clk(byte_clk), .reset_n_i(pll_lock), .reset_n_o(byte_rst_n));
 
-  // Switch the USB clock to the PLL output once the PLL locks. This is a stopgap measure for now.
-  // @TBD: Currently, the USB reference clock and processor clock are the same. Ideally, we will want
-  // the USB reference clock to come from the external source while the processor runs on a different clock.
-  // The DCS block will then be used to switch only the processor clock as the processor has to be
+  // Switch the processor clock to the PLL output once the PLL locks.
+  // The DCS block can then be used to switch only the processor clock as the processor has to be
   // clocked to initialize the external PLL to produce a clock.
-  logic usb_clk;
   defparam i_dcs.DCSMODE = "DCS";
   DCS i_dcs (
     .CLK0    (hf_clk  ),
-    .CLK1    (clk_60m ),
+    .CLK1    (clk_100m),
     .SEL     (pll_lock),
     .SELFORCE('0      ),
-    .DCSOUT  (usb_clk )
+    .DCSOUT  (proc_clk )
   );
 
+  logic proc_rst_n, proc_rst;
+  rst_sync proc_rst_sync (.clk(proc_clk), .async_rst_n(button_n), .sync_rst_n(proc_rst_n));
+  assign proc_rst = ~proc_rst_n;
 
+  // USB clock is 60MHz
+  wire usb_clk = clk_60m;
   logic usb_rst_n, usb_rst;
-  rst_sync usb_rst_sync (.clk(usb_clk), .async_rst_n(button_n), .sync_rst_n(usb_rst_n));
+  rst_sync usb_rst_sync (.clk(usb_clk), .async_rst_n(button_n & pll_lock), .sync_rst_n(usb_rst_n));
   assign usb_rst = ~usb_rst_n;
 
 /*------------------------------------------------------------------------------
 --  Wishbone interconnect: connects the processor to the USB as well as the CSR
 -- and other peripherals.
 ------------------------------------------------------------------------------*/
-  wire wb_clk = usb_clk;
-  wire wb_rst = usb_rst;
+  wire wb_clk = proc_clk;
+  wire wb_rst = proc_rst;
   `include "wb_intercon.vh"
 
 /*------------------------------------------------------------------------------
 --  AXI infrastructure to communicate with the USB and other stuff
 ------------------------------------------------------------------------------*/
 `include "axi_infrastructure.sv"
-assign axiReset = usb_rst;
-assign axiClk = usb_clk;
+assign axiReset = proc_rst;
+assign axiClk = proc_clk;
 
 /*------------------------------------------------------------------------------
 --  LiteX design
@@ -135,8 +140,8 @@ assign axiClk = usb_clk;
     .spiflash4x_clk (spiflash_clk  ),
     .spiflash4x_cs_n(spiflash_cs_n ),
     .spiflash4x_dq  (spiflash_dq   ),
-    .sys_clk        (usb_clk       ),
-    .sys_rst        (usb_rst       ),
+    .sys_clk        (proc_clk      ),
+    .sys_rst        (proc_rst      ),
     // Wishbone master
     .wishbone0_adr  (wb_adr        ),
     .wishbone0_bte  (wb_m2s_wb0_bte),
@@ -338,8 +343,8 @@ assign axiClk = usb_clk;
   logic [15:0] lmmi_offset     ;
   logic [31:0] lmmi_wdata      ;
   wb2lmmi i_wb2lmmi (
-    .clk     (usb_clk             ),
-    .rst     (usb_rst             ),
+    .clk     (wb_clk              ),
+    .rst     (wb_rst              ),
     .wb_cyc  (wb_m2s_usb_cyc      ),
     .wb_stb  (wb_m2s_usb_stb      ),
     .wb_adr  (wb_m2s_usb_adr[17:0]),
@@ -364,39 +369,28 @@ assign axiClk = usb_clk;
     // Clock Signals
     // *********************************************************************
     // USB 2.0 & 3.0 Internal Clock
-    .USBPHY_REFCLK_ALT (usb_clk             ), // Input @TBD VR: check this out!
+    .USBPHY_REFCLK_ALT (usb_clk             ), // Input @TBD!
     // USB 2.0 PHY External Clock
-    .XOIN18            (1'b0                ), // Input
+    .XOIN18            (usb_clk             ), // Input @TBD!
     .XOOUT18           (                    ), // Output
     // USB 3.0 PHY External Differential Clock
     .REFINCLKEXTP      (usb23_REFINCLKEXTP_i), // Input
     .REFINCLKEXTM      (usb23_REFINCLKEXTM_i), // Input
     // Other Clocks
-    .USB3_MCUCLK       (usb_clk             ), // Input
-    .USB_SUSPENDCLK    (usb_clk             ), // Input
+    .USB3_MCUCLK       (proc_clk            ), // Input
+    .USB_SUSPENDCLK    (proc_clk            ), // Input
     // *********************************************************************
-    // Reset Signals
+    // Reset Signals @TBD what domain these should be sync'ed up to!
     // *********************************************************************
     .USB3_SYSRSTN      (usb_rst_n           ), // Input
     .USB_RESETN        (usb_rst_n           ), // Input
-    .USB2_RESET        ((usb_rst)           ), // Input
-    // *********************************************************************
-    // USB23 High Speed Lines
-    // *********************************************************************
-    // USB 2.0 Lines
-    .DP                (usb23_DP            ), // IO
-    .DM                (usb23_DMP           ), // IO
-    // USB 3.0 Lines
-    .RXM               (usb23_RXMP_i        ), // Input
-    .RXP               (usb23_RXPP_i        ), // Input
-    .TXM               (usb23_TXMP_o        ), // Output
-    .TXP               (usb23_TXPP_o        ), // Output
+    .USB2_RESET        (usb_rst             ), // Input
     // *********************************************************************
     // Configuration Path
     // *********************************************************************
     // LMMI Configuration path Signals
-    .LMMICLK           (usb_clk             ), // Input
-    .LMMIRESETN        (usb_rst_n           ), // Input
+    .LMMICLK           (proc_clk            ), // Input
+    .LMMIRESETN        (proc_rst_n          ), // Input
     .LMMIREQUEST       (lmmi_request        ), // Input
     .LMMIWRRD_N        (lmmi_wr_rdn         ), // Input
     .LMMIOFFSET        (lmmi_offset[14:0]   ), // Input
@@ -414,7 +408,7 @@ assign axiClk = usb_clk;
     .XMAWLEN           (usbM_awlen          ),
     .XMAWBURST         (usbM_awburst        ),
     .XMAWID            (usbM_awid           ),
-    .XMAWLOCK          (), // @TBD:  usbM_awlock         ),
+    .XMAWLOCK          (                    ), // @TBD:  usbM_awlock         ),
     .XMAWCACHE         (usbM_awcache        ),
     .XMAWPROT          (usbM_awprot         ),
     .XMAWREADY         (usbM_awready        ),
@@ -424,12 +418,12 @@ assign axiClk = usb_clk;
     .XMWSTRB           (usbM_wstrb          ),
     .XMWVALID          (usbM_wvalid         ),
     .XMWLAST           (usbM_wlast          ),
-    .XMWID             (), // @TBD: usbM_wid            ),
+    .XMWID             (                    ), // @TBD: usbM_wid            ),
     .XMWREADY          (usbM_wready         ),
     // AXI Master Read Data Channel Signals
     .XMBID             (usbM_bid            ),
     .XMBVALID          (usbM_bvalid         ),
-    .XMBRESP           (), // @TBD: usbM_bresp          ),
+    .XMBRESP           (                    ), // @TBD: usbM_bresp          ),
     .XMBREADY          (usbM_bready         ),
     .XMBMISC_INFO      (                    ),
     // AXI Master Read Address Channel Signals
@@ -439,7 +433,7 @@ assign axiClk = usb_clk;
     .XMARSIZE          (usbM_arsize         ),
     .XMARBURST         (usbM_arburst        ),
     .XMARID            (usbM_arid           ),
-    .XMARLOCK          (), // @TBD: usbM_arlock         ),
+    .XMARLOCK          (                    ), // @TBD: usbM_arlock         ),
     .XMARCACHE         (usbM_arcache        ),
     .XMARPROT          (usbM_arprot         ),
     .XMARMISC_INFO     (                    ),
@@ -450,7 +444,7 @@ assign axiClk = usb_clk;
     .XMRLAST           (usbM_rlast          ),
     .XMRDATA           (usbM_rdata          ),
     .XMRMISC_INFO      (                    ),
-    .XMRRESP           (), // @TBD: usbM_rresp          ),
+    .XMRRESP           (                    ), // @TBD: usbM_rresp          ),
     .XMRREADY          (usbM_rready         ),
     // AXI bus for Lower Power
     .XMCSYSREQ         (1'b0                ), // Input
@@ -465,6 +459,17 @@ assign axiClk = usb_clk;
     // Interrupt Signal
     // *********************************************************************
     .INTERRUPT         (irq_usb23           ), // Output
+    // *********************************************************************
+    // USB23 High Speed Lines
+    // *********************************************************************
+    // USB 2.0 Lines
+    .DP                (usb23_DP            ), // IO
+    .DM                (usb23_DMP           ), // IO
+    // USB 3.0 Lines
+    .RXM               (usb23_RXMP_i        ), // Input
+    .RXP               (usb23_RXPP_i        ), // Input
+    .TXM               (usb23_TXMP_o        ), // Output
+    .TXP               (usb23_TXPP_o        ), // Output
     // *********************************************************************
     // Other Signal
     // *********************************************************************
