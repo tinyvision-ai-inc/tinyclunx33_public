@@ -63,14 +63,14 @@ ldc_set_location -site {L7} [get_ports {mipi_rx_dat_p[1]}]
 ldc_set_location -site {L6} [get_ports {mipi_rx_dat_m[1]}]
 # 2L MIPI transmit:
 # DIFF 3: MIPI Lane 0
-# DIFF 5: MIPI Clock
 # DIFF 4: MIPI Lane 1
-ldc_set_location -site {J6} [get_ports mipi_tx_clk_p]
-ldc_set_location -site {H6} [get_ports mipi_tx_clk_m]
+# DIFF 5: MIPI Clock
 ldc_set_location -site {F7} [get_ports {mipi_tx_dat_p[0]}]
 ldc_set_location -site {E6} [get_ports {mipi_tx_dat_m[0]}]
 ldc_set_location -site {G7} [get_ports {mipi_tx_dat_p[1]}]
 ldc_set_location -site {G6} [get_ports {mipi_tx_dat_m[1]}]
+ldc_set_location -site {J6} [get_ports mipi_tx_clk_p]
+ldc_set_location -site {H6} [get_ports mipi_tx_clk_m]
 #---- Byte2Pixel constraints --------------------------------------------------------------------------------------#
 ######                                                                                       ######
 # NOTE:  The byte-to-pixel IP treats the byte clock and the pixel clock as asynchronous.          #

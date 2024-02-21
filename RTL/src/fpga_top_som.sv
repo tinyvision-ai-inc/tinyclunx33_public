@@ -5,6 +5,7 @@
 `default_nettype wire
 
 module fpga_top_som (
+  output wire       gpio_a3             ,
   input  wire       button_n            , // Reset button from devboard
   input  wire       clk_2               , // Clock from PLL, usually set to 24MHz as this is a common value
   input  wire       uart_rxd            ,
@@ -666,6 +667,7 @@ assign axiClk = usb_clk;
 ------------------------------------------------------------------------------*/
   //assign gpio_b1 = tx_fv;
   //assign gpio_g1 = tx_lv;
+  assign gpio_a3 = pixel_lv;
 
 endmodule
 `define nettype wire

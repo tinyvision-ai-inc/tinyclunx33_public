@@ -105,10 +105,10 @@ module mipi_to_pixel #(
 		.rxfullfr1_o(),
 		.rxque_curstate_o(),
 		.rxque_empty_o(),
-		.rxque_full_o(),
-		.fifo_dly_err_o(),
-		.fifo_undflw_err_o(),
-		.fifo_ovflw_err_o()
+		.rxque_full_o()
+//		.fifo_dly_err_o(),
+//		.fifo_undflw_err_o(),
+//		.fifo_ovflw_err_o()
 	);
 
 // Convert bytes to pixels

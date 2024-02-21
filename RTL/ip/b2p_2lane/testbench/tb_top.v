@@ -245,7 +245,7 @@ PUR_INST_PIXEL(
 `include "dut_inst.v"
 
 generate 
-    if(AXI_SLAVE == "ON") begin : AXI_MASTER_byte_driver_ON  
+    if(AXI4_RX == "ON") begin : AXI4_TX_byte_driver_ON  
         assign axis_sclk_i        = clk_byte_i;
         assign axis_sresetn_i     = reset_byte_n_i;
         
@@ -327,7 +327,7 @@ generate
         assign vsync_i       = ~vsync_o;
         assign hsync_i       = ~hsync_o;
         assign frame_valid_i = ~fv_o;
-        if(AXI_MASTER == "ON") begin   
+        if(AXI4_TX == "ON") begin   
  	        assign de_i         = de_o;                   
             assign line_valid_i = lv_o;
         end
@@ -339,7 +339,7 @@ generate
 endgenerate 
 
 generate
-    if(AXI_MASTER == "ON") begin : AXI_SLAVE_pixel_monitor_ON   
+    if(AXI4_TX == "ON") begin : AXI4_RX_pixel_monitor_ON   
         assign axis_mclk_i    = clk_pixel_i;
         assign axis_mresetn_i = reset_pixel_n_i;
                 

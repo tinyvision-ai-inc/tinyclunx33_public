@@ -8,6 +8,7 @@
         .clk_byte_fr_i( ),
         .reset_n_i( ),
         .reset_lp_n_i( ),
+        .reset_byte_n_i( ),
         .reset_byte_fr_n_i( ),
         .clk_p_io( ),
         .clk_n_io( ),
@@ -42,7 +43,4 @@
         .rxfullfr1_o( ),
         .rxque_curstate_o( ),
         .rxque_empty_o( ),
-        .rxque_full_o( ),
-        .fifo_dly_err_o( ),
-        .fifo_undflw_err_o( ),
-        .fifo_ovflw_err_o( ));
+        .rxque_full_o( ));
