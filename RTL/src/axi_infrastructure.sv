@@ -93,7 +93,7 @@
 	wire [ 8:0] axiS_rid     ;
 	wire        axiS_rlast   ;
 	*/
-	TinyClunx i_TinyClunx (
+	TinyClunx_no_usb i_TinyClunx_no_usb (
 		.axiReset              (axiReset     ),
 		.axiClk                (axiClk       ),
 		.usbM_aw_valid         (usbM_awvalid ),

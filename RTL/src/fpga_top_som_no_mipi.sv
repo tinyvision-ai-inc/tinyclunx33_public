@@ -67,13 +67,13 @@ module fpga_top_som_no_mipi (
   assign reset = ~reset_n;
 
   // A PLL generates various frequencies for the design:
-  wire pll_lock, clk_60m, sync_clk, pixel_clk, camera_mclk, tx_clk, tx_clk_90, byte_clk;
+  wire pll_lock, clk_60m, clk_os2, pixel_clk, camera_mclk, tx_clk, tx_clk_90, byte_clk;
   main_pll u_main_pll (
     .clki_i  (clk_2    ),
     .rstn_i  (reset_n  ),
     .clkop_o (clk_60m  ), // 60 MHz
     .clkos_o (pixel_clk), // 100 MHz
-    .clkos2_o(sync_clk ), // 100 MHz
+    .clkos2_o(clk_os2 ), // 80 MHz
     .clkos3_o(byte_clk ), // 50 MHz
     .clkos4_o(tx_clk   ), // 200 MHz
     .clkos5_o(tx_clk_90), // 200 MHz
@@ -90,17 +90,21 @@ module fpga_top_som_no_mipi (
   // the USB reference clock to come from the external source while the processor runs on a different clock.
   // The DCS block will then be used to switch only the processor clock as the processor has to be
   // clocked to initialize the external PLL to produce a clock.
-  logic usb_clk;
+  logic proc_clk;
   defparam i_dcs.DCSMODE = "DCS";
   DCS i_dcs (
     .CLK0    (hf_clk  ),
-    .CLK1    (clk_60m ),
+    .CLK1    (clk_os2 ),
     .SEL     (pll_lock),
     .SELFORCE('0      ),
-    .DCSOUT  (usb_clk )
+    .DCSOUT  (proc_clk )
   );
 
+logic proc_rst, proc_rst_n;
+rst_sync proc_rst_sync (.clk(proc_clk), .async_rst_n(button_n), .sync_rst_n(proc_rst_n));
+assign proc_rst = ~proc_rst_n;
 
+  wire usb_clk = clk_60m;
   logic usb_rst_n, usb_rst;
   rst_sync usb_rst_sync (.clk(usb_clk), .async_rst_n(button_n), .sync_rst_n(usb_rst_n));
   assign usb_rst = ~usb_rst_n;
@@ -109,16 +113,17 @@ module fpga_top_som_no_mipi (
 --  Wishbone interconnect: connects the processor to the USB as well as the CSR
 -- and other peripherals.
 ------------------------------------------------------------------------------*/
-  wire wb_clk = usb_clk;
-  wire wb_rst = usb_rst;
+  wire wb_clk = proc_clk;
+  wire wb_rst = proc_rst;
+  wire wb_rst_n = ~wb_rst;
   `include "wb_intercon.vh"
 
 /*------------------------------------------------------------------------------
 --  AXI infrastructure to communicate with the USB and other stuff
 ------------------------------------------------------------------------------*/
 `include "axi_infrastructure.sv"
-assign axiReset = usb_rst;
-assign axiClk = usb_clk;
+assign axiReset = proc_rst;
+assign axiClk = proc_clk;
 
 /*------------------------------------------------------------------------------
 --  LiteX design
@@ -135,8 +140,8 @@ assign axiClk = usb_clk;
     .spiflash4x_clk (spiflash_clk  ),
     .spiflash4x_cs_n(spiflash_cs_n ),
     .spiflash4x_dq  (spiflash_dq   ),
-    .sys_clk        (usb_clk       ),
-    .sys_rst        (usb_rst       ),
+    .sys_clk        (wb_clk        ),
+    .sys_rst        (wb_rst        ),
     // Wishbone master
     .wishbone0_adr  (wb_adr        ),
     .wishbone0_bte  (wb_m2s_wb0_bte),
@@ -338,8 +343,8 @@ assign axiClk = usb_clk;
   logic [15:0] lmmi_offset     ;
   logic [31:0] lmmi_wdata      ;
   wb2lmmi i_wb2lmmi (
-    .clk     (usb_clk             ),
-    .rst     (usb_rst             ),
+    .clk     (wb_clk             ),
+    .rst     (wb_rst             ),
     .wb_cyc  (wb_m2s_usb_cyc      ),
     .wb_stb  (wb_m2s_usb_stb      ),
     .wb_adr  (wb_m2s_usb_adr[17:0]),
@@ -372,14 +377,14 @@ assign axiClk = usb_clk;
     .REFINCLKEXTP      (usb23_REFINCLKEXTP_i), // Input
     .REFINCLKEXTM      (usb23_REFINCLKEXTM_i), // Input
     // Other Clocks
-    .USB3_MCUCLK       (usb_clk             ), // Input
+    .USB3_MCUCLK       (wb_clk              ), // Input
     .USB_SUSPENDCLK    (usb_clk             ), // Input
     // *********************************************************************
     // Reset Signals
     // *********************************************************************
     .USB3_SYSRSTN      (usb_rst_n           ), // Input
     .USB_RESETN        (usb_rst_n           ), // Input
-    .USB2_RESET        ((usb_rst)           ), // Input
+    .USB2_RESET        (usb_rst             ), // Input
     // *********************************************************************
     // USB23 High Speed Lines
     // *********************************************************************
@@ -395,8 +400,8 @@ assign axiClk = usb_clk;
     // Configuration Path
     // *********************************************************************
     // LMMI Configuration path Signals
-    .LMMICLK           (usb_clk             ), // Input
-    .LMMIRESETN        (usb_rst_n           ), // Input
+    .LMMICLK           (wb_clk             ), // Input
+    .LMMIRESETN        (wb_rst_n           ), // Input
     .LMMIREQUEST       (lmmi_request        ), // Input
     .LMMIWRRD_N        (lmmi_wr_rdn         ), // Input
     .LMMIOFFSET        (lmmi_offset[14:0]   ), // Input
