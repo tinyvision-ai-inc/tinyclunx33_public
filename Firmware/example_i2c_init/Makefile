@@ -26,6 +26,8 @@ crt0.o: $(CPU_DIRECTORY)/crt0.S
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
+	mkdir -p ../../RTL/sim
+	od -v -An -tx1 firmware.bin > ../../RTL/sim/firmware.hex
 
 clean:
 	$(RM) *.o *.d *.elf *.bin *.map

@@ -34,3 +34,9 @@
 [submodule "ip/wb2axip"]
 	path = RTL/ip/wb2axip
 	url = https://github.com/ZipCPU/wb2axip.git
+[submodule "RTL/ip/wb_bfm"]
+	path = RTL/ip/wb_bfm
+	url = https://github.com/olofk/wb_bfm.git
+[submodule "RTL/ip/stream_utils"]
+	path = RTL/ip/stream_utils
+	url = https://github.com/olofk/stream_utils.git

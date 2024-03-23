@@ -2232,6 +2232,8 @@ begin
 		input_byte(byte_address[23:16]);	
 		input_byte(byte_address[15:8]);
 		input_byte(byte_address[7:0]);
+		$display("Flash:: Address= 0x%x ", byte_address);
+
 		if(fast_read)
 		begin
 		   if(flag_qpi_mode == 1)
@@ -2340,6 +2342,7 @@ begin
 	input_byte_quad(byte_address[15:8]);
 	input_byte_quad(byte_address[7:0]);
 	
+	$display("Flash:: address= 0x%x ", byte_address);
 
 	if(!status_reg[`WIP])
 	begin

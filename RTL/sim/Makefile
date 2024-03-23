@@ -6,15 +6,15 @@ WORKDIR = work
 
 RTL = ../src
 TB = ../tb
-RISCV = ../litex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog
+#RISCV = ../litex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog
 COMMON = ../common
-COMMON_IP = $(COMMON)/ip
+COMMON_IP = ../ip
 IP = ../ip
 LITEX = ../litex/build/som/gateware
 
 TOP = fpga_top_lifcl33u_som
 SIM_SRCS = $(IP)/wb2axip/rtl/afifo.v $(IP)/wb2axip/rtl/wbxclk.v
-SIM_SRCS += $(RISCV)/VexRiscv_Full.v
+SIM_SRCS += $(RTL)/VexRiscv.v
 SIM_SRCS += $(TB)/tb_$(TOP).sv
 
 

@@ -33,7 +33,7 @@ module tb_fpga_top_lifcl33u_som;
 	// Colorbar generates pixels
 	localparam NUM_COLS = 30;
 	localparam NUM_ROWS = 40;
-
+/*
 	assign pixel_clk   = dut.pixel_clk;
 	assign pixel_rst_n = dut.pixel_rst_n;
 	assign ref_clk     = dut.sync_clk;
@@ -80,7 +80,7 @@ module tb_fpga_top_lifcl33u_som;
 		.tx_d_p       (cam0_dat_p              ),
 		.tx_d_n       (cam0_dat_m              )
 	);
-
+*/
 	
 /*------------------------------------------------------------------------------
 --  MIPI Rx
@@ -96,6 +96,7 @@ module tb_fpga_top_lifcl33u_som;
   wire [2*8-1:0] rx_payload          ;
   wire           rx_payload_en       ;
   wire [    5:0] rx_dt               ;
+/*
 	mipi_to_pixel #(.NUM_RX_LANE(2), .RX_GEAR(8), .DT_WIDTH(10)) i_mipi_to_pixel (
 		.rx_clk_p     (tx0_clk_p               ),
 		.rx_clk_n     (tx0_clk_m               ),
@@ -122,7 +123,7 @@ module tb_fpga_top_lifcl33u_som;
 		.rx_payload_en(rx_payload_en           ),
 		.rx_dt        (rx_dt                   )
 	);
-
+*/
 
 always @(posedge pixel_clk) if (rx_fv & rx_lv) $display("%x", rx_data);
 
@@ -160,10 +161,11 @@ always @(posedge pixel_clk) if (rx_fv & rx_lv) $display("%x", rx_data);
 		button_n = 0;
 		#500;
 		button_n = 1;
-
+/*
 	  @(dut.tx_init_done);
 	  $display("%0t TX init_done\n", $time);
 	  $display("Starting DPHY models");
+		*/
 	  #10000000;
 		$stop();
 	end
@@ -229,7 +231,7 @@ always @(posedge pixel_clk) if (rx_fv & rx_lv) $display("%x", rx_data);
 		.d_n_i  (tx0_dat_m  )
 	);
 
-	fpga_top_som dut (
+	fpga_top_som_no_mipi dut (
 		.gpio_b1             (gpio_b1             ),
 		.gpio_g1             (gpio_g1             ),
 		.button_n            (button_n            ),
