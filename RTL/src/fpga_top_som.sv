@@ -576,40 +576,58 @@ assign axiClk = usb_clk;
 
 
 `define SEL_DT_RAW10
+`define PASSTHROUGH
 
-  `ifdef SEL_DT_RAW10
+  logic                patt_fv, patt_lv;
+  wire                 tx_fv, tx_lv;
+  wire  [DT_WIDTH-1:0] patt_data, tx_data;
 
-    localparam          DT_SEL     = "DT_RAW10";
-    localparam          DT_RAW10   = 6'h2B          ;
-    localparam          DT_WIDTH   = 10             ;
-    wire [        15:0] tx_byte_wc = (NUM_COLS*10)/8; // 1920*10/8
-    wire [         5:0] tx_byte_dt = DT_RAW10       ;
-    wire [DT_WIDTH-1:0] patt_data                   ;
-    //wire [DT_WIDTH-1:0] tx_data    = patt_data      ;
+`ifdef SEL_DT_RAW10
 
+  localparam          DT_SEL     = "DT_RAW10";
+  localparam          DT_RAW10   = 6'h2B          ;
+  localparam          DT_WIDTH   = 10             ;
+  wire  [        15:0] tx_byte_wc = (NUM_COLS*10)/8; // 1920*10/8
+  wire  [         5:0] tx_byte_dt = DT_RAW10       ;
+
+  `ifdef PASSTHROUGH
+    assign tx_data = pixel_data;
   `else
-
-    localparam          DT_SEL       = "DT_YUV_422_8";
-    localparam          DT_YUV_422_8 = 6'h1E                  ;
-    localparam          DT_WIDTH     = 16                     ;
-    wire [        15:0] tx_byte_wc   = NUM_COLS*2             ; // YUV_8 has 16 bits per pixel
-    wire [         5:0] tx_byte_dt   = DT_YUV_422_8           ;
-    wire [DT_WIDTH-1:0] patt_data                             ;
-    //wire [DT_WIDTH-1:0] tx_data      = {patt_data[9:2], 8'ha0};
-
+    assign tx_data = patt_data;
   `endif
 
+`else
+
+  localparam          DT_SEL       = "DT_YUV_422_8";
+  localparam  DT_YUV_422_8 = 6'h1E       ;
+  localparam  DT_WIDTH     = 16          ;
+  wire [15:0] tx_byte_wc   = NUM_COLS*2  ; // YUV_8 has 16 bits per pixel
+  wire [ 5:0] tx_byte_dt   = DT_YUV_422_8;
+
+  `ifdef PASSTHROUGH
+    assign tx_data = pixel_data;
+  `else
+    assign tx_data = {patt_data[9:2], 8'ha0};
+  `endif
+
+`endif
+
   // Pattern generator
-  logic patt_fv, patt_lv;
-  wire  tx_fv, tx_lv;
   wire  tx_init_done;
+`ifdef PASSTHROUGH
+  assign tx_fv = pixel_fv;
+  assign tx_lv = pixel_lv;
+`else
+  assign tx_fv = patt_fv;
+  assign tx_lv = patt_lv;
+`endif
 
   colorbar_gen_alt #(
     .h_active     (NUM_COLS),
     .v_active     (NUM_ROWS),
-    .V_FRONT_PORCH('d1     ),
-    .V_SYNCH      ('d1     ),
-    .V_BACK_PORCH ('d5     )
+    .V_FRONT_PORCH(F_PORCH     ),
+    .V_SYNCH      (V_SYNCH     ),
+    .V_BACK_PORCH (V_BACK_PORCH     )
   ) i_colorbar_gen (
     .rstn(tx_init_done),
     .clk (pixel_clk   ),
@@ -618,29 +636,20 @@ assign axiClk = usb_clk;
     .lv  (patt_lv     )
   );
 
-/*
-  // Pattern generator
-  assign tx_fv = patt_fv;
-  assign tx_lv = patt_lv;
 
-*/
-  // Passthrough:
-  assign tx_fv = pixel_fv;
-  assign tx_lv = pixel_lv;
-  assign tx_data = pixel_data;
  
   // One shot to increase the FV length: this appears to be required to enable the Tx P2B block to work properly.
   logic tx_fv_ext;
   one_shot #(.PERIOD(100)) i_one_shot (
-    .clk       (sync_clk   ),
-    .rst       (~byte_rst_n),
+    .clk       (pixel_clk   ),
+    .rst       (~pixel_rst_n),
     .start     (tx_fv      ),
     .pulse_o   (           ),
     .one_shot_o(tx_fv_ext  )
   );
 
   pixel_to_mipi #(.DT(DT_SEL), .DT_WIDTH(DT_WIDTH)) i_pixel_to_mipi (
-    .rst_n        (byte_rst_n       ),
+    .rst_n        (pixel_rst_n       ),
     .pixel_clk    (pixel_clk        ),
     .pixel_fv     (tx_fv | tx_fv_ext),
     .pixel_lv     (tx_lv            ),
