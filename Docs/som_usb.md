@@ -11,7 +11,7 @@ capable of 5 Gbit/s transfers.
 An external PHY is not required as the LIFCL-33U provides an integrated
 USB2 and USB3 PHY.
 
-For USB2 FullSpeed (1.5 Mbit/s) and USB2 HighSpeed (12 Mbit/s) operation,
+For USB2 FullSpeed (12 Mbit/s) and USB2 HighSpeed (480 Mbit/s) operation,
 the two USB D+/- pins can be routed to a connector,
 with proper ESD protection.
 
@@ -87,7 +87,7 @@ enumeration and subsequent transfer of data with the USB endpoints.
 
 A
 [Zephyr driver](https://github.com/tinyvision-ai-inc/zephyr/blob/tinyclunx33/drivers/usb/udc/udc_usb23.c)
-for the Lattice USB23 core was written.
+(private repository for now) for the Lattice USB23 core was written.
 
 It can be selected at build-time like any other USB driver in Zephyr.
 

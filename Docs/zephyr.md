@@ -18,6 +18,8 @@ An
 [usb driver](https://github.com/tinyvision-ai-inc/zephyr/blob/tinyclunx33/drivers/usb/udc/udc_usb23.c)
 is being implemented with the goal to be upstreamed in Zephyr.
 
+It is still a private repository as of now.
+
 An UVC device class is being implemented as well,
 Zephyr sill missing support for it.
 
