@@ -1,4 +1,5 @@
 // This file is Copyright (c) 2020 Florent Kermarrec <florent@enjoy-digital.fr>
+// Added to by Copyright (c) 2024 Venkat Rangan  <venkat@tinyvision.ai>
 // License: BSD
 
 #include <stdio.h>
@@ -16,12 +17,17 @@
 
 #include "i2c_init.h"
 #include "imx219.h"
+#include "pi4ioe5v9.h"
+pi4ioe5v9_state_t pi4ioe5v9_obj;
+static pi4ioe5v9_state_t *pi4ioe5v9_ptr = &pi4ioe5v9_obj;
+
 #include "common.h"
 
 #define WISHBONE_BASE_ADDR		0xb0000000
 
 // An I2C MUX exists at either 0x70 or 0x71 depending on the slot used
 #define I2C_MUX_ADDR 0x70
+
 
 static void i2c_init(void) {
 	//printf("Starting to initialize the PLL at 0x%x\n\r", PLL_I2C_ADDR);
@@ -101,11 +107,18 @@ static void RegTest(void) {
 	reg_32b_read(adr, &val);
 	printf("Read back 0x%x from 0x%x\n\r", val, adr);
 
+	adr += 4;
+	reg_32b_write(adr, 0xc001d00d);
+	reg_32b_read(adr, &val);
+	printf("Read back 0x%x from 0x%x\n\r", val, adr);
+
 	// TPG
+	/*
 	adr = WISHBONE_BASE_ADDR + 0x01100000;
 	reg_32b_write(adr, 0xdeadfeed);
 	reg_32b_read(adr, &val);
 	printf("Read back 0x%x from 0x%x\n\r", val, adr);
+	*/
 
 	// CSR
 	adr = WISHBONE_BASE_ADDR+0x02000000;
@@ -233,8 +246,7 @@ static void help(void)
 	puts("flash_div_0        - Set the flash clock divider to 0");
 	puts("flash_div_1        - Set the flash clock divider to 1");
 	puts("i2c_scan           - Scan for I2C devices");
-	puts("cam_00             - Selects Slot 0 Camera 0");
-	puts("cam_01             - Selects Slot 0 Camera 1");
+	puts("cam_[00,01,10,11]  - Selects Slot 0|1 Camera 0|1");
 	puts("cam_test           - Test for camera presence");
 	puts("cam_init           - Initialize the camera");
 	puts("reg_test           - Test register access");
@@ -312,6 +324,10 @@ static void console_service(void)
 		sel_cam(0, 0);
 	else if(strcmp(token, "cam_01") == 0)
 		sel_cam(0, 1);
+	else if(strcmp(token, "cam_10") == 0)
+		sel_cam(1, 0);
+	else if(strcmp(token, "cam_11") == 0)
+		sel_cam(1, 1);
 	else if(strcmp(token, "cam_test") == 0)
 		SensorI2cBusTest();
 	else if(strcmp(token, "cam_init") == 0)
@@ -330,7 +346,7 @@ int main(void)
 	irq_setmask(0);
 	irq_setie(1);
 #endif
-
+	//RegTest();
 	//CsrRegTest();
 
 	uart_init();
@@ -342,9 +358,20 @@ int main(void)
 	// Bump up Flash clock speed
 	//spiflash_phy_clk_divisor_write(0);
 
-	printf("\n\rINFO: Initializing the camera sensor on expansion port 0, sensor 0\n\r");
-	sel_cam(0, 0);
-	SensorInit();
+	//printf("\n\rINFO: Initializing the camera sensor on expansion port 0, sensor 0\n\r");
+	//sel_cam(0, 0);
+	//SensorInit();
+
+	pi4ioe5v9_init(pi4ioe5v9_ptr);
+	
+	// Enable the 60MHz clock
+	pi4ioe5v9_set_output(pi4ioe5v9_ptr, 0x80, LEVEL_HIGH);
+
+	// Enable the camera power for all 4 cameras on GPIO 0, 1, 3, 4:
+	pi4ioe5v9_set_output(pi4ioe5v9_ptr, 0x1, LEVEL_HIGH);
+	pi4ioe5v9_set_output(pi4ioe5v9_ptr, 0x2, LEVEL_HIGH);
+	pi4ioe5v9_set_output(pi4ioe5v9_ptr, 0x8, LEVEL_HIGH);
+	pi4ioe5v9_set_output(pi4ioe5v9_ptr, 0x10, LEVEL_HIGH);
 
 	help();
 	prompt();

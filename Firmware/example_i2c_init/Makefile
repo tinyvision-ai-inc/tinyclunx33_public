@@ -3,7 +3,7 @@ BUILD_DIR = ../../RTL/litex/build/som
 include $(BUILD_DIR)/software/include/generated/variables.mak
 include $(SOC_DIRECTORY)/software/common.mak
 
-OBJECTS = crt0.o main.o imx219.o
+OBJECTS = crt0.o main.o imx219.o pi4ioe5v9.o
 CFLAGS +=
 
 all: firmware.bin
