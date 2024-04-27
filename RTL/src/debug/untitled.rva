@@ -1,0 +1,552 @@
+<!DOCTYPE ispTLA>
+<ispTLA>
+ <CreationDate>Thu Apr 25 12:30:32 2024</CreationDate>
+ <XCFFileName/>
+ <CableSetting>
+  <IsTRSTConnected val="false"/>
+  <TRSTSetting val="0"/>
+  <IsBSCANConnected val="false"/>
+  <BSCANSetting val="0"/>
+  <CableType val="USB2"/>
+  <PortAddress val="0"/>
+  <PortSetting val="0"/>
+  <TCKDelay val="3"/>
+ </CableSetting>
+ <DeviceCount>1</DeviceCount>
+ <Device>
+  <DeviceIndex>0</DeviceIndex>
+  <DeviceName>1. LIFCL-33U</DeviceName>
+  <DeviceID>0x010FB043 (debug enabled)</DeviceID>
+  <HasIspTRACY>true</HasIspTRACY>
+  <HasJTAG2WB>false</HasJTAG2WB>
+  <SERDES/>
+  <IRBypassLen>8</IRBypassLen>
+  <RVLFileName>debug_usb_axi.rvl</RVLFileName>
+  <RVSFileName>debug_usb_axi.rvs</RVSFileName>
+  <LACoreCount>1</LACoreCount>
+  <WinUI CoreIndex="0" CoreType="LA">
+   <TraceSigTreeData>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="wb_m2s_usb_adr">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="398" Name="wb_m2s_usb_adr:31"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="397" Name="wb_m2s_usb_adr:30"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="396" Name="wb_m2s_usb_adr:29"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="395" Name="wb_m2s_usb_adr:28"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="394" Name="wb_m2s_usb_adr:27"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="393" Name="wb_m2s_usb_adr:26"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="392" Name="wb_m2s_usb_adr:25"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="391" Name="wb_m2s_usb_adr:24"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="390" Name="wb_m2s_usb_adr:23"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="389" Name="wb_m2s_usb_adr:22"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="388" Name="wb_m2s_usb_adr:21"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="387" Name="wb_m2s_usb_adr:20"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="386" Name="wb_m2s_usb_adr:19"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="385" Name="wb_m2s_usb_adr:18"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="384" Name="wb_m2s_usb_adr:17"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="383" Name="wb_m2s_usb_adr:16"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="382" Name="wb_m2s_usb_adr:15"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="381" Name="wb_m2s_usb_adr:14"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="380" Name="wb_m2s_usb_adr:13"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="379" Name="wb_m2s_usb_adr:12"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="378" Name="wb_m2s_usb_adr:11"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="377" Name="wb_m2s_usb_adr:10"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="376" Name="wb_m2s_usb_adr:9"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="375" Name="wb_m2s_usb_adr:8"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="374" Name="wb_m2s_usb_adr:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="373" Name="wb_m2s_usb_adr:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="372" Name="wb_m2s_usb_adr:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="371" Name="wb_m2s_usb_adr:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="370" Name="wb_m2s_usb_adr:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="369" Name="wb_m2s_usb_adr:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="368" Name="wb_m2s_usb_adr:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="367" Name="wb_m2s_usb_adr:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="wb_m2s_usb_bte">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="366" Name="wb_m2s_usb_bte:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="365" Name="wb_m2s_usb_bte:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="wb_m2s_usb_cti">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="364" Name="wb_m2s_usb_cti:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="363" Name="wb_m2s_usb_cti:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="362" Name="wb_m2s_usb_cti:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="361" Name="wb_m2s_usb_cyc"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="wb_m2s_usb_dat">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="360" Name="wb_m2s_usb_dat:31"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="359" Name="wb_m2s_usb_dat:30"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="358" Name="wb_m2s_usb_dat:29"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="357" Name="wb_m2s_usb_dat:28"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="356" Name="wb_m2s_usb_dat:27"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="355" Name="wb_m2s_usb_dat:26"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="354" Name="wb_m2s_usb_dat:25"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="353" Name="wb_m2s_usb_dat:24"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="352" Name="wb_m2s_usb_dat:23"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="351" Name="wb_m2s_usb_dat:22"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="350" Name="wb_m2s_usb_dat:21"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="349" Name="wb_m2s_usb_dat:20"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="348" Name="wb_m2s_usb_dat:19"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="347" Name="wb_m2s_usb_dat:18"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="346" Name="wb_m2s_usb_dat:17"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="345" Name="wb_m2s_usb_dat:16"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="344" Name="wb_m2s_usb_dat:15"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="343" Name="wb_m2s_usb_dat:14"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="342" Name="wb_m2s_usb_dat:13"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="341" Name="wb_m2s_usb_dat:12"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="340" Name="wb_m2s_usb_dat:11"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="339" Name="wb_m2s_usb_dat:10"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="338" Name="wb_m2s_usb_dat:9"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="337" Name="wb_m2s_usb_dat:8"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="336" Name="wb_m2s_usb_dat:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="335" Name="wb_m2s_usb_dat:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="334" Name="wb_m2s_usb_dat:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="333" Name="wb_m2s_usb_dat:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="332" Name="wb_m2s_usb_dat:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="331" Name="wb_m2s_usb_dat:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="330" Name="wb_m2s_usb_dat:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="329" Name="wb_m2s_usb_dat:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="wb_m2s_usb_sel">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="328" Name="wb_m2s_usb_sel:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="327" Name="wb_m2s_usb_sel:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="326" Name="wb_m2s_usb_sel:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="325" Name="wb_m2s_usb_sel:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="324" Name="wb_m2s_usb_stb"/>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="323" Name="wb_m2s_usb_we"/>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="322" Name="wb_s2m_usb_ack"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="wb_s2m_usb_dat">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="321" Name="wb_s2m_usb_dat:31"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="320" Name="wb_s2m_usb_dat:30"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="319" Name="wb_s2m_usb_dat:29"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="318" Name="wb_s2m_usb_dat:28"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="317" Name="wb_s2m_usb_dat:27"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="316" Name="wb_s2m_usb_dat:26"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="315" Name="wb_s2m_usb_dat:25"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="314" Name="wb_s2m_usb_dat:24"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="313" Name="wb_s2m_usb_dat:23"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="312" Name="wb_s2m_usb_dat:22"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="311" Name="wb_s2m_usb_dat:21"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="310" Name="wb_s2m_usb_dat:20"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="309" Name="wb_s2m_usb_dat:19"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="308" Name="wb_s2m_usb_dat:18"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="307" Name="wb_s2m_usb_dat:17"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="306" Name="wb_s2m_usb_dat:16"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="305" Name="wb_s2m_usb_dat:15"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="304" Name="wb_s2m_usb_dat:14"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="303" Name="wb_s2m_usb_dat:13"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="302" Name="wb_s2m_usb_dat:12"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="301" Name="wb_s2m_usb_dat:11"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="300" Name="wb_s2m_usb_dat:10"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="299" Name="wb_s2m_usb_dat:9"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="298" Name="wb_s2m_usb_dat:8"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="297" Name="wb_s2m_usb_dat:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="296" Name="wb_s2m_usb_dat:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="295" Name="wb_s2m_usb_dat:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="294" Name="wb_s2m_usb_dat:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="293" Name="wb_s2m_usb_dat:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="292" Name="wb_s2m_usb_dat:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="291" Name="wb_s2m_usb_dat:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="290" Name="wb_s2m_usb_dat:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_araddr">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="289" Name="i_tinyclunx/usbCore/axi_araddr:31"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="288" Name="i_tinyclunx/usbCore/axi_araddr:30"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="287" Name="i_tinyclunx/usbCore/axi_araddr:29"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="286" Name="i_tinyclunx/usbCore/axi_araddr:28"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="285" Name="i_tinyclunx/usbCore/axi_araddr:27"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="284" Name="i_tinyclunx/usbCore/axi_araddr:26"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="283" Name="i_tinyclunx/usbCore/axi_araddr:25"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="282" Name="i_tinyclunx/usbCore/axi_araddr:24"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="281" Name="i_tinyclunx/usbCore/axi_araddr:23"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="280" Name="i_tinyclunx/usbCore/axi_araddr:22"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="279" Name="i_tinyclunx/usbCore/axi_araddr:21"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="278" Name="i_tinyclunx/usbCore/axi_araddr:20"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="277" Name="i_tinyclunx/usbCore/axi_araddr:19"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="276" Name="i_tinyclunx/usbCore/axi_araddr:18"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="275" Name="i_tinyclunx/usbCore/axi_araddr:17"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="274" Name="i_tinyclunx/usbCore/axi_araddr:16"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="273" Name="i_tinyclunx/usbCore/axi_araddr:15"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="272" Name="i_tinyclunx/usbCore/axi_araddr:14"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="271" Name="i_tinyclunx/usbCore/axi_araddr:13"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="270" Name="i_tinyclunx/usbCore/axi_araddr:12"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="269" Name="i_tinyclunx/usbCore/axi_araddr:11"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="268" Name="i_tinyclunx/usbCore/axi_araddr:10"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="267" Name="i_tinyclunx/usbCore/axi_araddr:9"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="266" Name="i_tinyclunx/usbCore/axi_araddr:8"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="265" Name="i_tinyclunx/usbCore/axi_araddr:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="264" Name="i_tinyclunx/usbCore/axi_araddr:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="263" Name="i_tinyclunx/usbCore/axi_araddr:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="262" Name="i_tinyclunx/usbCore/axi_araddr:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="261" Name="i_tinyclunx/usbCore/axi_araddr:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="260" Name="i_tinyclunx/usbCore/axi_araddr:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="259" Name="i_tinyclunx/usbCore/axi_araddr:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="258" Name="i_tinyclunx/usbCore/axi_araddr:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_arburst">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="257" Name="i_tinyclunx/usbCore/axi_arburst:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="256" Name="i_tinyclunx/usbCore/axi_arburst:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_arcache">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="255" Name="i_tinyclunx/usbCore/axi_arcache:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="254" Name="i_tinyclunx/usbCore/axi_arcache:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="253" Name="i_tinyclunx/usbCore/axi_arcache:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="252" Name="i_tinyclunx/usbCore/axi_arcache:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_arid">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="251" Name="i_tinyclunx/usbCore/axi_arid:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="250" Name="i_tinyclunx/usbCore/axi_arid:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="249" Name="i_tinyclunx/usbCore/axi_arid:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="248" Name="i_tinyclunx/usbCore/axi_arid:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="247" Name="i_tinyclunx/usbCore/axi_arid:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="246" Name="i_tinyclunx/usbCore/axi_arid:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="245" Name="i_tinyclunx/usbCore/axi_arid:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="244" Name="i_tinyclunx/usbCore/axi_arid:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_arlen">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="243" Name="i_tinyclunx/usbCore/axi_arlen:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="242" Name="i_tinyclunx/usbCore/axi_arlen:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="241" Name="i_tinyclunx/usbCore/axi_arlen:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="240" Name="i_tinyclunx/usbCore/axi_arlen:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="239" Name="i_tinyclunx/usbCore/axi_arlen:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="238" Name="i_tinyclunx/usbCore/axi_arlen:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="237" Name="i_tinyclunx/usbCore/axi_arlen:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="236" Name="i_tinyclunx/usbCore/axi_arlen:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_arlock">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="235" Name="i_tinyclunx/usbCore/axi_arlock:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_arprot">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="234" Name="i_tinyclunx/usbCore/axi_arprot:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="233" Name="i_tinyclunx/usbCore/axi_arprot:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="232" Name="i_tinyclunx/usbCore/axi_arprot:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="231" Name="i_tinyclunx/usbCore/axi_arready"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_arsize">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="230" Name="i_tinyclunx/usbCore/axi_arsize:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="229" Name="i_tinyclunx/usbCore/axi_arsize:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="228" Name="i_tinyclunx/usbCore/axi_arsize:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="227" Name="i_tinyclunx/usbCore/axi_arvalid"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_awaddr">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="226" Name="i_tinyclunx/usbCore/axi_awaddr:31"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="225" Name="i_tinyclunx/usbCore/axi_awaddr:30"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="224" Name="i_tinyclunx/usbCore/axi_awaddr:29"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="223" Name="i_tinyclunx/usbCore/axi_awaddr:28"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="222" Name="i_tinyclunx/usbCore/axi_awaddr:27"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="221" Name="i_tinyclunx/usbCore/axi_awaddr:26"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="220" Name="i_tinyclunx/usbCore/axi_awaddr:25"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="219" Name="i_tinyclunx/usbCore/axi_awaddr:24"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="218" Name="i_tinyclunx/usbCore/axi_awaddr:23"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="217" Name="i_tinyclunx/usbCore/axi_awaddr:22"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="216" Name="i_tinyclunx/usbCore/axi_awaddr:21"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="215" Name="i_tinyclunx/usbCore/axi_awaddr:20"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="214" Name="i_tinyclunx/usbCore/axi_awaddr:19"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="213" Name="i_tinyclunx/usbCore/axi_awaddr:18"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="212" Name="i_tinyclunx/usbCore/axi_awaddr:17"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="211" Name="i_tinyclunx/usbCore/axi_awaddr:16"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="210" Name="i_tinyclunx/usbCore/axi_awaddr:15"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="209" Name="i_tinyclunx/usbCore/axi_awaddr:14"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="208" Name="i_tinyclunx/usbCore/axi_awaddr:13"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="207" Name="i_tinyclunx/usbCore/axi_awaddr:12"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="206" Name="i_tinyclunx/usbCore/axi_awaddr:11"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="205" Name="i_tinyclunx/usbCore/axi_awaddr:10"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="204" Name="i_tinyclunx/usbCore/axi_awaddr:9"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="203" Name="i_tinyclunx/usbCore/axi_awaddr:8"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="202" Name="i_tinyclunx/usbCore/axi_awaddr:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="201" Name="i_tinyclunx/usbCore/axi_awaddr:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="200" Name="i_tinyclunx/usbCore/axi_awaddr:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="199" Name="i_tinyclunx/usbCore/axi_awaddr:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="198" Name="i_tinyclunx/usbCore/axi_awaddr:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="197" Name="i_tinyclunx/usbCore/axi_awaddr:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="196" Name="i_tinyclunx/usbCore/axi_awaddr:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="195" Name="i_tinyclunx/usbCore/axi_awaddr:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_awburst">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="194" Name="i_tinyclunx/usbCore/axi_awburst:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="193" Name="i_tinyclunx/usbCore/axi_awburst:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_awcache">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="192" Name="i_tinyclunx/usbCore/axi_awcache:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="191" Name="i_tinyclunx/usbCore/axi_awcache:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="190" Name="i_tinyclunx/usbCore/axi_awcache:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="189" Name="i_tinyclunx/usbCore/axi_awcache:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_awid">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="188" Name="i_tinyclunx/usbCore/axi_awid:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="187" Name="i_tinyclunx/usbCore/axi_awid:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="186" Name="i_tinyclunx/usbCore/axi_awid:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="185" Name="i_tinyclunx/usbCore/axi_awid:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="184" Name="i_tinyclunx/usbCore/axi_awid:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="183" Name="i_tinyclunx/usbCore/axi_awid:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="182" Name="i_tinyclunx/usbCore/axi_awid:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="181" Name="i_tinyclunx/usbCore/axi_awid:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_awlen">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="180" Name="i_tinyclunx/usbCore/axi_awlen:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="179" Name="i_tinyclunx/usbCore/axi_awlen:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="178" Name="i_tinyclunx/usbCore/axi_awlen:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="177" Name="i_tinyclunx/usbCore/axi_awlen:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="176" Name="i_tinyclunx/usbCore/axi_awlen:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="175" Name="i_tinyclunx/usbCore/axi_awlen:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="174" Name="i_tinyclunx/usbCore/axi_awlen:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="173" Name="i_tinyclunx/usbCore/axi_awlen:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_awlock">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="172" Name="i_tinyclunx/usbCore/axi_awlock:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_awprot">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="171" Name="i_tinyclunx/usbCore/axi_awprot:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="170" Name="i_tinyclunx/usbCore/axi_awprot:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="169" Name="i_tinyclunx/usbCore/axi_awprot:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="168" Name="i_tinyclunx/usbCore/axi_awready"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_awsize">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="167" Name="i_tinyclunx/usbCore/axi_awsize:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="166" Name="i_tinyclunx/usbCore/axi_awsize:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="165" Name="i_tinyclunx/usbCore/axi_awsize:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="164" Name="i_tinyclunx/usbCore/axi_awvalid"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_bid">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="163" Name="i_tinyclunx/usbCore/axi_bid:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="162" Name="i_tinyclunx/usbCore/axi_bid:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="161" Name="i_tinyclunx/usbCore/axi_bid:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="160" Name="i_tinyclunx/usbCore/axi_bid:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="159" Name="i_tinyclunx/usbCore/axi_bid:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="158" Name="i_tinyclunx/usbCore/axi_bid:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="157" Name="i_tinyclunx/usbCore/axi_bid:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="156" Name="i_tinyclunx/usbCore/axi_bid:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="155" Name="i_tinyclunx/usbCore/axi_bready"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_bresp">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="154" Name="i_tinyclunx/usbCore/axi_bresp:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="153" Name="i_tinyclunx/usbCore/axi_bresp:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="152" Name="i_tinyclunx/usbCore/axi_bvalid"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_rdata">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="151" Name="i_tinyclunx/usbCore/axi_rdata:63"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="150" Name="i_tinyclunx/usbCore/axi_rdata:62"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="149" Name="i_tinyclunx/usbCore/axi_rdata:61"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="148" Name="i_tinyclunx/usbCore/axi_rdata:60"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="147" Name="i_tinyclunx/usbCore/axi_rdata:59"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="146" Name="i_tinyclunx/usbCore/axi_rdata:58"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="145" Name="i_tinyclunx/usbCore/axi_rdata:57"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="144" Name="i_tinyclunx/usbCore/axi_rdata:56"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="143" Name="i_tinyclunx/usbCore/axi_rdata:55"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="142" Name="i_tinyclunx/usbCore/axi_rdata:54"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="141" Name="i_tinyclunx/usbCore/axi_rdata:53"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="140" Name="i_tinyclunx/usbCore/axi_rdata:52"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="139" Name="i_tinyclunx/usbCore/axi_rdata:51"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="138" Name="i_tinyclunx/usbCore/axi_rdata:50"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="137" Name="i_tinyclunx/usbCore/axi_rdata:49"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="136" Name="i_tinyclunx/usbCore/axi_rdata:48"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="135" Name="i_tinyclunx/usbCore/axi_rdata:47"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="134" Name="i_tinyclunx/usbCore/axi_rdata:46"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="133" Name="i_tinyclunx/usbCore/axi_rdata:45"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="132" Name="i_tinyclunx/usbCore/axi_rdata:44"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="131" Name="i_tinyclunx/usbCore/axi_rdata:43"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="130" Name="i_tinyclunx/usbCore/axi_rdata:42"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="129" Name="i_tinyclunx/usbCore/axi_rdata:41"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="128" Name="i_tinyclunx/usbCore/axi_rdata:40"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="127" Name="i_tinyclunx/usbCore/axi_rdata:39"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="126" Name="i_tinyclunx/usbCore/axi_rdata:38"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="125" Name="i_tinyclunx/usbCore/axi_rdata:37"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="124" Name="i_tinyclunx/usbCore/axi_rdata:36"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="123" Name="i_tinyclunx/usbCore/axi_rdata:35"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="122" Name="i_tinyclunx/usbCore/axi_rdata:34"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="121" Name="i_tinyclunx/usbCore/axi_rdata:33"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="120" Name="i_tinyclunx/usbCore/axi_rdata:32"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="119" Name="i_tinyclunx/usbCore/axi_rdata:31"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="118" Name="i_tinyclunx/usbCore/axi_rdata:30"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="117" Name="i_tinyclunx/usbCore/axi_rdata:29"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="116" Name="i_tinyclunx/usbCore/axi_rdata:28"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="115" Name="i_tinyclunx/usbCore/axi_rdata:27"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="114" Name="i_tinyclunx/usbCore/axi_rdata:26"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="113" Name="i_tinyclunx/usbCore/axi_rdata:25"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="112" Name="i_tinyclunx/usbCore/axi_rdata:24"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="111" Name="i_tinyclunx/usbCore/axi_rdata:23"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="110" Name="i_tinyclunx/usbCore/axi_rdata:22"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="109" Name="i_tinyclunx/usbCore/axi_rdata:21"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="108" Name="i_tinyclunx/usbCore/axi_rdata:20"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="107" Name="i_tinyclunx/usbCore/axi_rdata:19"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="106" Name="i_tinyclunx/usbCore/axi_rdata:18"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="105" Name="i_tinyclunx/usbCore/axi_rdata:17"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="104" Name="i_tinyclunx/usbCore/axi_rdata:16"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="103" Name="i_tinyclunx/usbCore/axi_rdata:15"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="102" Name="i_tinyclunx/usbCore/axi_rdata:14"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="101" Name="i_tinyclunx/usbCore/axi_rdata:13"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="100" Name="i_tinyclunx/usbCore/axi_rdata:12"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="99" Name="i_tinyclunx/usbCore/axi_rdata:11"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="98" Name="i_tinyclunx/usbCore/axi_rdata:10"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="97" Name="i_tinyclunx/usbCore/axi_rdata:9"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="96" Name="i_tinyclunx/usbCore/axi_rdata:8"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="95" Name="i_tinyclunx/usbCore/axi_rdata:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="94" Name="i_tinyclunx/usbCore/axi_rdata:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="93" Name="i_tinyclunx/usbCore/axi_rdata:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="92" Name="i_tinyclunx/usbCore/axi_rdata:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="91" Name="i_tinyclunx/usbCore/axi_rdata:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="90" Name="i_tinyclunx/usbCore/axi_rdata:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="89" Name="i_tinyclunx/usbCore/axi_rdata:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="88" Name="i_tinyclunx/usbCore/axi_rdata:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_rid">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="87" Name="i_tinyclunx/usbCore/axi_rid:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="86" Name="i_tinyclunx/usbCore/axi_rid:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="85" Name="i_tinyclunx/usbCore/axi_rid:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="84" Name="i_tinyclunx/usbCore/axi_rid:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="83" Name="i_tinyclunx/usbCore/axi_rid:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="82" Name="i_tinyclunx/usbCore/axi_rid:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="81" Name="i_tinyclunx/usbCore/axi_rid:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="80" Name="i_tinyclunx/usbCore/axi_rid:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="79" Name="i_tinyclunx/usbCore/axi_rlast"/>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="78" Name="i_tinyclunx/usbCore/axi_rready"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_rresp">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="77" Name="i_tinyclunx/usbCore/axi_rresp:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="76" Name="i_tinyclunx/usbCore/axi_rresp:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="75" Name="i_tinyclunx/usbCore/axi_rvalid"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_wdata">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="74" Name="i_tinyclunx/usbCore/axi_wdata:63"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="73" Name="i_tinyclunx/usbCore/axi_wdata:62"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="72" Name="i_tinyclunx/usbCore/axi_wdata:61"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="71" Name="i_tinyclunx/usbCore/axi_wdata:60"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="70" Name="i_tinyclunx/usbCore/axi_wdata:59"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="69" Name="i_tinyclunx/usbCore/axi_wdata:58"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="68" Name="i_tinyclunx/usbCore/axi_wdata:57"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="67" Name="i_tinyclunx/usbCore/axi_wdata:56"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="66" Name="i_tinyclunx/usbCore/axi_wdata:55"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="65" Name="i_tinyclunx/usbCore/axi_wdata:54"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="64" Name="i_tinyclunx/usbCore/axi_wdata:53"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="63" Name="i_tinyclunx/usbCore/axi_wdata:52"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="62" Name="i_tinyclunx/usbCore/axi_wdata:51"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="61" Name="i_tinyclunx/usbCore/axi_wdata:50"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="60" Name="i_tinyclunx/usbCore/axi_wdata:49"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="59" Name="i_tinyclunx/usbCore/axi_wdata:48"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="58" Name="i_tinyclunx/usbCore/axi_wdata:47"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="57" Name="i_tinyclunx/usbCore/axi_wdata:46"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="56" Name="i_tinyclunx/usbCore/axi_wdata:45"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="55" Name="i_tinyclunx/usbCore/axi_wdata:44"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="54" Name="i_tinyclunx/usbCore/axi_wdata:43"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="53" Name="i_tinyclunx/usbCore/axi_wdata:42"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="52" Name="i_tinyclunx/usbCore/axi_wdata:41"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="51" Name="i_tinyclunx/usbCore/axi_wdata:40"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="50" Name="i_tinyclunx/usbCore/axi_wdata:39"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="49" Name="i_tinyclunx/usbCore/axi_wdata:38"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="48" Name="i_tinyclunx/usbCore/axi_wdata:37"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="47" Name="i_tinyclunx/usbCore/axi_wdata:36"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="46" Name="i_tinyclunx/usbCore/axi_wdata:35"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="45" Name="i_tinyclunx/usbCore/axi_wdata:34"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="44" Name="i_tinyclunx/usbCore/axi_wdata:33"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="43" Name="i_tinyclunx/usbCore/axi_wdata:32"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="42" Name="i_tinyclunx/usbCore/axi_wdata:31"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="41" Name="i_tinyclunx/usbCore/axi_wdata:30"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="40" Name="i_tinyclunx/usbCore/axi_wdata:29"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="39" Name="i_tinyclunx/usbCore/axi_wdata:28"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="38" Name="i_tinyclunx/usbCore/axi_wdata:27"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="37" Name="i_tinyclunx/usbCore/axi_wdata:26"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="36" Name="i_tinyclunx/usbCore/axi_wdata:25"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="35" Name="i_tinyclunx/usbCore/axi_wdata:24"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="34" Name="i_tinyclunx/usbCore/axi_wdata:23"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="33" Name="i_tinyclunx/usbCore/axi_wdata:22"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="32" Name="i_tinyclunx/usbCore/axi_wdata:21"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="31" Name="i_tinyclunx/usbCore/axi_wdata:20"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="30" Name="i_tinyclunx/usbCore/axi_wdata:19"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="29" Name="i_tinyclunx/usbCore/axi_wdata:18"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="28" Name="i_tinyclunx/usbCore/axi_wdata:17"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="27" Name="i_tinyclunx/usbCore/axi_wdata:16"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="26" Name="i_tinyclunx/usbCore/axi_wdata:15"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="25" Name="i_tinyclunx/usbCore/axi_wdata:14"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="24" Name="i_tinyclunx/usbCore/axi_wdata:13"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="23" Name="i_tinyclunx/usbCore/axi_wdata:12"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="22" Name="i_tinyclunx/usbCore/axi_wdata:11"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="21" Name="i_tinyclunx/usbCore/axi_wdata:10"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="20" Name="i_tinyclunx/usbCore/axi_wdata:9"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="19" Name="i_tinyclunx/usbCore/axi_wdata:8"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="18" Name="i_tinyclunx/usbCore/axi_wdata:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="17" Name="i_tinyclunx/usbCore/axi_wdata:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="16" Name="i_tinyclunx/usbCore/axi_wdata:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="15" Name="i_tinyclunx/usbCore/axi_wdata:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="14" Name="i_tinyclunx/usbCore/axi_wdata:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="13" Name="i_tinyclunx/usbCore/axi_wdata:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="12" Name="i_tinyclunx/usbCore/axi_wdata:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="11" Name="i_tinyclunx/usbCore/axi_wdata:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="10" Name="i_tinyclunx/usbCore/axi_wlast"/>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="9" Name="i_tinyclunx/usbCore/axi_wready"/>
+    <TraceSignal NodeType="1" Color="" IsHidden="false" PortIndex="-1" Name="i_tinyclunx/usbCore/axi_wstrb">
+     <BusRadix Radix="3"/>
+     <IsExpanded Expand="false"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="8" Name="i_tinyclunx/usbCore/axi_wstrb:7"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="7" Name="i_tinyclunx/usbCore/axi_wstrb:6"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="6" Name="i_tinyclunx/usbCore/axi_wstrb:5"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="5" Name="i_tinyclunx/usbCore/axi_wstrb:4"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="4" Name="i_tinyclunx/usbCore/axi_wstrb:3"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="3" Name="i_tinyclunx/usbCore/axi_wstrb:2"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="2" Name="i_tinyclunx/usbCore/axi_wstrb:1"/>
+     <TraceSignal NodeType="2" Color="" IsHidden="false" PortIndex="1" Name="i_tinyclunx/usbCore/axi_wstrb:0"/>
+    </TraceSignal>
+    <TraceSignal NodeType="0" Color="" IsHidden="false" PortIndex="0" Name="i_tinyclunx/usbCore/axi_wvalid"/>
+   </TraceSigTreeData>
+   <TriggerUI UserSelect="0" UserSelectPos="0" PreSelect="1" PreSelectType="0"/>
+   <CoreRun Run="true"/>
+   <CoreWndUIData>
+    <ClockFrequency Frequency="-1.0" Unit="ns"/>
+   </CoreWndUIData>
+  </WinUI>
+ </Device>
+</ispTLA>

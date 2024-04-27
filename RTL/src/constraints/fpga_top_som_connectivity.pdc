@@ -1,0 +1,135 @@
+ldc_set_sysconfig {CONFIGIO_VOLTAGE_BANK0=1.8 CONFIGIO_VOLTAGE_BANK1=1.8 CONFIG_IOSLEW=FAST TRANSFR=OFF MASTER_SPI_PORT=DISABLE INITN_PORT=DISABLE MCCLK_FREQ=28.1 COMPRESS_CONFIG=OFF BOOTMODE=DUAL PROGRAMN_PORT=ENABLE}
+ldc_set_vcc -bank 0 1.8
+ldc_set_vcc -bank 1 1.8
+ldc_set_vcc -bank 2 1.8
+ldc_set_vcc -bank 3 1.2
+ldc_set_vcc -bank 4 1.8
+# Clock input:
+ldc_set_location -site {H8} [get_ports clk_in]
+ldc_set_port -iobuf {IO_TYPE=LVCMOS18H} [get_ports clk_in]
+
+# GPIO:
+
+# Bank 0: 1.8V fixed
+ldc_set_location -site {A3} [get_ports gpio_a3]
+# qSPI Flash
+ldc_set_location -site {B4} [get_ports spiflash_clk]
+ldc_set_location -site {B3} [get_ports spiflash_cs_n]
+ldc_set_location -site {D4} [get_ports {spiflash_dq[0]}]
+ldc_set_location -site {D3} [get_ports {spiflash_dq[1]}]
+ldc_set_location -site {E4} [get_ports {spiflash_dq[2]}]
+ldc_set_location -site {E3} [get_ports {spiflash_dq[3]}]
+ldc_set_port -iobuf {IO_TYPE=LVCMOS18} [get_ports spiflash_*]
+ldc_set_port -iobuf {PULLMODE=UP} [get_ports {spiflash_dq[*]}]
+ldc_set_port -iobuf {SLEWRATE=FAST} [get_ports spiflash_cs_n]
+ldc_set_port -iobuf {SLEWRATE=FAST} [get_ports spiflash_clk]
+
+# Bank 1:
+ldc_set_location -site {E1} [get_ports scl]
+ldc_set_location -site {E2} [get_ports sda]
+ldc_set_port -iobuf {PULLMODE=NONE OPENDRAIN=ON} [get_ports scl]
+ldc_set_port -iobuf {PULLMODE=NONE OPENDRAIN=ON} [get_ports sda]
+ldc_set_location -site {A1} [get_ports gpio_a1]
+ldc_set_location -site {B1} [get_ports gpio_b1]
+ldc_set_location -site {F1} [get_ports gpio_f1]
+ldc_set_location -site {G1} [get_ports gpio_g1]
+
+# Bank 2:
+ldc_set_location -site {N5} [get_ports diff6_p]
+ldc_set_location -site {N4} [get_ports diff6_n]
+ldc_set_location -site {M5} [get_ports diff7_p]
+ldc_set_location -site {M4} [get_ports diff7_n]
+ldc_set_location -site {L4} [get_ports diff8_p]
+ldc_set_location -site {L3} [get_ports diff8_n]
+ldc_set_location -site {N3} [get_ports diff9_p]
+ldc_set_location -site {N2} [get_ports diff9_n]
+ldc_set_location -site {M3} [get_ports diff10_p]
+ldc_set_location -site {M2} [get_ports diff10_n]
+ldc_set_location -site {K3} [get_ports diff11_p]
+ldc_set_location -site {K2} [get_ports diff11_n]
+ldc_set_location -site {J2} [get_ports diff12_p]
+ldc_set_location -site {H2} [get_ports diff12_n]
+ldc_set_location -site {J1} [get_ports diff13_p]
+ldc_set_location -site {H1} [get_ports diff13_n]
+
+# Bank 3:
+ldc_set_location -site {N7} [get_ports diff0_p]
+ldc_set_location -site {N6} [get_ports diff0_n]
+ldc_set_location -site {M7} [get_ports diff1_p]
+ldc_set_location -site {M6} [get_ports diff1_n]
+ldc_set_location -site {L7} [get_ports diff2_p]
+ldc_set_location -site {L6} [get_ports diff2_n]
+ldc_set_location -site {F7} [get_ports diff3_p]
+ldc_set_location -site {E6} [get_ports diff3_n]
+ldc_set_location -site {G7} [get_ports diff4_p]
+ldc_set_location -site {G6} [get_ports diff4_n]
+ldc_set_location -site {J6} [get_ports diff5_p]
+ldc_set_location -site {H6} [get_ports diff5_n]
+
+# Bank 4:
+ldc_set_location -site {N8} [get_ports gpio_n8]
+ldc_set_location -site {M8} [get_ports gpio_m8]
+ldc_set_location -site {H8} [get_ports gpio_h8]
+ldc_set_location -site {G8} [get_ports gpio_g8]
+
+
+# Devkit specific naming:
+ldc_set_location -site {B1} [get_ports sw1]
+ldc_set_location -site {A1} [get_ports sw2]
+# Note: this switch is not normally accessible unless you blow an OTP fuse!
+#ldc_set_location -site {A4} [get_ports sw3]
+ldc_set_port -iobuf {PULLMODE=UP} [get_ports button_n]
+ldc_set_port -iobuf {PULLMODE=UP} [get_ports button2_n]
+
+# Debug UART: Note that these pins are shared with GPIO!
+ldc_set_location -site {B1} [get_ports uart_rxd]
+ldc_set_location -site {G1} [get_ports uart_txd]
+
+# USB23 constraints
+ldc_set_location -site {D7} [get_ports usb23_DP]
+ldc_set_location -site {E7} [get_ports usb23_DMP]
+ldc_set_location -site {A7} [get_ports usb23_TXPP_o]
+ldc_set_location -site {A6} [get_ports usb23_TXMP_o]
+ldc_set_location -site {A8} [get_ports usb23_RXPP_i]
+ldc_set_location -site {B8} [get_ports usb23_RXMP_i]
+ldc_set_location -site {E5} [get_ports VBUS_i]
+ldc_set_location -site {E8} [get_ports usb23_REFINCLKEXTM_i]
+ldc_set_location -site {F8} [get_ports usb23_REFINCLKEXTP_i]
+ldc_set_location -site {C8} [get_ports usb23_RESEXTUSB2]
+# JTAG
+ldc_set_location -site {F2} [get_ports TCK]
+ldc_set_location -site {D2} [get_ports TDI]
+ldc_set_location -site {B2} [get_ports TMS]
+ldc_set_location -site {D1} [get_ports TDO]
+
+#---- Byte2Pixel constraints --------------------------------------------------------------------------------------#
+######                                                                                       ######
+# NOTE:  The byte-to-pixel IP treats the byte clock and the pixel clock as asynchronous.          #
+#        Use "set_clock_groups -asynchronous" constraint only if the two clocks are asynchronous  #
+#        even for other logic outside the byte-to-pixel IP.                                       #
+#   set_clock_groups -group [get_clocks clk_byte_i] -group [get_clocks clk_pixel_i] -asynchronous #
+######                                                                                       ######
+#----TIMING CONSTRAINTS ---------------------------------------------------------------------------#
+# 1st stage of a 2-FF CDC register
+#  - payload_done_fdbk_meta_*.ff_inst/DF
+#  - lp_av_fdbk_meta_*.ff_inst/DF
+#  - fifo_almost_full_meta_*.ff_inst/DF
+set_false_path -to [get_pins -hierarchical *_meta_reg.ff_inst/DF]
+# set_false_path -to [get_pins -hierarchical {*_meta_c.ff_inst/DF}]
+# set_false_path -from [get_pins -hierarchical {*/b2p/lscc_byte2pixel_sync/fv_r_c.ff_inst/Q }]                   -to [get_pins -hierarchical {*/b2p/lscc_byte2pixel_sync/fv_meta_c.ff_inst/DF}]
+# set_false_path -from [get_pins -hierarchical {*/b2p/dataconvert.lscc_dataconvert/payload_en_done_c.ff_inst/Q}] -to [get_pins -hierarchical {*/b2p/dataconvert.lscc_dataconvert/payload_done_pix_meta_c.ff_inst/DF}]
+# set_false_path -from [get_pins -hierarchical {*/b2p/dataconvert.lscc_dataconvert/lp_av_stretch_c.ff_inst/Q}]   -to [get_pins -hierarchical {*/b2p/dataconvert.lscc_dataconvert/active_lp_pix_meta_c.ff_inst/DF}]
+set_false_path -to [get_pins -hierarchical */lscc_byte2pixel_inst/genblk*.lscc_activevideo/wc_rd_a_r*.ff_inst/DF]
+set_false_path -to [get_pins -hierarchical */lscc_byte2pixel_inst/genblk*.lscc_activevideo/wc_rd_b_r*.ff_inst/DF]
+#----uncomment these for 4 RX lane, RX gear16 ----#
+#set_false_path -to [get_pins -hierarchical */b2p/genblk*.lscc_activevideo/genblk*.wc_rd_c_r*.ff_inst/DF]
+#set_false_path -to [get_pins -hierarchical */b2p/genblk*.lscc_activevideo/genblk*.wc_rd_d_r*.ff_inst/DF]
+# multicycle path from wc_pix_sync* to pixcnt_c* and pix_out_cntr* #
+set_multicycle_path -setup -from [get_pins -hierarchical wc_pix_sync*.ff_inst/Q] -to [get_pins -hierarchical pix_out_cntr*.ff_inst/DF] 7
+set_multicycle_path -hold -from [get_pins -hierarchical wc_pix_sync*.ff_inst/Q] -to [get_pins -hierarchical pix_out_cntr*.ff_inst/DF] 6
+### If using the encrypted IP, these CDC false_path constraints are not applied since it is within the encrypted block. ###
+###  Ignore these timing errors from the FIFO, or use set_clock_groups -asynchronous if there are no other logic
+##   outside the IP treating the pixel clock and the byteclock as synchronous.
+set_false_path -to [get_pins -hierarchical *.rp_sync1_r*.ff_inst/DF]
+set_false_path -to [get_pins -hierarchical *.wp_sync1_r*.ff_inst/DF]
+#--------------------------------------------------------------------------------------------------#

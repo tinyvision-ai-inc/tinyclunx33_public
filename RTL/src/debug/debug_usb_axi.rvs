@@ -1,0 +1,485 @@
+<Project ModBy="Analyzer" Date="2024-04-25" Name="E:/Data/local_github/tinyclunx33_internal/tinyclunx33_public/RTL/src/debug/debug_usb_axi.rvs">
+ <Core Name="WB">
+  <Setting>
+   <Capture SamplesPerTrig="512" NumTrigsCap="1"/>
+   <Event CntEnableRun="0" EventCnt="0"/>
+   <TrigSetting PreTrgSamples="" AND_ALL="0" PostTrgSamples="" TURadix="0"/>
+  </Setting>
+  <Dataset Name="Base">
+   <Trace>
+    <Sig Name="i_tinyclunx/usbCore/axi_wvalid"/>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_wstrb">
+     <Sig Name="i_tinyclunx/usbCore/axi_wstrb:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wstrb:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wstrb:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wstrb:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wstrb:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wstrb:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wstrb:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wstrb:7"/>
+    </Bus>
+    <Sig Name="i_tinyclunx/usbCore/axi_wready"/>
+    <Sig Name="i_tinyclunx/usbCore/axi_wlast"/>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_wdata">
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:7"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:8"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:9"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:10"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:11"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:12"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:13"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:14"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:15"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:16"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:17"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:18"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:19"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:20"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:21"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:22"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:23"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:24"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:25"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:26"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:27"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:28"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:29"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:30"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:31"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:32"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:33"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:34"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:35"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:36"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:37"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:38"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:39"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:40"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:41"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:42"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:43"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:44"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:45"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:46"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:47"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:48"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:49"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:50"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:51"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:52"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:53"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:54"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:55"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:56"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:57"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:58"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:59"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:60"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:61"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:62"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_wdata:63"/>
+    </Bus>
+    <Sig Name="i_tinyclunx/usbCore/axi_rvalid"/>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_rresp">
+     <Sig Name="i_tinyclunx/usbCore/axi_rresp:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rresp:1"/>
+    </Bus>
+    <Sig Name="i_tinyclunx/usbCore/axi_rready"/>
+    <Sig Name="i_tinyclunx/usbCore/axi_rlast"/>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_rid">
+     <Sig Name="i_tinyclunx/usbCore/axi_rid:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rid:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rid:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rid:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rid:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rid:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rid:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rid:7"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_rdata">
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:7"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:8"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:9"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:10"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:11"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:12"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:13"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:14"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:15"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:16"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:17"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:18"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:19"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:20"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:21"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:22"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:23"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:24"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:25"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:26"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:27"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:28"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:29"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:30"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:31"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:32"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:33"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:34"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:35"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:36"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:37"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:38"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:39"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:40"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:41"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:42"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:43"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:44"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:45"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:46"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:47"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:48"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:49"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:50"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:51"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:52"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:53"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:54"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:55"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:56"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:57"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:58"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:59"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:60"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:61"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:62"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_rdata:63"/>
+    </Bus>
+    <Sig Name="i_tinyclunx/usbCore/axi_bvalid"/>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_bresp">
+     <Sig Name="i_tinyclunx/usbCore/axi_bresp:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_bresp:1"/>
+    </Bus>
+    <Sig Name="i_tinyclunx/usbCore/axi_bready"/>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_bid">
+     <Sig Name="i_tinyclunx/usbCore/axi_bid:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_bid:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_bid:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_bid:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_bid:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_bid:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_bid:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_bid:7"/>
+    </Bus>
+    <Sig Name="i_tinyclunx/usbCore/axi_awvalid"/>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_awsize">
+     <Sig Name="i_tinyclunx/usbCore/axi_awsize:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awsize:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awsize:2"/>
+    </Bus>
+    <Sig Name="i_tinyclunx/usbCore/axi_awready"/>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_awprot">
+     <Sig Name="i_tinyclunx/usbCore/axi_awprot:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awprot:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awprot:2"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_awlock">
+     <Sig Name="i_tinyclunx/usbCore/axi_awlock:0"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_awlen">
+     <Sig Name="i_tinyclunx/usbCore/axi_awlen:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awlen:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awlen:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awlen:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awlen:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awlen:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awlen:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awlen:7"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_awid">
+     <Sig Name="i_tinyclunx/usbCore/axi_awid:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awid:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awid:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awid:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awid:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awid:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awid:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awid:7"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_awcache">
+     <Sig Name="i_tinyclunx/usbCore/axi_awcache:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awcache:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awcache:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awcache:3"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_awburst">
+     <Sig Name="i_tinyclunx/usbCore/axi_awburst:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awburst:1"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_awaddr">
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:7"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:8"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:9"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:10"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:11"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:12"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:13"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:14"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:15"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:16"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:17"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:18"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:19"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:20"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:21"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:22"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:23"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:24"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:25"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:26"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:27"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:28"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:29"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:30"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_awaddr:31"/>
+    </Bus>
+    <Sig Name="i_tinyclunx/usbCore/axi_arvalid"/>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_arsize">
+     <Sig Name="i_tinyclunx/usbCore/axi_arsize:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arsize:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arsize:2"/>
+    </Bus>
+    <Sig Name="i_tinyclunx/usbCore/axi_arready"/>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_arprot">
+     <Sig Name="i_tinyclunx/usbCore/axi_arprot:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arprot:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arprot:2"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_arlock">
+     <Sig Name="i_tinyclunx/usbCore/axi_arlock:0"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_arlen">
+     <Sig Name="i_tinyclunx/usbCore/axi_arlen:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arlen:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arlen:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arlen:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arlen:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arlen:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arlen:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arlen:7"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_arid">
+     <Sig Name="i_tinyclunx/usbCore/axi_arid:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arid:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arid:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arid:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arid:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arid:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arid:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arid:7"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_arcache">
+     <Sig Name="i_tinyclunx/usbCore/axi_arcache:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arcache:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arcache:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arcache:3"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_arburst">
+     <Sig Name="i_tinyclunx/usbCore/axi_arburst:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_arburst:1"/>
+    </Bus>
+    <Bus Radix="0" Name="i_tinyclunx/usbCore/axi_araddr">
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:0"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:1"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:2"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:3"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:4"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:5"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:6"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:7"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:8"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:9"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:10"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:11"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:12"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:13"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:14"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:15"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:16"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:17"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:18"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:19"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:20"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:21"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:22"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:23"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:24"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:25"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:26"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:27"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:28"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:29"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:30"/>
+     <Sig Name="i_tinyclunx/usbCore/axi_araddr:31"/>
+    </Bus>
+    <Bus Radix="0" Name="wb_s2m_usb_dat">
+     <Sig Name="wb_s2m_usb_dat:0"/>
+     <Sig Name="wb_s2m_usb_dat:1"/>
+     <Sig Name="wb_s2m_usb_dat:2"/>
+     <Sig Name="wb_s2m_usb_dat:3"/>
+     <Sig Name="wb_s2m_usb_dat:4"/>
+     <Sig Name="wb_s2m_usb_dat:5"/>
+     <Sig Name="wb_s2m_usb_dat:6"/>
+     <Sig Name="wb_s2m_usb_dat:7"/>
+     <Sig Name="wb_s2m_usb_dat:8"/>
+     <Sig Name="wb_s2m_usb_dat:9"/>
+     <Sig Name="wb_s2m_usb_dat:10"/>
+     <Sig Name="wb_s2m_usb_dat:11"/>
+     <Sig Name="wb_s2m_usb_dat:12"/>
+     <Sig Name="wb_s2m_usb_dat:13"/>
+     <Sig Name="wb_s2m_usb_dat:14"/>
+     <Sig Name="wb_s2m_usb_dat:15"/>
+     <Sig Name="wb_s2m_usb_dat:16"/>
+     <Sig Name="wb_s2m_usb_dat:17"/>
+     <Sig Name="wb_s2m_usb_dat:18"/>
+     <Sig Name="wb_s2m_usb_dat:19"/>
+     <Sig Name="wb_s2m_usb_dat:20"/>
+     <Sig Name="wb_s2m_usb_dat:21"/>
+     <Sig Name="wb_s2m_usb_dat:22"/>
+     <Sig Name="wb_s2m_usb_dat:23"/>
+     <Sig Name="wb_s2m_usb_dat:24"/>
+     <Sig Name="wb_s2m_usb_dat:25"/>
+     <Sig Name="wb_s2m_usb_dat:26"/>
+     <Sig Name="wb_s2m_usb_dat:27"/>
+     <Sig Name="wb_s2m_usb_dat:28"/>
+     <Sig Name="wb_s2m_usb_dat:29"/>
+     <Sig Name="wb_s2m_usb_dat:30"/>
+     <Sig Name="wb_s2m_usb_dat:31"/>
+    </Bus>
+    <Sig Name="wb_s2m_usb_ack"/>
+    <Sig Name="wb_m2s_usb_we"/>
+    <Sig Name="wb_m2s_usb_stb"/>
+    <Bus Radix="0" Name="wb_m2s_usb_sel">
+     <Sig Name="wb_m2s_usb_sel:0"/>
+     <Sig Name="wb_m2s_usb_sel:1"/>
+     <Sig Name="wb_m2s_usb_sel:2"/>
+     <Sig Name="wb_m2s_usb_sel:3"/>
+    </Bus>
+    <Bus Radix="0" Name="wb_m2s_usb_dat">
+     <Sig Name="wb_m2s_usb_dat:0"/>
+     <Sig Name="wb_m2s_usb_dat:1"/>
+     <Sig Name="wb_m2s_usb_dat:2"/>
+     <Sig Name="wb_m2s_usb_dat:3"/>
+     <Sig Name="wb_m2s_usb_dat:4"/>
+     <Sig Name="wb_m2s_usb_dat:5"/>
+     <Sig Name="wb_m2s_usb_dat:6"/>
+     <Sig Name="wb_m2s_usb_dat:7"/>
+     <Sig Name="wb_m2s_usb_dat:8"/>
+     <Sig Name="wb_m2s_usb_dat:9"/>
+     <Sig Name="wb_m2s_usb_dat:10"/>
+     <Sig Name="wb_m2s_usb_dat:11"/>
+     <Sig Name="wb_m2s_usb_dat:12"/>
+     <Sig Name="wb_m2s_usb_dat:13"/>
+     <Sig Name="wb_m2s_usb_dat:14"/>
+     <Sig Name="wb_m2s_usb_dat:15"/>
+     <Sig Name="wb_m2s_usb_dat:16"/>
+     <Sig Name="wb_m2s_usb_dat:17"/>
+     <Sig Name="wb_m2s_usb_dat:18"/>
+     <Sig Name="wb_m2s_usb_dat:19"/>
+     <Sig Name="wb_m2s_usb_dat:20"/>
+     <Sig Name="wb_m2s_usb_dat:21"/>
+     <Sig Name="wb_m2s_usb_dat:22"/>
+     <Sig Name="wb_m2s_usb_dat:23"/>
+     <Sig Name="wb_m2s_usb_dat:24"/>
+     <Sig Name="wb_m2s_usb_dat:25"/>
+     <Sig Name="wb_m2s_usb_dat:26"/>
+     <Sig Name="wb_m2s_usb_dat:27"/>
+     <Sig Name="wb_m2s_usb_dat:28"/>
+     <Sig Name="wb_m2s_usb_dat:29"/>
+     <Sig Name="wb_m2s_usb_dat:30"/>
+     <Sig Name="wb_m2s_usb_dat:31"/>
+    </Bus>
+    <Sig Name="wb_m2s_usb_cyc"/>
+    <Bus Radix="0" Name="wb_m2s_usb_cti">
+     <Sig Name="wb_m2s_usb_cti:0"/>
+     <Sig Name="wb_m2s_usb_cti:1"/>
+     <Sig Name="wb_m2s_usb_cti:2"/>
+    </Bus>
+    <Bus Radix="0" Name="wb_m2s_usb_bte">
+     <Sig Name="wb_m2s_usb_bte:0"/>
+     <Sig Name="wb_m2s_usb_bte:1"/>
+    </Bus>
+    <Bus Radix="0" Name="wb_m2s_usb_adr">
+     <Sig Name="wb_m2s_usb_adr:0"/>
+     <Sig Name="wb_m2s_usb_adr:1"/>
+     <Sig Name="wb_m2s_usb_adr:2"/>
+     <Sig Name="wb_m2s_usb_adr:3"/>
+     <Sig Name="wb_m2s_usb_adr:4"/>
+     <Sig Name="wb_m2s_usb_adr:5"/>
+     <Sig Name="wb_m2s_usb_adr:6"/>
+     <Sig Name="wb_m2s_usb_adr:7"/>
+     <Sig Name="wb_m2s_usb_adr:8"/>
+     <Sig Name="wb_m2s_usb_adr:9"/>
+     <Sig Name="wb_m2s_usb_adr:10"/>
+     <Sig Name="wb_m2s_usb_adr:11"/>
+     <Sig Name="wb_m2s_usb_adr:12"/>
+     <Sig Name="wb_m2s_usb_adr:13"/>
+     <Sig Name="wb_m2s_usb_adr:14"/>
+     <Sig Name="wb_m2s_usb_adr:15"/>
+     <Sig Name="wb_m2s_usb_adr:16"/>
+     <Sig Name="wb_m2s_usb_adr:17"/>
+     <Sig Name="wb_m2s_usb_adr:18"/>
+     <Sig Name="wb_m2s_usb_adr:19"/>
+     <Sig Name="wb_m2s_usb_adr:20"/>
+     <Sig Name="wb_m2s_usb_adr:21"/>
+     <Sig Name="wb_m2s_usb_adr:22"/>
+     <Sig Name="wb_m2s_usb_adr:23"/>
+     <Sig Name="wb_m2s_usb_adr:24"/>
+     <Sig Name="wb_m2s_usb_adr:25"/>
+     <Sig Name="wb_m2s_usb_adr:26"/>
+     <Sig Name="wb_m2s_usb_adr:27"/>
+     <Sig Name="wb_m2s_usb_adr:28"/>
+     <Sig Name="wb_m2s_usb_adr:29"/>
+     <Sig Name="wb_m2s_usb_adr:30"/>
+     <Sig Name="wb_m2s_usb_adr:31"/>
+    </Bus>
+   </Trace>
+   <Trigger>
+    <TU Value="11" Operator="0" ID="1" Index="0" Radix="0" Name="AR"/>
+    <TU Value="11" Operator="0" ID="2" Index="2" Radix="0" Name="AW"/>
+    <TU Value="11" Operator="0" ID="3" Index="4" Radix="0" Name="B"/>
+    <TU Value="11" Operator="0" ID="4" Index="1" Radix="0" Name="R"/>
+    <TU Value="11" Operator="0" ID="5" Index="3" Radix="0" Name="W"/>
+    <TU Value="00000000000000000000000000000000" Operator="0" ID="6" Index="5" Radix="0" Name="AR_ADDR"/>
+    <TU Value="00000000000000000000000000000000" Operator="0" ID="7" Index="6" Radix="0" Name="AW_ADDR"/>
+    <TU Value="11x" Operator="0" ID="8" Index="8" Radix="0" Name="WB"/>
+    <TE ID="1" Index="1" Enable="0" Name="TE1" Expression="AR"/>
+    <TE ID="2" Index="2" Enable="0" Name="TE2" Expression="R"/>
+    <TE ID="3" Index="3" Enable="0" Name="TE3" Expression="B"/>
+    <TE ID="4" Index="4" Enable="0" Name="TE4" Expression="AW"/>
+    <TE ID="5" Index="1" Enable="1" Name="TE5" Expression="WB"/>
+   </Trigger>
+  </Dataset>
+ </Core>
+</Project>

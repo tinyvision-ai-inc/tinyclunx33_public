@@ -1,0 +1,151 @@
+<Project ModBy="Inserter" Date="2024-04-26" SigType="0" Name="E:/Data/local_github/tinyclunx33_internal/tinyclunx33_public/RTL/src/debug/fpga_top_som_wishbone.rvl">
+    <IP Version="1_6_042617"/>
+    <Design DesignName="fpga_top_som_connectivity" Synthesis="lse" JTAG="hard" DeviceFamily="LIFCL" DeviceName="LIFCL-33U" DesignEntry="Schematic/Verilog HDL"/>
+    <Core InsertDataset="0" ID="0" Insert="1" Reveal_sig="557146993" Name="fpga_top_som_connectivity_LA0">
+        <Setting>
+            <Clock EnableClk="" SampleClk="hf_clk" EnableClk_Pri="0" SampleEnable="0"/>
+            <TraceBuffer IncTrigSig="0" hasTimeStamp="0" BitTimeStamp="0" Implementation="0" BufferDepth="256"/>
+            <Capture Mode="1" MinSamplesPerTrig="8"/>
+            <Event MaxEventCnt="8" CntEnable="0"/>
+            <TrigOut EnableTrigOut="0" TrigOutNetType="1" MinPulseWidth="0" TrigOutNet="reveal_debug_fpga_top_som_connectivity_LA0_net" Polarity="0"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Type="SIG" Name="clk_60m"/>
+                <Bus Name="wb_s2m_cpu_dat">
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:0"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:1"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:2"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:3"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:4"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:5"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:6"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:7"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:8"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:9"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:10"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:11"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:12"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:13"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:14"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:15"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:16"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:17"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:18"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:19"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:20"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:21"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:22"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:23"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:24"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:25"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:26"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:27"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:28"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:29"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:30"/>
+                    <Sig Type="SIG" Name="wb_s2m_cpu_dat:31"/>
+                </Bus>
+                <Sig Type="SIG" Name="wb_s2m_cpu_ack"/>
+                <Sig Type="SIG" Name="wb_m2s_cpu_we"/>
+                <Sig Type="SIG" Name="wb_m2s_cpu_stb"/>
+                <Bus Name="wb_m2s_cpu_sel">
+                    <Sig Type="SIG" Name="wb_m2s_cpu_sel:0"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_sel:1"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_sel:2"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_sel:3"/>
+                </Bus>
+                <Bus Name="wb_m2s_cpu_dat">
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:0"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:1"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:2"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:3"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:4"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:5"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:6"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:7"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:8"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:9"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:10"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:11"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:12"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:13"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:14"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:15"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:16"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:17"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:18"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:19"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:20"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:21"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:22"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:23"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:24"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:25"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:26"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:27"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:28"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:29"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:30"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_dat:31"/>
+                </Bus>
+                <Sig Type="SIG" Name="wb_m2s_cpu_cyc"/>
+                <Bus Name="wb_m2s_cpu_cti">
+                    <Sig Type="SIG" Name="wb_m2s_cpu_cti:0"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_cti:1"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_cti:2"/>
+                </Bus>
+                <Bus Name="wb_m2s_cpu_bte">
+                    <Sig Type="SIG" Name="wb_m2s_cpu_bte:0"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_bte:1"/>
+                </Bus>
+                <Bus Name="wb_m2s_cpu_adr">
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:0"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:1"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:2"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:3"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:4"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:5"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:6"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:7"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:8"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:9"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:10"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:11"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:12"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:13"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:14"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:15"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:16"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:17"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:18"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:19"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:20"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:21"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:22"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:23"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:24"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:25"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:26"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:27"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:28"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:29"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:30"/>
+                    <Sig Type="SIG" Name="wb_m2s_cpu_adr:31"/>
+                </Bus>
+                <Sig Type="SIG" Name="uart_txd"/>
+                <Sig Type="SIG" Name="uart_rxd"/>
+                <Sig Type="SIG" Name="sda"/>
+                <Sig Type="SIG" Name="scl"/>
+                <Sig Type="SIG" Name="pll_lock"/>
+            </Trace>
+            <Trigger>
+                <TU Type="0" ID="1" Serialbits="0" Sig="wb_m2s_cpu_we,wb_m2s_cpu_stb,wb_m2s_cpu_cyc,"/>
+                <TU Type="0" ID="2" Serialbits="0" Sig="uart_txd,uart_rxd,"/>
+                <TE Resource="0" MaxSequence="2" MaxEvnCnt="1" ID="1"/>
+                <TE Resource="0" MaxSequence="2" MaxEvnCnt="1" ID="2"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>
