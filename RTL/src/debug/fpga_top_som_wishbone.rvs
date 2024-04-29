@@ -1,4 +1,4 @@
-<Project ModBy="Inserter" Date="2024-04-26" Name="E:/Data/local_github/tinyclunx33_internal/tinyclunx33_public/RTL/src/debug/fpga_top_som_wishbone.rvl">
+<Project ModBy="Inserter" Date="2024-04-27" Name="E:/Data/local_github/tinyclunx33_internal/tinyclunx33_public/RTL/src/debug/fpga_top_som_wishbone.rvl">
     <Core Name="fpga_top_som_connectivity_LA0">
         <Setting>
             <Capture SamplesPerTrig="1" NumTrigsCap=""/>
@@ -8,93 +8,6 @@
         <Dataset Name="Base">
             <Trace>
                 <Sig Name="clk_60m"/>
-                <Bus Radix="0" Name="wb_s2m_cpu_dat">
-                    <Sig Name="wb_s2m_cpu_dat:0"/>
-                    <Sig Name="wb_s2m_cpu_dat:1"/>
-                    <Sig Name="wb_s2m_cpu_dat:2"/>
-                    <Sig Name="wb_s2m_cpu_dat:3"/>
-                    <Sig Name="wb_s2m_cpu_dat:4"/>
-                    <Sig Name="wb_s2m_cpu_dat:5"/>
-                    <Sig Name="wb_s2m_cpu_dat:6"/>
-                    <Sig Name="wb_s2m_cpu_dat:7"/>
-                    <Sig Name="wb_s2m_cpu_dat:8"/>
-                    <Sig Name="wb_s2m_cpu_dat:9"/>
-                    <Sig Name="wb_s2m_cpu_dat:10"/>
-                    <Sig Name="wb_s2m_cpu_dat:11"/>
-                    <Sig Name="wb_s2m_cpu_dat:12"/>
-                    <Sig Name="wb_s2m_cpu_dat:13"/>
-                    <Sig Name="wb_s2m_cpu_dat:14"/>
-                    <Sig Name="wb_s2m_cpu_dat:15"/>
-                    <Sig Name="wb_s2m_cpu_dat:16"/>
-                    <Sig Name="wb_s2m_cpu_dat:17"/>
-                    <Sig Name="wb_s2m_cpu_dat:18"/>
-                    <Sig Name="wb_s2m_cpu_dat:19"/>
-                    <Sig Name="wb_s2m_cpu_dat:20"/>
-                    <Sig Name="wb_s2m_cpu_dat:21"/>
-                    <Sig Name="wb_s2m_cpu_dat:22"/>
-                    <Sig Name="wb_s2m_cpu_dat:23"/>
-                    <Sig Name="wb_s2m_cpu_dat:24"/>
-                    <Sig Name="wb_s2m_cpu_dat:25"/>
-                    <Sig Name="wb_s2m_cpu_dat:26"/>
-                    <Sig Name="wb_s2m_cpu_dat:27"/>
-                    <Sig Name="wb_s2m_cpu_dat:28"/>
-                    <Sig Name="wb_s2m_cpu_dat:29"/>
-                    <Sig Name="wb_s2m_cpu_dat:30"/>
-                    <Sig Name="wb_s2m_cpu_dat:31"/>
-                </Bus>
-                <Sig Name="wb_s2m_cpu_ack"/>
-                <Sig Name="wb_m2s_cpu_we"/>
-                <Sig Name="wb_m2s_cpu_stb"/>
-                <Bus Radix="0" Name="wb_m2s_cpu_sel">
-                    <Sig Name="wb_m2s_cpu_sel:0"/>
-                    <Sig Name="wb_m2s_cpu_sel:1"/>
-                    <Sig Name="wb_m2s_cpu_sel:2"/>
-                    <Sig Name="wb_m2s_cpu_sel:3"/>
-                </Bus>
-                <Bus Radix="0" Name="wb_m2s_cpu_dat">
-                    <Sig Name="wb_m2s_cpu_dat:0"/>
-                    <Sig Name="wb_m2s_cpu_dat:1"/>
-                    <Sig Name="wb_m2s_cpu_dat:2"/>
-                    <Sig Name="wb_m2s_cpu_dat:3"/>
-                    <Sig Name="wb_m2s_cpu_dat:4"/>
-                    <Sig Name="wb_m2s_cpu_dat:5"/>
-                    <Sig Name="wb_m2s_cpu_dat:6"/>
-                    <Sig Name="wb_m2s_cpu_dat:7"/>
-                    <Sig Name="wb_m2s_cpu_dat:8"/>
-                    <Sig Name="wb_m2s_cpu_dat:9"/>
-                    <Sig Name="wb_m2s_cpu_dat:10"/>
-                    <Sig Name="wb_m2s_cpu_dat:11"/>
-                    <Sig Name="wb_m2s_cpu_dat:12"/>
-                    <Sig Name="wb_m2s_cpu_dat:13"/>
-                    <Sig Name="wb_m2s_cpu_dat:14"/>
-                    <Sig Name="wb_m2s_cpu_dat:15"/>
-                    <Sig Name="wb_m2s_cpu_dat:16"/>
-                    <Sig Name="wb_m2s_cpu_dat:17"/>
-                    <Sig Name="wb_m2s_cpu_dat:18"/>
-                    <Sig Name="wb_m2s_cpu_dat:19"/>
-                    <Sig Name="wb_m2s_cpu_dat:20"/>
-                    <Sig Name="wb_m2s_cpu_dat:21"/>
-                    <Sig Name="wb_m2s_cpu_dat:22"/>
-                    <Sig Name="wb_m2s_cpu_dat:23"/>
-                    <Sig Name="wb_m2s_cpu_dat:24"/>
-                    <Sig Name="wb_m2s_cpu_dat:25"/>
-                    <Sig Name="wb_m2s_cpu_dat:26"/>
-                    <Sig Name="wb_m2s_cpu_dat:27"/>
-                    <Sig Name="wb_m2s_cpu_dat:28"/>
-                    <Sig Name="wb_m2s_cpu_dat:29"/>
-                    <Sig Name="wb_m2s_cpu_dat:30"/>
-                    <Sig Name="wb_m2s_cpu_dat:31"/>
-                </Bus>
-                <Sig Name="wb_m2s_cpu_cyc"/>
-                <Bus Radix="0" Name="wb_m2s_cpu_cti">
-                    <Sig Name="wb_m2s_cpu_cti:0"/>
-                    <Sig Name="wb_m2s_cpu_cti:1"/>
-                    <Sig Name="wb_m2s_cpu_cti:2"/>
-                </Bus>
-                <Bus Radix="0" Name="wb_m2s_cpu_bte">
-                    <Sig Name="wb_m2s_cpu_bte:0"/>
-                    <Sig Name="wb_m2s_cpu_bte:1"/>
-                </Bus>
                 <Bus Radix="0" Name="wb_m2s_cpu_adr">
                     <Sig Name="wb_m2s_cpu_adr:0"/>
                     <Sig Name="wb_m2s_cpu_adr:1"/>
@@ -129,11 +42,9 @@
                     <Sig Name="wb_m2s_cpu_adr:30"/>
                     <Sig Name="wb_m2s_cpu_adr:31"/>
                 </Bus>
-                <Sig Name="uart_txd"/>
                 <Sig Name="uart_rxd"/>
                 <Sig Name="sda"/>
                 <Sig Name="scl"/>
-                <Sig Name="pll_lock"/>
             </Trace>
             <Trigger>
                 <TU Value="11x" Operator="0" ID="1" Index="1" Radix="0" Name="TU1"/>
