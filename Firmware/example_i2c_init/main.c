@@ -15,13 +15,24 @@
 #include <libbase/console.h>
 #include <generated/csr.h>
 
+#include "common.h"
 #include "i2c_init.h"
+#include "usb_init.h"
 #include "imx219.h"
 #include "pi4ioe5v9.h"
 pi4ioe5v9_state_t pi4ioe5v9_obj;
 static pi4ioe5v9_state_t *pi4ioe5v9_ptr = &pi4ioe5v9_obj;
 
 #include "common.h"
+
+#define ENABLE_PRINTF 0
+
+#if ENABLE_PRINTF
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
+
 
 #define WISHBONE_BASE_ADDR		0xb0000000
 
@@ -56,61 +67,24 @@ static void sel_cam(uint8_t slot, uint8_t cam_id) {
 	i2c_write(I2C_MUX_ADDR + slot, 0, &val, 1, 1);
 }
 
-// Shared global variable to prevent a lot of debug messages printing out when polling.
-static bool print_me = true;
-
-static void reg_32b_read(unsigned int addr, unsigned int *val)
-{
-	*val = *((volatile unsigned int *)addr);
-#ifdef DEBUG
-	if(print_me)
-		printf("reg_read 0x%08x = 0x%08x\n", addr, *val);
-#endif
-}
-
-static void reg_32b_write(unsigned int addr, unsigned int val)
-{
-	*((volatile unsigned int *)addr) = val;
-#ifdef DEBUG
-	printf("reg_write 0x%08x = 0x%08x\n", addr, val);
-#endif
-}
-
-static void reg_32b_poll(unsigned int addr, unsigned int flag)
-{
-#ifdef DEBUG
-	printf("reg_poll 0x%08x flag = 0x%08x, ", addr, flag);
-#endif
-	unsigned int reg;
-	print_me = false;
-	do {
-		reg_32b_read(addr, &reg);
-	} while (reg & flag);
-	print_me = true;
-#ifdef DEBUG
-	printf("got: 0x%08x\n", reg);
-#endif
-
-}
-
 static void RegTest(void) {
 	unsigned int val, adr;
 
 	// USB
 	adr = WISHBONE_BASE_ADDR + 0xc120;
 	reg_32b_read(adr, &val);
-	printf("Read back 0x%x from 0x%x\n\r", val, adr);
+	PRINTF("Read back 0x%x from 0x%x\n\r", val, adr);
 
 	// Scratch RAM
 	adr = WISHBONE_BASE_ADDR + 0x01000000;
 	reg_32b_write(adr, 0xdeadfeed);
 	reg_32b_read(adr, &val);
-	printf("Read back 0x%x from 0x%x\n\r", val, adr);
+	PRINTF("Read back 0x%x from 0x%x\n\r", val, adr);
 
 	adr += 4;
 	reg_32b_write(adr, 0xc001d00d);
 	reg_32b_read(adr, &val);
-	printf("Read back 0x%x from 0x%x\n\r", val, adr);
+	PRINTF("Read back 0x%x from 0x%x\n\r", val, adr);
 
 	// TPG
 	/*
@@ -127,32 +101,32 @@ static void RegTest(void) {
 	// Scratch RAM
 	adr = WISHBONE_BASE_ADDR + 0x01000000;
 	reg_32b_read(adr, &val);
-	printf("Read back 0x%x from 0x%x\n\r", val, adr);
+	PRINTF("Read back 0x%x from 0x%x\n\r", val, adr);
 
 	// CSR
 	adr = WISHBONE_BASE_ADDR+0x02000000;
 	reg_32b_read(adr, &val);
-	printf("Read back 0x%x from 0x%x\n\r", val, adr);
+	PRINTF("Read back 0x%x from 0x%x\n\r", val, adr);
 
 	val = *(volatile uint32_t *)0xb000c110;  // GCTL
-	printf("Read back 0x%x\n\r", val);
+	PRINTF("Read back 0x%x\n\r", val);
 
 	val = *(volatile uint32_t *)0xb000c704;  // DCTL
-	printf("Read back 0x%x\n\r", val);
+	PRINTF("Read back 0x%x\n\r", val);
 	val = *(volatile uint32_t *)0xb000c700;  // DCFG
-	printf("Read back 0x%x\n\r", val);
+	PRINTF("Read back 0x%x\n\r", val);
 	val = *(volatile uint32_t *)0xb000c720;  // DALEPENA
-	printf("Read back 0x%x\n\r", val);
+	PRINTF("Read back 0x%x\n\r", val);
 	val = *(volatile uint32_t *)0xb000c120;  // GCOREID
-	printf("Read back 0x%x\n\r", val);
+	PRINTF("Read back 0x%x\n\r", val);
 	val = *(volatile uint32_t *)0xb0018004;
-	printf("Read back 0x%x\n\r", val);
+	PRINTF("Read back 0x%x\n\r", val);
 	val = *(volatile uint32_t *)0xb0018008;
-	printf("Read back 0x%x\n\r", val);
+	PRINTF("Read back 0x%x\n\r", val);
 	val = *(volatile uint32_t *)0xb00100c8;
-	printf("Read back 0x%x\n\r", val);
+	PRINTF("Read back 0x%x\n\r", val);
 	val = *(volatile uint32_t *)0xb0014010;
-	printf("Read back 0x%x\n\r", val);
+	PRINTF("Read back 0x%x\n\r", val);
 }
 
 static void CsrRegTest(void) {
@@ -346,7 +320,12 @@ int main(void)
 	irq_setmask(0);
 	irq_setie(1);
 #endif
-	//RegTest();
+	RegTest();
+	usb_reset_seq();
+	device_poweron_soft_reset();
+	usb_depcfg();
+
+	//usb_init();
 	//CsrRegTest();
 
 	uart_init();
@@ -362,6 +341,7 @@ int main(void)
 	//sel_cam(0, 0);
 	//SensorInit();
 
+/*
 	pi4ioe5v9_init(pi4ioe5v9_ptr);
 	
 	// Enable the 60MHz clock
@@ -372,6 +352,7 @@ int main(void)
 	pi4ioe5v9_set_output(pi4ioe5v9_ptr, 0x2, LEVEL_HIGH);
 	pi4ioe5v9_set_output(pi4ioe5v9_ptr, 0x8, LEVEL_HIGH);
 	pi4ioe5v9_set_output(pi4ioe5v9_ptr, 0x10, LEVEL_HIGH);
+*/
 
 	help();
 	prompt();

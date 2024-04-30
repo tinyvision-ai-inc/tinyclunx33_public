@@ -1,4 +1,3 @@
-`default_nettype wire
 module wb_intercon
    (input  wire        wb_clk_i,
     input  wire        wb_rst_i,
