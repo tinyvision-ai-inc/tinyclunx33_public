@@ -12,4 +12,8 @@
 #define RET_SUCCESS 0
 #define RET_CAM_NOT_FOUND 1
 
+void reg_32b_read(unsigned int addr, unsigned int *val);
+void reg_32b_write(unsigned int addr, unsigned int val);
+void reg_32b_poll(unsigned int addr, unsigned int flag);
+
 #endif
