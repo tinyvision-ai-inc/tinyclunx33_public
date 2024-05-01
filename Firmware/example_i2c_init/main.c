@@ -25,12 +25,12 @@ static pi4ioe5v9_state_t *pi4ioe5v9_ptr = &pi4ioe5v9_obj;
 
 #include "common.h"
 
-#define ENABLE_PRINTF 0
+#define ENABLE_PRINTF 1
 
 #if ENABLE_PRINTF
-#define PRINTF(...) printf(__VA_ARGS__)
+#define PRINTF printf
 #else
-#define PRINTF(...)
+#define PRINTF
 #endif
 
 
@@ -320,10 +320,12 @@ int main(void)
 	irq_setmask(0);
 	irq_setie(1);
 #endif
-	RegTest();
+	//RegTest();
+/*
 	usb_reset_seq();
 	device_poweron_soft_reset();
 	usb_depcfg();
+*/
 
 	//usb_init();
 	//CsrRegTest();

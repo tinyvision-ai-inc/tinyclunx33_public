@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RadiantProject version="4.2" radiant="2023.2.0.38.1" title="fpga_top_som_connectivity" device="LIFCL-33U-7CTG104C" performance_grade="7_High-Performance_1.0V" default_implementation="impl">
+<RadiantProject version="4.2" radiant="2023.2.1.288.0" title="fpga_top_som_connectivity" device="LIFCL-33U-7CTG104C" performance_grade="7_High-Performance_1.0V" default_implementation="impl">
     <Options/>
     <Implementation title="impl" dir="impl_connectivity" description="impl" synthesis="lse" default_strategy="Strategy1">
-        <Options def_top="activity_detect">
+        <Options def_top="wb2axi4">
             <Option name="include path" value="ip/wb_common;src"/>
             <Option name="top" value="fpga_top_som_connectivity"/>
         </Options>
@@ -87,6 +87,12 @@
         <Source name="src/TinyClunx.v" type="Verilog" type_short="Verilog">
             <Options/>
         </Source>
+        <Source name="common/wb_reg.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog"/>
+        </Source>
+        <Source name="ip/main_pll_60/main_pll_60.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
         <Source name="fpga_top_som_connectivity.xcf" type="Programming Project File" type_short="Programming">
             <Options/>
         </Source>
@@ -97,9 +103,6 @@
             <Options/>
         </Source>
         <Source name="src/debug/debug_mipi_rx.rvl" type="Reveal" type_short="Reveal" excluded="TRUE">
-            <Options/>
-        </Source>
-        <Source name="src/debug/untitled.rva" type="Reveal Analyzer Project File" type_short="RVA">
             <Options/>
         </Source>
     </Implementation>
