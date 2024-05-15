@@ -41,7 +41,7 @@ gateware: $(LITEX_SOC_PY)
 	cp litex/build/som/gateware/som.v src
 
 wishbone src/wb_intercon.v: src/wb_intercon.cfg
-	python ip/wb_intercon/sw/wb_intercon_gen src/wb_intercon.cfg src/wb_intercon.v
+	$(PYTHON) ip/wb_intercon/sw/wb_intercon_gen src/wb_intercon.cfg src/wb_intercon.v
 
 litex litex.overlay litex.conf: gateware
 	$(PYTHON) python/litex_json2dts_zephyr.py --dts=litex.overlay --config=litex.conf litex/build/csr.som.json
