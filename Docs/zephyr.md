@@ -8,6 +8,8 @@ On the [RTL Reference Design](rtl_reference_design.md) of the FPGA, there is the
 This allows to run a firmware, and an RTOS such as [Zephyr](https://docs.zephyrproject.org/) with an USB stack and USB drivers.
 The firmware is loaded into the flash after the FPGA image, and the RISC-V soft CPU starts it.
 
+![](images/zephyr_architecture.drawio.png)
+
 
 ## Features
 
@@ -53,7 +55,7 @@ Example repository: all you need to get started.
   [`west`](https://docs.zephyrproject.org/latest/develop/west/index.html) build tool.
 
 
-### Release process
+## Release process
 
 For transparency, here is how tinyVision.ai performs a new [release](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/) internally:
 
