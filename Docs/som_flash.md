@@ -11,7 +11,7 @@ In the default RTL, the flash is mapped at address `0x2000_0000`.
 ```
 0x2000_0000 -- First address of FPGA bitfile
 0x2010_0000 -- First address of Zephyr firmware (optional)
-0x20*0_0000 -- Free area at the end of the flash for custom
+0x20*0_0000 -- Free area at the end of the flash for custom data
 ```
 
 

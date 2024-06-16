@@ -51,3 +51,36 @@ Example repository: all you need to get started.
 - [`tinyclunx33_zephyr_example`](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example):
   the top-level repository that contains the example, and points at the `zephyr_private` repo, downloaded in chain by the
   [`west`](https://docs.zephyrproject.org/latest/develop/west/index.html) build tool.
+
+
+### Release process
+
+For transparency, here is how tinyVision.ai performs a new [release](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/) internally:
+
+1. Build and test every example using the `zephyr_internal` repo and `zephyr_internal` branch,
+   and commit as needed to fix the exapmles.
+
+2. Once all the examples work, run [`blobify.sh`](https://github.com/tinyvision-ai-inc/zephyr_private/blob/zephyr_private/drivers/usb/udc/blobify.sh)
+   to obfuscate the function names from [`udc_usb23blob.c`](https://github.com/tinyvision-ai-inc/zephyr_internal/blob/zephyr_internal/drivers/usb/udc/udc_usb23blob.c).
+
+3. Build any example another time to generate [`udc_usb23blob.c.obj`](https://github.com/tinyvision-ai-inc/zephyr_private/blob/zephyr_private/drivers/usb/udc/udc_usb23blob.c.obj).
+
+4. Remove the `udc_usb23blob.c` file and commit the result into the `zephyr_private` branch,
+   with a message indicating which commit of `zephyr_internal` this came from.
+
+5. Re-test and re-build each example using the `zephyr_private` branch, and publish the generated files.
+
+
+## Troubleshooting
+
+The first sign of life from the Zephyr RTOS coming from the board will happen over the FTDI UART interface, available by plugging the DEBUG USB cable.
+
+Once a serial console viewer is connected to the second interface (often numbered #1, such as `/dev/ttyUSB1`), logs will be available to review what is going on.
+
+In order to get early boot logs, you can hit the SW2 button which will reset the board but keep the serial console attached.
+
+On the logging interface directly, the Zephyr shell is available with debug commands, except for the Shell example for which it goes over a separate `/dev/ttyACM0`.
+
+These debug commands permit to review the internal state of the driver using subcommands of `usb23`.
+
+Their usage is described with tab completion.
