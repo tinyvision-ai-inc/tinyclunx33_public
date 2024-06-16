@@ -1,65 +1,53 @@
 # Zephyr integration
 
-[Source](https://github.com/tinyvision-ai-inc/zephyr/) |
+[Source](https://github.com/tinyvision-ai-inc/zephyr_private/) |
 [Example](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/) |
 [Release](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
 
-The [Zephyr RTOS](https://docs.zephyrproject.org/) has been ported the SoM on
-top of the [RTL Reference Design](rtl_reference_design.md), allowing to control
-the USB core, configure the peripherals and external chis, as well as execute
-custom application.
-
-![](images/zephyr_architecture.drawio.png)
+On the [RTL Reference Design](rtl_reference_design.md) of the FPGA, there is the a RISC-V soft-CPU integrated.
+This allows to run a firmware, and an RTOS such as [Zephyr](https://docs.zephyrproject.org/) with an USB stack and USB drivers.
+The firmware is loaded into the flash after the FPGA image, and the RISC-V soft CPU starts it.
 
 
-## Zephyr fork
+## Features
 
-An
-[usb driver](https://github.com/tinyvision-ai-inc/zephyr/blob/tinyclunx33/drivers/usb/udc/udc_usb23.c)
-is being implemented with the goal to be upstreamed in Zephyr.
-
-It is still a private repository as of now.
-
-An UVC device class is being implemented as well,
-Zephyr sill missing support for it.
-
-
-## Example project
-
-An example project is provided with build instructions in order to:
-
-- Test the USB device driver, with an USB CDC and soon USB UVC interface
-
-- Communicate with an UART (baud rate 115200) through the FTDI to get
-  the debug logs, or send commands to the Zephyr shell (both through the
-  same UART) such as an I2C scan or raw register writes.
-
-- Act as a staring point for new firmware, updated to match the latest RTL
-  and driver: same code tinyVision uses for writing and testing USB3.
+- A Driver for Lattice USB23
+- The Zephyr USB stack
+- An UVC device class
+- UART for debug logs over the FTDI (on the devkit)
+- I2C control for sensors
+- Any other driver alrelady present on Zephyr
+- etc. (about anything Zephyr can do)
 
 
-## Debug logs and shell
+## Getting started
 
-The FTDI chip present on the Devkit provides ways to:
+Follow the Zephyr guide up to the point to build the "blinky" example:
+<https://docs.zephyrproject.org/latest/develop/getting_started/index.html>
 
-- [program the flash](som_flash.md)
+Follow the extra steps for any tinyCLUNX33 example:
+<https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/>
 
-- Access the soft CPU JTAG interface (work in progress, not ready yet)
+Or follow this longer step-by-step guide including both the install of Zephyr tools and the build process.
+<https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/blob/main/README.ubuntu.md>
 
-- Access a debug UART interface (baud rate 115200)
 
-These can be accessed by connecting an USB2 cable to the Debug USB interace
-of the Devkit as described
-[here](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example).
+## Repositories organization
 
-For users of different systems, it is possible to use any tool of your choice
-supporting JTAG (for when it is ready) and UART.
+Fork of Zephyr: how our development is organized
 
-```
-# First, power cycle the board to let the FPGA start
+- [`zephyr_internal`](https://github.com/tinyvision-ai-inc/zephyr_internal):
+  where the development happens, the `zephyr_internal` branch acts as a `dev` branch
 
-# Get the logs from the Zephyr console, and access the debug shell
-picocom -g zephyrshell.log -b 115200 /dev/ttyUSB1
-```
+- [`zephyr_private`](https://github.com/tinyvision-ai-inc/zephyr_private):
+  releases of the `zephyr_internal` repo, the `zephyr_private` branch acts as a `main` branch.
+  You can ask the access to it to tinyVision.ai Inc.
 
-You may have to press "Enter" to get the prompt `uart:~$` to appear.
+- [`zephyr_public`](https://github.com/tinyvision-ai-inc/zephyr):
+  only used for public contributions to Zephyr, and not relevant for using the tinyCLUNX33 at this time.
+
+Example repository: all you need to get started.
+
+- [`tinyclunx33_zephyr_example`](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example):
+  the top-level repository that contains the example, and points at the `zephyr_private` repo, downloaded in chain by the
+  [`west`](https://docs.zephyrproject.org/latest/develop/west/index.html) build tool.
