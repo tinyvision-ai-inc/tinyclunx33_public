@@ -25,12 +25,15 @@ The firmware is loaded into the flash after the FPGA image, and the RISC-V soft 
 ## Getting started
 
 Follow the Zephyr guide up to the point to build the "blinky" example:
+
 <https://docs.zephyrproject.org/latest/develop/getting_started/index.html>
 
 Follow the extra steps for any tinyCLUNX33 example:
+
 <https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/>
 
 Or follow this longer step-by-step guide including both the install of Zephyr tools and the build process.
+
 <https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/blob/main/README.ubuntu.md>
 
 
@@ -39,18 +42,22 @@ Or follow this longer step-by-step guide including both the install of Zephyr to
 Fork of Zephyr: how our development is organized
 
 - [`zephyr_internal`](https://github.com/tinyvision-ai-inc/zephyr_internal):
+
   where the development happens, the `zephyr_internal` branch acts as a `dev` branch
 
 - [`zephyr_private`](https://github.com/tinyvision-ai-inc/zephyr_private):
+
   releases of the `zephyr_internal` repo, the `zephyr_private` branch acts as a `main` branch.
   You can ask the access to it to tinyVision.ai Inc.
 
 - [`zephyr_public`](https://github.com/tinyvision-ai-inc/zephyr):
+
   only used for public contributions to Zephyr, and not relevant for using the tinyCLUNX33 at this time.
 
 Example repository: all you need to get started.
 
 - [`tinyclunx33_zephyr_example`](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example):
+
   the top-level repository that contains the example, and points at the `zephyr_private` repo, downloaded in chain by the
   [`west`](https://docs.zephyrproject.org/latest/develop/west/index.html) build tool.
 
