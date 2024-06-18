@@ -103,7 +103,7 @@ module fpga_top_som (
 
 
   logic usb_rst_n, usb_rst;
-  rst_sync usb_rst_sync (.clk(usb_clk), .async_rst_n(button_n), .sync_rst_n(usb_rst_n));
+  rst_sync usb_rst_sync (.clk(usb_clk), .async_rst_n(reset_n), .sync_rst_n(usb_rst_n));
   assign usb_rst = ~usb_rst_n;
 
 /*------------------------------------------------------------------------------
