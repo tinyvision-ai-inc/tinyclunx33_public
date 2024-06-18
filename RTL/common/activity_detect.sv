@@ -4,11 +4,11 @@
 */
 
 module activity_detect #(parameter COUNT_BITS = 4) (
-	input  logic clk    ,
-	input  logic rst    ,
-	input  logic sig    ,
-	output logic [COUNT_BITS-1:0] ctr_o,
-	output logic act_det
+	input  wire clk    ,
+	input  wire rst    ,
+	input  wire sig    ,
+	output wire [COUNT_BITS-1:0] ctr_o,
+	output wire act_det
 );
 
 	// Create a blinking LED when there is frame data to make it easy to see

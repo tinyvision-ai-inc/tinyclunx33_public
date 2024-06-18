@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RadiantProject version="4.2" radiant="2023.2.0.38.1" title="fpga_top_som" device="LIFCL-33U-7CTG104C" performance_grade="7_High-Performance_1.0V" default_implementation="impl_no_mipi">
+<RadiantProject version="4.2" radiant="2023.2.1.288.0" title="fpga_top_som" device="LIFCL-33U-7CTG104C" performance_grade="7_High-Performance_1.0V" default_implementation="impl_no_mipi">
     <Options/>
     <Implementation title="impl_no_mipi" dir="impl_no_mipi" description="impl_no_mipi" synthesis="lse" default_strategy="Strategy1">
-        <Options def_top="TinyClunx">
+        <Options def_top="fpga_top_som_no_mipi">
             <Option name="include path" value="ip/wb_common;src"/>
             <Option name="top" value="fpga_top_som_no_mipi"/>
         </Options>
@@ -69,7 +69,7 @@
         <Source name="common/wb2axi4.sv" type="Verilog" type_short="Verilog">
             <Options VerilogStandard="System Verilog"/>
         </Source>
-        <Source name="src/TinyClunx.v" type="Verilog" type_short="Verilog">
+        <Source name="src/TinyClunx_no_usb.v" type="Verilog" type_short="Verilog">
             <Options/>
         </Source>
         <Source name="fpga_top_som.xcf" type="Programming Project File" type_short="Programming">

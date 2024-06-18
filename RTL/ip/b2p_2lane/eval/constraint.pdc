@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Generated IP Settings
-# LDC File: E:\Data\local_github\tinyCLUNX33_new\RTL\ip\b2p_2lane\constraints\b2p_2lane.ldc
+# LDC File: E:\Data\local_github\tinyclunx33_internal\tinyclunx33_public\RTL\ip\b2p_2lane\constraints\b2p_2lane.ldc
 #-------------------------------------------------------------------------------
 set b2p_2lane_architecture "LIFCL"
 set b2p_2lane_device "LIFCL-33U"

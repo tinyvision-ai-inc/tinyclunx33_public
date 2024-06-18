@@ -23,7 +23,7 @@ SRCH_PATH = -y $(TB) -y $(RTL) -y $(COMMON) -y $(LITEX) \
  -y $(COMMON_IP)/dpram1024x8/rtl -y $(COMMON_IP)/dpram2048x8/rtl -y $(COMMON_IP)/dpram4096x8/rtl \
  -y $(COMMON_IP)/rx_dphy_2l/rtl -y $(COMMON_IP)/rx_dphy_s_2lane/rtl -y $(COMMON_IP)/b2p_2lane/rtl\
  -y $(COMMON_IP)/p2b_2lane/rtl -y $(COMMON_IP)/tx_dphy_s_2lane/rtl \
- -y $(COMMON_IP)/p2b_2l_yuv422_8/rtl \
+ -y $(COMMON_IP)/main_pll_60/rtl \
  -y $(IP)/wb_intercon/rtl/verilog -y $(IP)/cdc_utils/rtl/verilog -y $(IP)/wb_ram/rtl/verilog
 
  INC_DIR = +incdir+$(IP)/wb_common

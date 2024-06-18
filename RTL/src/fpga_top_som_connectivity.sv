@@ -14,26 +14,34 @@ module fpga_top_som_connectivity (
   output wire       spiflash_clk        ,
   output wire       spiflash_cs_n       ,
   inout  wire [3:0] spiflash_dq         ,
-/*
-  inout  wire       mipi_rx_clk_p       ,
-  inout  wire       mipi_rx_clk_m       ,
-  inout  wire [1:0] mipi_rx_dat_p       ,
-  inout  wire [1:0] mipi_rx_dat_m       ,
-  inout  wire       mipi_tx_clk_p       ,
-  inout  wire       mipi_tx_clk_m       ,
-  inout  wire [1:0] mipi_tx_dat_p       ,
-  inout  wire [1:0] mipi_tx_dat_m       ,
-*/
+
+  // MIPI Rx
+  inout  wire       diff0_p       ,
+  inout  wire       diff0_m       ,
+  inout  wire       diff1_p       ,
+  inout  wire       diff1_m       ,
+  inout  wire       diff2_p       ,
+  inout  wire       diff2_m       ,
+
+  // MIPI Tx
+  inout  wire       diff3_p       ,
+  inout  wire       diff3_m       ,
+  inout  wire       diff4_p       ,
+  inout  wire       diff4_m       ,
+  inout  wire       diff5_p       ,
+  inout  wire       diff5_m       ,
+
+  // USB
   inout  wire       VBUS_i              ,
-  inout  wire       usb23_DMP           ,
+  inout  wire       usb23_DM           ,
   inout  wire       usb23_DP            ,
   input  wire       usb23_REFINCLKEXTM_i,
   input  wire       usb23_REFINCLKEXTP_i,
   inout  wire       usb23_RESEXTUSB2    ,
-  input  wire       usb23_RXMP_i        ,
-  input  wire       usb23_RXPP_i        ,
-  output wire       usb23_TXMP_o        ,
-  output wire       usb23_TXPP_o
+  input  wire       usb23_RXM_i        ,
+  input  wire       usb23_RXP_i        ,
+  output wire       usb23_TXM_o        ,
+  output wire       usb23_TXP_o
 );
 
   `ifdef FAST_SIM
@@ -85,7 +93,8 @@ module fpga_top_som_connectivity (
   // No need to waste a PLL output when the clock is the right frequency. Do wer need to pass this through the
   // PLL to clean it up perhaps?
   assign clk_60m = clk_in;
-
+  wire sync_clk = clk_60m;
+  
   logic pixel_rst_n;
   fpga_reset pix_rst_sync (.clk(pixel_clk), .reset_n_i(pll_lock), .reset_n_o(pixel_rst_n)); 
   logic byte_rst_n;
@@ -440,12 +449,12 @@ USB23 #(
   // *********************************************************************
   // USB 2.0 Lines
   .DP                (usb23_DP            ), // IO
-  .DM                (usb23_DMP           ), // IO
+  .DM                (usb23_DM           ), // IO
   // USB 3.0 Lines
-  .RXM               (usb23_RXMP_i        ), // Input
-  .RXP               (usb23_RXPP_i        ), // Input
-  .TXM               (usb23_TXMP_o        ), // Output
-  .TXP               (usb23_TXPP_o        ), // Output
+  .RXM               (usb23_RXM_i        ), // Input
+  .RXP               (usb23_RXP_i        ), // Input
+  .TXM               (usb23_TXM_o        ), // Output
+  .TXP               (usb23_TXP_o        ), // Output
   // *********************************************************************
   // Configuration Path
   // *********************************************************************
@@ -544,5 +553,168 @@ USB23 #(
   .SS_RX_ACJT_OUTN   (                    ), // O
   .SS_RX_ACJT_OUTP   (                    )  // O
 );
+
+`define IGNORE
+`ifdef IGNORE
+
+/*------------------------------------------------------------------------------
+--  MIPI Rx
+------------------------------------------------------------------------------*/
+wire           byte_clk_rx         ;
+wire           tx_rdy              ;
+wire [    5:0] ref_dt        = 'h2B;
+wire           pixel_fv            ;
+wire           pixel_lv            ;
+wire [    9:0] pixel_data          ;
+wire [   15:0] rx_wc               ;
+wire           hs_sync             ;
+wire           hs_d_en             ;
+wire           rx_lp_en            ;
+wire           rx_lp_av_en         ;
+wire [2*8-1:0] rx_payload          ;
+wire           rx_payload_en       ;
+wire [    5:0] rx_dt               ;
+
+
+mipi_to_pixel #(
+  .NUM_RX_LANE(2         ),
+  .RX_GEAR    (8         ),
+  .DT_WIDTH   (PIXEL_BITS)
+) i_mipi_to_pixel (
+  .rx_clk_p     (diff1_p),
+  .rx_clk_n     (diff1_m),
+  .rx_d_p       ({diff2_p, diff0_p}),
+  .rx_d_n       ({diff2_m, diff0_m}),
+  .sync_clk     (sync_clk     ),
+  .rst_n        (usb_rst_n    ),
+  .pll_lock     (pll_lock     ),
+  .byte_clk_i   (byte_clk     ),
+  .byte_clk_o   (byte_clk_rx  ),
+  .tx_rdy_i     (tx_rdy       ),
+  .ref_dt       (ref_dt       ),
+  .pixel_clk    (pixel_clk    ),
+  .pixel_rst_n  (pixel_rst_n  ),
+  .pixel_fv     (pixel_fv     ),
+  .pixel_lv     (pixel_lv     ),
+  .pixel_data   (pixel_data   ),
+  .rx_wc        (rx_wc        ),
+  .hs_sync      (hs_sync      ),
+  .hs_d_en      (hs_d_en      ),
+  .rx_lp_en     (rx_lp_en     ),
+  .rx_lp_av_en  (rx_lp_av_en  ),
+  .rx_payload   (rx_payload   ),
+  .rx_payload_en(rx_payload_en),
+  .rx_dt        (rx_dt        )
+);
+
+// Accumulate the RGB pixels for AWB
+wire [$clog2(NUM_COLS)-1:0] trim_left = 0       ;
+wire [$clog2(NUM_COLS)-1:0] width     = NUM_COLS;
+wire [$clog2(NUM_ROWS)-1:0] trim_top  = 0       ;
+wire [$clog2(NUM_ROWS)-1:0] height    = NUM_ROWS;
+
+logic avg_valid;
+image_stats #(
+  .PIXEL_BITS    (PIXEL_BITS    ),
+  .ACCUM_OUT_BITS(ACCUM_OUT_BITS),
+  .MAX_ROWS      (NUM_ROWS      ),
+  .MAX_COLS      (NUM_COLS      )
+) i_image_stats (
+  .clk       (pixel_clk                     ),
+  .reset     (~pixel_rst_n                  ),
+  .trim_left (trim_left                     ),
+  .width     (width                         ),
+  .trim_top  (trim_top                      ),
+  .height    (height                        ),
+  .i_fv      (pixel_fv                      ),
+  .i_lv      (pixel_lv                      ),
+  .i_data    (pixel_data                    ),
+  .avg_valid (avg_valid                     ),
+  .num_cols  (num_cols                      ),
+  .num_rows  (num_rows                      ),
+  .num_frames(num_frames                    ),
+  .ch0_avg   (avg_chan_0[ACCUM_OUT_BITS-1:0]),
+  .ch1_avg   (avg_chan_1[ACCUM_OUT_BITS-1:0]),
+  .ch2_avg   (avg_chan_2[ACCUM_OUT_BITS-1:0]),
+  .ch3_avg   (avg_chan_3[ACCUM_OUT_BITS-1:0])
+);
+
+assign irq_frame = avg_valid;
+
+localparam          DT_SEL     = "DT_RAW10";
+localparam          DT_RAW10   = 6'h2B          ;
+localparam          DT_WIDTH   = 10             ;
+
+wire  tx_init_done;
+logic                patt_fv, patt_lv;
+wire                 tx_fv, tx_lv;
+wire  [DT_WIDTH-1:0] patt_data, tx_data;
+
+wire  [        15:0] tx_byte_wc = (NUM_COLS*10)/8; // 1920*10/8
+wire  [         5:0] tx_byte_dt = DT_RAW10       ;
+
+`define PASSTHROUGH
+
+`ifdef PASSTHROUGH
+  assign tx_data = pixel_data;
+  assign tx_fv = pixel_fv;
+  assign tx_lv = pixel_lv;
+`else
+  assign tx_data = patt_data;
+  assign tx_fv = patt_fv;
+  assign tx_lv = patt_lv;
+`endif
+
+// Pattern generator
+colorbar_gen_alt #(
+  .h_active     (NUM_COLS),
+  .v_active     (NUM_ROWS),
+  .V_FRONT_PORCH(F_PORCH     ),
+  .V_SYNCH      (V_SYNCH     ),
+  .V_BACK_PORCH (V_BACK_PORCH     )
+) i_colorbar_gen (
+  .rstn(tx_init_done),
+  .clk (pixel_clk   ),
+  .data(patt_data   ),
+  .fv  (patt_fv     ),
+  .lv  (patt_lv     )
+);
+
+
+
+// One shot to increase the FV length: this appears to be required to enable the Tx P2B block to work properly.
+logic tx_fv_ext;
+one_shot #(.PERIOD(100)) i_one_shot (
+  .clk       (pixel_clk   ),
+  .rst       (~pixel_rst_n),
+  .start     (tx_fv      ),
+  .pulse_o   (           ),
+  .one_shot_o(tx_fv_ext  )
+);
+
+pixel_to_mipi #(.DT(DT_SEL), .DT_WIDTH(DT_WIDTH)) i_pixel_to_mipi (
+  .rst_n        (pixel_rst_n       ),
+  .pixel_clk    (pixel_clk        ),
+  .pixel_fv     (tx_fv | tx_fv_ext),
+  .pixel_lv     (tx_lv            ),
+  .pixel_data   (tx_data          ),
+  .byte_clk_i   (byte_clk         ),
+  .byte_clk_o   (                 ),
+  .ref_clk      (sync_clk         ),
+  .tx_pll_clk   (tx_clk           ),
+  .tx_pll_clk_90(tx_clk_90        ),
+  .pll_lock_i   (pll_lock         ),
+  .pll_lock_o   (                 ),
+  .tx_init_done (tx_init_done     ),
+  .tx_rdy       (tx_rdy           ),
+  .byte_dt      (tx_byte_dt       ),
+  .byte_wc      (tx_byte_wc       ),
+  .tx_clk_p     (diff4_p    ),
+  .tx_clk_n     (diff4_m    ),
+  .tx_d_p       ({diff5_p, diff3_p}    ),
+  .tx_d_n       ({diff5_m, diff3_m}    )
+);
+`endif
+
 endmodule
 `define nettype wire

@@ -9,18 +9,18 @@
 			<Pos>1</Pos>
 			<Vendor>Lattice</Vendor>
 			<Family>LIFCL</Family>
-			<Name>LIFCL-33U</Name>
-			<IDCode>0x010fb043</IDCode>
+			<Name>LIFCL-40</Name>
+			<IDCode>0x110f1043</IDCode>
 			<Package>All</Package>
-			<PON>LIFCL-33U</PON>
+			<PON>LIFCL-40</PON>
 			<Bypass>
 				<InstrLen>8</InstrLen>
 				<InstrVal>11111111</InstrVal>
 				<BScanLen>1</BScanLen>
 				<BScanVal>0</BScanVal>
 			</Bypass>
-			<File>../impl_no_mipi/fpga_top_som_impl_no_mipi.bit</File>
-			<FileTime>04/29/24 13:57:50</FileTime>
+			<File>../../../../priv-rtl_hyperram_controller/synth/hyper_ram_memc_fpga/impl_1/hyper_ram_memc_fpga_impl_1.bit</File>
+			<FileTime>05/08/24 14:28:44</FileTime>
 			<MemoryType>Static Random Access Memory (SRAM)</MemoryType>
 			<Operation>Fast Configuration</Operation>
 			<Option>
@@ -46,6 +46,10 @@
 	<CableOptions>
 		<CableName>USB2</CableName>
 		<PortAdd>FTUSB-0</PortAdd>
-		<USBID>tinyCLUNXdevkit A Location 0000 Serial A</USBID>
+		<USBID>Dual RS232-HS A Location 0000 Serial A</USBID>
+		<JTAGPinSetting>
+			ISPEN	HIGH;
+		</JTAGPinSetting>
+		<ISPENConnect value="TRUE"/>
 	</CableOptions>
 </ispXCF>

@@ -64,7 +64,7 @@ module fpga_top_som (
 
   // Hold design in reset under external control
   logic reset, reset_n;
-  fpga_reset u_fpga_reset (.clk(lf_clk), .reset_n_i(button_n), .reset_n_o(reset_n));
+  fpga_reset u_fpga_reset (.clk(lf_clk), .reset_n_i(1'b1), .reset_n_o(reset_n));
   assign reset = ~reset_n;
 
   // A PLL generates various frequencies for the design:

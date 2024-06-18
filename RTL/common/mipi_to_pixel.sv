@@ -69,7 +69,7 @@ module mipi_to_pixel #(
 		.clk_lp_ctrl_i    (byte_clk_i        ),
 		.reset_lp_n_i     (byte_clk_rst_n    ),
 		.reset_n_i        (rst_n             ),
-		//.reset_byte_n_i   (byte_clk_rst_n    ),
+		.reset_byte_n_i   (byte_clk_rst_n    ),
 		.reset_byte_fr_n_i(byte_clk_rst_n    ),
 		.clk_p_io         (rx_clk_p          ),
 		.clk_n_io         (rx_clk_n          ),
@@ -129,8 +129,8 @@ module mipi_to_pixel #(
 		.p_odd_o        (              ),
 		.pixcnt_c_o     (              ),
 		.pix_out_cntr_o (              ),
-		.wc_pix_sync_o  (              )
-		//.write_cycle_o  (              ),
+		.wc_pix_sync_o  (              ),
+		.write_cycle_o  (              )
 		//.mem_we_o()
 	);
 

@@ -1,20 +1,21 @@
 module wb2lmmi (
-  input  logic        clk             ,
-  input  logic        rst             ,
+  input  wire            clk             ,
+  input  wire            rst             ,
   // Wishbone bus
-  input  logic        wb_cyc, wb_stb, wb_we,
-  input  logic [17:0] wb_adr         ,
-  input  logic [31:0] wb_dat_w        ,
-  output logic        wb_ack, wb_err  ,
-  output logic [31:0] wb_dat_r        ,
+  input  wire            wb_cyc, wb_stb, wb_we,
+  input  wire     [17:0] wb_adr          ,
+  input  wire     [31:0] wb_dat_w        ,
+  output      reg        wb_ack          ,
+  output wire            wb_err          ,
+  output      reg [31:0] wb_dat_r        ,
   // LMMI bus
-  input  logic [31:0] lmmi_rdata      ,
-  input  logic        lmmi_rdata_valid,
-  input  logic        lmmi_ready      ,
-  output logic        lmmi_request    ,
-  output logic        lmmi_wr_rdn     ,
-  output logic [15:0] lmmi_offset     ,
-  output logic [31:0] lmmi_wdata
+  input  wire     [31:0] lmmi_rdata      ,
+  input  wire            lmmi_rdata_valid,
+  input  wire            lmmi_ready      ,
+  output      reg        lmmi_request    ,
+  output      reg        lmmi_wr_rdn     ,
+  output wire     [15:0] lmmi_offset     ,
+  output wire     [31:0] lmmi_wdata
 );
 
   // Translate between WB and LMMI:

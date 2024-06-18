@@ -7,13 +7,13 @@
  */
 
 module fpga_reset (
-   input  logic clk      ,
-   input  logic reset_n_i,
-   output logic reset_n_o
+   input  wire clk      ,
+   input  wire reset_n_i,
+   output reg  reset_n_o
 );
 
 
-   logic [9:0] reset_cnt;
+   logic [11:0] reset_cnt;
 
    `ifdef SIM
       initial reset_cnt = '1 - 'd4; // Shorter reset time during sims

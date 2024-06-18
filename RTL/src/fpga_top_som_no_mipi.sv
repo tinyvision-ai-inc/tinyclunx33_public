@@ -7,6 +7,7 @@
 module fpga_top_som_no_mipi (
   input  wire       button_n            , // Reset button from devboard
   input  wire       clk_2               , // Clock from PLL, usually set to 24MHz as this is a common value
+  output wire       led,
   input  wire       uart_rxd            ,
   output wire       uart_txd            ,
   inout  wire       scl                 ,
@@ -66,6 +67,7 @@ module fpga_top_som_no_mipi (
   fpga_reset u_fpga_reset (.clk(lf_clk), .reset_n_i(button_n), .reset_n_o(reset_n));
   assign reset = ~reset_n;
 
+  
   // A PLL generates various frequencies for the design:
   wire pll_lock, clk_60m, clk_os2, pixel_clk, camera_mclk, tx_clk, tx_clk_90, byte_clk;
   main_pll u_main_pll (
@@ -101,13 +103,15 @@ module fpga_top_som_no_mipi (
   );
 
 logic proc_rst, proc_rst_n;
-rst_sync proc_rst_sync (.clk(proc_clk), .async_rst_n(button_n), .sync_rst_n(proc_rst_n));
+rst_sync proc_rst_sync (.clk(proc_clk), .async_rst_n(reset_n), .sync_rst_n(proc_rst_n));
 assign proc_rst = ~proc_rst_n;
 
   wire usb_clk = clk_60m;
   logic usb_rst_n, usb_rst;
-  rst_sync usb_rst_sync (.clk(usb_clk), .async_rst_n(button_n), .sync_rst_n(usb_rst_n));
+  rst_sync usb_rst_sync (.clk(usb_clk), .async_rst_n(reset_n), .sync_rst_n(usb_rst_n));
   assign usb_rst = ~usb_rst_n;
+
+  assign led = reset;
 
 /*------------------------------------------------------------------------------
 --  Wishbone interconnect: connects the processor to the USB as well as the CSR
