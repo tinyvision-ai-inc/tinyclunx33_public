@@ -245,6 +245,8 @@ static void help(void)
 	puts("i2c_scan           - Scan for I2C devices");
 	puts("cam_00             - Selects Slot 0 Camera 0");
 	puts("cam_01             - Selects Slot 0 Camera 1");
+	puts("cam_10             - Selects Slot 1 Camera 0");
+	puts("cam_11             - Selects Slot 1 Camera 1");
 	puts("cam_test           - Test for camera presence");
 	puts("cam_init           - Initialize the camera");
 	puts("reg_test           - Test register access");
@@ -322,6 +324,10 @@ static void console_service(void)
 		sel_cam(0, 0);
 	else if(strcmp(token, "cam_01") == 0)
 		sel_cam(0, 1);
+	else if(strcmp(token, "cam_10") == 0)
+		sel_cam(1, 0);
+	else if(strcmp(token, "cam_11") == 0)
+		sel_cam(1, 1);
 	else if(strcmp(token, "cam_test") == 0)
 		SensorI2cBusTest();
 	else if(strcmp(token, "cam_init") == 0)
