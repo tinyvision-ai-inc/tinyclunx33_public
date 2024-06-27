@@ -14,6 +14,7 @@
 #include <libbase/console.h>
 #include <generated/csr.h>
 
+#include <libbase/i2c.h>
 #include "i2c_init.h"
 #include "imx219.h"
 #include "common.h"
@@ -24,13 +25,22 @@
 #define I2C_MUX_ADDR 0x70
 
 static void i2c_init(void) {
-	//printf("Starting to initialize the PLL at 0x%x\n\r", PLL_I2C_ADDR);
-	for (int i=0; i<NUM_PLL_INIT; i+=2) {
-		//printf("Reg: 0x%lx = 0x%lx\n\r", pll_init_table[i], pll_init_table[i+1]);
-		uint8_t val = pll_init_table[i+1];
-		i2c_write(PLL_I2C_ADDR, pll_init_table[i], &val, 1, 1);
+	uint8_t val = 0xff;
+	i2c_write(PLL_I2C_ADDR, 0x3, &val, 1, 1); // Disable all clock outputs
+	for (int i=16; i<=23; i++) { 
+		val = 0x80;
+		i2c_write(PLL_I2C_ADDR, i, &val, 1, 1); // Power down all output drivers
 	}
-
+	
+	for (int i=0; i<SI5351A_REVB_REG_CONFIG_NUM_REGS; i++){
+		val = si5351a_revb_registers[i].value;
+		i2c_write(PLL_I2C_ADDR, si5351a_revb_registers[i].address, &val, 1, 1);
+	}
+	
+	val = 0xAC;
+	i2c_write(PLL_I2C_ADDR, 177, &val, 1, 1); // Apply PLLA/B reset
+	val = 0x0;
+	i2c_write(PLL_I2C_ADDR, 0x3, &val, 1, 1); // Enable all clock outputs
 }
 
 static void i2c_scan(void) {
