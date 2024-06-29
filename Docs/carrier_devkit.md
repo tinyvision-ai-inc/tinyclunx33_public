@@ -80,11 +80,11 @@ Then, pressing "Enter" should give an access to the Zephyr shell, displaying onl
 
 ## Revisions
 
-| Rev | Distributed  | Debug Plug | Label on Board           | SYZYGY        | Sch       | Asm       |
-|-----|--------------|------------|--------------------------|---------------|-----------|-----------|
-| v1  | never        | micro USB  | none                     | incompatible  | [pdf][s1] | [pdf][a1] |
-| v2  | early users  | USB-C      | "tiny SoM Developer Kit" | incompatible  | [pdf][s2] | [pdf][a2] |
-| v3  | not yet      | USB-C      | TBD                      | STD v1.1.1    | [pdf][s3] | [pdf][a3] |
+| Rev | Distributed  | Debug Plug | Label on Board                | SYZYGY        | Sch       | Asm       |
+|-----|--------------|------------|-------------------------------|---------------|-----------|-----------|
+| v1  | never        | micro USB  | none                          | incompatible  | [pdf][s1] | [pdf][a1] |
+| v2  | early users  | USB-C      | "tiny SoM Developer Kit"      | incompatible  | [pdf][s2] | [pdf][a2] |
+| v3  | early users  | USB-C      | "tiny SoM Developer Kit v2.0" | STD v1.1.1    | [pdf][s3] | [pdf][a3] |
 
 [s1]: NXU_devkit_v1.0_Schematic.pdf
 [a1]: NXU_devkit_v1.0_Assembly.pdf

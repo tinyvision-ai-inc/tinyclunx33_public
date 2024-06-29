@@ -17,14 +17,24 @@ INPUT = \
 HTML_EXTRA_FILES  = \
 ../Hardware/SoM/v1/tinyCLUNX33_v1.0_Schematic.pdf \
 ../Hardware/SoM/v1/tinyCLUNX33_v1.0_Assembly.pdf \
+../Hardware/tinyCamera/v1/tinyCamera_v1.0_Assembly.pdf \
+../Hardware/tinyCamera/v1/tinyCamera_v1.0_Schematic.pdf \
 ../Hardware/SoM/v2/tinyCLUNX33_v2.0_Schematic.pdf \
 ../Hardware/SoM/v2/tinyCLUNX33_v2.0_Assembly.pdf \
 ../Hardware/Devkit/v1/NXU_devkit_v1.0_Schematic.pdf \
 ../Hardware/Devkit/v1/NXU_devkit_v1.0_Assembly.pdf \
 ../Hardware/Devkit/v2/NXU_devkit_v2.0_Schematic.pdf \
 ../Hardware/Devkit/v2/NXU_devkit_v2.0_Assembly.pdf \
-../Hardware/tinyCamera/v1/tinyCamera_v1.0_Assembly.pdf \
-../Hardware/tinyCamera/v1/tinyCamera_v1.0_Schematic.pdf
+../Hardware/Devkit/v3/NXU_devkit_v3.0_Schematic.pdf \
+../Hardware/Devkit/v3/NXU_devkit_v3.0_Assembly.pdf \
+../Hardware/SoM/v3/Compute/tinyCLUNX33-A_v3.0_Schematic.pdf \
+../Hardware/SoM/v3/Compute/tinyCLUNX33-A_v3.0_Assembly.pdf \
+../Hardware/SoM/v3/Connectivity/tinyCLUNX33-B_v3.0_Schematic.pdf \
+../Hardware/SoM/v3/Connectivity/tinyCLUNX33-B_v3.0_Assembly.pdf \
+../Hardware/RPi_adapter/MIPI_inout_Syzygy/MIPI_inout_Syzygy_v3.0_Schematic.pdf \
+../Hardware/RPi_adapter/MIPI_inout_Syzygy/MIPI_inout_Syzygy_v3.0_Assembly.pdf \
+../Hardware/RPi_adapter/2X_MIPI_Input_Syzygy/2X_MIPI_Input_Syzygy_v3.0_Schematic.pdf \
+../Hardware/RPi_adapter/2X_MIPI_Input_Syzygy/2X_MIPI_Input_Syzygy_v3.0_Assembly.pdf
 
 HTML_EXTRA_STYLESHEET = \
 doxygen-awesome-css/doxygen-awesome.css \
