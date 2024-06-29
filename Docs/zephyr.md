@@ -72,12 +72,15 @@ For transparency, here is how tinyVision.ai performs a new [release](https://git
 2. Once all the examples work, run [`blobify.sh`](https://github.com/tinyvision-ai-inc/zephyr_private/blob/zephyr_private/drivers/usb/udc/blobify.sh)
    to obfuscate the function names from [`udc_usb23blob.c`](https://github.com/tinyvision-ai-inc/zephyr_internal/blob/zephyr_internal/drivers/usb/udc/udc_usb23blob.c).
 
-3. Build any example another time to generate [`udc_usb23blob.c.obj`](https://github.com/tinyvision-ai-inc/zephyr_private/blob/zephyr_private/drivers/usb/udc/udc_usb23blob.c.obj).
+3. Build any example another time to generate [`udc_usb23blob.c.obj`](https://github.com/tinyvision-ai-inc/zephyr_private/blob/zephyr_private/drivers/usb/udc/udc_usb23blob.c.obj)
+   and commit it on the `zephyr_internal_blob` branch.
 
-4. Remove the `udc_usb23blob.c` file and commit the result into the `zephyr_private` branch,
+4. Import the content of the `zephyr_internal_blob` branch onto `zephyr_private` with `git checkout zephyr_private` then `git checkout --no-overlay zephyr_internal_blob`.
+
+5. Remove the `udc_usb23blob.c` file and commit the result into the `zephyr_private` branch,
    with a message indicating which commit of `zephyr_internal` this came from.
 
-5. Re-test and re-build each example using the `zephyr_private` branch, and publish the generated files.
+6. Re-test and re-build each example using the `zephyr_private` branch, and publish the generated files.
 
 
 ## Troubleshooting
