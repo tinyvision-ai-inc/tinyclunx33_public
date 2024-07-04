@@ -17,10 +17,10 @@ Features:
 - FTDI chip for JTAG, Flash SPI, UART access over USB
 
 Connectors:
-- 2 × USB-C connectors for the FPGA 5 Gbit/s interfaces and FTDI debug
-- 2 × QSE expansion connectors for adapter boards (RPi FPC Camera, custom...)
-- 1 × SMA connector for the high-speed clock export
-- 4 × headers for JTAG, SPI flash, I2C, GPIO
+- 2 - USB-C connectors for the FPGA 5 Gbit/s interfaces and FTDI debug
+- 2 - QSE expansion connectors for adapter boards (RPi FPC Camera, custom...)
+- 1 - SMA connector for the high-speed clock export
+- 4 - headers for JTAG, SPI flash, I2C, GPIO
 - Extra headers for EN signals and power rails
 
 Mechanical:
@@ -42,24 +42,9 @@ Linux terminal, Mac OSX terminal, Windows with
 [Git Bash](https://git-scm.com/download/win) or
 [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build)'s MinGW.
 
-```bash
-# Latest number from https://github.com/tinyvision-ai-inc/tinyCLUNX33/releases
-gw=v1.2.3
+Or alternatively, using the [Radiant Programmer](https://tinyclunx33.tinyvision.ai/md_som_flash.html#autotoc_md25) is also possible.
 
-# Latest number from https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases
-fw=v1.2.3
-
-# check that the QE mode is "enabled"
-ecpprog -tv 2>&1 | grep QE:
-
-# Download both releases
-curl -LO https://github.com/tinyvision-ai-inc/tinyCLUNX33/releases/download/$gw/tinyclunx33_rtl_reference_design.$gw.bit
-curl -LO https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/download/v0.0/tinyclunx33_zephyr_example_v0.0.bin
-
-# Program both releases to the FPGA Flash
-ecpprog -o 0x000000 tinyclunx33_rtl_reference_design.v0.1.bit
-ecpprog -o 0x100000 tinyclunx33_zephyr_example_v0.0.bin
-```
+Follow the install instructions from the [latest release page](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/latest).
 
 Then, unplug all USB cables to completely power off the board.
 Then, connect to the board using a serial console viewer, such as minicom, picocom,
@@ -80,18 +65,21 @@ Then, pressing "Enter" should give an access to the Zephyr shell, displaying onl
 
 ## Revisions
 
-| Rev | Distributed  | Debug Plug | Label on Board                | SYZYGY        | Sch       | Asm       |
-|-----|--------------|------------|-------------------------------|---------------|-----------|-----------|
-| v1  | never        | micro USB  | none                          | incompatible  | [pdf][s1] | [pdf][a1] |
-| v2  | early users  | USB-C      | "tiny SoM Developer Kit"      | incompatible  | [pdf][s2] | [pdf][a2] |
-| v3  | early users  | USB-C      | "tiny SoM Developer Kit v2.0" | STD v1.1.1    | [pdf][s3] | [pdf][a3] |
+| Name                | Label on Board               | SoM  | Adapter | Sch       | Asm       | Img       |
+|---------------------|------------------------------|------|---------|-----------|-----------|-----------|
+| DevkitRev0 (EOL)    | none                         | Rev0 | Custom  | [pdf][s0] | [pdf][a0] | [png][i0] |
+| DevkitRev1 (EOL)    | tiny SoM Developer Kit       | Rev1 | Custom  | [pdf][s1] | [pdf][a1] | [png][i1] |
+| DevkitRev2 (Active) | tiny SoM Developer Kit Rev 2 | Rev2 | SYZYGY  | [pdf][s2] | [pdf][a2] | [png][i2] |
 
-[s1]: NXU_devkit_v1.0_Schematic.pdf
-[a1]: NXU_devkit_v1.0_Assembly.pdf
-[s2]: NXU_devkit_v2.0_Schematic.pdf
-[a2]: NXU_devkit_v2.0_Assembly.pdf
-[s3]: NXU_devkit_v3.0_Schematic.pdf
-[a3]: NXU_devkit_v3.0_Assembly.pdf
+[s0]: tinyCLUNX33_DevkitRev0_Schematic.pdf
+[a0]: tinyCLUNX33_DevkitRev0_Assembly.pdf
+[i0]: tinyCLUNX33_DevkitRev0_Preview.png
+[s1]: tinyCLUNX33_DevkitRev1_Schematic.pdf
+[a1]: tinyCLUNX33_DevkitRev1_Assembly.pdf
+[i1]: tinyCLUNX33_DevkitRev1_Preview.png
+[s2]: tinyCLUNX33_DevkitRev2_Schematic.pdf
+[a2]: tinyCLUNX33_DevkitRev2_Assembly.pdf
+[i2]: tinyCLUNX33_DevkitRev2_Preview.png
 
 
 ## Parts featured
