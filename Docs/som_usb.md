@@ -3,7 +3,7 @@
 The LIFCL-33U FPGA part of the CrosslinkU-NX series contains a hard USB3 core
 capable of 5 Gbit/s transfers.
 
-![](images/som_usb_architecture.drawio.png)
+![](images/tinyclunx33_som_usb_architecture.drawio.png)
 
 
 ## Hardware integration
@@ -28,7 +28,7 @@ ignoring the extra Type-C functions.
 
 A CPU core is preferred to manage the Lattice USB23 register interfae.
 
-![](images/som_usb_rtl_integration.drawio.png)
+![](images/tinyclunx33_som_usb_rtl_integration.drawio.png)
 
 The data flow from the source to the USB bus is:
 
