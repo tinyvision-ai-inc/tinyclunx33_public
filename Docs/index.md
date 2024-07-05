@@ -1,6 +1,6 @@
 # tinyCLUNX33
 
-[tinyVision.ai](https://tinyvision.ai/) |
+[Order](https://tinyvision.ai/products/mipi-to-usb-connector-tinyclunx33-system-on-module) |
 [Hardware](https://github.com/tinyvision-ai-inc/tinyCLUNX33/tree/main/Hardware) |
 [Firmware](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example) |
 [Schematics](boards.md) |
