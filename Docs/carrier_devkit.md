@@ -1,13 +1,10 @@
 # tinyCLUNX33 devkit
 
-[schematics](tinyCLUNX33_devkit_Rev2_schematic.pdf) |
-[Assembly](tinyCLUNX33_devkit_Rev2_assembly.pdf)
-
 The **Devkit** is a carrier for the tinyCLUNX33 SoM that eases product
 development and debugging:
 A development kit usable as factory programming/test rig.
 
-![](images/tinyclunx33_usb_to_mipi_devkit.png)
+![](tinyclunx33_usb_to_mipi_devkit.png)
 
 Features:
 - All SoM pins exposed, additional probing and voltage pins
@@ -31,8 +28,6 @@ Mechanical:
 
 ## Quick Start
 
-> **This only applies to the latest version of the [Devkit](carrier_devkit.md) and SoM**
-
 These are the instructions to be able to quickly test the
 hardware, gateware, and firmware.
 
@@ -40,11 +35,11 @@ This assumes a command line environment:
 Linux terminal, Mac OSX terminal, Windows with
 [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or
 [Git Bash](https://git-scm.com/download/win) or
-[OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build)'s MinGW.
+[OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build)'s MinGW or
+[Radiant Programmer](https://tinyclunx33.tinyvision.ai/md_som_flash.html#autotoc_md25).
 
-Or alternatively, using the [Radiant Programmer](https://tinyclunx33.tinyvision.ai/md_som_flash.html#autotoc_md25) is also possible.
-
-Follow the install instructions from the [latest release page](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/latest).
+Follow the install instructions from the
+[latest release page](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/latest).
 
 Then, unplug all USB cables to completely power off the board.
 Then, connect to the board using a serial console viewer, such as minicom, picocom,
@@ -52,34 +47,15 @@ Then, connect to the board using a serial console viewer, such as minicom, picoc
 [teraterm](https://sourceforge.net/projects/tera-term/),
 or other tool of your preference.
 
-The baud rate is `115200`, and all other parameters might be left to default:
+The baud rate depends on the [RTL version]() selected: either `153600` or `192000`, and all other parameters might be left to default.
 
-The serial interface is the 2nd of the FTDI, for instance, on Linux, instead of `/dev/ttyUSB0`, it would be `/dev/ttyUSB1`:
+The serial interface is the 2nd of the FTDI, for instance, on Linux, if the first interface of the FTDI is `/dev/ttyUSB0`, the logs would appear on `/dev/ttyUSB1`:
 
 ```
-picocom -b 115200 /dev/ttyUSB1
+picocom --baud 153600 /dev/ttyUSB1
 ```
 
 Then, pressing "Enter" should give an access to the Zephyr shell, displaying only `uart:$`.
-
-
-## Revisions
-
-| Name                | Label on Board               | SoM  | Adapter | Sch       | Asm       | Img       |
-|---------------------|------------------------------|------|---------|-----------|-----------|-----------|
-| DevkitRev0 (EOL)    | none                         | Rev0 | Custom  | [pdf][s0] | [pdf][a0] | [png][i0] |
-| DevkitRev1 (EOL)    | tiny SoM Developer Kit       | Rev1 | Custom  | [pdf][s1] | [pdf][a1] | [png][i1] |
-| DevkitRev2 (Active) | tiny SoM Developer Kit Rev 2 | Rev2 | SYZYGY  | [pdf][s2] | [pdf][a2] | [png][i2] |
-
-[s0]: tinyCLUNX33_DevkitRev0_Schematic.pdf
-[a0]: tinyCLUNX33_DevkitRev0_Assembly.pdf
-[i0]: tinyCLUNX33_DevkitRev0_Preview.png
-[s1]: tinyCLUNX33_DevkitRev1_Schematic.pdf
-[a1]: tinyCLUNX33_DevkitRev1_Assembly.pdf
-[i1]: tinyCLUNX33_DevkitRev1_Preview.png
-[s2]: tinyCLUNX33_DevkitRev2_Schematic.pdf
-[a2]: tinyCLUNX33_DevkitRev2_Assembly.pdf
-[i2]: tinyCLUNX33_DevkitRev2_Preview.png
 
 
 ## Parts featured

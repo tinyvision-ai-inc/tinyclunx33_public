@@ -30,8 +30,9 @@ HTML_EXTRA_FILES = \
 ../Hardware/tinyCLUNX33_SoM_compute/Rev1/tinyCLUNX33_SoM_compute_Rev1_assembly.pdf \
 ../Hardware/tinyCLUNX33_SoM_compute/Rev2/tinyCLUNX33_SoM_compute_Rev2_assembly.pdf \
 ../Hardware/tinyCLUNX33_SoM_compute/Rev2/tinyCLUNX33_SoM_compute_Rev2_schematic.pdf \
-../Hardware/tinyCLUNX33_SoM_connectivity/tinyCLUNX33_SoM_connectivity_Rev2_Schematic.pdf \
-../Hardware/tinyCLUNX33_SoM_connectivity/tinyCLUNX33_SoM_connectivity_Rev2_Assembly.pdf \
+../Hardware/tinyCLUNX33_SoM_connectivity/tinyCLUNX33_SoM_connectivity_Rev2_assembly.pdf \
+../Hardware/tinyCLUNX33_SoM_connectivity/Rev2/tinyCLUNX33_SoM_connectivity_Rev2_photo_front.png \
+../Hardware/tinyCLUNX33_SoM_connectivity/tinyCLUNX33_SoM_connectivity_Rev2_schematic.pdf \
 ../Hardware/tinyCLUNX33_adapter_MIPI_IO_to_QSE/Rev3/tinyCLUNX33_adapter_MIPI_IO_to_QSE_Rev3_assembly.pdf \
 ../Hardware/tinyCLUNX33_adapter_MIPI_IO_to_QSE/Rev3/tinyCLUNX33_adapter_MIPI_IO_to_QSE_Rev3_schematic.pdf \
 ../Hardware/tinyCLUNX33_adapter_MIPI_IO_to_QSE/Rev2/tinyCLUNX33_adapter_MIPI_IO_to_QSE_Rev2_assembly.pdf \

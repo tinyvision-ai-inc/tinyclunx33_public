@@ -1,7 +1,4 @@
-# tinyCLUNX33 reference design: dual MIPI to USB
-
-[Schematics](tinyCamera_v1.0_Schematic.pdf) |
-[Assembly](tinyCamera_v1.0_Assembly.pdf)
+# tinyCLUNX33 RD: dual MIPI to USB
 
 This is a reference hardware design to show how it is possible to build a compact camera device
 USB3 camera device: turning the tinyCLUNX33 SoM into a product.
@@ -28,7 +25,7 @@ Mechanical:
 
 ## Pinout
 
-TODO: switch to v2 and document the pinout as tables
+TODO: document the pinout as tables once
 
 ## Parts featured
 
