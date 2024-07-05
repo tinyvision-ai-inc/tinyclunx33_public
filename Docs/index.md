@@ -1,10 +1,9 @@
 # tinyCLUNX33
 
-[Doc](https://tinyclunx33.tinyvision.ai/) |
+[tinyVision.ai](https://tinyvision.ai/) |
 [Hardware](https://github.com/tinyvision-ai-inc/tinyCLUNX33/tree/main/Hardware) |
 [Firmware](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example) |
-[Schematic](tinyCLUNX33_v2.0_Schematic.pdf) |
-[Assembly](tinyCLUNX33_v2.0_Assembly.pdf) |
+[Schematics](boards.md) |
 [Discord](https://discord.gg/yjVc6P3sCt)
 
 ![](images/tinyclunx33_som_v2.png)

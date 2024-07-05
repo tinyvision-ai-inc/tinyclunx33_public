@@ -86,7 +86,7 @@ enumeration and subsequent transfer of data with the USB endpoints.
 ## Zephyr integration
 
 A
-[Zephyr driver](https://github.com/tinyvision-ai-inc/zephyr/blob/tinyclunx33/drivers/usb/udc/udc_usb23.c)
+[Zephyr driver](https://github.com/tinyvision-ai-inc/zephyr_private/blob/zephyr_private/drivers/usb/udc/udc_usb23.c)
 (private repository for now) for the Lattice USB23 core was written.
 
 It can be selected at build-time like any other USB driver in Zephyr.
