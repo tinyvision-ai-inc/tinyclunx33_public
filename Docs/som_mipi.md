@@ -58,4 +58,4 @@ TODO: evoke the UVC configuration possible/required to do once UVC is there
   [LIFCL-33U-8CTG104CAS](https://www.latticesemi.com/Products/FPGAandCPLD/CrossLink-NX)
   FPGA (search for 33U in this page).
 
-![](images/som_mipi_schematic.png)
+![](images/tinyclunx33_som_mipi_schematic.png)

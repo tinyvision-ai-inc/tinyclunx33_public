@@ -115,4 +115,4 @@ An example Zephyr firmware with the USB core enabled is provided as example:
   [USB23](https://www.latticesemi.com/products/designsoftwareandip/intellectualproperty/ipcore/ipcores05/usb-2_0-3_2-ip-core)
   Physical core for USB2 and USB3 at 5 Gbit/s
 
-![](images/som_usb_schematic.png)
+![](images/tinyclunx33_som_usb_schematic.png)

@@ -81,4 +81,4 @@ TODO: Describe the pinctrl DeviceTree integration.
 - Texas Instrument [TLV707](https://www.ti.com/lit/ds/symlink/tlv707.pdf) LDO
 - Texas Instrument [TPS7A02](https://www.ti.com/lit/ds/symlink/tps7a02.pdf) nanopower LDO
 
-![](images/som_power_schematic.png)
+![](images/tinyclunx33_som_power_schematic.png)

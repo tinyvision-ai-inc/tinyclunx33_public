@@ -7,7 +7,7 @@
 [Assembly](tinyCLUNX33_v2.0_Assembly.pdf) |
 [Discord](https://discord.gg/yjVc6P3sCt)
 
-![](images/som_v2.png)
+![](images/tinyclunx33_som_v2.png)
 
 25.4mm x 25.4mm x 4.5mm module, commercial temperature grade: 0°C to 85°C
 

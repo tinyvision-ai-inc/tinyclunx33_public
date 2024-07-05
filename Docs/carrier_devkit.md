@@ -1,13 +1,13 @@
-# Carrier Devkit
+# tinyCLUNX33 devkit
 
-[Schematics](NXU_devkit_v2.0_Schematic.pdf) |
-[Assembly](NXU_devkit_v2.0_Assembly.pdf)
+[schematics](tinyCLUNX33_devkit_Rev2_schematic.pdf) |
+[Assembly](tinyCLUNX33_devkit_Rev2_assembly.pdf)
 
 The **Devkit** is a carrier for the tinyCLUNX33 SoM that eases product
 development and debugging:
 A development kit usable as factory programming/test rig.
 
-![](images/carrier_devkit.png)
+![](images/tinyclunx33_usb_to_mipi_devkit.png)
 
 Features:
 - All SoM pins exposed, additional probing and voltage pins

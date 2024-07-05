@@ -8,7 +8,7 @@ On the [RTL Reference Design](rtl_reference_design.md) of the FPGA, there is the
 This allows to run a firmware, and an RTOS such as [Zephyr](https://docs.zephyrproject.org/) with an USB stack and USB drivers.
 The firmware is loaded into the flash after the FPGA image, and the RISC-V soft CPU starts it.
 
-![](images/zephyr_architecture.drawio.png)
+![](images/tinyclunx33_zephyr_architecture.drawio.png)
 
 
 ## Features

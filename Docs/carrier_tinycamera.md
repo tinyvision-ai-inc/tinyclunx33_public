@@ -1,13 +1,12 @@
-# Carrier tinyCamera
+# tinyCLUNX33 reference design: dual MIPI to USB
 
 [Schematics](tinyCamera_v1.0_Schematic.pdf) |
 [Assembly](tinyCamera_v1.0_Assembly.pdf)
 
-The **tinyCamera** is a carrier for the tinyCLUNX33 SoM implementing an
-USB3 camera device:
-Example hardware turning the SoM into a product.
+This is a reference hardware design to show how it is possible to build a compact camera device
+USB3 camera device: turning the tinyCLUNX33 SoM into a product.
 
-![](images/carrier_tinycamera.png)
+![](images/tinyclunx33_reference_design_dual_mipi_to_usb.png)
 
 Features:
 - All SoM pins exposed, additional probing and voltage pins
@@ -45,4 +44,4 @@ TODO: switch to v2 and document the pinout as tables
   [PI5USB30213A](https://www.diodes.com/assets/Databriefs/PI5USB30213A-Product-Brief.pdf)
   Type-C Dual Role Port Controller
 
-![](images/carrier_tinycamera_schematic.png)
+![](images/tinyclunx33_reference_design_dual_mipi_to_usb_schematic.png)

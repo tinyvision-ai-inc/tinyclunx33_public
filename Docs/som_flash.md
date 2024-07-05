@@ -231,4 +231,4 @@ is another device containing an FTDI connected to your workstation?
   [W25Q128JW_DTR](https://www.winbond.com/hq/support/documentation/downloadV2022.jsp?__locale=en&xmlPath=/support/resources/.content/item/DA00-W25Q128JW_1.html&level=1)
   QSPI DTR flash
 
-![](images/som_flash_schematic.png)
+![](images/tinyclunx33_som_flash_schematic.png)
