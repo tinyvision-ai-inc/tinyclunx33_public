@@ -69,7 +69,7 @@ for SoM Rev2 | `tiny SoM Developer Kit v2.0`
 ---
 
 
-## tinyCLUNX33 adapter MIPI IO to QSE
+## tinyCLUNX33 adapter MIPI I/O to QSE
 
 ---
 
