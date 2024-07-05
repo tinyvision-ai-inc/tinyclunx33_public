@@ -19,6 +19,9 @@ for SoM Rev1 | `tinyCLUNX33`
 [Schematic](tinyCLUNX33_SoM_compute_Rev2_schematic.pdf) |
 for SoM Rev2 | `tinyCLUNX33-A`
 
+![](tinyCLUNX33_SoM_compute_Rev2_photo_front.jpg)
+![](tinyCLUNX33_SoM_compute_Rev2_photo_back.jpg)
+
 ---
 
 
@@ -31,7 +34,8 @@ for SoM Rev2 | `tinyCLUNX33-A`
 [Schematic](tinyCLUNX33_SoM_connectivity_Rev2_schematic.pdf) |
 for SoM Rev2 | `tinyCLUNX33-B`
 
-![](tinyCLUNX33_SoM_connectivity_Rev2_photo_front.png)
+![](tinyCLUNX33_SoM_connectivity_Rev2_photo_front.jpg)
+![](tinyCLUNX33_SoM_connectivity_Rev2_photo_back.jpg)
 
 ---
 
@@ -79,7 +83,8 @@ for SoM Rev1 | `tinyDualRPi MIPI I/O Rev2`
 for SoM Rev2 | `tinyDualRPi MIPI I/O Rev3` |
 [Syzygy](https://syzygyfpga.io/) compatible
 
-This adapter connects the caerr as MIPI can be connected.
+![](tinyCLUNX33_adapter_MIPI_IO_to_QSE_Rev3_photo_front.jpg)
+![](tinyCLUNX33_adapter_MIPI_IO_to_QSE_Rev3_photo_back.jpg)
 
 ---
 
@@ -103,5 +108,8 @@ for SoM Rev1 | `tinyDualRPi adapter Rev2`
 [Schematics](tinyCLUNX33_adapter_dual_MIPI_in_to_QSE_Rev3_schematic.pdf) |
 for SoM Rev2 | `tinyDualRPi adapter Rev3` |
 [Syzygy](https://syzygyfpga.io/) compatible
+
+![](tinyCLUNX33_adapter_dual_MIPI_in_to_QSE_Rev3_photo_front.jpg)
+![](tinyCLUNX33_adapter_dual_MIPI_in_to_QSE_Rev3_photo_back.jpg)
 
 ---
