@@ -225,6 +225,19 @@ If not signal is visible at all, something might have gone wrong with the FTDI:
 is another device containing an FTDI connected to your workstation?
 
 
+### On Windows, `ecpprog` cannot find the FTDI USB device
+
+Because `ecpprog` was written for an UNIX-like system such as Linux or MacOS,
+getting it to work on Windows requires to force the device to be exposed to software.
+
+This is done by changing the driver that Windows uses, via one of these programs:
+
+- [Zadig](https://zadig.akeo.ie/) documented [here](https://github.com/pbatard/libwdi/wiki/Zadig),
+  select the WinUSB or libusb0.sys or LibusbK driver
+- [UsbDriverTool](https://visualgdb.com/UsbDriverTool/) documented [here](https://visualgdb.com/tutorials/android/usbdebug/),
+  select the Libusb or WinUSB driver.
+
+
 ## Parts featured
 
 - Winbond
