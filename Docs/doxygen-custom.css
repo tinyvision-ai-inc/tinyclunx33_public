@@ -1,0 +1,3 @@
+img.inline {
+    width: calc(50% - 10px);
+}

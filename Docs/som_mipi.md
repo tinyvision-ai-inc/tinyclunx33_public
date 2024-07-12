@@ -4,7 +4,7 @@ The differential pairs of the CrossLinkU-NX FPGA can be combined together into
 MIPI interfaces. These MIPI image signals can further be processed by the FPGA
 and be transferred through to USB 5 Gbit/s or another interface of any kind.
 
-![](images/som_mipi_architecture.drawio.png)
+![](images/tinyclunx33_som_mipi_architecture.drawio.png)
 
 On the Compute SoM variant, some differential pairs are used for the external
 RAM, absent from the Connectivity SoM variant, leading to 6 or 14 differential
@@ -58,4 +58,4 @@ TODO: evoke the UVC configuration possible/required to do once UVC is there
   [LIFCL-33U-8CTG104CAS](https://www.latticesemi.com/Products/FPGAandCPLD/CrossLink-NX)
   FPGA (search for 33U in this page).
 
-![](images/som_mipi_schematic.png)
+![](images/tinyclunx33_som_mipi_schematic.png)

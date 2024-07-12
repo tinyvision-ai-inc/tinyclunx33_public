@@ -3,7 +3,7 @@
 The SoM uses a single source of power at 5V, and exports several power rails
 at lower voltage using LDO and Buck converters.
 
-![](images/som_power_architecture.drawio.png)
+![](images/tinyclunx33_som_power_architecture.drawio.png)
 
 The SoM supports turning all power rails off, except a single Always ON (AON)
 rail, only powering one power domain of the FPGA.
@@ -77,8 +77,8 @@ TODO: Describe the pinctrl DeviceTree integration.
 ## Parts featured
 
 - Diodes [AP61102](https://www.diodes.com/assets/Datasheets/AP61100-AP61102.pdf) buck converter
-- Diodes [AP2120N](https://www.diodes.com/assets/Datasheets/AP2120.pdf) LDO
+- Diodes [AP2120N](https://www.diodes.com/assets/Datasheets/products_inactive_data/AP2120.pdf) LDO
 - Texas Instrument [TLV707](https://www.ti.com/lit/ds/symlink/tlv707.pdf) LDO
 - Texas Instrument [TPS7A02](https://www.ti.com/lit/ds/symlink/tps7a02.pdf) nanopower LDO
 
-![](images/som_power_schematic.png)
+![](images/tinyclunx33_som_power_schematic.png)

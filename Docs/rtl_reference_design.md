@@ -64,7 +64,7 @@ Internal Wishbone cores:
 - **Main CPU RAM** controller, memory-mapped to the Wishbone bus for use by the CPU and its firmware.
 
 - **qSPI DTR Flash** controller, memory-mapped to the wishbone bus so that the CPU
-  can execute its firmware from flash (XIP). See [SoC Flash](soc_flash.md).
+  can execute its firmware from flash (XIP). See [SoC Flash](som_flash.md).
 
 - **Timer** controller, used as systick by the Zephyr RTOS.
 

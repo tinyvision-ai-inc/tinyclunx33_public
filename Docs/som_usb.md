@@ -3,7 +3,7 @@
 The LIFCL-33U FPGA part of the CrosslinkU-NX series contains a hard USB3 core
 capable of 5 Gbit/s transfers.
 
-![](images/som_usb_architecture.drawio.png)
+![](images/tinyclunx33_som_usb_architecture.drawio.png)
 
 
 ## Hardware integration
@@ -28,7 +28,7 @@ ignoring the extra Type-C functions.
 
 A CPU core is preferred to manage the Lattice USB23 register interfae.
 
-![](images/som_usb_rtl_integration.drawio.png)
+![](images/tinyclunx33_som_usb_rtl_integration.drawio.png)
 
 The data flow from the source to the USB bus is:
 
@@ -86,7 +86,7 @@ enumeration and subsequent transfer of data with the USB endpoints.
 ## Zephyr integration
 
 A
-[Zephyr driver](https://github.com/tinyvision-ai-inc/zephyr/blob/tinyclunx33/drivers/usb/udc/udc_usb23.c)
+[Zephyr driver](https://github.com/tinyvision-ai-inc/zephyr_private/blob/zephyr_private/drivers/usb/udc/udc_usb23.c)
 (private repository for now) for the Lattice USB23 core was written.
 
 It can be selected at build-time like any other USB driver in Zephyr.
@@ -115,4 +115,4 @@ An example Zephyr firmware with the USB core enabled is provided as example:
   [USB23](https://www.latticesemi.com/products/designsoftwareandip/intellectualproperty/ipcore/ipcores05/usb-2_0-3_2-ip-core)
   Physical core for USB2 and USB3 at 5 Gbit/s
 
-![](images/som_usb_schematic.png)
+![](images/tinyclunx33_som_usb_schematic.png)

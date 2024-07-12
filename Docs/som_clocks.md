@@ -7,7 +7,7 @@ An external Si5351A PLL is responsible for generating the differential USB3
 reference clock, and has one remaining clock signals free to use.
 Clocks are synthesized out of a 25 MHz Crystal Oscillator on the SoM.
 
-![](images/som_clock_tree.drawio.png)
+![](images/tinyclunx33_som_clock_tree.drawio.png)
 
 The Si5351 PLL can be configured over I2C.
 Skyworks provides a generator tool to build the table of I2C registers address
@@ -81,4 +81,4 @@ TODO: Write a driver to initialize the PLL and control free clock signal.
   [TCA9509](https://www.ti.com/lit/ds/symlink/tca9509.pdf)
   I2C level shifter
 
-![](images/som_clocks_schematic.png)
+![](images/tinyclunx33_som_clocks_schematic.png)

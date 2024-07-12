@@ -1,13 +1,12 @@
 # tinyCLUNX33
 
-[Doc](https://tinyclunx33.tinyvision.ai/) |
+[Order](https://tinyvision.ai/products/mipi-to-usb-connector-tinyclunx33-system-on-module) |
 [Hardware](https://github.com/tinyvision-ai-inc/tinyCLUNX33/tree/main/Hardware) |
 [Firmware](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example) |
-[Schematic](tinyCLUNX33_v2.0_Schematic.pdf) |
-[Assembly](tinyCLUNX33_v2.0_Assembly.pdf) |
+[Schematics](boards.md) |
 [Discord](https://discord.gg/yjVc6P3sCt)
 
-![](images/som_v2.png)
+![](images/tinyclunx33_som_v2.png)
 
 25.4mm x 25.4mm x 4.5mm module, commercial temperature grade: 0°C to 85°C
 
@@ -30,23 +29,8 @@ Firmware/RTL:
 - No code, graphical RTL generator with large # of IP blocks (under development)
 
 Development boards:
-- devkit for programming/debug
-- tinyCamera board as a basis of a compact camera device
+- [devkit] for programming/debug
 - extra adapter boards for various camera connectors and expansion
+- reference designs such as a basis of a compact camera device
 
- ![](images/tinyclunx33_block_diagram.drawio.png)
-
-Hardware revisions:
-
-| Rev | Distributed | Sch       | Asm       |
-|-----|-------------|-----------|-----------|
-| v1  | never       | [pdf][s1] | [pdf][a1] |
-| v2  | early users | [pdf][s2] | [pdf][a2] |
-| v3  | not yet     | [pdf][s3] | [pdf][a3] |
-
-[s1]: tinyCLUNX33_v1.0_Schematic.pdf
-[a1]: tinyCLUNX33_v1.0_Assembly.pdf
-[s2]: tinyCLUNX33_v2.0_Schematic.pdf
-[a2]: tinyCLUNX33_v2.0_Assembly.pdf
-[s3]: tinyCLUNX33_v3.0_Schematic.pdf
-[a3]: tinyCLUNX33_v3.0_Assembly.pdf
+![](images/tinyclunx33_block_diagram.drawio.png)

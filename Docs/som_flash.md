@@ -4,7 +4,7 @@ A 16 MByte (128 Mbit) QSPI flash with Dual Transmission Rate (DTR) can store the
 FPGA bitfile as well as a storing the firmware that the soft CPU core can
 execute in-place (XIP).
 
-![](images/som_flash_architecture.drawio.png)
+![](images/tinyclunx33_som_flash_architecture.drawio.png)
 
 In the default RTL, the flash is mapped at address `0x2000_0000`.
 
@@ -225,10 +225,23 @@ If not signal is visible at all, something might have gone wrong with the FTDI:
 is another device containing an FTDI connected to your workstation?
 
 
+### On Windows, `ecpprog` cannot find the FTDI USB device
+
+Because `ecpprog` was written for an UNIX-like system such as Linux or MacOS,
+getting it to work on Windows requires to force the device to be exposed to software.
+
+This is done by changing the driver that Windows uses, via one of these programs:
+
+- [Zadig](https://zadig.akeo.ie/) documented [here](https://github.com/pbatard/libwdi/wiki/Zadig),
+  select the WinUSB or libusb0.sys or LibusbK driver
+- [UsbDriverTool](https://visualgdb.com/UsbDriverTool/) documented [here](https://visualgdb.com/tutorials/android/usbdebug/),
+  select the Libusb or WinUSB driver.
+
+
 ## Parts featured
 
 - Winbond
   [W25Q128JW_DTR](https://www.winbond.com/hq/support/documentation/downloadV2022.jsp?__locale=en&xmlPath=/support/resources/.content/item/DA00-W25Q128JW_1.html&level=1)
   QSPI DTR flash
 
-![](images/som_flash_schematic.png)
+![](images/tinyclunx33_som_flash_schematic.png)

@@ -6,7 +6,7 @@ that can be used through the RTL.
 It also has two Large RAM (LRAM) blocks that provide can be used for storing
 larger memory buffers, such as entire frames, or as CPU main memory.
 
-![](images/som_memory_architecture.drawio.png)
+![](images/tinyclunx33_som_memory_architecture.drawio.png)
 
 The *Compute* variant of the SoM additionally has an external OctalSPI or
 HyperRAM memory installed and interconnected with the FPGA.
@@ -56,4 +56,4 @@ integration of the NXLRAM as well as a controller for the external RAM chip.
   [APS256XXN-OB9-G](https://www.apmemory.com/wp-content/uploads/APM_PSRAM_OPI_Xccela-APS256XXN-OBRx-v1.0-PKG.pdf)
   Double-Data-Rate HPI (x16) PSRAM
 
-![](images/som_ram_schematic.png)
+![](images/tinyclunx33_som_ram_schematic.png)
