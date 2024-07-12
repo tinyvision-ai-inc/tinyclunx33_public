@@ -63,14 +63,11 @@
         <Source name="src/image_stats.sv" type="Verilog" type_short="Verilog">
             <Options VerilogStandard="System Verilog"/>
         </Source>
-        <Source name="common/wb2axi4.sv" type="Verilog" type_short="Verilog">
-            <Options VerilogStandard="System Verilog"/>
-        </Source>
-        <Source name="src/TinyClunx.v" type="Verilog" type_short="Verilog" excluded="TRUE">
-            <Options/>
-        </Source>
         <Source name="src/fpga_top_som_no_mipi.sv" type="Verilog" type_short="Verilog">
             <Options VerilogStandard="System Verilog" top_module="fpga_top_som_no_mipi"/>
+        </Source>
+        <Source name="common/wb2axi4.sv" type="Verilog" type_short="Verilog">
+            <Options VerilogStandard="System Verilog"/>
         </Source>
         <Source name="src/TinyClunx_no_usb.v" type="Verilog" type_short="Verilog">
             <Options/>
