@@ -62,7 +62,7 @@ module image_stats #(
 	// Accumulator & other outputs
 	output      reg                        avg_valid ,
 	output      reg [  $clog2(MAX_COLS):0] num_cols  ,
-	output      reg [  $clog2(MAX_COLS):0] num_rows  ,
+	output      reg [  $clog2(MAX_ROWS):0] num_rows  ,
 	output      reg [                31:0] num_frames,
 	output wire     [  ACCUM_OUT_BITS-1:0] ch0_avg     ,
 	output wire     [  ACCUM_OUT_BITS-1:0] ch1_avg    ,
