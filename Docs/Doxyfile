@@ -9,7 +9,13 @@ HTML_COLORSTYLE        = LIGHT
 GENERATE_TREEVIEW      = YES
 DISABLE_INDEX          = NO
 FULL_SIDEBAR           = NO
-INPUT                  = .
+
+INPUT = \
+.
+
+IMAGE_PATH = \
+pinout/tinyCLUNX33_devkit_Rev1 \
+pinout/tinyCLUNX33_devkit_Rev2
 
 HTML_EXTRA_FILES = \
 ../Hardware/tinyCLUNX33_MIPI_to_USB3_devkit/Rev1/tinyCLUNX33_MIPI_to_USB3_devkit_Rev1_photo_front.png \
