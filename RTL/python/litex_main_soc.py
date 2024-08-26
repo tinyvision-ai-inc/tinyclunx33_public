@@ -8,6 +8,9 @@ from migen import *
 
 from litex.gen import *
 from litex.build.io import *
+from litex.build.lattice.common import *
+from litex.build.lattice import *
+from litex.soc.cores.jtag import *
 from litex.soc.cores.clock import *
 from litex.soc.cores.ram import NXLRAM
 from litex_zephyr_soc import ZephyrSoC
@@ -184,6 +187,24 @@ soc_io = [
     ("framectl", 0,
         Subsignal("irq", Pins(1)),
     ),
+
+    ("serial_debug", 0,
+        Subsignal("tx", Pins(1)),
+        Subsignal("rx", Pins(1)),
+        #IOStandard("LVCMOSXY")
+    ),
+    
+    ("jtag", 0,
+     Subsignal("tdi", Pins(1)),
+     Subsignal("tdo", Pins(1)),
+     Subsignal("tck", Pins(1)),
+     Subsignal("tms", Pins(1)),
+#     Subsignal("shift", Pins(1)),
+#     Subsignal("update", Pins(1)),
+#     Subsignal("reset", Pins(1)),          
+#     Subsignal("capture", Pins(1))
+     )
+     
 ]
 
 class VerilogAXIPort(LiteXModule):
@@ -221,14 +242,34 @@ class FrameCtl(LiteXModule):
         self.ev.finalize()
         self.comb += self.ev.frame.trigger.eq(pads.irq)
 
+
+class ExternalJtag(LiteXModule):
+    def __init__(self, pads):
+        self.reset   = Signal()
+        self.capture = Signal()
+        self.shift   = Signal()
+        self.update  = Signal()
+
+        self.tck = Signal()
+        self.tdi = Signal()
+        self.tdo = Signal()
+
+        self.comb += self.reset.eq(pads.reset)
+        self.comb += self.capture.eq(pads.capture)        
+        self.comb += self.shift.eq(pads.shift)
+        self.comb += self.update.eq(pads.update)
+        self.comb += self.tck.eq(pads.tck)
+        self.comb += self.tdi.eq(pads.tdi)
+        self.comb += pads.tdo.eq(self.tdo)                                        
+
 class MainSoC(ZephyrSoC, SoCCore):
     soc_kwargs = {
-        #"cpu_variant": "lite",
-        #"bus_interconnect":"crossbar",
+        "bus_interconnect":"crossbar",
         "bus_bursting": True,
         "integrated_sram_size": 0x0, # Replaced with the NXLRAM
         "cpu_reset_address": 0x2010_0000,
         "irq_n_irqs": 16,
+        "uart_baudrate": 115200,
     }
 
     def __init__(self, name, sys_clk_freq=None, rom_size=0, sram_size=0, **kwargs):
@@ -242,13 +283,30 @@ class MainSoC(ZephyrSoC, SoCCore):
         ZephyrSoC.__init__(self, **self.soc_kwargs)
 
         self.add_i2c()
+        
         # Note: can change to DDR by setting rate="1:2", will need some changes to suport this."
         self.add_spi_flash(mode="4x", module=Flash(default_read_cmd=Codes.READ_1_1_4), clk_freq=sys_clk_freq, rate="1:1", with_master=False)
         self.add_main_ram()
         self.add_wb_slave_port(origin=0xb0000000, size=0x0f000000)
+
+        self.add_cpu_jtag()
         self.add_usb23()
         self.add_framectl()
-
+        
+        #self.add_uartbone(uart_name="serial_debug", baudrate=115200)
+    def add_cpu_jtag(self, name="jtagbone"):
+        # Imports.
+        from litex.soc.cores import uart
+        from litex.soc.cores.jtag import JTAGPHY
+        
+        jtag_pads = self.platform.request("jtag")
+        self.cpu.cpu_params.update(
+            i_jtag_tdi = jtag_pads.tdi,
+            i_jtag_tck = jtag_pads.tck,
+            i_jtag_tms = jtag_pads.tms,
+            o_jtag_tdo = jtag_pads.tdo
+        )
+        
     def add_usb23(self):
         pads = self.platform.request("usb23", 0)
         self.submodules.usb23 = USB23(pads)
@@ -261,7 +319,7 @@ class MainSoC(ZephyrSoC, SoCCore):
 
     def add_main_ram(self):
         self.main_ram = NXLRAM(32, 64*kB)
-        region = SoCRegion(origin=self.mem_map["main_ram"], size=64*kB)
+        region = SoCRegion(origin=self.mem_map["main_ram"], size=64*kB, mode="rw")
         self.bus.add_slave("main_ram", self.main_ram.bus, region)
 
     # In the naming below:
@@ -288,13 +346,14 @@ class MainSoC(ZephyrSoC, SoCCore):
         self.submodules += port
         self.bus.add_master(name=f"wb{id}", master=port.bus)
 
-    def add_wb_slave_port(self, origin, size=0xf000000, id=0, width=32):
+    def add_wb_slave_port(self, origin, size=0xf000000, id=0, width=32, cached = False):
         self.mem_map[f"wb{id}"] = origin
         pads = self.platform.request("wishbone", id)
         port = VerilogWBPort(pads, width=width, mode="master")
-        region = SoCRegion(origin=origin, size=size, cached=False)
+        region = SoCRegion(origin=origin, size=size, cached=cached, mode="rw")
         self.submodules += port
         self.bus.add_slave(name=f"wb{id}", slave=port.bus, region=region)
+        return port
 
     def add_axi_master_port(self, id=0, width=32):
         pads = self.platform.request("axi", id)

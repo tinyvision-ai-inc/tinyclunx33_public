@@ -26,24 +26,28 @@ release:
 	mkdir -p release
 	cp impl/*.bit *.sty *.rvs *.rvl *.rdf release
 
-litex/litex_setup.py:
-	mkdir -p litex
-	wget -O $@ $(LITEX_SETUP_URL)
+# litex/litex_setup.py:
+# 	mkdir -p litex
+# 	wget -O $@ $(LITEX_SETUP_URL)
 
 spinal src/TinyClunx.v: spinal/TinyClunx/src/main/scala/TinyClunx.scala
 	sbt  "runMain TinyClunx.TinyClunx"
 
 software: $(LITEX_SOC_PY)
-	cd litex && $(PYTHON) ../python/litex_top_software.py
+	cd litex && PYTHONPATH=`pwd`/litex $(PYTHON) ../python/litex_top_software.py
+
+sim: $(LITEX_SOC_PY)
+	cd litex && PYTHONPATH=`pwd`/litex $(PYTHON) ../python/litex_top_sim.py
+	cp litex/build/sim/gateware/sim.v src/sim.v
 
 gateware: $(LITEX_SOC_PY)
-	cd litex && $(PYTHON) ../python/litex_top_som.py
+	cd litex && PYTHONPATH=`pwd`/litex $(PYTHON) ../python/litex_top_som.py
 	cp litex/build/som/gateware/som.v src
 
 wishbone src/wb_intercon.v: src/wb_intercon.cfg
 	python ip/wb_intercon/sw/wb_intercon_gen src/wb_intercon.cfg src/wb_intercon.v
 
 litex litex.overlay litex.conf: gateware
-	$(PYTHON) python/litex_json2dts_zephyr.py --dts=litex.overlay --config=litex.conf litex/build/csr.som.json
+	$(PYTHON) python/litex_json2dts_zephyr.py --dts=litex.overlay --config=litex.conf litex/build/csr.som.json 
 
 .PHONY: spinal litex

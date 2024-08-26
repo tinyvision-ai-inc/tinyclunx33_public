@@ -8,4 +8,5 @@ Builder(
     compile_software=True,
     compile_gateware=False,
     csr_json="build/csr.som.json",
+    csr_csv="csr.csv"
 ).build()

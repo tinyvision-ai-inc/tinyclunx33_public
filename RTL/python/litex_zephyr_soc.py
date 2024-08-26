@@ -13,9 +13,10 @@ from litex.soc.integration.soc_core import SoCCore
 
 class ZephyrSoC:
 
-    def __init__(self, cpu_variant="standard", **kwargs):
+    def __init__(self, cpu_variant="lite", **kwargs):
         self.soc_kwargs.update(
             cpu_type="vexriscv",
+            cpu_variant=cpu_variant,
             csr_data_width=32,
             max_sdram_size=0x10000000, # Limit mapped SDRAM to 256MB for now
             integrated_rom_size=0xfa00,
