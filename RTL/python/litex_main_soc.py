@@ -201,7 +201,7 @@ soc_io = [
      Subsignal("tms", Pins(1)),
 #     Subsignal("shift", Pins(1)),
 #     Subsignal("update", Pins(1)),
-#     Subsignal("reset", Pins(1)),          
+     Subsignal("reset", Pins(1)),          
 #     Subsignal("capture", Pins(1))
      )
      
@@ -241,26 +241,6 @@ class FrameCtl(LiteXModule):
         self.ev.frame = EventSourceProcess(edge="rising")
         self.ev.finalize()
         self.comb += self.ev.frame.trigger.eq(pads.irq)
-
-
-class ExternalJtag(LiteXModule):
-    def __init__(self, pads):
-        self.reset   = Signal()
-        self.capture = Signal()
-        self.shift   = Signal()
-        self.update  = Signal()
-
-        self.tck = Signal()
-        self.tdi = Signal()
-        self.tdo = Signal()
-
-        self.comb += self.reset.eq(pads.reset)
-        self.comb += self.capture.eq(pads.capture)        
-        self.comb += self.shift.eq(pads.shift)
-        self.comb += self.update.eq(pads.update)
-        self.comb += self.tck.eq(pads.tck)
-        self.comb += self.tdi.eq(pads.tdi)
-        self.comb += pads.tdo.eq(self.tdo)                                        
 
 class MainSoC(ZephyrSoC, SoCCore):
     soc_kwargs = {
@@ -304,7 +284,8 @@ class MainSoC(ZephyrSoC, SoCCore):
             i_jtag_tdi = jtag_pads.tdi,
             i_jtag_tck = jtag_pads.tck,
             i_jtag_tms = jtag_pads.tms,
-            o_jtag_tdo = jtag_pads.tdo
+            o_jtag_tdo = jtag_pads.tdo,
+            i_debugReset = jtag_pads.reset
         )
         
     def add_usb23(self):
@@ -319,7 +300,7 @@ class MainSoC(ZephyrSoC, SoCCore):
 
     def add_main_ram(self):
         self.main_ram = NXLRAM(32, 64*kB)
-        region = SoCRegion(origin=self.mem_map["main_ram"], size=64*kB, mode="rw")
+        region = SoCRegion(origin=self.mem_map["main_ram"], size=64*kB, mode="rwx")
         self.bus.add_slave("main_ram", self.main_ram.bus, region)
 
     # In the naming below:

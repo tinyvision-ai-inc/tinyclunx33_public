@@ -9,7 +9,7 @@
 // Filename   : som.v
 // Device     : build
 // LiteX sha1 : ac871c690
-// Date       : 2024-08-25 22:14:17
+// Date       : 2024-08-26 16:40:06
 //------------------------------------------------------------------------------
 
 `timescale 1ns / 1ps
@@ -22,6 +22,7 @@ module som (
     input  wire          framectl0_irq,
     inout  wire          i2c0_scl,
     inout  wire          i2c0_sda,
+    input  wire          jtag_reset,
     input  wire          jtag_tck,
     input  wire          jtag_tdi,
     output wire          jtag_tdo,
@@ -178,8 +179,8 @@ reg     [2:0] _w_storage = 3'd5;
 wire   [13:0] adr;
 reg           arbiter0_grant = 1'd0;
 wire    [1:0] arbiter0_request;
-wire          arbiter1_grant;
-wire          arbiter1_request;
+reg           arbiter1_grant = 1'd0;
+wire    [1:0] arbiter1_request;
 wire          arbiter2_grant;
 wire          arbiter2_request;
 wire          arbiter3_grant;
@@ -367,8 +368,8 @@ wire          dbus_err;
 wire    [3:0] dbus_sel;
 wire          dbus_stb;
 wire          dbus_we;
-reg           decoder0_slave_sel = 1'd0;
-reg           decoder0_slave_sel_r = 1'd0;
+reg     [1:0] decoder0_slave_sel = 2'd0;
+reg     [1:0] decoder0_slave_sel_r = 2'd0;
 reg     [3:0] decoder1_slave_sel = 4'd0;
 reg     [3:0] decoder1_slave_sel_r = 4'd0;
 reg           framectl_clear = 1'd0;
@@ -514,6 +515,17 @@ reg    [31:0] interface5_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface5_bank_bus_dat_w;
 wire          interface5_bank_bus_re;
 wire          interface5_bank_bus_we;
+wire          interface5_interface_ack;
+wire   [29:0] interface5_interface_adr;
+wire    [1:0] interface5_interface_bte;
+wire    [2:0] interface5_interface_cti;
+wire          interface5_interface_cyc;
+wire   [31:0] interface5_interface_dat_r;
+wire   [31:0] interface5_interface_dat_w;
+wire          interface5_interface_err;
+wire    [3:0] interface5_interface_sel;
+wire          interface5_interface_stb;
+wire          interface5_interface_we;
 wire   [13:0] interface6_bank_bus_adr;
 reg    [31:0] interface6_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface6_bank_bus_dat_w;
@@ -1004,8 +1016,9 @@ assign sys_clk_1 = sys_clk;
 assign por_clk = sys_clk;
 assign sys_rst_1 = int_rst;
 always @(*) begin
-    decoder0_slave_sel <= 1'd0;
-    decoder0_slave_sel <= (ibus_adr[29:22] == 6'd32);
+    decoder0_slave_sel <= 2'd0;
+    decoder0_slave_sel[0] <= (ibus_adr[29:22] == 6'd32);
+    decoder0_slave_sel[1] <= (ibus_adr[29:14] == 15'd16384);
 end
 assign interface0_interface_adr = ibus_adr;
 assign interface0_interface_dat_w = ibus_dat_w;
@@ -1014,15 +1027,23 @@ assign interface0_interface_stb = ibus_stb;
 assign interface0_interface_we = ibus_we;
 assign interface0_interface_cti = ibus_cti;
 assign interface0_interface_bte = ibus_bte;
-assign interface0_interface_cyc = (ibus_cyc & decoder0_slave_sel);
-assign ibus_err = interface0_interface_err;
+assign interface1_interface_adr = ibus_adr;
+assign interface1_interface_dat_w = ibus_dat_w;
+assign interface1_interface_sel = ibus_sel;
+assign interface1_interface_stb = ibus_stb;
+assign interface1_interface_we = ibus_we;
+assign interface1_interface_cti = ibus_cti;
+assign interface1_interface_bte = ibus_bte;
+assign interface0_interface_cyc = (ibus_cyc & decoder0_slave_sel[0]);
+assign interface1_interface_cyc = (ibus_cyc & decoder0_slave_sel[1]);
+assign ibus_err = (interface0_interface_err | interface1_interface_err);
 assign timeout0_wait = ((ibus_stb & ibus_cyc) & (~ibus_ack));
 always @(*) begin
     ibus_ack <= 1'd0;
     ibus_dat_r <= 32'd0;
     timeout0_error <= 1'd0;
-    ibus_ack <= interface0_interface_ack;
-    ibus_dat_r <= ({32{decoder0_slave_sel_r}} & interface0_interface_dat_r);
+    ibus_ack <= (interface0_interface_ack | interface1_interface_ack);
+    ibus_dat_r <= (({32{decoder0_slave_sel_r[0]}} & interface0_interface_dat_r) | ({32{decoder0_slave_sel_r[1]}} & interface1_interface_dat_r));
     if (timeout0_done) begin
         ibus_dat_r <= 32'd4294967295;
         ibus_ack <= 1'd1;
@@ -1037,13 +1058,6 @@ always @(*) begin
     decoder1_slave_sel[2] <= (dbus_adr[29:26] == 4'd11);
     decoder1_slave_sel[3] <= (dbus_adr[29:14] == 16'd57344);
 end
-assign interface1_interface_adr = dbus_adr;
-assign interface1_interface_dat_w = dbus_dat_w;
-assign interface1_interface_sel = dbus_sel;
-assign interface1_interface_stb = dbus_stb;
-assign interface1_interface_we = dbus_we;
-assign interface1_interface_cti = dbus_cti;
-assign interface1_interface_bte = dbus_bte;
 assign interface2_interface_adr = dbus_adr;
 assign interface2_interface_dat_w = dbus_dat_w;
 assign interface2_interface_sel = dbus_sel;
@@ -1065,18 +1079,25 @@ assign interface4_interface_stb = dbus_stb;
 assign interface4_interface_we = dbus_we;
 assign interface4_interface_cti = dbus_cti;
 assign interface4_interface_bte = dbus_bte;
-assign interface1_interface_cyc = (dbus_cyc & decoder1_slave_sel[0]);
-assign interface2_interface_cyc = (dbus_cyc & decoder1_slave_sel[1]);
-assign interface3_interface_cyc = (dbus_cyc & decoder1_slave_sel[2]);
-assign interface4_interface_cyc = (dbus_cyc & decoder1_slave_sel[3]);
-assign dbus_err = (((interface1_interface_err | interface2_interface_err) | interface3_interface_err) | interface4_interface_err);
+assign interface5_interface_adr = dbus_adr;
+assign interface5_interface_dat_w = dbus_dat_w;
+assign interface5_interface_sel = dbus_sel;
+assign interface5_interface_stb = dbus_stb;
+assign interface5_interface_we = dbus_we;
+assign interface5_interface_cti = dbus_cti;
+assign interface5_interface_bte = dbus_bte;
+assign interface2_interface_cyc = (dbus_cyc & decoder1_slave_sel[0]);
+assign interface3_interface_cyc = (dbus_cyc & decoder1_slave_sel[1]);
+assign interface4_interface_cyc = (dbus_cyc & decoder1_slave_sel[2]);
+assign interface5_interface_cyc = (dbus_cyc & decoder1_slave_sel[3]);
+assign dbus_err = (((interface2_interface_err | interface3_interface_err) | interface4_interface_err) | interface5_interface_err);
 assign timeout1_wait = ((dbus_stb & dbus_cyc) & (~dbus_ack));
 always @(*) begin
     dbus_ack <= 1'd0;
     dbus_dat_r <= 32'd0;
     timeout1_error <= 1'd0;
-    dbus_ack <= (((interface1_interface_ack | interface2_interface_ack) | interface3_interface_ack) | interface4_interface_ack);
-    dbus_dat_r <= (((({32{decoder1_slave_sel_r[0]}} & interface1_interface_dat_r) | ({32{decoder1_slave_sel_r[1]}} & interface2_interface_dat_r)) | ({32{decoder1_slave_sel_r[2]}} & interface3_interface_dat_r)) | ({32{decoder1_slave_sel_r[3]}} & interface4_interface_dat_r));
+    dbus_ack <= (((interface2_interface_ack | interface3_interface_ack) | interface4_interface_ack) | interface5_interface_ack);
+    dbus_dat_r <= (((({32{decoder1_slave_sel_r[0]}} & interface2_interface_dat_r) | ({32{decoder1_slave_sel_r[1]}} & interface3_interface_dat_r)) | ({32{decoder1_slave_sel_r[2]}} & interface4_interface_dat_r)) | ({32{decoder1_slave_sel_r[3]}} & interface5_interface_dat_r));
     if (timeout1_done) begin
         dbus_dat_r <= 32'd4294967295;
         dbus_ack <= 1'd1;
@@ -1093,12 +1114,12 @@ assign spiflash_core_litespimmap_bus_we = array_muxed5;
 assign spiflash_core_litespimmap_bus_cti = array_muxed6;
 assign spiflash_core_litespimmap_bus_bte = array_muxed7;
 assign interface0_interface_dat_r = spiflash_core_litespimmap_bus_dat_r;
-assign interface1_interface_dat_r = spiflash_core_litespimmap_bus_dat_r;
+assign interface2_interface_dat_r = spiflash_core_litespimmap_bus_dat_r;
 assign interface0_interface_ack = (spiflash_core_litespimmap_bus_ack & (arbiter0_grant == 1'd0));
-assign interface1_interface_ack = (spiflash_core_litespimmap_bus_ack & (arbiter0_grant == 1'd1));
+assign interface2_interface_ack = (spiflash_core_litespimmap_bus_ack & (arbiter0_grant == 1'd1));
 assign interface0_interface_err = (spiflash_core_litespimmap_bus_err & (arbiter0_grant == 1'd0));
-assign interface1_interface_err = (spiflash_core_litespimmap_bus_err & (arbiter0_grant == 1'd1));
-assign arbiter0_request = {interface1_interface_cyc, interface0_interface_cyc};
+assign interface2_interface_err = (spiflash_core_litespimmap_bus_err & (arbiter0_grant == 1'd1));
+assign arbiter0_request = {interface2_interface_cyc, interface0_interface_cyc};
 assign main_ram_bus_adr = array_muxed8;
 assign main_ram_bus_dat_w = array_muxed9;
 assign main_ram_bus_sel = array_muxed10;
@@ -1107,11 +1128,13 @@ assign main_ram_bus_stb = array_muxed12;
 assign main_ram_bus_we = array_muxed13;
 assign main_ram_bus_cti = array_muxed14;
 assign main_ram_bus_bte = array_muxed15;
-assign interface2_interface_dat_r = main_ram_bus_dat_r;
-assign interface2_interface_ack = (main_ram_bus_ack & (arbiter1_grant == 1'd0));
-assign interface2_interface_err = (main_ram_bus_err & (arbiter1_grant == 1'd0));
-assign arbiter1_request = {interface2_interface_cyc};
-assign arbiter1_grant = 1'd0;
+assign interface1_interface_dat_r = main_ram_bus_dat_r;
+assign interface3_interface_dat_r = main_ram_bus_dat_r;
+assign interface1_interface_ack = (main_ram_bus_ack & (arbiter1_grant == 1'd0));
+assign interface3_interface_ack = (main_ram_bus_ack & (arbiter1_grant == 1'd1));
+assign interface1_interface_err = (main_ram_bus_err & (arbiter1_grant == 1'd0));
+assign interface3_interface_err = (main_ram_bus_err & (arbiter1_grant == 1'd1));
+assign arbiter1_request = {interface3_interface_cyc, interface1_interface_cyc};
 assign port_bus_adr = array_muxed16;
 assign port_bus_dat_w = array_muxed17;
 assign port_bus_sel = array_muxed18;
@@ -1120,10 +1143,10 @@ assign port_bus_stb = array_muxed20;
 assign port_bus_we = array_muxed21;
 assign port_bus_cti = array_muxed22;
 assign port_bus_bte = array_muxed23;
-assign interface3_interface_dat_r = port_bus_dat_r;
-assign interface3_interface_ack = (port_bus_ack & (arbiter2_grant == 1'd0));
-assign interface3_interface_err = (port_bus_err & (arbiter2_grant == 1'd0));
-assign arbiter2_request = {interface3_interface_cyc};
+assign interface4_interface_dat_r = port_bus_dat_r;
+assign interface4_interface_ack = (port_bus_ack & (arbiter2_grant == 1'd0));
+assign interface4_interface_err = (port_bus_err & (arbiter2_grant == 1'd0));
+assign arbiter2_request = {interface4_interface_cyc};
 assign arbiter2_grant = 1'd0;
 assign interface0_adr = array_muxed24;
 assign interface0_dat_w = array_muxed25;
@@ -1133,10 +1156,10 @@ assign interface0_stb = array_muxed28;
 assign interface0_we = array_muxed29;
 assign interface0_cti = array_muxed30;
 assign interface0_bte = array_muxed31;
-assign interface4_interface_dat_r = interface0_dat_r;
-assign interface4_interface_ack = (interface0_ack & (arbiter3_grant == 1'd0));
-assign interface4_interface_err = (interface0_err & (arbiter3_grant == 1'd0));
-assign arbiter3_request = {interface4_interface_cyc};
+assign interface5_interface_dat_r = interface0_dat_r;
+assign interface5_interface_ack = (interface0_ack & (arbiter3_grant == 1'd0));
+assign interface5_interface_err = (interface0_err & (arbiter3_grant == 1'd0));
+assign arbiter3_request = {interface5_interface_cyc};
 assign arbiter3_grant = 1'd0;
 assign bus_errors_status = bus_errors;
 always @(*) begin
@@ -2268,7 +2291,7 @@ always @(*) begin
             array_muxed0 <= interface0_interface_adr;
         end
         default: begin
-            array_muxed0 <= interface1_interface_adr;
+            array_muxed0 <= interface2_interface_adr;
         end
     endcase
 end
@@ -2279,7 +2302,7 @@ always @(*) begin
             array_muxed1 <= interface0_interface_dat_w;
         end
         default: begin
-            array_muxed1 <= interface1_interface_dat_w;
+            array_muxed1 <= interface2_interface_dat_w;
         end
     endcase
 end
@@ -2290,7 +2313,7 @@ always @(*) begin
             array_muxed2 <= interface0_interface_sel;
         end
         default: begin
-            array_muxed2 <= interface1_interface_sel;
+            array_muxed2 <= interface2_interface_sel;
         end
     endcase
 end
@@ -2301,7 +2324,7 @@ always @(*) begin
             array_muxed3 <= interface0_interface_cyc;
         end
         default: begin
-            array_muxed3 <= interface1_interface_cyc;
+            array_muxed3 <= interface2_interface_cyc;
         end
     endcase
 end
@@ -2312,7 +2335,7 @@ always @(*) begin
             array_muxed4 <= interface0_interface_stb;
         end
         default: begin
-            array_muxed4 <= interface1_interface_stb;
+            array_muxed4 <= interface2_interface_stb;
         end
     endcase
 end
@@ -2323,7 +2346,7 @@ always @(*) begin
             array_muxed5 <= interface0_interface_we;
         end
         default: begin
-            array_muxed5 <= interface1_interface_we;
+            array_muxed5 <= interface2_interface_we;
         end
     endcase
 end
@@ -2334,7 +2357,7 @@ always @(*) begin
             array_muxed6 <= interface0_interface_cti;
         end
         default: begin
-            array_muxed6 <= interface1_interface_cti;
+            array_muxed6 <= interface2_interface_cti;
         end
     endcase
 end
@@ -2345,71 +2368,95 @@ always @(*) begin
             array_muxed7 <= interface0_interface_bte;
         end
         default: begin
-            array_muxed7 <= interface1_interface_bte;
+            array_muxed7 <= interface2_interface_bte;
         end
     endcase
 end
 always @(*) begin
     array_muxed8 <= 30'd0;
     case (arbiter1_grant)
+        1'd0: begin
+            array_muxed8 <= interface1_interface_adr;
+        end
         default: begin
-            array_muxed8 <= interface2_interface_adr;
+            array_muxed8 <= interface3_interface_adr;
         end
     endcase
 end
 always @(*) begin
     array_muxed9 <= 32'd0;
     case (arbiter1_grant)
+        1'd0: begin
+            array_muxed9 <= interface1_interface_dat_w;
+        end
         default: begin
-            array_muxed9 <= interface2_interface_dat_w;
+            array_muxed9 <= interface3_interface_dat_w;
         end
     endcase
 end
 always @(*) begin
     array_muxed10 <= 4'd0;
     case (arbiter1_grant)
+        1'd0: begin
+            array_muxed10 <= interface1_interface_sel;
+        end
         default: begin
-            array_muxed10 <= interface2_interface_sel;
+            array_muxed10 <= interface3_interface_sel;
         end
     endcase
 end
 always @(*) begin
     array_muxed11 <= 1'd0;
     case (arbiter1_grant)
+        1'd0: begin
+            array_muxed11 <= interface1_interface_cyc;
+        end
         default: begin
-            array_muxed11 <= interface2_interface_cyc;
+            array_muxed11 <= interface3_interface_cyc;
         end
     endcase
 end
 always @(*) begin
     array_muxed12 <= 1'd0;
     case (arbiter1_grant)
+        1'd0: begin
+            array_muxed12 <= interface1_interface_stb;
+        end
         default: begin
-            array_muxed12 <= interface2_interface_stb;
+            array_muxed12 <= interface3_interface_stb;
         end
     endcase
 end
 always @(*) begin
     array_muxed13 <= 1'd0;
     case (arbiter1_grant)
+        1'd0: begin
+            array_muxed13 <= interface1_interface_we;
+        end
         default: begin
-            array_muxed13 <= interface2_interface_we;
+            array_muxed13 <= interface3_interface_we;
         end
     endcase
 end
 always @(*) begin
     array_muxed14 <= 3'd0;
     case (arbiter1_grant)
+        1'd0: begin
+            array_muxed14 <= interface1_interface_cti;
+        end
         default: begin
-            array_muxed14 <= interface2_interface_cti;
+            array_muxed14 <= interface3_interface_cti;
         end
     endcase
 end
 always @(*) begin
     array_muxed15 <= 2'd0;
     case (arbiter1_grant)
+        1'd0: begin
+            array_muxed15 <= interface1_interface_bte;
+        end
         default: begin
-            array_muxed15 <= interface2_interface_bte;
+            array_muxed15 <= interface3_interface_bte;
         end
     endcase
 end
@@ -2417,7 +2464,7 @@ always @(*) begin
     array_muxed16 <= 30'd0;
     case (arbiter2_grant)
         default: begin
-            array_muxed16 <= interface3_interface_adr;
+            array_muxed16 <= interface4_interface_adr;
         end
     endcase
 end
@@ -2425,7 +2472,7 @@ always @(*) begin
     array_muxed17 <= 32'd0;
     case (arbiter2_grant)
         default: begin
-            array_muxed17 <= interface3_interface_dat_w;
+            array_muxed17 <= interface4_interface_dat_w;
         end
     endcase
 end
@@ -2433,7 +2480,7 @@ always @(*) begin
     array_muxed18 <= 4'd0;
     case (arbiter2_grant)
         default: begin
-            array_muxed18 <= interface3_interface_sel;
+            array_muxed18 <= interface4_interface_sel;
         end
     endcase
 end
@@ -2441,7 +2488,7 @@ always @(*) begin
     array_muxed19 <= 1'd0;
     case (arbiter2_grant)
         default: begin
-            array_muxed19 <= interface3_interface_cyc;
+            array_muxed19 <= interface4_interface_cyc;
         end
     endcase
 end
@@ -2449,7 +2496,7 @@ always @(*) begin
     array_muxed20 <= 1'd0;
     case (arbiter2_grant)
         default: begin
-            array_muxed20 <= interface3_interface_stb;
+            array_muxed20 <= interface4_interface_stb;
         end
     endcase
 end
@@ -2457,7 +2504,7 @@ always @(*) begin
     array_muxed21 <= 1'd0;
     case (arbiter2_grant)
         default: begin
-            array_muxed21 <= interface3_interface_we;
+            array_muxed21 <= interface4_interface_we;
         end
     endcase
 end
@@ -2465,7 +2512,7 @@ always @(*) begin
     array_muxed22 <= 3'd0;
     case (arbiter2_grant)
         default: begin
-            array_muxed22 <= interface3_interface_cti;
+            array_muxed22 <= interface4_interface_cti;
         end
     endcase
 end
@@ -2473,7 +2520,7 @@ always @(*) begin
     array_muxed23 <= 2'd0;
     case (arbiter2_grant)
         default: begin
-            array_muxed23 <= interface3_interface_bte;
+            array_muxed23 <= interface4_interface_bte;
         end
     endcase
 end
@@ -2481,7 +2528,7 @@ always @(*) begin
     array_muxed24 <= 30'd0;
     case (arbiter3_grant)
         default: begin
-            array_muxed24 <= interface4_interface_adr;
+            array_muxed24 <= interface5_interface_adr;
         end
     endcase
 end
@@ -2489,7 +2536,7 @@ always @(*) begin
     array_muxed25 <= 32'd0;
     case (arbiter3_grant)
         default: begin
-            array_muxed25 <= interface4_interface_dat_w;
+            array_muxed25 <= interface5_interface_dat_w;
         end
     endcase
 end
@@ -2497,7 +2544,7 @@ always @(*) begin
     array_muxed26 <= 4'd0;
     case (arbiter3_grant)
         default: begin
-            array_muxed26 <= interface4_interface_sel;
+            array_muxed26 <= interface5_interface_sel;
         end
     endcase
 end
@@ -2505,7 +2552,7 @@ always @(*) begin
     array_muxed27 <= 1'd0;
     case (arbiter3_grant)
         default: begin
-            array_muxed27 <= interface4_interface_cyc;
+            array_muxed27 <= interface5_interface_cyc;
         end
     endcase
 end
@@ -2513,7 +2560,7 @@ always @(*) begin
     array_muxed28 <= 1'd0;
     case (arbiter3_grant)
         default: begin
-            array_muxed28 <= interface4_interface_stb;
+            array_muxed28 <= interface5_interface_stb;
         end
     endcase
 end
@@ -2521,7 +2568,7 @@ always @(*) begin
     array_muxed29 <= 1'd0;
     case (arbiter3_grant)
         default: begin
-            array_muxed29 <= interface4_interface_we;
+            array_muxed29 <= interface5_interface_we;
         end
     endcase
 end
@@ -2529,7 +2576,7 @@ always @(*) begin
     array_muxed30 <= 3'd0;
     case (arbiter3_grant)
         default: begin
-            array_muxed30 <= interface4_interface_cti;
+            array_muxed30 <= interface5_interface_cti;
         end
     endcase
 end
@@ -2537,11 +2584,14 @@ always @(*) begin
     array_muxed31 <= 2'd0;
     case (arbiter3_grant)
         default: begin
-            array_muxed31 <= interface4_interface_bte;
+            array_muxed31 <= interface5_interface_bte;
         end
     endcase
 end
 assign rx_rx = regs1;
+assign sdrio_clk_10 = sys_clk_1;
+assign sdrio_clk_11 = sys_clk_1;
+assign sdrio_clk_12 = sys_clk_1;
 assign sdrio_clk = sys_clk_1;
 assign sdrio_clk_1 = sys_clk_1;
 assign sdrio_clk_2 = sys_clk_1;
@@ -2549,12 +2599,9 @@ assign sdrio_clk_3 = sys_clk_1;
 assign sdrio_clk_4 = sys_clk_1;
 assign sdrio_clk_5 = sys_clk_1;
 assign sdrio_clk_6 = sys_clk_1;
+assign sdrio_clk_9 = sys_clk_1;
 assign sdrio_clk_7 = sys_clk_1;
 assign sdrio_clk_8 = sys_clk_1;
-assign sdrio_clk_9 = sys_clk_1;
-assign sdrio_clk_10 = sys_clk_1;
-assign sdrio_clk_11 = sys_clk_1;
-assign sdrio_clk_12 = sys_clk_1;
 
 
 //------------------------------------------------------------------------------
@@ -2565,7 +2612,7 @@ always @(posedge por_clk) begin
     int_rst <= sys_rst;
 end
 
-always @(posedge sdrio_clk) begin
+always @(posedge sdrio_clk_10) begin
     spiflash4x_clk <= litespisdrphycore_clk;
     inferedsdrtristate0_oe <= litespisdrphycore_dq_oe[0];
     inferedsdrtristate1_oe <= litespisdrphycore_dq_oe[1];
@@ -2610,6 +2657,22 @@ always @(posedge sys_clk_1) begin
             if ((~arbiter0_request[1])) begin
                 if (arbiter0_request[0]) begin
                     arbiter0_grant <= 1'd0;
+                end
+            end
+        end
+    endcase
+    case (arbiter1_grant)
+        1'd0: begin
+            if ((~arbiter1_request[0])) begin
+                if (arbiter1_request[1]) begin
+                    arbiter1_grant <= 1'd1;
+                end
+            end
+        end
+        1'd1: begin
+            if ((~arbiter1_request[1])) begin
+                if (arbiter1_request[0]) begin
+                    arbiter1_grant <= 1'd0;
                 end
             end
         end
@@ -3133,11 +3196,12 @@ always @(posedge sys_clk_1) begin
         framectl_pending_r <= 1'd0;
         framectl_enable_storage <= 1'd0;
         framectl_enable_re <= 1'd0;
-        decoder0_slave_sel_r <= 1'd0;
+        decoder0_slave_sel_r <= 2'd0;
         timeout0_count <= 20'd1000000;
         decoder1_slave_sel_r <= 4'd0;
         timeout1_count <= 20'd1000000;
         arbiter0_grant <= 1'd0;
+        arbiter1_grant <= 1'd0;
         rs232phytx_state <= 1'd0;
         rs232phyrx_state <= 1'd0;
         litespiphy_state <= 2'd0;
@@ -3231,6 +3295,7 @@ VexRiscv VexRiscv(
 	.dBusWishbone_ACK       (dbus_ack),
 	.dBusWishbone_DAT_MISO  (dbus_dat_r),
 	.dBusWishbone_ERR       (dbus_err),
+	.debugReset             (jtag_reset),
 	.externalInterruptArray (interrupt),
 	.externalResetVector    (vexriscv),
 	.iBusWishbone_ACK       (ibus_ack),
@@ -3278,5 +3343,5 @@ assign inferedsdrtristate3__i = spiflash4x_dq[3];
 endmodule
 
 // -----------------------------------------------------------------------------
-//  Auto-Generated by LiteX on 2024-08-25 22:14:17.
+//  Auto-Generated by LiteX on 2024-08-26 16:40:06.
 //------------------------------------------------------------------------------
