@@ -31,7 +31,12 @@ module fpga_top_som_no_mipi (
   input  wire       usb23_RXMP_i        ,
   input  wire       usb23_RXPP_i        ,
   output wire       usb23_TXMP_o        ,
-  output wire       usb23_TXPP_o
+  output wire       usb23_TXPP_o,
+  
+	input wire TCK,
+	input wire TDI,
+	output wire TDO,
+	input wire TMS
 );
 
   `ifdef FAST_SIM
@@ -125,6 +130,29 @@ assign proc_rst = ~proc_rst_n;
 assign axiReset = proc_rst;
 assign axiClk = proc_clk;
 
+// Having a WDT present is necessary to have access to the jtag pins as IO; dont know why exactly.
+WDT wdt(
+	.WDTRELOAD(0),
+	.WDT_CLK(0),
+	.WDT_RST(0)
+);
+
+wire          jtag_tms;
+wire          jtag_tck;
+wire          jtag_capture;
+wire		  jtag_reset;
+
+wire jtag_tdi_som;
+wire jtag_tdo_som;
+
+assign jtag_tms = TMS;
+assign jtag_tdi_som = TDI;
+assign TDO = jtag_tdo_som;
+assign jtag_tck = TCK;
+
+assign jtag_reset = wb_rst;
+
+
 /*------------------------------------------------------------------------------
 --  LiteX design
 ------------------------------------------------------------------------------*/
@@ -155,7 +183,10 @@ assign axiClk = proc_clk;
     .wishbone0_dat_r(wb_s2m_wb0_dat),
     .wishbone0_err  (wb_s2m_wb0_err),
     .usb230_irq     (irq_usb23     ),
-    .framectl0_irq  (irq_frame     )
+    .framectl0_irq  (irq_frame     ),
+	.jtag_tdo(jtag_tdo_som),
+	.jtag_tdi(jtag_tdi_som),
+	.*
   );
   
 

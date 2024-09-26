@@ -8,8 +8,8 @@
 //
 // Filename   : som.v
 // Device     : build
-// LiteX sha1 : b19d992f
-// Date       : 2024-02-10 20:02:23
+// LiteX sha1 : ac871c690
+// Date       : 2024-08-26 16:40:06
 //------------------------------------------------------------------------------
 
 `timescale 1ns / 1ps
@@ -22,6 +22,11 @@ module som (
     input  wire          framectl0_irq,
     inout  wire          i2c0_scl,
     inout  wire          i2c0_sda,
+    input  wire          jtag_reset,
+    input  wire          jtag_tck,
+    input  wire          jtag_tdi,
+    output wire          jtag_tdo,
+    input  wire          jtag_tms,
     input  wire          serial_rx,
     output reg           serial_tx,
     output reg           spiflash4x_clk,
@@ -52,12 +57,21 @@ module som (
 MainSoC
 └─── crg (CRG)
 └─── bus (SoCBusHandler)
-│    └─── _interconnect (InterconnectShared)
-│    │    └─── arbiter (Arbiter)
-│    │    │    └─── rr (RoundRobin)
-│    │    └─── decoder (Decoder)
-│    │    └─── timeout (Timeout)
+│    └─── _interconnect (Crossbar)
+│    │    └─── decoder_0* (Decoder)
+│    │    └─── timeout_0* (Timeout)
 │    │    │    └─── waittimer_0* (WaitTimer)
+│    │    └─── decoder_1* (Decoder)
+│    │    └─── timeout_1* (Timeout)
+│    │    │    └─── waittimer_0* (WaitTimer)
+│    │    └─── arbiter_0* (Arbiter)
+│    │    │    └─── rr (RoundRobin)
+│    │    └─── arbiter_1* (Arbiter)
+│    │    │    └─── rr (RoundRobin)
+│    │    └─── arbiter_2* (Arbiter)
+│    │    │    └─── rr (RoundRobin)
+│    │    └─── arbiter_3* (Arbiter)
+│    │    │    └─── rr (RoundRobin)
 └─── csr (SoCCSRHandler)
 └─── irq (SoCIRQHandler)
 └─── ctrl (SoCController)
@@ -163,20 +177,51 @@ wire          _r_we;
 reg           _w_re = 1'd0;
 reg     [2:0] _w_storage = 3'd5;
 wire   [13:0] adr;
+reg           arbiter0_grant = 1'd0;
+wire    [1:0] arbiter0_request;
+reg           arbiter1_grant = 1'd0;
+wire    [1:0] arbiter1_request;
+wire          arbiter2_grant;
+wire          arbiter2_request;
+wire          arbiter3_grant;
+wire          arbiter3_request;
 reg    [29:0] array_muxed0 = 30'd0;
 reg    [31:0] array_muxed1 = 32'd0;
+reg     [3:0] array_muxed10 = 4'd0;
+reg           array_muxed11 = 1'd0;
+reg           array_muxed12 = 1'd0;
+reg           array_muxed13 = 1'd0;
+reg     [2:0] array_muxed14 = 3'd0;
+reg     [1:0] array_muxed15 = 2'd0;
+reg    [29:0] array_muxed16 = 30'd0;
+reg    [31:0] array_muxed17 = 32'd0;
+reg     [3:0] array_muxed18 = 4'd0;
+reg           array_muxed19 = 1'd0;
 reg     [3:0] array_muxed2 = 4'd0;
+reg           array_muxed20 = 1'd0;
+reg           array_muxed21 = 1'd0;
+reg     [2:0] array_muxed22 = 3'd0;
+reg     [1:0] array_muxed23 = 2'd0;
+reg    [29:0] array_muxed24 = 30'd0;
+reg    [31:0] array_muxed25 = 32'd0;
+reg     [3:0] array_muxed26 = 4'd0;
+reg           array_muxed27 = 1'd0;
+reg           array_muxed28 = 1'd0;
+reg           array_muxed29 = 1'd0;
 reg           array_muxed3 = 1'd0;
+reg     [2:0] array_muxed30 = 3'd0;
+reg     [1:0] array_muxed31 = 2'd0;
 reg           array_muxed4 = 1'd0;
 reg           array_muxed5 = 1'd0;
 reg     [2:0] array_muxed6 = 3'd0;
 reg     [1:0] array_muxed7 = 2'd0;
-wire          bus_error;
+reg    [29:0] array_muxed8 = 30'd0;
+reg    [31:0] array_muxed9 = 32'd0;
+reg           bus_error = 1'd0;
 reg    [31:0] bus_errors = 32'd0;
 reg           bus_errors_re = 1'd0;
 wire   [31:0] bus_errors_status;
 wire          bus_errors_we;
-reg    [19:0] count = 20'd1000000;
 wire          cpu_rst;
 wire   [31:0] csrbank0_bus_errors_r;
 reg           csrbank0_bus_errors_re = 1'd0;
@@ -312,19 +357,21 @@ reg           csrbank7_ev_status_we = 1'd0;
 wire          csrbank7_sel;
 wire   [31:0] dat_r;
 wire   [31:0] dat_w;
-wire          dbus_ack;
+reg           dbus_ack = 1'd0;
 wire   [29:0] dbus_adr;
 wire    [1:0] dbus_bte;
 wire    [2:0] dbus_cti;
 wire          dbus_cyc;
-wire   [31:0] dbus_dat_r;
+reg    [31:0] dbus_dat_r = 32'd0;
 wire   [31:0] dbus_dat_w;
 wire          dbus_err;
 wire    [3:0] dbus_sel;
 wire          dbus_stb;
 wire          dbus_we;
-wire          done;
-reg           error = 1'd0;
+reg     [1:0] decoder0_slave_sel = 2'd0;
+reg     [1:0] decoder0_slave_sel_r = 2'd0;
+reg     [3:0] decoder1_slave_sel = 4'd0;
+reg     [3:0] decoder1_slave_sel_r = 4'd0;
 reg           framectl_clear = 1'd0;
 reg           framectl_enable_re = 1'd0;
 reg           framectl_enable_storage = 1'd0;
@@ -343,13 +390,12 @@ reg           framectl_status_status = 1'd0;
 wire          framectl_status_we;
 wire          framectl_trigger;
 reg           framectl_trigger_d = 1'd0;
-reg           grant = 1'd0;
-wire          ibus_ack;
+reg           ibus_ack = 1'd0;
 wire   [29:0] ibus_adr;
 wire    [1:0] ibus_bte;
 wire    [2:0] ibus_cti;
 wire          ibus_cyc;
-wire   [31:0] ibus_dat_r;
+reg    [31:0] ibus_dat_r = 32'd0;
 wire   [31:0] ibus_dat_w;
 wire          ibus_err;
 wire    [3:0] ibus_sel;
@@ -373,6 +419,7 @@ wire   [29:0] interface0_adr;
 wire   [13:0] interface0_bank_bus_adr;
 reg    [31:0] interface0_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface0_bank_bus_dat_w;
+wire          interface0_bank_bus_re;
 wire          interface0_bank_bus_we;
 wire    [1:0] interface0_bte;
 wire    [2:0] interface0_cti;
@@ -380,6 +427,17 @@ wire          interface0_cyc;
 reg    [31:0] interface0_dat_r = 32'd0;
 wire   [31:0] interface0_dat_w;
 reg           interface0_err = 1'd0;
+wire          interface0_interface_ack;
+wire   [29:0] interface0_interface_adr;
+wire    [1:0] interface0_interface_bte;
+wire    [2:0] interface0_interface_cti;
+wire          interface0_interface_cyc;
+wire   [31:0] interface0_interface_dat_r;
+wire   [31:0] interface0_interface_dat_w;
+wire          interface0_interface_err;
+wire    [3:0] interface0_interface_sel;
+wire          interface0_interface_stb;
+wire          interface0_interface_we;
 wire    [3:0] interface0_sel;
 wire          interface0_stb;
 wire          interface0_we;
@@ -387,33 +445,96 @@ reg    [13:0] interface1_adr = 14'd0;
 wire   [13:0] interface1_bank_bus_adr;
 reg    [31:0] interface1_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface1_bank_bus_dat_w;
+wire          interface1_bank_bus_re;
 wire          interface1_bank_bus_we;
 wire   [31:0] interface1_dat_r;
 reg    [31:0] interface1_dat_w = 32'd0;
+wire          interface1_interface_ack;
+wire   [29:0] interface1_interface_adr;
+wire    [1:0] interface1_interface_bte;
+wire    [2:0] interface1_interface_cti;
+wire          interface1_interface_cyc;
+wire   [31:0] interface1_interface_dat_r;
+wire   [31:0] interface1_interface_dat_w;
+wire          interface1_interface_err;
+wire    [3:0] interface1_interface_sel;
+wire          interface1_interface_stb;
+wire          interface1_interface_we;
+reg           interface1_re = 1'd0;
 reg           interface1_we = 1'd0;
 wire   [13:0] interface2_bank_bus_adr;
 reg    [31:0] interface2_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface2_bank_bus_dat_w;
+wire          interface2_bank_bus_re;
 wire          interface2_bank_bus_we;
+wire          interface2_interface_ack;
+wire   [29:0] interface2_interface_adr;
+wire    [1:0] interface2_interface_bte;
+wire    [2:0] interface2_interface_cti;
+wire          interface2_interface_cyc;
+wire   [31:0] interface2_interface_dat_r;
+wire   [31:0] interface2_interface_dat_w;
+wire          interface2_interface_err;
+wire    [3:0] interface2_interface_sel;
+wire          interface2_interface_stb;
+wire          interface2_interface_we;
 wire   [13:0] interface3_bank_bus_adr;
 reg    [31:0] interface3_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface3_bank_bus_dat_w;
+wire          interface3_bank_bus_re;
 wire          interface3_bank_bus_we;
+wire          interface3_interface_ack;
+wire   [29:0] interface3_interface_adr;
+wire    [1:0] interface3_interface_bte;
+wire    [2:0] interface3_interface_cti;
+wire          interface3_interface_cyc;
+wire   [31:0] interface3_interface_dat_r;
+wire   [31:0] interface3_interface_dat_w;
+wire          interface3_interface_err;
+wire    [3:0] interface3_interface_sel;
+wire          interface3_interface_stb;
+wire          interface3_interface_we;
 wire   [13:0] interface4_bank_bus_adr;
 reg    [31:0] interface4_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface4_bank_bus_dat_w;
+wire          interface4_bank_bus_re;
 wire          interface4_bank_bus_we;
+wire          interface4_interface_ack;
+wire   [29:0] interface4_interface_adr;
+wire    [1:0] interface4_interface_bte;
+wire    [2:0] interface4_interface_cti;
+wire          interface4_interface_cyc;
+wire   [31:0] interface4_interface_dat_r;
+wire   [31:0] interface4_interface_dat_w;
+wire          interface4_interface_err;
+wire    [3:0] interface4_interface_sel;
+wire          interface4_interface_stb;
+wire          interface4_interface_we;
 wire   [13:0] interface5_bank_bus_adr;
 reg    [31:0] interface5_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface5_bank_bus_dat_w;
+wire          interface5_bank_bus_re;
 wire          interface5_bank_bus_we;
+wire          interface5_interface_ack;
+wire   [29:0] interface5_interface_adr;
+wire    [1:0] interface5_interface_bte;
+wire    [2:0] interface5_interface_cti;
+wire          interface5_interface_cyc;
+wire   [31:0] interface5_interface_dat_r;
+wire   [31:0] interface5_interface_dat_w;
+wire          interface5_interface_err;
+wire    [3:0] interface5_interface_sel;
+wire          interface5_interface_stb;
+wire          interface5_interface_we;
 wire   [13:0] interface6_bank_bus_adr;
 reg    [31:0] interface6_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface6_bank_bus_dat_w;
+wire          interface6_bank_bus_re;
 wire          interface6_bank_bus_we;
 wire   [13:0] interface7_bank_bus_adr;
 reg    [31:0] interface7_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface7_bank_bus_dat_w;
+wire          interface7_bank_bus_re;
 wire          interface7_bank_bus_we;
 reg    [31:0] interrupt = 32'd0;
 wire          litespi_grant;
@@ -495,7 +616,7 @@ reg           litespisdrphycore_sr_in_shift = 1'd0;
 reg    [31:0] litespisdrphycore_sr_out = 32'd0;
 reg           litespisdrphycore_sr_out_load = 1'd0;
 reg           litespisdrphycore_sr_out_shift = 1'd0;
-reg     [7:0] litespisdrphycore_storage = 8'd1;
+reg     [7:0] litespisdrphycore_storage = 8'd0;
 wire          litespisdrphycore_update;
 wire    [7:0] litespisdrphycore_update_cnt;
 wire          litespisdrphycore_wait;
@@ -527,9 +648,9 @@ wire          port_bus_err;
 wire    [3:0] port_bus_sel;
 wire          port_bus_stb;
 wire          port_bus_we;
+wire          re;
 reg           regs0 = 1'd0;
 reg           regs1 = 1'd0;
-wire    [1:0] request;
 wire          reset;
 reg           reset_re = 1'd0;
 reg     [1:0] reset_storage = 2'd0;
@@ -573,19 +694,6 @@ wire          sdrio_clk_8;
 wire          sdrio_clk_9;
 reg           serial_tx_rs232phytx_next_value1 = 1'd0;
 reg           serial_tx_rs232phytx_next_value_ce1 = 1'd0;
-reg           shared_ack = 1'd0;
-wire   [29:0] shared_adr;
-wire    [1:0] shared_bte;
-wire    [2:0] shared_cti;
-wire          shared_cyc;
-reg    [31:0] shared_dat_r = 32'd0;
-wire   [31:0] shared_dat_w;
-wire          shared_err;
-wire    [3:0] shared_sel;
-wire          shared_stb;
-wire          shared_we;
-reg     [3:0] slave_sel = 4'd0;
-reg     [3:0] slave_sel_r = 4'd0;
 reg           soc_rst = 1'd0;
 reg           spiflash_core_cs = 1'd0;
 wire          spiflash_core_internal_port_sink_first;
@@ -601,13 +709,14 @@ wire          spiflash_core_internal_port_source_last;
 wire   [31:0] spiflash_core_internal_port_source_payload_data;
 wire          spiflash_core_internal_port_source_ready;
 wire          spiflash_core_internal_port_source_valid;
-reg     [1:0] spiflash_core_litespimmap = 2'd0;
+reg           spiflash_core_litespimmap0 = 1'd0;
+reg           spiflash_core_litespimmap1 = 1'd0;
 reg    [29:0] spiflash_core_litespimmap_burst_adr = 30'd0;
-reg    [29:0] spiflash_core_litespimmap_burst_adr_litespi_next_value1 = 30'd0;
-reg           spiflash_core_litespimmap_burst_adr_litespi_next_value_ce1 = 1'd0;
+reg    [29:0] spiflash_core_litespimmap_burst_adr_litespi_f_next_value = 30'd0;
+reg           spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce = 1'd0;
 reg           spiflash_core_litespimmap_burst_cs = 1'd0;
-reg           spiflash_core_litespimmap_burst_cs_litespi_next_value0 = 1'd0;
-reg           spiflash_core_litespimmap_burst_cs_litespi_next_value_ce0 = 1'd0;
+reg           spiflash_core_litespimmap_burst_cs_litespi_next_value = 1'd0;
+reg           spiflash_core_litespimmap_burst_cs_litespi_next_value_ce = 1'd0;
 reg           spiflash_core_litespimmap_bus_ack = 1'd0;
 wire   [29:0] spiflash_core_litespimmap_bus_adr;
 wire    [1:0] spiflash_core_litespimmap_bus_bte;
@@ -619,10 +728,17 @@ reg           spiflash_core_litespimmap_bus_err = 1'd0;
 wire    [3:0] spiflash_core_litespimmap_bus_sel;
 wire          spiflash_core_litespimmap_bus_stb;
 wire          spiflash_core_litespimmap_bus_we;
+reg     [1:0] spiflash_core_litespimmap_byte_count = 2'd0;
+reg     [1:0] spiflash_core_litespimmap_byte_count_litespi_t_next_value = 2'd0;
+reg           spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce = 1'd0;
 reg     [8:0] spiflash_core_litespimmap_count = 9'd256;
 reg           spiflash_core_litespimmap_cs = 1'd0;
+reg    [31:0] spiflash_core_litespimmap_data_write = 32'd0;
+reg    [31:0] spiflash_core_litespimmap_data_write_litespi_t_f_next_value1 = 32'd0;
+reg           spiflash_core_litespimmap_data_write_litespi_t_f_next_value_ce1 = 1'd0;
 wire          spiflash_core_litespimmap_done;
 reg    [31:0] spiflash_core_litespimmap_dummy = 32'd57005;
+wire   [29:0] spiflash_core_litespimmap_offset;
 reg           spiflash_core_litespimmap_re = 1'd0;
 wire          spiflash_core_litespimmap_sink_first;
 wire          spiflash_core_litespimmap_sink_last;
@@ -640,6 +756,13 @@ reg           spiflash_core_litespimmap_source_valid = 1'd0;
 wire    [7:0] spiflash_core_litespimmap_spi_dummy_bits;
 reg     [7:0] spiflash_core_litespimmap_storage = 8'd8;
 reg           spiflash_core_litespimmap_wait = 1'd0;
+reg           spiflash_core_litespimmap_write = 1'd0;
+wire          spiflash_core_litespimmap_write_enabled;
+reg           spiflash_core_litespimmap_write_litespi_t_t_next_value = 1'd0;
+reg           spiflash_core_litespimmap_write_litespi_t_t_next_value_ce = 1'd0;
+reg     [3:0] spiflash_core_litespimmap_write_mask = 4'd0;
+reg     [3:0] spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0 = 4'd0;
+reg           spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0 = 1'd0;
 wire          spiflash_core_request;
 wire          spiflash_core_sink_first;
 wire          spiflash_core_sink_last;
@@ -669,6 +792,14 @@ wire          spiflash_core_user_port_source_ready;
 wire          spiflash_core_user_port_source_valid;
 wire          sys_clk_1;
 wire          sys_rst_1;
+reg    [19:0] timeout0_count = 20'd1000000;
+wire          timeout0_done;
+reg           timeout0_error = 1'd0;
+wire          timeout0_wait;
+reg    [19:0] timeout1_count = 20'd1000000;
+wire          timeout1_done;
+reg           timeout1_error = 1'd0;
+wire          timeout1_wait;
 reg           timer_en_re = 1'd0;
 reg           timer_en_storage = 1'd0;
 reg           timer_enable_re = 1'd0;
@@ -864,7 +995,6 @@ wire          usb23_usb0;
 wire          usb23_usb1;
 wire          usb23_usb2;
 reg    [31:0] vexriscv = 32'd537919488;
-wire          wait_1;
 wire          we;
 reg           wishbone2csr_next_state = 1'd0;
 reg           wishbone2csr_state = 1'd0;
@@ -874,7 +1004,7 @@ reg           wishbone2csr_state = 1'd0;
 //------------------------------------------------------------------------------
 
 assign reset = (soc_rst | cpu_rst);
-assign bus_error = error;
+assign spiflash_core_litespimmap_offset = 30'd536870912;
 always @(*) begin
     interrupt <= 32'd0;
     interrupt[4] <= framectl_irq;
@@ -885,75 +1015,152 @@ end
 assign sys_clk_1 = sys_clk;
 assign por_clk = sys_clk;
 assign sys_rst_1 = int_rst;
-assign shared_adr = array_muxed0;
-assign shared_dat_w = array_muxed1;
-assign shared_sel = array_muxed2;
-assign shared_cyc = array_muxed3;
-assign shared_stb = array_muxed4;
-assign shared_we = array_muxed5;
-assign shared_cti = array_muxed6;
-assign shared_bte = array_muxed7;
-assign ibus_dat_r = shared_dat_r;
-assign dbus_dat_r = shared_dat_r;
-assign ibus_ack = (shared_ack & (grant == 1'd0));
-assign dbus_ack = (shared_ack & (grant == 1'd1));
-assign ibus_err = (shared_err & (grant == 1'd0));
-assign dbus_err = (shared_err & (grant == 1'd1));
-assign request = {dbus_cyc, ibus_cyc};
 always @(*) begin
-    slave_sel <= 4'd0;
-    slave_sel[0] <= (shared_adr[29:22] == 6'd32);
-    slave_sel[1] <= (shared_adr[29:14] == 15'd16384);
-    slave_sel[2] <= (shared_adr[29:26] == 4'd11);
-    slave_sel[3] <= (shared_adr[29:14] == 16'd57344);
+    decoder0_slave_sel <= 2'd0;
+    decoder0_slave_sel[0] <= (ibus_adr[29:22] == 6'd32);
+    decoder0_slave_sel[1] <= (ibus_adr[29:14] == 15'd16384);
 end
-assign spiflash_core_litespimmap_bus_adr = shared_adr;
-assign spiflash_core_litespimmap_bus_dat_w = shared_dat_w;
-assign spiflash_core_litespimmap_bus_sel = shared_sel;
-assign spiflash_core_litespimmap_bus_stb = shared_stb;
-assign spiflash_core_litespimmap_bus_we = shared_we;
-assign spiflash_core_litespimmap_bus_cti = shared_cti;
-assign spiflash_core_litespimmap_bus_bte = shared_bte;
-assign main_ram_bus_adr = shared_adr;
-assign main_ram_bus_dat_w = shared_dat_w;
-assign main_ram_bus_sel = shared_sel;
-assign main_ram_bus_stb = shared_stb;
-assign main_ram_bus_we = shared_we;
-assign main_ram_bus_cti = shared_cti;
-assign main_ram_bus_bte = shared_bte;
-assign port_bus_adr = shared_adr;
-assign port_bus_dat_w = shared_dat_w;
-assign port_bus_sel = shared_sel;
-assign port_bus_stb = shared_stb;
-assign port_bus_we = shared_we;
-assign port_bus_cti = shared_cti;
-assign port_bus_bte = shared_bte;
-assign interface0_adr = shared_adr;
-assign interface0_dat_w = shared_dat_w;
-assign interface0_sel = shared_sel;
-assign interface0_stb = shared_stb;
-assign interface0_we = shared_we;
-assign interface0_cti = shared_cti;
-assign interface0_bte = shared_bte;
-assign spiflash_core_litespimmap_bus_cyc = (shared_cyc & slave_sel[0]);
-assign main_ram_bus_cyc = (shared_cyc & slave_sel[1]);
-assign port_bus_cyc = (shared_cyc & slave_sel[2]);
-assign interface0_cyc = (shared_cyc & slave_sel[3]);
-assign shared_err = (((spiflash_core_litespimmap_bus_err | main_ram_bus_err) | port_bus_err) | interface0_err);
-assign wait_1 = ((shared_stb & shared_cyc) & (~shared_ack));
+assign interface0_interface_adr = ibus_adr;
+assign interface0_interface_dat_w = ibus_dat_w;
+assign interface0_interface_sel = ibus_sel;
+assign interface0_interface_stb = ibus_stb;
+assign interface0_interface_we = ibus_we;
+assign interface0_interface_cti = ibus_cti;
+assign interface0_interface_bte = ibus_bte;
+assign interface1_interface_adr = ibus_adr;
+assign interface1_interface_dat_w = ibus_dat_w;
+assign interface1_interface_sel = ibus_sel;
+assign interface1_interface_stb = ibus_stb;
+assign interface1_interface_we = ibus_we;
+assign interface1_interface_cti = ibus_cti;
+assign interface1_interface_bte = ibus_bte;
+assign interface0_interface_cyc = (ibus_cyc & decoder0_slave_sel[0]);
+assign interface1_interface_cyc = (ibus_cyc & decoder0_slave_sel[1]);
+assign ibus_err = (interface0_interface_err | interface1_interface_err);
+assign timeout0_wait = ((ibus_stb & ibus_cyc) & (~ibus_ack));
 always @(*) begin
-    error <= 1'd0;
-    shared_ack <= 1'd0;
-    shared_dat_r <= 32'd0;
-    shared_ack <= (((spiflash_core_litespimmap_bus_ack | main_ram_bus_ack) | port_bus_ack) | interface0_ack);
-    shared_dat_r <= (((({32{slave_sel_r[0]}} & spiflash_core_litespimmap_bus_dat_r) | ({32{slave_sel_r[1]}} & main_ram_bus_dat_r)) | ({32{slave_sel_r[2]}} & port_bus_dat_r)) | ({32{slave_sel_r[3]}} & interface0_dat_r));
-    if (done) begin
-        shared_dat_r <= 32'd4294967295;
-        shared_ack <= 1'd1;
-        error <= 1'd1;
+    ibus_ack <= 1'd0;
+    ibus_dat_r <= 32'd0;
+    timeout0_error <= 1'd0;
+    ibus_ack <= (interface0_interface_ack | interface1_interface_ack);
+    ibus_dat_r <= (({32{decoder0_slave_sel_r[0]}} & interface0_interface_dat_r) | ({32{decoder0_slave_sel_r[1]}} & interface1_interface_dat_r));
+    if (timeout0_done) begin
+        ibus_dat_r <= 32'd4294967295;
+        ibus_ack <= 1'd1;
+        timeout0_error <= 1'd1;
     end
 end
-assign done = (count == 1'd0);
+assign timeout0_done = (timeout0_count == 1'd0);
+always @(*) begin
+    decoder1_slave_sel <= 4'd0;
+    decoder1_slave_sel[0] <= (dbus_adr[29:22] == 6'd32);
+    decoder1_slave_sel[1] <= (dbus_adr[29:14] == 15'd16384);
+    decoder1_slave_sel[2] <= (dbus_adr[29:26] == 4'd11);
+    decoder1_slave_sel[3] <= (dbus_adr[29:14] == 16'd57344);
+end
+assign interface2_interface_adr = dbus_adr;
+assign interface2_interface_dat_w = dbus_dat_w;
+assign interface2_interface_sel = dbus_sel;
+assign interface2_interface_stb = dbus_stb;
+assign interface2_interface_we = dbus_we;
+assign interface2_interface_cti = dbus_cti;
+assign interface2_interface_bte = dbus_bte;
+assign interface3_interface_adr = dbus_adr;
+assign interface3_interface_dat_w = dbus_dat_w;
+assign interface3_interface_sel = dbus_sel;
+assign interface3_interface_stb = dbus_stb;
+assign interface3_interface_we = dbus_we;
+assign interface3_interface_cti = dbus_cti;
+assign interface3_interface_bte = dbus_bte;
+assign interface4_interface_adr = dbus_adr;
+assign interface4_interface_dat_w = dbus_dat_w;
+assign interface4_interface_sel = dbus_sel;
+assign interface4_interface_stb = dbus_stb;
+assign interface4_interface_we = dbus_we;
+assign interface4_interface_cti = dbus_cti;
+assign interface4_interface_bte = dbus_bte;
+assign interface5_interface_adr = dbus_adr;
+assign interface5_interface_dat_w = dbus_dat_w;
+assign interface5_interface_sel = dbus_sel;
+assign interface5_interface_stb = dbus_stb;
+assign interface5_interface_we = dbus_we;
+assign interface5_interface_cti = dbus_cti;
+assign interface5_interface_bte = dbus_bte;
+assign interface2_interface_cyc = (dbus_cyc & decoder1_slave_sel[0]);
+assign interface3_interface_cyc = (dbus_cyc & decoder1_slave_sel[1]);
+assign interface4_interface_cyc = (dbus_cyc & decoder1_slave_sel[2]);
+assign interface5_interface_cyc = (dbus_cyc & decoder1_slave_sel[3]);
+assign dbus_err = (((interface2_interface_err | interface3_interface_err) | interface4_interface_err) | interface5_interface_err);
+assign timeout1_wait = ((dbus_stb & dbus_cyc) & (~dbus_ack));
+always @(*) begin
+    dbus_ack <= 1'd0;
+    dbus_dat_r <= 32'd0;
+    timeout1_error <= 1'd0;
+    dbus_ack <= (((interface2_interface_ack | interface3_interface_ack) | interface4_interface_ack) | interface5_interface_ack);
+    dbus_dat_r <= (((({32{decoder1_slave_sel_r[0]}} & interface2_interface_dat_r) | ({32{decoder1_slave_sel_r[1]}} & interface3_interface_dat_r)) | ({32{decoder1_slave_sel_r[2]}} & interface4_interface_dat_r)) | ({32{decoder1_slave_sel_r[3]}} & interface5_interface_dat_r));
+    if (timeout1_done) begin
+        dbus_dat_r <= 32'd4294967295;
+        dbus_ack <= 1'd1;
+        timeout1_error <= 1'd1;
+    end
+end
+assign timeout1_done = (timeout1_count == 1'd0);
+assign spiflash_core_litespimmap_bus_adr = array_muxed0;
+assign spiflash_core_litespimmap_bus_dat_w = array_muxed1;
+assign spiflash_core_litespimmap_bus_sel = array_muxed2;
+assign spiflash_core_litespimmap_bus_cyc = array_muxed3;
+assign spiflash_core_litespimmap_bus_stb = array_muxed4;
+assign spiflash_core_litespimmap_bus_we = array_muxed5;
+assign spiflash_core_litespimmap_bus_cti = array_muxed6;
+assign spiflash_core_litespimmap_bus_bte = array_muxed7;
+assign interface0_interface_dat_r = spiflash_core_litespimmap_bus_dat_r;
+assign interface2_interface_dat_r = spiflash_core_litespimmap_bus_dat_r;
+assign interface0_interface_ack = (spiflash_core_litespimmap_bus_ack & (arbiter0_grant == 1'd0));
+assign interface2_interface_ack = (spiflash_core_litespimmap_bus_ack & (arbiter0_grant == 1'd1));
+assign interface0_interface_err = (spiflash_core_litespimmap_bus_err & (arbiter0_grant == 1'd0));
+assign interface2_interface_err = (spiflash_core_litespimmap_bus_err & (arbiter0_grant == 1'd1));
+assign arbiter0_request = {interface2_interface_cyc, interface0_interface_cyc};
+assign main_ram_bus_adr = array_muxed8;
+assign main_ram_bus_dat_w = array_muxed9;
+assign main_ram_bus_sel = array_muxed10;
+assign main_ram_bus_cyc = array_muxed11;
+assign main_ram_bus_stb = array_muxed12;
+assign main_ram_bus_we = array_muxed13;
+assign main_ram_bus_cti = array_muxed14;
+assign main_ram_bus_bte = array_muxed15;
+assign interface1_interface_dat_r = main_ram_bus_dat_r;
+assign interface3_interface_dat_r = main_ram_bus_dat_r;
+assign interface1_interface_ack = (main_ram_bus_ack & (arbiter1_grant == 1'd0));
+assign interface3_interface_ack = (main_ram_bus_ack & (arbiter1_grant == 1'd1));
+assign interface1_interface_err = (main_ram_bus_err & (arbiter1_grant == 1'd0));
+assign interface3_interface_err = (main_ram_bus_err & (arbiter1_grant == 1'd1));
+assign arbiter1_request = {interface3_interface_cyc, interface1_interface_cyc};
+assign port_bus_adr = array_muxed16;
+assign port_bus_dat_w = array_muxed17;
+assign port_bus_sel = array_muxed18;
+assign port_bus_cyc = array_muxed19;
+assign port_bus_stb = array_muxed20;
+assign port_bus_we = array_muxed21;
+assign port_bus_cti = array_muxed22;
+assign port_bus_bte = array_muxed23;
+assign interface4_interface_dat_r = port_bus_dat_r;
+assign interface4_interface_ack = (port_bus_ack & (arbiter2_grant == 1'd0));
+assign interface4_interface_err = (port_bus_err & (arbiter2_grant == 1'd0));
+assign arbiter2_request = {interface4_interface_cyc};
+assign arbiter2_grant = 1'd0;
+assign interface0_adr = array_muxed24;
+assign interface0_dat_w = array_muxed25;
+assign interface0_sel = array_muxed26;
+assign interface0_cyc = array_muxed27;
+assign interface0_stb = array_muxed28;
+assign interface0_we = array_muxed29;
+assign interface0_cti = array_muxed30;
+assign interface0_bte = array_muxed31;
+assign interface5_interface_dat_r = interface0_dat_r;
+assign interface5_interface_ack = (interface0_ack & (arbiter3_grant == 1'd0));
+assign interface5_interface_err = (interface0_err & (arbiter3_grant == 1'd0));
+assign arbiter3_request = {interface5_interface_cyc};
+assign arbiter3_grant = 1'd0;
 assign bus_errors_status = bus_errors;
 always @(*) begin
     rs232phytx_next_state <= 1'd0;
@@ -1353,16 +1560,21 @@ always @(*) begin
     endcase
 end
 assign spiflash_core_litespimmap_spi_dummy_bits = spiflash_core_litespimmap_storage;
+assign spiflash_core_litespimmap_write_enabled = 1'd0;
 assign spiflash_core_litespimmap_done = (spiflash_core_litespimmap_count == 1'd0);
 always @(*) begin
     litespi_next_state <= 4'd0;
-    spiflash_core_litespimmap_burst_adr_litespi_next_value1 <= 30'd0;
-    spiflash_core_litespimmap_burst_adr_litespi_next_value_ce1 <= 1'd0;
-    spiflash_core_litespimmap_burst_cs_litespi_next_value0 <= 1'd0;
-    spiflash_core_litespimmap_burst_cs_litespi_next_value_ce0 <= 1'd0;
+    spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= 30'd0;
+    spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd0;
+    spiflash_core_litespimmap_burst_cs_litespi_next_value <= 1'd0;
+    spiflash_core_litespimmap_burst_cs_litespi_next_value_ce <= 1'd0;
     spiflash_core_litespimmap_bus_ack <= 1'd0;
     spiflash_core_litespimmap_bus_dat_r <= 32'd0;
+    spiflash_core_litespimmap_byte_count_litespi_t_next_value <= 2'd0;
+    spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce <= 1'd0;
     spiflash_core_litespimmap_cs <= 1'd0;
+    spiflash_core_litespimmap_data_write_litespi_t_f_next_value1 <= 32'd0;
+    spiflash_core_litespimmap_data_write_litespi_t_f_next_value_ce1 <= 1'd0;
     spiflash_core_litespimmap_sink_ready <= 1'd0;
     spiflash_core_litespimmap_source_last <= 1'd0;
     spiflash_core_litespimmap_source_payload_data <= 32'd0;
@@ -1371,73 +1583,107 @@ always @(*) begin
     spiflash_core_litespimmap_source_payload_width <= 4'd0;
     spiflash_core_litespimmap_source_valid <= 1'd0;
     spiflash_core_litespimmap_wait <= 1'd0;
+    spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd0;
+    spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd0;
+    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0 <= 4'd0;
+    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd0;
     litespi_next_state <= litespi_state;
     case (litespi_state)
         1'd1: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_source_valid <= 1'd1;
-            spiflash_core_litespimmap_source_payload_data <= 7'd107;
-            spiflash_core_litespimmap_source_payload_len <= 4'd8;
-            spiflash_core_litespimmap_source_payload_width <= 1'd1;
-            spiflash_core_litespimmap_source_payload_mask <= 1'd1;
-            spiflash_core_litespimmap_burst_adr_litespi_next_value1 <= spiflash_core_litespimmap_bus_adr;
-            spiflash_core_litespimmap_burst_adr_litespi_next_value_ce1 <= 1'd1;
-            if (spiflash_core_litespimmap_source_ready) begin
+            spiflash_core_litespimmap_cs <= 1'd0;
+            if (spiflash_core_litespimmap_write_mask[0]) begin
                 litespi_next_state <= 2'd2;
+                spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd1;
+                spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
+            end else begin
+                if ((spiflash_core_litespimmap_byte_count == 2'd3)) begin
+                    spiflash_core_litespimmap_bus_ack <= 1'd1;
+                    spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= (spiflash_core_litespimmap_burst_adr + 1'd1);
+                    spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
+                    litespi_next_state <= 1'd0;
+                    spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd0;
+                    spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
+                end else begin
+                    spiflash_core_litespimmap_byte_count_litespi_t_next_value <= (spiflash_core_litespimmap_byte_count + 1'd1);
+                    spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce <= 1'd1;
+                    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0 <= {spiflash_core_litespimmap0, spiflash_core_litespimmap_write_mask[3:1]};
+                    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd1;
+                end
             end
         end
         2'd2: begin
             spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_sink_ready <= 1'd1;
-            if (spiflash_core_litespimmap_sink_valid) begin
+            spiflash_core_litespimmap_source_valid <= 1'd1;
+            if ((spiflash_core_litespimmap_write_enabled & spiflash_core_litespimmap_write)) begin
+                spiflash_core_litespimmap_source_payload_data <= 2'd2;
+            end else begin
+                spiflash_core_litespimmap_source_payload_data <= 7'd107;
+            end
+            spiflash_core_litespimmap_source_payload_len <= 4'd8;
+            spiflash_core_litespimmap_source_payload_width <= 1'd1;
+            spiflash_core_litespimmap_source_payload_mask <= 1'd1;
+            spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= spiflash_core_litespimmap_bus_adr;
+            spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
+            if (spiflash_core_litespimmap_source_ready) begin
                 litespi_next_state <= 2'd3;
             end
         end
         2'd3: begin
             spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_source_valid <= 1'd1;
-            spiflash_core_litespimmap_source_payload_width <= 1'd1;
-            spiflash_core_litespimmap_source_payload_mask <= 1'd1;
-            spiflash_core_litespimmap_source_payload_data <= {spiflash_core_litespimmap_bus_adr, spiflash_core_litespimmap};
-            spiflash_core_litespimmap_source_payload_len <= 5'd24;
-            spiflash_core_litespimmap_burst_cs_litespi_next_value0 <= 1'd1;
-            spiflash_core_litespimmap_burst_cs_litespi_next_value_ce0 <= 1'd1;
-            spiflash_core_litespimmap_burst_adr_litespi_next_value1 <= spiflash_core_litespimmap_bus_adr;
-            spiflash_core_litespimmap_burst_adr_litespi_next_value_ce1 <= 1'd1;
-            if (spiflash_core_litespimmap_source_ready) begin
+            spiflash_core_litespimmap_sink_ready <= 1'd1;
+            if (spiflash_core_litespimmap_sink_valid) begin
                 litespi_next_state <= 3'd4;
             end
         end
         3'd4: begin
             spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_sink_ready <= 1'd1;
-            if (spiflash_core_litespimmap_sink_valid) begin
-                if ((spiflash_core_litespimmap_spi_dummy_bits == 1'd0)) begin
-                    litespi_next_state <= 3'd7;
-                end else begin
-                    litespi_next_state <= 3'd5;
-                end
+            spiflash_core_litespimmap_source_valid <= 1'd1;
+            spiflash_core_litespimmap_source_payload_width <= 1'd1;
+            spiflash_core_litespimmap_source_payload_mask <= 1'd1;
+            spiflash_core_litespimmap_source_payload_data <= {(spiflash_core_litespimmap_bus_adr - spiflash_core_litespimmap_offset), spiflash_core_litespimmap_byte_count};
+            spiflash_core_litespimmap_source_payload_len <= 5'd24;
+            spiflash_core_litespimmap_burst_cs_litespi_next_value <= 1'd1;
+            spiflash_core_litespimmap_burst_cs_litespi_next_value_ce <= 1'd1;
+            spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= spiflash_core_litespimmap_bus_adr;
+            spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
+            if (spiflash_core_litespimmap_source_ready) begin
+                litespi_next_state <= 3'd5;
             end
         end
         3'd5: begin
             spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_source_valid <= 1'd1;
-            spiflash_core_litespimmap_source_payload_width <= 1'd1;
-            spiflash_core_litespimmap_source_payload_mask <= 1'd1;
-            spiflash_core_litespimmap_source_payload_data <= spiflash_core_litespimmap_dummy;
-            spiflash_core_litespimmap_source_payload_len <= spiflash_core_litespimmap_spi_dummy_bits;
-            if (spiflash_core_litespimmap_source_ready) begin
-                litespi_next_state <= 3'd6;
+            spiflash_core_litespimmap_sink_ready <= 1'd1;
+            if (spiflash_core_litespimmap_sink_valid) begin
+                if ((spiflash_core_litespimmap_write_enabled & spiflash_core_litespimmap_write)) begin
+                    litespi_next_state <= 4'd10;
+                end else begin
+                    if ((spiflash_core_litespimmap_spi_dummy_bits == 1'd0)) begin
+                        litespi_next_state <= 4'd8;
+                    end else begin
+                        litespi_next_state <= 3'd6;
+                    end
+                end
             end
         end
         3'd6: begin
             spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_sink_ready <= 1'd1;
-            if (spiflash_core_litespimmap_sink_valid) begin
+            spiflash_core_litespimmap_source_valid <= 1'd1;
+            spiflash_core_litespimmap_source_payload_width <= 1'd1;
+            spiflash_core_litespimmap_source_payload_mask <= 1'd0;
+            spiflash_core_litespimmap_source_payload_data <= spiflash_core_litespimmap_dummy;
+            spiflash_core_litespimmap_source_payload_len <= spiflash_core_litespimmap_spi_dummy_bits;
+            if (spiflash_core_litespimmap_source_ready) begin
                 litespi_next_state <= 3'd7;
             end
         end
         3'd7: begin
+            spiflash_core_litespimmap_cs <= 1'd1;
+            spiflash_core_litespimmap_sink_ready <= 1'd1;
+            if (spiflash_core_litespimmap_sink_valid) begin
+                litespi_next_state <= 4'd8;
+            end
+        end
+        4'd8: begin
             spiflash_core_litespimmap_cs <= 1'd1;
             spiflash_core_litespimmap_source_valid <= 1'd1;
             spiflash_core_litespimmap_source_last <= 1'd1;
@@ -1445,31 +1691,90 @@ always @(*) begin
             spiflash_core_litespimmap_source_payload_len <= 6'd32;
             spiflash_core_litespimmap_source_payload_mask <= 1'd0;
             if (spiflash_core_litespimmap_source_ready) begin
-                litespi_next_state <= 4'd8;
+                litespi_next_state <= 4'd9;
             end
         end
-        4'd8: begin
+        4'd9: begin
             spiflash_core_litespimmap_cs <= 1'd1;
             spiflash_core_litespimmap_sink_ready <= 1'd1;
             spiflash_core_litespimmap_bus_dat_r <= {spiflash_core_litespimmap_sink_payload_data[7:0], spiflash_core_litespimmap_sink_payload_data[15:8], spiflash_core_litespimmap_sink_payload_data[23:16], spiflash_core_litespimmap_sink_payload_data[31:24]};
             if (spiflash_core_litespimmap_sink_valid) begin
                 spiflash_core_litespimmap_bus_ack <= 1'd1;
-                spiflash_core_litespimmap_burst_adr_litespi_next_value1 <= (spiflash_core_litespimmap_burst_adr + 1'd1);
-                spiflash_core_litespimmap_burst_adr_litespi_next_value_ce1 <= 1'd1;
+                spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= (spiflash_core_litespimmap_burst_adr + 1'd1);
+                spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
                 litespi_next_state <= 1'd0;
+            end
+        end
+        4'd10: begin
+            spiflash_core_litespimmap_cs <= 1'd1;
+            spiflash_core_litespimmap_source_valid <= 1'd1;
+            spiflash_core_litespimmap_source_payload_width <= 1'd1;
+            spiflash_core_litespimmap_source_payload_mask <= 4'd15;
+            spiflash_core_litespimmap_source_payload_data <= spiflash_core_litespimmap_data_write;
+            spiflash_core_litespimmap_source_payload_len <= 4'd8;
+            if (spiflash_core_litespimmap_source_ready) begin
+                litespi_next_state <= 4'd11;
+            end
+        end
+        4'd11: begin
+            spiflash_core_litespimmap_cs <= 1'd1;
+            spiflash_core_litespimmap_sink_ready <= 1'd1;
+            if (spiflash_core_litespimmap_sink_valid) begin
+                if ((spiflash_core_litespimmap_byte_count != 2'd3)) begin
+                    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0 <= {spiflash_core_litespimmap1, spiflash_core_litespimmap_write_mask[3:1]};
+                    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd1;
+                    spiflash_core_litespimmap_byte_count_litespi_t_next_value <= (spiflash_core_litespimmap_byte_count + 1'd1);
+                    spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce <= 1'd1;
+                    spiflash_core_litespimmap_data_write_litespi_t_f_next_value1 <= (spiflash_core_litespimmap_data_write >>> 4'd8);
+                    spiflash_core_litespimmap_data_write_litespi_t_f_next_value_ce1 <= 1'd1;
+                    if (spiflash_core_litespimmap_write_mask[1]) begin
+                        litespi_next_state <= 4'd10;
+                    end else begin
+                        spiflash_core_litespimmap_cs <= 1'd0;
+                        spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd0;
+                        spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
+                        litespi_next_state <= 1'd1;
+                    end
+                end else begin
+                    spiflash_core_litespimmap_bus_ack <= 1'd1;
+                    spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= (spiflash_core_litespimmap_burst_adr + 1'd1);
+                    spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
+                    litespi_next_state <= 1'd0;
+                end
             end
         end
         default: begin
             spiflash_core_litespimmap_wait <= 1'd1;
-            spiflash_core_litespimmap_burst_cs_litespi_next_value0 <= (spiflash_core_litespimmap_burst_cs & (~spiflash_core_litespimmap_done));
-            spiflash_core_litespimmap_burst_cs_litespi_next_value_ce0 <= 1'd1;
+            spiflash_core_litespimmap_burst_cs_litespi_next_value <= (spiflash_core_litespimmap_burst_cs & (~spiflash_core_litespimmap_done));
+            spiflash_core_litespimmap_burst_cs_litespi_next_value_ce <= 1'd1;
             spiflash_core_litespimmap_cs <= spiflash_core_litespimmap_burst_cs;
-            if (((spiflash_core_litespimmap_bus_cyc & spiflash_core_litespimmap_bus_stb) & (~spiflash_core_litespimmap_bus_we))) begin
-                if ((spiflash_core_litespimmap_burst_cs & (spiflash_core_litespimmap_bus_adr == spiflash_core_litespimmap_burst_adr))) begin
-                    litespi_next_state <= 3'd7;
+            if ((spiflash_core_litespimmap_bus_cyc & spiflash_core_litespimmap_bus_stb)) begin
+                spiflash_core_litespimmap_byte_count_litespi_t_next_value <= 1'd0;
+                spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce <= 1'd1;
+                if ((~spiflash_core_litespimmap_bus_we)) begin
+                    if (((spiflash_core_litespimmap_burst_cs & (spiflash_core_litespimmap_bus_adr == spiflash_core_litespimmap_burst_adr)) & ((~spiflash_core_litespimmap_write_enabled) | (~spiflash_core_litespimmap_write)))) begin
+                        litespi_next_state <= 4'd8;
+                    end else begin
+                        spiflash_core_litespimmap_cs <= 1'd0;
+                        litespi_next_state <= 2'd2;
+                    end
+                    spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd0;
+                    spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
                 end else begin
-                    spiflash_core_litespimmap_cs <= 1'd0;
-                    litespi_next_state <= 1'd1;
+                    if (spiflash_core_litespimmap_write_enabled) begin
+                        spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0 <= spiflash_core_litespimmap_bus_sel;
+                        spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd1;
+                        spiflash_core_litespimmap_data_write_litespi_t_f_next_value1 <= spiflash_core_litespimmap_bus_dat_w;
+                        spiflash_core_litespimmap_data_write_litespi_t_f_next_value_ce1 <= 1'd1;
+                        if ((((spiflash_core_litespimmap_burst_cs & (spiflash_core_litespimmap_bus_adr == spiflash_core_litespimmap_burst_adr)) & spiflash_core_litespimmap_bus_sel[0]) & spiflash_core_litespimmap_write)) begin
+                            litespi_next_state <= 4'd10;
+                        end else begin
+                            spiflash_core_litespimmap_cs <= 1'd0;
+                            litespi_next_state <= 1'd1;
+                        end
+                        spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd1;
+                        spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
+                    end
                 end
             end
         end
@@ -1524,6 +1829,7 @@ always @(*) begin
     interface0_dat_r <= 32'd0;
     interface1_adr <= 14'd0;
     interface1_dat_w <= 32'd0;
+    interface1_re <= 1'd0;
     interface1_we <= 1'd0;
     wishbone2csr_next_state <= 1'd0;
     wishbone2csr_next_state <= wishbone2csr_state;
@@ -1537,6 +1843,7 @@ always @(*) begin
             interface1_dat_w <= interface0_dat_w;
             if ((interface0_cyc & interface0_stb)) begin
                 interface1_adr <= interface0_adr[29:0];
+                interface1_re <= ((~interface0_we) & (interface0_sel != 1'd0));
                 interface1_we <= (interface0_we & (interface0_sel != 1'd0));
                 wishbone2csr_next_state <= 1'd1;
             end
@@ -1550,7 +1857,7 @@ always @(*) begin
     csrbank0_reset0_we <= 1'd0;
     if ((csrbank0_sel & (interface0_bank_bus_adr[8:0] == 1'd0))) begin
         csrbank0_reset0_re <= interface0_bank_bus_we;
-        csrbank0_reset0_we <= (~interface0_bank_bus_we);
+        csrbank0_reset0_we <= interface0_bank_bus_re;
     end
 end
 assign csrbank0_scratch0_r = interface0_bank_bus_dat_w[31:0];
@@ -1559,7 +1866,7 @@ always @(*) begin
     csrbank0_scratch0_we <= 1'd0;
     if ((csrbank0_sel & (interface0_bank_bus_adr[8:0] == 1'd1))) begin
         csrbank0_scratch0_re <= interface0_bank_bus_we;
-        csrbank0_scratch0_we <= (~interface0_bank_bus_we);
+        csrbank0_scratch0_we <= interface0_bank_bus_re;
     end
 end
 assign csrbank0_bus_errors_r = interface0_bank_bus_dat_w[31:0];
@@ -1568,7 +1875,7 @@ always @(*) begin
     csrbank0_bus_errors_we <= 1'd0;
     if ((csrbank0_sel & (interface0_bank_bus_adr[8:0] == 2'd2))) begin
         csrbank0_bus_errors_re <= interface0_bank_bus_we;
-        csrbank0_bus_errors_we <= (~interface0_bank_bus_we);
+        csrbank0_bus_errors_we <= interface0_bank_bus_re;
     end
 end
 always @(*) begin
@@ -1589,7 +1896,7 @@ always @(*) begin
     csrbank1_ev_status_we <= 1'd0;
     if ((csrbank1_sel & (interface1_bank_bus_adr[8:0] == 1'd0))) begin
         csrbank1_ev_status_re <= interface1_bank_bus_we;
-        csrbank1_ev_status_we <= (~interface1_bank_bus_we);
+        csrbank1_ev_status_we <= interface1_bank_bus_re;
     end
 end
 assign csrbank1_ev_pending_r = interface1_bank_bus_dat_w[0];
@@ -1598,7 +1905,7 @@ always @(*) begin
     csrbank1_ev_pending_we <= 1'd0;
     if ((csrbank1_sel & (interface1_bank_bus_adr[8:0] == 1'd1))) begin
         csrbank1_ev_pending_re <= interface1_bank_bus_we;
-        csrbank1_ev_pending_we <= (~interface1_bank_bus_we);
+        csrbank1_ev_pending_we <= interface1_bank_bus_re;
     end
 end
 assign csrbank1_ev_enable0_r = interface1_bank_bus_dat_w[0];
@@ -1607,7 +1914,7 @@ always @(*) begin
     csrbank1_ev_enable0_we <= 1'd0;
     if ((csrbank1_sel & (interface1_bank_bus_adr[8:0] == 2'd2))) begin
         csrbank1_ev_enable0_re <= interface1_bank_bus_we;
-        csrbank1_ev_enable0_we <= (~interface1_bank_bus_we);
+        csrbank1_ev_enable0_we <= interface1_bank_bus_re;
     end
 end
 always @(*) begin
@@ -1631,7 +1938,7 @@ always @(*) begin
     csrbank2_w0_we <= 1'd0;
     if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 1'd0))) begin
         csrbank2_w0_re <= interface2_bank_bus_we;
-        csrbank2_w0_we <= (~interface2_bank_bus_we);
+        csrbank2_w0_we <= interface2_bank_bus_re;
     end
 end
 assign csrbank2_r_r = interface2_bank_bus_dat_w[0];
@@ -1640,7 +1947,7 @@ always @(*) begin
     csrbank2_r_we <= 1'd0;
     if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 1'd1))) begin
         csrbank2_r_re <= interface2_bank_bus_we;
-        csrbank2_r_we <= (~interface2_bank_bus_we);
+        csrbank2_r_we <= interface2_bank_bus_re;
     end
 end
 assign scl = _w_storage[0];
@@ -1660,7 +1967,7 @@ always @(*) begin
     csrbank3_mmap_dummy_bits0_we <= 1'd0;
     if ((csrbank3_sel & (interface3_bank_bus_adr[8:0] == 1'd0))) begin
         csrbank3_mmap_dummy_bits0_re <= interface3_bank_bus_we;
-        csrbank3_mmap_dummy_bits0_we <= (~interface3_bank_bus_we);
+        csrbank3_mmap_dummy_bits0_we <= interface3_bank_bus_re;
     end
 end
 assign csrbank3_mmap_dummy_bits0_w = spiflash_core_litespimmap_storage[7:0];
@@ -1671,7 +1978,7 @@ always @(*) begin
     csrbank4_clk_divisor0_we <= 1'd0;
     if ((csrbank4_sel & (interface4_bank_bus_adr[8:0] == 1'd0))) begin
         csrbank4_clk_divisor0_re <= interface4_bank_bus_we;
-        csrbank4_clk_divisor0_we <= (~interface4_bank_bus_we);
+        csrbank4_clk_divisor0_we <= interface4_bank_bus_re;
     end
 end
 assign csrbank4_clk_divisor0_w = litespisdrphycore_storage[7:0];
@@ -1682,7 +1989,7 @@ always @(*) begin
     csrbank5_load0_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 1'd0))) begin
         csrbank5_load0_re <= interface5_bank_bus_we;
-        csrbank5_load0_we <= (~interface5_bank_bus_we);
+        csrbank5_load0_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_reload0_r = interface5_bank_bus_dat_w[31:0];
@@ -1691,7 +1998,7 @@ always @(*) begin
     csrbank5_reload0_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 1'd1))) begin
         csrbank5_reload0_re <= interface5_bank_bus_we;
-        csrbank5_reload0_we <= (~interface5_bank_bus_we);
+        csrbank5_reload0_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_en0_r = interface5_bank_bus_dat_w[0];
@@ -1700,7 +2007,7 @@ always @(*) begin
     csrbank5_en0_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 2'd2))) begin
         csrbank5_en0_re <= interface5_bank_bus_we;
-        csrbank5_en0_we <= (~interface5_bank_bus_we);
+        csrbank5_en0_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_update_value0_r = interface5_bank_bus_dat_w[0];
@@ -1709,7 +2016,7 @@ always @(*) begin
     csrbank5_update_value0_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 2'd3))) begin
         csrbank5_update_value0_re <= interface5_bank_bus_we;
-        csrbank5_update_value0_we <= (~interface5_bank_bus_we);
+        csrbank5_update_value0_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_value_r = interface5_bank_bus_dat_w[31:0];
@@ -1718,7 +2025,7 @@ always @(*) begin
     csrbank5_value_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 3'd4))) begin
         csrbank5_value_re <= interface5_bank_bus_we;
-        csrbank5_value_we <= (~interface5_bank_bus_we);
+        csrbank5_value_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_ev_status_r = interface5_bank_bus_dat_w[0];
@@ -1727,7 +2034,7 @@ always @(*) begin
     csrbank5_ev_status_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 3'd5))) begin
         csrbank5_ev_status_re <= interface5_bank_bus_we;
-        csrbank5_ev_status_we <= (~interface5_bank_bus_we);
+        csrbank5_ev_status_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_ev_pending_r = interface5_bank_bus_dat_w[0];
@@ -1736,7 +2043,7 @@ always @(*) begin
     csrbank5_ev_pending_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 3'd6))) begin
         csrbank5_ev_pending_re <= interface5_bank_bus_we;
-        csrbank5_ev_pending_we <= (~interface5_bank_bus_we);
+        csrbank5_ev_pending_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_ev_enable0_r = interface5_bank_bus_dat_w[0];
@@ -1745,7 +2052,7 @@ always @(*) begin
     csrbank5_ev_enable0_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 3'd7))) begin
         csrbank5_ev_enable0_re <= interface5_bank_bus_we;
-        csrbank5_ev_enable0_we <= (~interface5_bank_bus_we);
+        csrbank5_ev_enable0_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_uptime_latch0_r = interface5_bank_bus_dat_w[0];
@@ -1754,7 +2061,7 @@ always @(*) begin
     csrbank5_uptime_latch0_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 4'd8))) begin
         csrbank5_uptime_latch0_re <= interface5_bank_bus_we;
-        csrbank5_uptime_latch0_we <= (~interface5_bank_bus_we);
+        csrbank5_uptime_latch0_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_uptime_cycles1_r = interface5_bank_bus_dat_w[31:0];
@@ -1763,7 +2070,7 @@ always @(*) begin
     csrbank5_uptime_cycles1_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 4'd9))) begin
         csrbank5_uptime_cycles1_re <= interface5_bank_bus_we;
-        csrbank5_uptime_cycles1_we <= (~interface5_bank_bus_we);
+        csrbank5_uptime_cycles1_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_uptime_cycles0_r = interface5_bank_bus_dat_w[31:0];
@@ -1772,7 +2079,7 @@ always @(*) begin
     csrbank5_uptime_cycles0_we <= 1'd0;
     if ((csrbank5_sel & (interface5_bank_bus_adr[8:0] == 4'd10))) begin
         csrbank5_uptime_cycles0_re <= interface5_bank_bus_we;
-        csrbank5_uptime_cycles0_we <= (~interface5_bank_bus_we);
+        csrbank5_uptime_cycles0_we <= interface5_bank_bus_re;
     end
 end
 assign csrbank5_load0_w = timer_load_storage[31:0];
@@ -1806,7 +2113,7 @@ always @(*) begin
     uart_rxtx_we <= 1'd0;
     if ((csrbank6_sel & (interface6_bank_bus_adr[8:0] == 1'd0))) begin
         uart_rxtx_re <= interface6_bank_bus_we;
-        uart_rxtx_we <= (~interface6_bank_bus_we);
+        uart_rxtx_we <= interface6_bank_bus_re;
     end
 end
 assign csrbank6_txfull_r = interface6_bank_bus_dat_w[0];
@@ -1815,7 +2122,7 @@ always @(*) begin
     csrbank6_txfull_we <= 1'd0;
     if ((csrbank6_sel & (interface6_bank_bus_adr[8:0] == 1'd1))) begin
         csrbank6_txfull_re <= interface6_bank_bus_we;
-        csrbank6_txfull_we <= (~interface6_bank_bus_we);
+        csrbank6_txfull_we <= interface6_bank_bus_re;
     end
 end
 assign csrbank6_rxempty_r = interface6_bank_bus_dat_w[0];
@@ -1824,7 +2131,7 @@ always @(*) begin
     csrbank6_rxempty_we <= 1'd0;
     if ((csrbank6_sel & (interface6_bank_bus_adr[8:0] == 2'd2))) begin
         csrbank6_rxempty_re <= interface6_bank_bus_we;
-        csrbank6_rxempty_we <= (~interface6_bank_bus_we);
+        csrbank6_rxempty_we <= interface6_bank_bus_re;
     end
 end
 assign csrbank6_ev_status_r = interface6_bank_bus_dat_w[1:0];
@@ -1833,7 +2140,7 @@ always @(*) begin
     csrbank6_ev_status_we <= 1'd0;
     if ((csrbank6_sel & (interface6_bank_bus_adr[8:0] == 2'd3))) begin
         csrbank6_ev_status_re <= interface6_bank_bus_we;
-        csrbank6_ev_status_we <= (~interface6_bank_bus_we);
+        csrbank6_ev_status_we <= interface6_bank_bus_re;
     end
 end
 assign csrbank6_ev_pending_r = interface6_bank_bus_dat_w[1:0];
@@ -1842,7 +2149,7 @@ always @(*) begin
     csrbank6_ev_pending_we <= 1'd0;
     if ((csrbank6_sel & (interface6_bank_bus_adr[8:0] == 3'd4))) begin
         csrbank6_ev_pending_re <= interface6_bank_bus_we;
-        csrbank6_ev_pending_we <= (~interface6_bank_bus_we);
+        csrbank6_ev_pending_we <= interface6_bank_bus_re;
     end
 end
 assign csrbank6_ev_enable0_r = interface6_bank_bus_dat_w[1:0];
@@ -1851,7 +2158,7 @@ always @(*) begin
     csrbank6_ev_enable0_we <= 1'd0;
     if ((csrbank6_sel & (interface6_bank_bus_adr[8:0] == 3'd5))) begin
         csrbank6_ev_enable0_re <= interface6_bank_bus_we;
-        csrbank6_ev_enable0_we <= (~interface6_bank_bus_we);
+        csrbank6_ev_enable0_we <= interface6_bank_bus_re;
     end
 end
 assign csrbank6_txempty_r = interface6_bank_bus_dat_w[0];
@@ -1860,7 +2167,7 @@ always @(*) begin
     csrbank6_txempty_we <= 1'd0;
     if ((csrbank6_sel & (interface6_bank_bus_adr[8:0] == 3'd6))) begin
         csrbank6_txempty_re <= interface6_bank_bus_we;
-        csrbank6_txempty_we <= (~interface6_bank_bus_we);
+        csrbank6_txempty_we <= interface6_bank_bus_re;
     end
 end
 assign csrbank6_rxfull_r = interface6_bank_bus_dat_w[0];
@@ -1869,7 +2176,7 @@ always @(*) begin
     csrbank6_rxfull_we <= 1'd0;
     if ((csrbank6_sel & (interface6_bank_bus_adr[8:0] == 3'd7))) begin
         csrbank6_rxfull_re <= interface6_bank_bus_we;
-        csrbank6_rxfull_we <= (~interface6_bank_bus_we);
+        csrbank6_rxfull_we <= interface6_bank_bus_re;
     end
 end
 assign csrbank6_txfull_w = uart_txfull_status;
@@ -1904,7 +2211,7 @@ always @(*) begin
     csrbank7_ev_status_we <= 1'd0;
     if ((csrbank7_sel & (interface7_bank_bus_adr[8:0] == 1'd0))) begin
         csrbank7_ev_status_re <= interface7_bank_bus_we;
-        csrbank7_ev_status_we <= (~interface7_bank_bus_we);
+        csrbank7_ev_status_we <= interface7_bank_bus_re;
     end
 end
 assign csrbank7_ev_pending_r = interface7_bank_bus_dat_w[0];
@@ -1913,7 +2220,7 @@ always @(*) begin
     csrbank7_ev_pending_we <= 1'd0;
     if ((csrbank7_sel & (interface7_bank_bus_adr[8:0] == 1'd1))) begin
         csrbank7_ev_pending_re <= interface7_bank_bus_we;
-        csrbank7_ev_pending_we <= (~interface7_bank_bus_we);
+        csrbank7_ev_pending_we <= interface7_bank_bus_re;
     end
 end
 assign csrbank7_ev_enable0_r = interface7_bank_bus_dat_w[0];
@@ -1922,7 +2229,7 @@ always @(*) begin
     csrbank7_ev_enable0_we <= 1'd0;
     if ((csrbank7_sel & (interface7_bank_bus_adr[8:0] == 2'd2))) begin
         csrbank7_ev_enable0_re <= interface7_bank_bus_we;
-        csrbank7_ev_enable0_we <= (~interface7_bank_bus_we);
+        csrbank7_ev_enable0_we <= interface7_bank_bus_re;
     end
 end
 always @(*) begin
@@ -1940,6 +2247,7 @@ assign usb23_pending_we = csrbank7_ev_pending_we;
 assign usb23_usb2 = usb23_enable_storage;
 assign csrbank7_ev_enable0_w = usb23_enable_storage;
 assign adr = interface1_adr;
+assign re = interface1_re;
 assign we = interface1_we;
 assign dat_w = interface1_dat_w;
 assign interface1_dat_r = dat_r;
@@ -1951,6 +2259,14 @@ assign interface4_bank_bus_adr = adr;
 assign interface5_bank_bus_adr = adr;
 assign interface6_bank_bus_adr = adr;
 assign interface7_bank_bus_adr = adr;
+assign interface0_bank_bus_re = re;
+assign interface1_bank_bus_re = re;
+assign interface2_bank_bus_re = re;
+assign interface3_bank_bus_re = re;
+assign interface4_bank_bus_re = re;
+assign interface5_bank_bus_re = re;
+assign interface6_bank_bus_re = re;
+assign interface7_bank_bus_re = re;
 assign interface0_bank_bus_we = we;
 assign interface1_bank_bus_we = we;
 assign interface2_bank_bus_we = we;
@@ -1970,93 +2286,312 @@ assign interface7_bank_bus_dat_w = dat_w;
 assign dat_r = (((((((interface0_bank_bus_dat_r | interface1_bank_bus_dat_r) | interface2_bank_bus_dat_r) | interface3_bank_bus_dat_r) | interface4_bank_bus_dat_r) | interface5_bank_bus_dat_r) | interface6_bank_bus_dat_r) | interface7_bank_bus_dat_r);
 always @(*) begin
     array_muxed0 <= 30'd0;
-    case (grant)
+    case (arbiter0_grant)
         1'd0: begin
-            array_muxed0 <= ibus_adr;
+            array_muxed0 <= interface0_interface_adr;
         end
         default: begin
-            array_muxed0 <= dbus_adr;
+            array_muxed0 <= interface2_interface_adr;
         end
     endcase
 end
 always @(*) begin
     array_muxed1 <= 32'd0;
-    case (grant)
+    case (arbiter0_grant)
         1'd0: begin
-            array_muxed1 <= ibus_dat_w;
+            array_muxed1 <= interface0_interface_dat_w;
         end
         default: begin
-            array_muxed1 <= dbus_dat_w;
+            array_muxed1 <= interface2_interface_dat_w;
         end
     endcase
 end
 always @(*) begin
     array_muxed2 <= 4'd0;
-    case (grant)
+    case (arbiter0_grant)
         1'd0: begin
-            array_muxed2 <= ibus_sel;
+            array_muxed2 <= interface0_interface_sel;
         end
         default: begin
-            array_muxed2 <= dbus_sel;
+            array_muxed2 <= interface2_interface_sel;
         end
     endcase
 end
 always @(*) begin
     array_muxed3 <= 1'd0;
-    case (grant)
+    case (arbiter0_grant)
         1'd0: begin
-            array_muxed3 <= ibus_cyc;
+            array_muxed3 <= interface0_interface_cyc;
         end
         default: begin
-            array_muxed3 <= dbus_cyc;
+            array_muxed3 <= interface2_interface_cyc;
         end
     endcase
 end
 always @(*) begin
     array_muxed4 <= 1'd0;
-    case (grant)
+    case (arbiter0_grant)
         1'd0: begin
-            array_muxed4 <= ibus_stb;
+            array_muxed4 <= interface0_interface_stb;
         end
         default: begin
-            array_muxed4 <= dbus_stb;
+            array_muxed4 <= interface2_interface_stb;
         end
     endcase
 end
 always @(*) begin
     array_muxed5 <= 1'd0;
-    case (grant)
+    case (arbiter0_grant)
         1'd0: begin
-            array_muxed5 <= ibus_we;
+            array_muxed5 <= interface0_interface_we;
         end
         default: begin
-            array_muxed5 <= dbus_we;
+            array_muxed5 <= interface2_interface_we;
         end
     endcase
 end
 always @(*) begin
     array_muxed6 <= 3'd0;
-    case (grant)
+    case (arbiter0_grant)
         1'd0: begin
-            array_muxed6 <= ibus_cti;
+            array_muxed6 <= interface0_interface_cti;
         end
         default: begin
-            array_muxed6 <= dbus_cti;
+            array_muxed6 <= interface2_interface_cti;
         end
     endcase
 end
 always @(*) begin
     array_muxed7 <= 2'd0;
-    case (grant)
+    case (arbiter0_grant)
         1'd0: begin
-            array_muxed7 <= ibus_bte;
+            array_muxed7 <= interface0_interface_bte;
         end
         default: begin
-            array_muxed7 <= dbus_bte;
+            array_muxed7 <= interface2_interface_bte;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed8 <= 30'd0;
+    case (arbiter1_grant)
+        1'd0: begin
+            array_muxed8 <= interface1_interface_adr;
+        end
+        default: begin
+            array_muxed8 <= interface3_interface_adr;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed9 <= 32'd0;
+    case (arbiter1_grant)
+        1'd0: begin
+            array_muxed9 <= interface1_interface_dat_w;
+        end
+        default: begin
+            array_muxed9 <= interface3_interface_dat_w;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed10 <= 4'd0;
+    case (arbiter1_grant)
+        1'd0: begin
+            array_muxed10 <= interface1_interface_sel;
+        end
+        default: begin
+            array_muxed10 <= interface3_interface_sel;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed11 <= 1'd0;
+    case (arbiter1_grant)
+        1'd0: begin
+            array_muxed11 <= interface1_interface_cyc;
+        end
+        default: begin
+            array_muxed11 <= interface3_interface_cyc;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed12 <= 1'd0;
+    case (arbiter1_grant)
+        1'd0: begin
+            array_muxed12 <= interface1_interface_stb;
+        end
+        default: begin
+            array_muxed12 <= interface3_interface_stb;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed13 <= 1'd0;
+    case (arbiter1_grant)
+        1'd0: begin
+            array_muxed13 <= interface1_interface_we;
+        end
+        default: begin
+            array_muxed13 <= interface3_interface_we;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed14 <= 3'd0;
+    case (arbiter1_grant)
+        1'd0: begin
+            array_muxed14 <= interface1_interface_cti;
+        end
+        default: begin
+            array_muxed14 <= interface3_interface_cti;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed15 <= 2'd0;
+    case (arbiter1_grant)
+        1'd0: begin
+            array_muxed15 <= interface1_interface_bte;
+        end
+        default: begin
+            array_muxed15 <= interface3_interface_bte;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed16 <= 30'd0;
+    case (arbiter2_grant)
+        default: begin
+            array_muxed16 <= interface4_interface_adr;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed17 <= 32'd0;
+    case (arbiter2_grant)
+        default: begin
+            array_muxed17 <= interface4_interface_dat_w;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed18 <= 4'd0;
+    case (arbiter2_grant)
+        default: begin
+            array_muxed18 <= interface4_interface_sel;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed19 <= 1'd0;
+    case (arbiter2_grant)
+        default: begin
+            array_muxed19 <= interface4_interface_cyc;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed20 <= 1'd0;
+    case (arbiter2_grant)
+        default: begin
+            array_muxed20 <= interface4_interface_stb;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed21 <= 1'd0;
+    case (arbiter2_grant)
+        default: begin
+            array_muxed21 <= interface4_interface_we;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed22 <= 3'd0;
+    case (arbiter2_grant)
+        default: begin
+            array_muxed22 <= interface4_interface_cti;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed23 <= 2'd0;
+    case (arbiter2_grant)
+        default: begin
+            array_muxed23 <= interface4_interface_bte;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed24 <= 30'd0;
+    case (arbiter3_grant)
+        default: begin
+            array_muxed24 <= interface5_interface_adr;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed25 <= 32'd0;
+    case (arbiter3_grant)
+        default: begin
+            array_muxed25 <= interface5_interface_dat_w;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed26 <= 4'd0;
+    case (arbiter3_grant)
+        default: begin
+            array_muxed26 <= interface5_interface_sel;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed27 <= 1'd0;
+    case (arbiter3_grant)
+        default: begin
+            array_muxed27 <= interface5_interface_cyc;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed28 <= 1'd0;
+    case (arbiter3_grant)
+        default: begin
+            array_muxed28 <= interface5_interface_stb;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed29 <= 1'd0;
+    case (arbiter3_grant)
+        default: begin
+            array_muxed29 <= interface5_interface_we;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed30 <= 3'd0;
+    case (arbiter3_grant)
+        default: begin
+            array_muxed30 <= interface5_interface_cti;
+        end
+    endcase
+end
+always @(*) begin
+    array_muxed31 <= 2'd0;
+    case (arbiter3_grant)
+        default: begin
+            array_muxed31 <= interface5_interface_bte;
         end
     endcase
 end
 assign rx_rx = regs1;
+assign sdrio_clk_10 = sys_clk_1;
+assign sdrio_clk_11 = sys_clk_1;
+assign sdrio_clk_12 = sys_clk_1;
 assign sdrio_clk = sys_clk_1;
 assign sdrio_clk_1 = sys_clk_1;
 assign sdrio_clk_2 = sys_clk_1;
@@ -2064,12 +2599,9 @@ assign sdrio_clk_3 = sys_clk_1;
 assign sdrio_clk_4 = sys_clk_1;
 assign sdrio_clk_5 = sys_clk_1;
 assign sdrio_clk_6 = sys_clk_1;
+assign sdrio_clk_9 = sys_clk_1;
 assign sdrio_clk_7 = sys_clk_1;
 assign sdrio_clk_8 = sys_clk_1;
-assign sdrio_clk_9 = sys_clk_1;
-assign sdrio_clk_10 = sys_clk_1;
-assign sdrio_clk_11 = sys_clk_1;
-assign sdrio_clk_12 = sys_clk_1;
 
 
 //------------------------------------------------------------------------------
@@ -2080,7 +2612,7 @@ always @(posedge por_clk) begin
     int_rst <= sys_rst;
 end
 
-always @(posedge sdrio_clk) begin
+always @(posedge sdrio_clk_10) begin
     spiflash4x_clk <= litespisdrphycore_clk;
     inferedsdrtristate0_oe <= litespisdrphycore_dq_oe[0];
     inferedsdrtristate1_oe <= litespisdrphycore_dq_oe[1];
@@ -2097,30 +2629,54 @@ always @(posedge sdrio_clk) begin
 end
 
 always @(posedge sys_clk_1) begin
-    case (grant)
+    decoder0_slave_sel_r <= decoder0_slave_sel;
+    if (timeout0_wait) begin
+        if ((~timeout0_done)) begin
+            timeout0_count <= (timeout0_count - 1'd1);
+        end
+    end else begin
+        timeout0_count <= 20'd1000000;
+    end
+    decoder1_slave_sel_r <= decoder1_slave_sel;
+    if (timeout1_wait) begin
+        if ((~timeout1_done)) begin
+            timeout1_count <= (timeout1_count - 1'd1);
+        end
+    end else begin
+        timeout1_count <= 20'd1000000;
+    end
+    case (arbiter0_grant)
         1'd0: begin
-            if ((~request[0])) begin
-                if (request[1]) begin
-                    grant <= 1'd1;
+            if ((~arbiter0_request[0])) begin
+                if (arbiter0_request[1]) begin
+                    arbiter0_grant <= 1'd1;
                 end
             end
         end
         1'd1: begin
-            if ((~request[1])) begin
-                if (request[0]) begin
-                    grant <= 1'd0;
+            if ((~arbiter0_request[1])) begin
+                if (arbiter0_request[0]) begin
+                    arbiter0_grant <= 1'd0;
                 end
             end
         end
     endcase
-    slave_sel_r <= slave_sel;
-    if (wait_1) begin
-        if ((~done)) begin
-            count <= (count - 1'd1);
+    case (arbiter1_grant)
+        1'd0: begin
+            if ((~arbiter1_request[0])) begin
+                if (arbiter1_request[1]) begin
+                    arbiter1_grant <= 1'd1;
+                end
+            end
         end
-    end else begin
-        count <= 20'd1000000;
-    end
+        1'd1: begin
+            if ((~arbiter1_request[1])) begin
+                if (arbiter1_request[0]) begin
+                    arbiter1_grant <= 1'd0;
+                end
+            end
+        end
+    endcase
     if ((bus_errors != 32'd4294967295)) begin
         if (bus_error) begin
             bus_errors <= (bus_errors + 1'd1);
@@ -2300,11 +2856,23 @@ always @(posedge sys_clk_1) begin
         spiflash_core_litespimmap_count <= 9'd256;
     end
     litespi_state <= litespi_next_state;
-    if (spiflash_core_litespimmap_burst_cs_litespi_next_value_ce0) begin
-        spiflash_core_litespimmap_burst_cs <= spiflash_core_litespimmap_burst_cs_litespi_next_value0;
+    if (spiflash_core_litespimmap_burst_cs_litespi_next_value_ce) begin
+        spiflash_core_litespimmap_burst_cs <= spiflash_core_litespimmap_burst_cs_litespi_next_value;
     end
-    if (spiflash_core_litespimmap_burst_adr_litespi_next_value_ce1) begin
-        spiflash_core_litespimmap_burst_adr <= spiflash_core_litespimmap_burst_adr_litespi_next_value1;
+    if (spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce) begin
+        spiflash_core_litespimmap_byte_count <= spiflash_core_litespimmap_byte_count_litespi_t_next_value;
+    end
+    if (spiflash_core_litespimmap_write_litespi_t_t_next_value_ce) begin
+        spiflash_core_litespimmap_write <= spiflash_core_litespimmap_write_litespi_t_t_next_value;
+    end
+    if (spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0) begin
+        spiflash_core_litespimmap_write_mask <= spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0;
+    end
+    if (spiflash_core_litespimmap_data_write_litespi_t_f_next_value_ce1) begin
+        spiflash_core_litespimmap_data_write <= spiflash_core_litespimmap_data_write_litespi_t_f_next_value1;
+    end
+    if (spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce) begin
+        spiflash_core_litespimmap_burst_adr <= spiflash_core_litespimmap_burst_adr_litespi_f_next_value;
     end
     main_ram_bus_ack <= ((main_ram_bus_stb & main_ram_bus_cyc) & (~main_ram_bus_ack));
     if (usb23_clear) begin
@@ -2599,7 +3167,7 @@ always @(posedge sys_clk_1) begin
         _w_storage <= 3'd5;
         _w_re <= 1'd0;
         _r_re <= 1'd0;
-        litespisdrphycore_storage <= 8'd1;
+        litespisdrphycore_storage <= 8'd0;
         litespisdrphycore_re <= 1'd0;
         litespisdrphycore_cnt <= 8'd0;
         litespisdrphycore_clk <= 1'd0;
@@ -2608,8 +3176,11 @@ always @(posedge sys_clk_1) begin
         litespisdrphycore_count <= 4'd11;
         spiflash_core_litespimmap_burst_cs <= 1'd0;
         spiflash_core_litespimmap_count <= 9'd256;
+        spiflash_core_litespimmap_write <= 1'd0;
+        spiflash_core_litespimmap_write_mask <= 4'd0;
         spiflash_core_litespimmap_storage <= 8'd8;
         spiflash_core_litespimmap_re <= 1'd0;
+        spiflash_core_litespimmap_data_write <= 32'd0;
         main_ram_bus_ack <= 1'd0;
         usb23_pending <= 1'd0;
         usb23_trigger_d <= 1'd0;
@@ -2625,9 +3196,12 @@ always @(posedge sys_clk_1) begin
         framectl_pending_r <= 1'd0;
         framectl_enable_storage <= 1'd0;
         framectl_enable_re <= 1'd0;
-        grant <= 1'd0;
-        slave_sel_r <= 4'd0;
-        count <= 20'd1000000;
+        decoder0_slave_sel_r <= 2'd0;
+        timeout0_count <= 20'd1000000;
+        decoder1_slave_sel_r <= 4'd0;
+        timeout1_count <= 20'd1000000;
+        arbiter0_grant <= 1'd0;
+        arbiter1_grant <= 1'd0;
         rs232phytx_state <= 1'd0;
         rs232phyrx_state <= 1'd0;
         litespiphy_state <= 2'd0;
@@ -2721,11 +3295,15 @@ VexRiscv VexRiscv(
 	.dBusWishbone_ACK       (dbus_ack),
 	.dBusWishbone_DAT_MISO  (dbus_dat_r),
 	.dBusWishbone_ERR       (dbus_err),
+	.debugReset             (jtag_reset),
 	.externalInterruptArray (interrupt),
 	.externalResetVector    (vexriscv),
 	.iBusWishbone_ACK       (ibus_ack),
 	.iBusWishbone_DAT_MISO  (ibus_dat_r),
 	.iBusWishbone_ERR       (ibus_err),
+	.jtag_tck               (jtag_tck),
+	.jtag_tdi               (jtag_tdi),
+	.jtag_tms               (jtag_tms),
 	.reset                  ((sys_rst_1 | reset)),
 	.softwareInterrupt      (1'd0),
 	.timerInterrupt         (1'd0),
@@ -2746,7 +3324,8 @@ VexRiscv VexRiscv(
 	.iBusWishbone_DAT_MOSI  (ibus_dat_w),
 	.iBusWishbone_SEL       (ibus_sel),
 	.iBusWishbone_STB       (ibus_stb),
-	.iBusWishbone_WE        (ibus_we)
+	.iBusWishbone_WE        (ibus_we),
+	.jtag_tdo               (jtag_tdo)
 );
 
 assign spiflash4x_dq[0] = inferedsdrtristate0_oe ? inferedsdrtristate0__o : 1'bz;
@@ -2764,5 +3343,5 @@ assign inferedsdrtristate3__i = spiflash4x_dq[3];
 endmodule
 
 // -----------------------------------------------------------------------------
-//  Auto-Generated by LiteX on 2024-02-10 20:02:23.
+//  Auto-Generated by LiteX on 2024-08-26 16:40:06.
 //------------------------------------------------------------------------------

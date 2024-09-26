@@ -70,11 +70,12 @@ class TinyClunx(
       byteCount = onChipRamSize,
       idWidth = axiMConfig.idWidth+1
     )
+    //ram1.ram.generateAsBlackBox()
 
     val axiCrossbar = Axi4CrossbarFactory()
 
     axiCrossbar.addSlaves(
-      ram1.io.axi       -> (0x00000000L,   onChipRamSize)
+         ram1.io.axi       -> (0x00000000L,   onChipRamSize)
     )
 
     axiCrossbar.addConnections(
@@ -90,7 +91,7 @@ class TinyClunx(
 
 object TinyClunx{
   def main(args: Array[String]) {
-    val config = SpinalConfig(targetDirectory="src")
+    val config = SpinalConfig(targetDirectory="src", device = Device.LATTICE)//.addStandardMemBlackboxing(blackboxAll)
     config.generateVerilog({
       val toplevel = new TinyClunx(onChipRamSize = 1 kB, slaveAXISize = 16 MB)
       toplevel
