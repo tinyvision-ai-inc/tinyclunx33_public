@@ -25,8 +25,8 @@ I/O interfaces:
 - GPIO voltage is programmable
 
 Firmware/RTL:
-- uPython for control path on RISCv
-- No code, graphical RTL generator with large # of IP blocks (under development)
+- Zephyr for control path on RISCv
+- No-code graphical RTL generator with large # of IP blocks (under development)
 
 Development boards:
 - [devkit] for programming/debug
