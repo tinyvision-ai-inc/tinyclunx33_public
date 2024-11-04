@@ -25,7 +25,8 @@ from litex.build.generic_platform import GenericPlatform, Pins, Subsignal
 from litex.tools import litex_soc_gen
 
 from litespi.opcodes import SpiNorFlashOpCodes as Codes
-from litespi.modules import W25Q128FW as Flash
+#from litespi.modules import W25Q128FW as Flash
+from litespi.modules import W25Q128JV as Flash
 
 kB = 1024
 
@@ -263,9 +264,12 @@ class MainSoC(ZephyrSoC, SoCCore):
         ZephyrSoC.__init__(self, **self.soc_kwargs)
 
         self.add_i2c()
+        #self.add_spi(data_width=8, spi_clk_freq=sys_clk_freq/2)  # Adjust data_width and spi_clk_freq as needed
         
         # Note: can change to DDR by setting rate="1:2", will need some changes to suport this."
-        self.add_spi_flash(mode="4x", module=Flash(default_read_cmd=Codes.READ_1_1_4), clk_freq=sys_clk_freq, rate="1:1", with_master=False)
+        self.add_spi_flash(mode="4x", module=Flash(default_read_cmd=Codes.READ_1_1_4), clk_freq=sys_clk_freq, rate="1:1", with_master=True)
+        #self.add_spi_flash(mode="4x", module=Flash(default_read_cmd=Codes.READ_1_1_4), clk_freq=sys_clk_freq, rate="1:1", with_master=False)
+
         self.add_main_ram()
         self.add_wb_slave_port(origin=0xb0000000, size=0x0f000000)
 

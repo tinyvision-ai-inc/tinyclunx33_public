@@ -10,6 +10,10 @@ from litex.soc.cores.bitbang import I2CMaster, I2CMasterSim
 from litex.soc.integration.builder import Builder
 from litex.soc.integration.soc_core import SoCCore
 
+from migen import *
+from litex.soc.interconnect import wishbone
+from litex.build.generic_platform import *
+from i2c import RTLI2C
 
 class ZephyrSoC:
 
@@ -36,9 +40,11 @@ class ZephyrSoC:
         self.interrupt_map.update(
             timer0      = 1,
             uart        = 2,
-            ethmac      = 3,
-            i2s_rx      = 6,
-            i2s_tx      = 7,
+            i2c         = 3,
+            spiflash    = 4,
+            #ethmac      = 4,
+            #i2s_rx      = 6,
+            #i2s_tx      = 7,
         )
         self.csr_map.update(
             ctrl        = 0,  # addr: 0xe0000000
@@ -68,8 +74,11 @@ class ZephyrSoC:
     def add_i2c(self):
         if hasattr(self, "sim_config"):
             self.submodules.i2c0 = I2CMasterSim(self.platform.request("i2c", 0))
-        else:
-            self.submodules.i2c0 = I2CMaster(self.platform.request("i2c", 0))
+        else:            
+            #self.submodules.i2c0 = I2CMaster(self.platform.request("i2c", 0))
+            self.submodules.i2c0 = RTLI2C(self.platform, self.platform.request("i2c", 0))
+
+        self.comb += self.cpu.interrupt[self.irq.locs["i2c"]].eq(self.i2c0.ev.i2c_int.trigger | self.i2c0.ev.txrx_done.trigger)
 
     def add_i2s(self):
         self.platform.add_extension(arty_platform._i2s_pmod_io)
