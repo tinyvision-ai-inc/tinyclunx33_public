@@ -1,4 +1,4 @@
-# SoM MIPI
+# SoM MIPI {#som_mipi}
 
 The differential pairs of the CrossLinkU-NX FPGA can be combined together into
 MIPI interfaces. These MIPI image signals can further be processed by the FPGA

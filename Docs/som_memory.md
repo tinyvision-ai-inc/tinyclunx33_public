@@ -1,4 +1,4 @@
-# SoM Memory
+# SoM Memory {#som_memory}
 
 The FPGA fabric features several Distributed RAM and Embedded Block RAM (EBR)
 that can be used through the RTL.

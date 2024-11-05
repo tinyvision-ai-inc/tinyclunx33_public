@@ -1,4 +1,4 @@
-# SoM Power
+# SoM Power {#som_power}
 
 The SoM uses a single source of power at 5V, and exports several power rails
 at lower voltage using LDO and Buck converters.

@@ -1,4 +1,4 @@
-# SoM USB
+# SoM USB {#som_usb}
 
 The LIFCL-33U FPGA part of the CrosslinkU-NX series contains a hard USB3 core
 capable of 5 Gbit/s transfers.

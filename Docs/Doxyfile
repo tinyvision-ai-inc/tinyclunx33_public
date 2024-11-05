@@ -4,7 +4,6 @@ OPTIMIZE_OUTPUT_FOR_C  = YES
 FILE_PATTERNS          = *.v *.vh *.sv *.svh *.md
 EXTENSION_MAPPING      = v=C++ vh=C++ sv=C++ svh=C++
 USE_MDFILE_AS_MAINPAGE = index.md
-IMAGE_PATH             = images
 HTML_COLORSTYLE        = LIGHT
 GENERATE_TREEVIEW      = YES
 DISABLE_INDEX          = NO
@@ -14,6 +13,7 @@ INPUT = \
 .
 
 IMAGE_PATH = \
+images \
 pinout/tinyCLUNX33_devkit_Rev1 \
 pinout/tinyCLUNX33_devkit_Rev2
 

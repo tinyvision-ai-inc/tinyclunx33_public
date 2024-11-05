@@ -1,4 +1,4 @@
-# SoM FPGA
+# SoM FPGA {#som_fpga}
 
 The tinyCLUNX33 SoM features the CrossLinkU-NX FPGA with 33k LUT, codename LIFCL-33U.
 
