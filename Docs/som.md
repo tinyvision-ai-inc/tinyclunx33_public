@@ -3,7 +3,6 @@
 25.4mm x 25.4mm x 4.5mm module, commercial temperature grade: 0°C to 85°C
 
 <div class="grid">
-@subpage som_flash
 @subpage som_clocks
 @subpage som_flash
 @subpage som_fpga
