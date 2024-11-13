@@ -1,4 +1,4 @@
-# Boards
+# Boards Schematics
 
 ## tinyCLUNX33 SoM compute
 
