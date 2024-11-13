@@ -57,7 +57,7 @@ for SoM Rev1 | `tiny SoM Developer Kit`
 ---
 
 **Rev2:**
-[Assembly](tinyCLUNX33_MIPI_to_USB3_devkit_Rev2_assembly.pdf)
+[Assembly](tinyCLUNX33_MIPI_to_USB3_devkit_Rev2_assembly.pdf) |
 [Schematics](tinyCLUNX33_MIPI_to_USB3_devkit_Rev2_schematic.pdf) |
 for SoM Rev2 | `tiny SoM Developer Kit v2.0`
 
@@ -86,7 +86,7 @@ for SoM Rev1 | `tinyDualRPi MIPI I/O Rev2`
 
 ---
 
-**Rev3:** |
+**Rev3:**
 [Assembly](tinyCLUNX33_adapter_MIPI_IO_to_QSE_Rev3_assembly.pdf) |
 [Schematics](tinyCLUNX33_adapter_MIPI_IO_to_QSE_Rev3_schematic.pdf) |
 for SoM Rev2 | `tinyDualRPi MIPI I/O Rev3`
@@ -117,7 +117,7 @@ for SoM Rev1 | `tinyDualRPi adapter Rev2`
 
 ---
 
-**Rev3:** |
+**Rev3:**
 [Assembly](tinyCLUNX33_adapter_dual_MIPI_in_to_QSE_Rev3_assembly.pdf) |
 [Schematics](tinyCLUNX33_adapter_dual_MIPI_in_to_QSE_Rev3_schematic.pdf) |
 for SoM Rev2 | `tinyDualRPi adapter Rev3`
