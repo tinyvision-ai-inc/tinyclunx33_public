@@ -1,4 +1,9 @@
-# Zephyr integration
+# Zephyr SDK {#appnote_zephyr_sdk}
+
+> The following document describe the current organization with forks
+> of Zephyr used by tinyCLUNX33 users.
+> This approach has flaws, and is being replaced by the `tinyclunx33_sdk`
+> as introduced on @ref appnote_firmware..
 
 [Source](https://github.com/tinyvision-ai-inc/zephyr_private/) |
 [Example](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/) |
