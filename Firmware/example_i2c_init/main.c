@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include <uart.h>
 #include <console.h>
@@ -14,7 +15,7 @@
 #include <libbase/console.h>
 #include <generated/csr.h>
 
-#include <libbase/i2c.h>
+//#include <libbase/i2c.h>
 #include "i2c_init.h"
 #include "imx219.h"
 #include "common.h"
@@ -23,6 +24,20 @@
 
 // An I2C MUX exists at either 0x70 or 0x71 depending on the slot used
 #define I2C_MUX_ADDR 0x70
+
+static bool i2c_write(uint8_t addr, uint8_t reg, uint8_t *data, int len, int stop) {
+    // Dummy function for I2C write
+    return true;
+}
+
+static bool i2c_read(uint8_t addr, uint8_t reg, uint8_t *data, int len) {
+    // Dummy function for I2C read
+    return true;
+}
+static bool i2c_poll(uint8_t addr) {
+    // Dummy function for I2C polling
+    return true;
+}
 
 static void i2c_init(void) {
 	uint8_t val = 0xff;
@@ -352,15 +367,15 @@ int main(void)
 	uart_init();
 
 	// Initialize the PLL
-	i2c_init();
-	busy_wait(200); // Wait for the PLL to lock and switch clocks
+	//i2c_init();
+	//busy_wait(200); // Wait for the PLL to lock and switch clocks
 
 	// Bump up Flash clock speed
 	//spiflash_phy_clk_divisor_write(0);
 
 	printf("\n\rINFO: Initializing the camera sensor on expansion port 0, sensor 0\n\r");
-	sel_cam(0, 0);
-	SensorInit();
+	//sel_cam(0, 0);
+	//SensorInit();
 
 	help();
 	prompt();

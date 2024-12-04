@@ -8,8 +8,8 @@
 //
 // Filename   : som.v
 // Device     : build
-// LiteX sha1 : ac871c690
-// Date       : 2024-08-26 16:40:06
+// LiteX sha1 : cbb1adfa7
+// Date       : 2024-10-26 22:23:06
 //------------------------------------------------------------------------------
 
 `timescale 1ns / 1ps
@@ -59,11 +59,7 @@ MainSoC
 └─── bus (SoCBusHandler)
 │    └─── _interconnect (Crossbar)
 │    │    └─── decoder_0* (Decoder)
-│    │    └─── timeout_0* (Timeout)
-│    │    │    └─── waittimer_0* (WaitTimer)
 │    │    └─── decoder_1* (Decoder)
-│    │    └─── timeout_1* (Timeout)
-│    │    │    └─── waittimer_0* (WaitTimer)
 │    │    └─── arbiter_0* (Arbiter)
 │    │    │    └─── rr (RoundRobin)
 │    │    └─── arbiter_1* (Arbiter)
@@ -97,7 +93,11 @@ MainSoC
 └─── timer0 (Timer)
 │    └─── ev (EventManager)
 │    │    └─── eventsourceprocess_0* (EventSourceProcess)
-└─── i2c0 (I2CMaster)
+└─── i2c0 (RTLI2C)
+│    └─── ev (EventManager)
+│    │    └─── eventsourcepulse_0* (EventSourcePulse)
+│    │    └─── eventsourceprocess_0* (EventSourceProcess)
+│    └─── [i2c_controller_byte_ctrl]
 └─── spiflash_phy (LiteSPIPHY)
 │    └─── spiflash_phy (LiteSPISDRPHYCore)
 │    │    └─── resyncreg_0* (ResyncReg)
@@ -112,6 +112,15 @@ MainSoC
 │    └─── mmap (LiteSPIMMAP)
 │    │    └─── waittimer_0* (WaitTimer)
 │    │    └─── fsm (FSM)
+│    └─── master (LiteSPIMaster)
+│    │    └─── syncfifo_0* (SyncFIFO)
+│    │    │    └─── buffer_0* (Buffer)
+│    │    │    │    └─── pipe_valid (PipeValid)
+│    │    │    │    └─── pipeline (Pipeline)
+│    │    └─── syncfifo_1* (SyncFIFO)
+│    │    │    └─── buffer_0* (Buffer)
+│    │    │    │    └─── pipe_valid (PipeValid)
+│    │    │    │    └─── pipeline (Pipeline)
 └─── main_ram (NXLRAM)
 │    └─── [SP512K]
 └─── verilogwbport_0* (VerilogWBPort)
@@ -134,9 +143,20 @@ MainSoC
 │    │    └─── csrstorage_0* (CSRStorage)
 │    └─── csrbank_2* (CSRBank)
 │    │    └─── csrstorage_0* (CSRStorage)
+│    │    └─── csrstorage_1* (CSRStorage)
+│    │    └─── csrstorage_2* (CSRStorage)
 │    │    └─── csrstatus_0* (CSRStatus)
+│    │    └─── csrstorage_3* (CSRStorage)
+│    │    └─── csrstatus_1* (CSRStatus)
+│    │    └─── csrstorage_4* (CSRStorage)
+│    │    └─── csrstatus_2* (CSRStatus)
+│    │    └─── csrstatus_3* (CSRStatus)
+│    │    └─── csrstorage_5* (CSRStorage)
 │    └─── csrbank_3* (CSRBank)
 │    │    └─── csrstorage_0* (CSRStorage)
+│    │    └─── csrstorage_1* (CSRStorage)
+│    │    └─── csrstorage_2* (CSRStorage)
+│    │    └─── csrstatus_0* (CSRStatus)
 │    └─── csrbank_4* (CSRBank)
 │    │    └─── csrstorage_0* (CSRStorage)
 │    └─── csrbank_5* (CSRBank)
@@ -171,20 +191,15 @@ MainSoC
 // Signals
 //------------------------------------------------------------------------------
 
-reg           _r_re = 1'd0;
-reg           _r_status = 1'd0;
-wire          _r_we;
-reg           _w_re = 1'd0;
-reg     [2:0] _w_storage = 3'd5;
 wire   [13:0] adr;
 reg           arbiter0_grant = 1'd0;
 wire    [1:0] arbiter0_request;
 reg           arbiter1_grant = 1'd0;
 wire    [1:0] arbiter1_request;
-wire          arbiter2_grant;
-wire          arbiter2_request;
-wire          arbiter3_grant;
-wire          arbiter3_request;
+reg           arbiter2_grant = 1'd0;
+wire    [1:0] arbiter2_request;
+reg           arbiter3_grant = 1'd0;
+wire    [1:0] arbiter3_request;
 reg    [29:0] array_muxed0 = 30'd0;
 reg    [31:0] array_muxed1 = 32'd0;
 reg     [3:0] array_muxed10 = 4'd0;
@@ -217,12 +232,20 @@ reg     [2:0] array_muxed6 = 3'd0;
 reg     [1:0] array_muxed7 = 2'd0;
 reg    [29:0] array_muxed8 = 30'd0;
 reg    [31:0] array_muxed9 = 32'd0;
-reg           bus_error = 1'd0;
-reg    [31:0] bus_errors = 32'd0;
-reg           bus_errors_re = 1'd0;
-wire   [31:0] bus_errors_status;
-wire          bus_errors_we;
-wire          cpu_rst;
+reg           crossbar_cs = 1'd0;
+wire          crossbar_sink_first;
+wire          crossbar_sink_last;
+wire   [31:0] crossbar_sink_payload_data;
+wire          crossbar_sink_ready;
+wire          crossbar_sink_valid;
+wire          crossbar_source_first;
+wire          crossbar_source_last;
+wire   [31:0] crossbar_source_payload_data;
+wire    [5:0] crossbar_source_payload_len;
+wire    [7:0] crossbar_source_payload_mask;
+wire    [3:0] crossbar_source_payload_width;
+wire          crossbar_source_ready;
+wire          crossbar_source_valid;
 wire   [31:0] csrbank0_bus_errors_r;
 reg           csrbank0_bus_errors_re = 1'd0;
 wire   [31:0] csrbank0_bus_errors_w;
@@ -249,15 +272,59 @@ reg           csrbank1_ev_status_re = 1'd0;
 wire          csrbank1_ev_status_w;
 reg           csrbank1_ev_status_we = 1'd0;
 wire          csrbank1_sel;
-wire          csrbank2_r_r;
-reg           csrbank2_r_re = 1'd0;
-wire          csrbank2_r_w;
-reg           csrbank2_r_we = 1'd0;
+wire    [7:0] csrbank2_command0_r;
+reg           csrbank2_command0_re = 1'd0;
+wire    [7:0] csrbank2_command0_w;
+reg           csrbank2_command0_we = 1'd0;
+wire    [7:0] csrbank2_control0_r;
+reg           csrbank2_control0_re = 1'd0;
+wire    [7:0] csrbank2_control0_w;
+reg           csrbank2_control0_we = 1'd0;
+wire          csrbank2_core_reset0_r;
+reg           csrbank2_core_reset0_re = 1'd0;
+wire          csrbank2_core_reset0_w;
+reg           csrbank2_core_reset0_we = 1'd0;
+wire    [1:0] csrbank2_ev_enable0_r;
+reg           csrbank2_ev_enable0_re = 1'd0;
+wire    [1:0] csrbank2_ev_enable0_w;
+reg           csrbank2_ev_enable0_we = 1'd0;
+wire    [1:0] csrbank2_ev_pending_r;
+reg           csrbank2_ev_pending_re = 1'd0;
+wire    [1:0] csrbank2_ev_pending_w;
+reg           csrbank2_ev_pending_we = 1'd0;
+wire    [1:0] csrbank2_ev_status_r;
+reg           csrbank2_ev_status_re = 1'd0;
+wire    [1:0] csrbank2_ev_status_w;
+reg           csrbank2_ev_status_we = 1'd0;
+wire   [15:0] csrbank2_prescale0_r;
+reg           csrbank2_prescale0_re = 1'd0;
+wire   [15:0] csrbank2_prescale0_w;
+reg           csrbank2_prescale0_we = 1'd0;
+wire    [7:0] csrbank2_rxr_r;
+reg           csrbank2_rxr_re = 1'd0;
+wire    [7:0] csrbank2_rxr_w;
+reg           csrbank2_rxr_we = 1'd0;
 wire          csrbank2_sel;
-wire    [2:0] csrbank2_w0_r;
-reg           csrbank2_w0_re = 1'd0;
-wire    [2:0] csrbank2_w0_w;
-reg           csrbank2_w0_we = 1'd0;
+wire    [7:0] csrbank2_status_r;
+reg           csrbank2_status_re = 1'd0;
+wire    [7:0] csrbank2_status_w;
+reg           csrbank2_status_we = 1'd0;
+wire    [7:0] csrbank2_txr0_r;
+reg           csrbank2_txr0_re = 1'd0;
+wire    [7:0] csrbank2_txr0_w;
+reg           csrbank2_txr0_we = 1'd0;
+wire          csrbank3_master_cs0_r;
+reg           csrbank3_master_cs0_re = 1'd0;
+wire          csrbank3_master_cs0_w;
+reg           csrbank3_master_cs0_we = 1'd0;
+wire   [23:0] csrbank3_master_phyconfig0_r;
+reg           csrbank3_master_phyconfig0_re = 1'd0;
+wire   [23:0] csrbank3_master_phyconfig0_w;
+reg           csrbank3_master_phyconfig0_we = 1'd0;
+wire    [1:0] csrbank3_master_status_r;
+reg           csrbank3_master_status_re = 1'd0;
+wire    [1:0] csrbank3_master_status_w;
+reg           csrbank3_master_status_we = 1'd0;
 wire    [7:0] csrbank3_mmap_dummy_bits0_r;
 reg           csrbank3_mmap_dummy_bits0_re = 1'd0;
 wire    [7:0] csrbank3_mmap_dummy_bits0_w;
@@ -357,19 +424,8 @@ reg           csrbank7_ev_status_we = 1'd0;
 wire          csrbank7_sel;
 wire   [31:0] dat_r;
 wire   [31:0] dat_w;
-reg           dbus_ack = 1'd0;
-wire   [29:0] dbus_adr;
-wire    [1:0] dbus_bte;
-wire    [2:0] dbus_cti;
-wire          dbus_cyc;
-reg    [31:0] dbus_dat_r = 32'd0;
-wire   [31:0] dbus_dat_w;
-wire          dbus_err;
-wire    [3:0] dbus_sel;
-wire          dbus_stb;
-wire          dbus_we;
-reg     [1:0] decoder0_slave_sel = 2'd0;
-reg     [1:0] decoder0_slave_sel_r = 2'd0;
+reg     [3:0] decoder0_slave_sel = 4'd0;
+reg     [3:0] decoder0_slave_sel_r = 4'd0;
 reg     [3:0] decoder1_slave_sel = 4'd0;
 reg     [3:0] decoder1_slave_sel_r = 4'd0;
 reg           framectl_clear = 1'd0;
@@ -390,17 +446,93 @@ reg           framectl_status_status = 1'd0;
 wire          framectl_status_we;
 wire          framectl_trigger;
 reg           framectl_trigger_d = 1'd0;
-reg           ibus_ack = 1'd0;
-wire   [29:0] ibus_adr;
-wire    [1:0] ibus_bte;
-wire    [2:0] ibus_cti;
-wire          ibus_cyc;
-reg    [31:0] ibus_dat_r = 32'd0;
-wire   [31:0] ibus_dat_w;
-wire          ibus_err;
-wire    [3:0] ibus_sel;
-wire          ibus_stb;
-wire          ibus_we;
+wire          i2c0_ACK;
+wire          i2c0_ArbLost;
+wire          i2c0_Busy;
+wire          i2c0_EN;
+reg           i2c0_IACK = 1'd0;
+wire          i2c0_IEN;
+wire          i2c0_IF;
+wire          i2c0_RD;
+wire    [5:0] i2c0_Resvd0;
+wire    [1:0] i2c0_Resvd1;
+reg     [2:0] i2c0_Resvd2 = 3'd0;
+wire          i2c0_RxACK;
+wire          i2c0_STA;
+wire          i2c0_STO;
+wire          i2c0_TIP;
+wire          i2c0_WR;
+wire          i2c0_ack;
+reg           i2c0_arb_lost = 1'd0;
+wire          i2c0_busy;
+reg     [7:0] i2c0_command_dat_w = 8'd0;
+reg           i2c0_command_re = 1'd0;
+reg     [7:0] i2c0_command_storage = 8'd0;
+reg           i2c0_command_we = 1'd0;
+reg           i2c0_control_re = 1'd0;
+reg     [7:0] i2c0_control_storage = 8'd0;
+reg           i2c0_core_reset_re = 1'd0;
+reg           i2c0_core_reset_storage = 1'd0;
+wire          i2c0_done;
+wire          i2c0_ena;
+reg           i2c0_enable_re = 1'd0;
+reg     [1:0] i2c0_enable_storage = 2'd0;
+wire          i2c0_i2c_al;
+wire          i2c0_i2c_int0;
+wire          i2c0_i2c_int1;
+wire          i2c0_i2c_int2;
+reg           i2c0_i2c_int_clear = 1'd0;
+reg           i2c0_i2c_int_pending = 1'd0;
+wire          i2c0_i2c_int_status;
+wire          i2c0_i2c_int_trigger;
+wire          i2c0_iack;
+wire          i2c0_int_ena;
+reg           i2c0_intflag = 1'd0;
+wire          i2c0_irq;
+reg     [1:0] i2c0_pending_r = 2'd0;
+reg           i2c0_pending_re = 1'd0;
+reg     [1:0] i2c0_pending_status = 2'd0;
+wire          i2c0_pending_we;
+reg           i2c0_prescale_re = 1'd0;
+reg    [15:0] i2c0_prescale_storage = 16'd65535;
+wire          i2c0_read;
+reg           i2c0_reset = 1'd0;
+wire          i2c0_rxack;
+reg           i2c0_rxr_re = 1'd0;
+wire    [7:0] i2c0_rxr_status;
+wire          i2c0_rxr_we;
+wire          i2c0_scl_i0;
+wire          i2c0_scl_i1;
+wire          i2c0_scl_o0;
+wire          i2c0_scl_o1;
+wire          i2c0_scl_oe;
+wire          i2c0_scl_oen;
+wire          i2c0_sda_i0;
+wire          i2c0_sda_i1;
+wire          i2c0_sda_o0;
+wire          i2c0_sda_o1;
+wire          i2c0_sda_oe;
+wire          i2c0_sda_oen;
+wire          i2c0_start;
+reg           i2c0_status_re0 = 1'd0;
+reg           i2c0_status_re1 = 1'd0;
+reg     [7:0] i2c0_status_status0 = 8'd0;
+reg     [1:0] i2c0_status_status1 = 2'd0;
+wire          i2c0_status_we0;
+wire          i2c0_status_we1;
+wire          i2c0_stop;
+reg           i2c0_tip = 1'd0;
+reg           i2c0_txr_re = 1'd0;
+reg     [7:0] i2c0_txr_storage = 8'd0;
+wire          i2c0_txrx_done0;
+wire          i2c0_txrx_done1;
+wire          i2c0_txrx_done2;
+reg           i2c0_txrx_done_clear = 1'd0;
+reg           i2c0_txrx_done_pending = 1'd0;
+wire          i2c0_txrx_done_status;
+wire          i2c0_txrx_done_trigger;
+reg           i2c0_txrx_done_trigger_d = 1'd0;
+wire          i2c0_write;
 wire          inferedsdrtristate0__i;
 reg           inferedsdrtristate0__o = 1'd0;
 reg           inferedsdrtristate0_oe = 1'd0;
@@ -414,153 +546,187 @@ wire          inferedsdrtristate3__i;
 reg           inferedsdrtristate3__o = 1'd0;
 reg           inferedsdrtristate3_oe = 1'd0;
 reg           int_rst = 1'd1;
-reg           interface0_ack = 1'd0;
-wire   [29:0] interface0_adr;
+reg           interface0_ack0 = 1'd0;
+wire          interface0_ack1;
+wire   [29:0] interface0_adr0;
+wire   [29:0] interface0_adr1;
 wire   [13:0] interface0_bank_bus_adr;
 reg    [31:0] interface0_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface0_bank_bus_dat_w;
 wire          interface0_bank_bus_re;
 wire          interface0_bank_bus_we;
-wire    [1:0] interface0_bte;
-wire    [2:0] interface0_cti;
-wire          interface0_cyc;
-reg    [31:0] interface0_dat_r = 32'd0;
-wire   [31:0] interface0_dat_w;
-reg           interface0_err = 1'd0;
-wire          interface0_interface_ack;
-wire   [29:0] interface0_interface_adr;
-wire    [1:0] interface0_interface_bte;
-wire    [2:0] interface0_interface_cti;
-wire          interface0_interface_cyc;
-wire   [31:0] interface0_interface_dat_r;
-wire   [31:0] interface0_interface_dat_w;
-wire          interface0_interface_err;
-wire    [3:0] interface0_interface_sel;
-wire          interface0_interface_stb;
-wire          interface0_interface_we;
-wire    [3:0] interface0_sel;
-wire          interface0_stb;
-wire          interface0_we;
-reg    [13:0] interface1_adr = 14'd0;
+wire    [1:0] interface0_bte0;
+wire    [1:0] interface0_bte1;
+wire    [2:0] interface0_cti0;
+wire    [2:0] interface0_cti1;
+wire          interface0_cyc0;
+wire          interface0_cyc1;
+reg    [31:0] interface0_dat_r0 = 32'd0;
+wire   [31:0] interface0_dat_r1;
+wire   [31:0] interface0_dat_w0;
+wire   [31:0] interface0_dat_w1;
+reg           interface0_err0 = 1'd0;
+wire          interface0_err1;
+wire    [3:0] interface0_sel0;
+wire    [3:0] interface0_sel1;
+wire          interface0_stb0;
+wire          interface0_stb1;
+wire          interface0_we0;
+wire          interface0_we1;
+wire          interface1_ack;
+reg    [13:0] interface1_adr0 = 14'd0;
+wire   [29:0] interface1_adr1;
 wire   [13:0] interface1_bank_bus_adr;
 reg    [31:0] interface1_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface1_bank_bus_dat_w;
 wire          interface1_bank_bus_re;
 wire          interface1_bank_bus_we;
-wire   [31:0] interface1_dat_r;
-reg    [31:0] interface1_dat_w = 32'd0;
-wire          interface1_interface_ack;
-wire   [29:0] interface1_interface_adr;
-wire    [1:0] interface1_interface_bte;
-wire    [2:0] interface1_interface_cti;
-wire          interface1_interface_cyc;
-wire   [31:0] interface1_interface_dat_r;
-wire   [31:0] interface1_interface_dat_w;
-wire          interface1_interface_err;
-wire    [3:0] interface1_interface_sel;
-wire          interface1_interface_stb;
-wire          interface1_interface_we;
+wire    [1:0] interface1_bte;
+wire    [2:0] interface1_cti;
+wire          interface1_cyc;
+wire   [31:0] interface1_dat_r0;
+wire   [31:0] interface1_dat_r1;
+reg    [31:0] interface1_dat_w0 = 32'd0;
+wire   [31:0] interface1_dat_w1;
+wire          interface1_err;
 reg           interface1_re = 1'd0;
-reg           interface1_we = 1'd0;
+wire    [3:0] interface1_sel;
+wire          interface1_stb;
+reg           interface1_we0 = 1'd0;
+wire          interface1_we1;
+wire          interface2_ack;
+wire   [29:0] interface2_adr;
 wire   [13:0] interface2_bank_bus_adr;
 reg    [31:0] interface2_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface2_bank_bus_dat_w;
 wire          interface2_bank_bus_re;
 wire          interface2_bank_bus_we;
-wire          interface2_interface_ack;
-wire   [29:0] interface2_interface_adr;
-wire    [1:0] interface2_interface_bte;
-wire    [2:0] interface2_interface_cti;
-wire          interface2_interface_cyc;
-wire   [31:0] interface2_interface_dat_r;
-wire   [31:0] interface2_interface_dat_w;
-wire          interface2_interface_err;
-wire    [3:0] interface2_interface_sel;
-wire          interface2_interface_stb;
-wire          interface2_interface_we;
+wire    [1:0] interface2_bte;
+wire    [2:0] interface2_cti;
+wire          interface2_cyc;
+wire   [31:0] interface2_dat_r;
+wire   [31:0] interface2_dat_w;
+wire          interface2_err;
+wire    [3:0] interface2_sel;
+wire          interface2_stb;
+wire          interface2_we;
+wire          interface3_ack;
+wire   [29:0] interface3_adr;
 wire   [13:0] interface3_bank_bus_adr;
 reg    [31:0] interface3_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface3_bank_bus_dat_w;
 wire          interface3_bank_bus_re;
 wire          interface3_bank_bus_we;
-wire          interface3_interface_ack;
-wire   [29:0] interface3_interface_adr;
-wire    [1:0] interface3_interface_bte;
-wire    [2:0] interface3_interface_cti;
-wire          interface3_interface_cyc;
-wire   [31:0] interface3_interface_dat_r;
-wire   [31:0] interface3_interface_dat_w;
-wire          interface3_interface_err;
-wire    [3:0] interface3_interface_sel;
-wire          interface3_interface_stb;
-wire          interface3_interface_we;
+wire    [1:0] interface3_bte;
+wire    [2:0] interface3_cti;
+wire          interface3_cyc;
+wire   [31:0] interface3_dat_r;
+wire   [31:0] interface3_dat_w;
+wire          interface3_err;
+wire    [3:0] interface3_sel;
+wire          interface3_stb;
+wire          interface3_we;
+wire          interface4_ack;
+wire   [29:0] interface4_adr;
 wire   [13:0] interface4_bank_bus_adr;
 reg    [31:0] interface4_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface4_bank_bus_dat_w;
 wire          interface4_bank_bus_re;
 wire          interface4_bank_bus_we;
-wire          interface4_interface_ack;
-wire   [29:0] interface4_interface_adr;
-wire    [1:0] interface4_interface_bte;
-wire    [2:0] interface4_interface_cti;
-wire          interface4_interface_cyc;
-wire   [31:0] interface4_interface_dat_r;
-wire   [31:0] interface4_interface_dat_w;
-wire          interface4_interface_err;
-wire    [3:0] interface4_interface_sel;
-wire          interface4_interface_stb;
-wire          interface4_interface_we;
+wire    [1:0] interface4_bte;
+wire    [2:0] interface4_cti;
+wire          interface4_cyc;
+wire   [31:0] interface4_dat_r;
+wire   [31:0] interface4_dat_w;
+wire          interface4_err;
+wire    [3:0] interface4_sel;
+wire          interface4_stb;
+wire          interface4_we;
+wire          interface5_ack;
+wire   [29:0] interface5_adr;
 wire   [13:0] interface5_bank_bus_adr;
 reg    [31:0] interface5_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface5_bank_bus_dat_w;
 wire          interface5_bank_bus_re;
 wire          interface5_bank_bus_we;
-wire          interface5_interface_ack;
-wire   [29:0] interface5_interface_adr;
-wire    [1:0] interface5_interface_bte;
-wire    [2:0] interface5_interface_cti;
-wire          interface5_interface_cyc;
-wire   [31:0] interface5_interface_dat_r;
-wire   [31:0] interface5_interface_dat_w;
-wire          interface5_interface_err;
-wire    [3:0] interface5_interface_sel;
-wire          interface5_interface_stb;
-wire          interface5_interface_we;
+wire    [1:0] interface5_bte;
+wire    [2:0] interface5_cti;
+wire          interface5_cyc;
+wire   [31:0] interface5_dat_r;
+wire   [31:0] interface5_dat_w;
+wire          interface5_err;
+wire    [3:0] interface5_sel;
+wire          interface5_stb;
+wire          interface5_we;
+wire          interface6_ack;
+wire   [29:0] interface6_adr;
 wire   [13:0] interface6_bank_bus_adr;
 reg    [31:0] interface6_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface6_bank_bus_dat_w;
 wire          interface6_bank_bus_re;
 wire          interface6_bank_bus_we;
+wire    [1:0] interface6_bte;
+wire    [2:0] interface6_cti;
+wire          interface6_cyc;
+wire   [31:0] interface6_dat_r;
+wire   [31:0] interface6_dat_w;
+wire          interface6_err;
+wire    [3:0] interface6_sel;
+wire          interface6_stb;
+wire          interface6_we;
+wire          interface7_ack;
+wire   [29:0] interface7_adr;
 wire   [13:0] interface7_bank_bus_adr;
 reg    [31:0] interface7_bank_bus_dat_r = 32'd0;
 wire   [31:0] interface7_bank_bus_dat_w;
 wire          interface7_bank_bus_re;
 wire          interface7_bank_bus_we;
-reg    [31:0] interrupt = 32'd0;
-wire          litespi_grant;
+wire    [1:0] interface7_bte;
+wire    [2:0] interface7_cti;
+wire          interface7_cyc;
+wire   [31:0] interface7_dat_r;
+wire   [31:0] interface7_dat_w;
+wire          interface7_err;
+wire    [3:0] interface7_sel;
+wire          interface7_stb;
+wire          interface7_we;
+reg           litespi_grant = 1'd0;
 reg     [3:0] litespi_next_state = 4'd0;
-wire          litespi_request;
+wire    [1:0] litespi_request;
+reg           litespi_rx_demux_endpoint0_source_first = 1'd0;
+reg           litespi_rx_demux_endpoint0_source_last = 1'd0;
+reg    [31:0] litespi_rx_demux_endpoint0_source_payload_data = 32'd0;
+wire          litespi_rx_demux_endpoint0_source_ready;
+reg           litespi_rx_demux_endpoint0_source_valid = 1'd0;
+reg           litespi_rx_demux_endpoint1_source_first = 1'd0;
+reg           litespi_rx_demux_endpoint1_source_last = 1'd0;
+reg    [31:0] litespi_rx_demux_endpoint1_source_payload_data = 32'd0;
+wire          litespi_rx_demux_endpoint1_source_ready;
+reg           litespi_rx_demux_endpoint1_source_valid = 1'd0;
 wire          litespi_rx_demux_sel;
 wire          litespi_rx_demux_sink_first;
 wire          litespi_rx_demux_sink_last;
 wire   [31:0] litespi_rx_demux_sink_payload_data;
 reg           litespi_rx_demux_sink_ready = 1'd0;
 wire          litespi_rx_demux_sink_valid;
-reg           litespi_rx_demux_source_first = 1'd0;
-reg           litespi_rx_demux_source_last = 1'd0;
-reg    [31:0] litespi_rx_demux_source_payload_data = 32'd0;
-wire          litespi_rx_demux_source_ready;
-reg           litespi_rx_demux_source_valid = 1'd0;
 reg     [3:0] litespi_state = 4'd0;
+wire          litespi_tx_mux_endpoint0_sink_first;
+wire          litespi_tx_mux_endpoint0_sink_last;
+wire   [31:0] litespi_tx_mux_endpoint0_sink_payload_data;
+wire    [5:0] litespi_tx_mux_endpoint0_sink_payload_len;
+wire    [7:0] litespi_tx_mux_endpoint0_sink_payload_mask;
+wire    [3:0] litespi_tx_mux_endpoint0_sink_payload_width;
+reg           litespi_tx_mux_endpoint0_sink_ready = 1'd0;
+wire          litespi_tx_mux_endpoint0_sink_valid;
+wire          litespi_tx_mux_endpoint1_sink_first;
+wire          litespi_tx_mux_endpoint1_sink_last;
+wire   [31:0] litespi_tx_mux_endpoint1_sink_payload_data;
+wire    [5:0] litespi_tx_mux_endpoint1_sink_payload_len;
+wire    [7:0] litespi_tx_mux_endpoint1_sink_payload_mask;
+wire    [3:0] litespi_tx_mux_endpoint1_sink_payload_width;
+reg           litespi_tx_mux_endpoint1_sink_ready = 1'd0;
+wire          litespi_tx_mux_endpoint1_sink_valid;
 wire          litespi_tx_mux_sel;
-wire          litespi_tx_mux_sink_first;
-wire          litespi_tx_mux_sink_last;
-wire   [31:0] litespi_tx_mux_sink_payload_data;
-wire    [5:0] litespi_tx_mux_sink_payload_len;
-wire    [7:0] litespi_tx_mux_sink_payload_mask;
-wire    [3:0] litespi_tx_mux_sink_payload_width;
-reg           litespi_tx_mux_sink_ready = 1'd0;
-wire          litespi_tx_mux_sink_valid;
 reg           litespi_tx_mux_source_first = 1'd0;
 reg           litespi_tx_mux_source_last = 1'd0;
 reg    [31:0] litespi_tx_mux_source_payload_data = 32'd0;
@@ -569,6 +735,60 @@ reg     [7:0] litespi_tx_mux_source_payload_mask = 8'd0;
 reg     [3:0] litespi_tx_mux_source_payload_width = 4'd0;
 wire          litespi_tx_mux_source_ready;
 reg           litespi_tx_mux_source_valid = 1'd0;
+reg           litespimmap0 = 1'd0;
+reg           litespimmap1 = 1'd0;
+reg    [29:0] litespimmap_burst_adr = 30'd0;
+reg    [29:0] litespimmap_burst_adr_litespi_f_next_value = 30'd0;
+reg           litespimmap_burst_adr_litespi_f_next_value_ce = 1'd0;
+reg           litespimmap_burst_cs = 1'd0;
+reg           litespimmap_burst_cs_litespi_next_value = 1'd0;
+reg           litespimmap_burst_cs_litespi_next_value_ce = 1'd0;
+reg           litespimmap_bus_ack = 1'd0;
+wire   [29:0] litespimmap_bus_adr;
+wire    [1:0] litespimmap_bus_bte;
+wire    [2:0] litespimmap_bus_cti;
+wire          litespimmap_bus_cyc;
+reg    [31:0] litespimmap_bus_dat_r = 32'd0;
+wire   [31:0] litespimmap_bus_dat_w;
+reg           litespimmap_bus_err = 1'd0;
+wire    [3:0] litespimmap_bus_sel;
+wire          litespimmap_bus_stb;
+wire          litespimmap_bus_we;
+reg     [1:0] litespimmap_byte_count = 2'd0;
+reg     [1:0] litespimmap_byte_count_litespi_t_next_value = 2'd0;
+reg           litespimmap_byte_count_litespi_t_next_value_ce = 1'd0;
+reg     [8:0] litespimmap_count = 9'd256;
+reg           litespimmap_cs = 1'd0;
+reg    [31:0] litespimmap_data_write = 32'd0;
+reg    [31:0] litespimmap_data_write_litespi_t_f_next_value1 = 32'd0;
+reg           litespimmap_data_write_litespi_t_f_next_value_ce1 = 1'd0;
+wire          litespimmap_done;
+reg    [31:0] litespimmap_dummy = 32'd57005;
+reg    [29:0] litespimmap_offset = 30'd0;
+reg           litespimmap_re = 1'd0;
+wire          litespimmap_sink_first;
+wire          litespimmap_sink_last;
+wire   [31:0] litespimmap_sink_payload_data;
+reg           litespimmap_sink_ready = 1'd0;
+wire          litespimmap_sink_valid;
+reg           litespimmap_source_first = 1'd0;
+reg           litespimmap_source_last = 1'd0;
+reg    [31:0] litespimmap_source_payload_data = 32'd0;
+reg     [5:0] litespimmap_source_payload_len = 6'd0;
+reg     [7:0] litespimmap_source_payload_mask = 8'd0;
+reg     [3:0] litespimmap_source_payload_width = 4'd0;
+wire          litespimmap_source_ready;
+reg           litespimmap_source_valid = 1'd0;
+wire    [7:0] litespimmap_spi_dummy_bits;
+reg     [7:0] litespimmap_storage = 8'd8;
+reg           litespimmap_wait = 1'd0;
+reg           litespimmap_write = 1'd0;
+wire          litespimmap_write_enabled;
+reg           litespimmap_write_litespi_t_t_next_value = 1'd0;
+reg           litespimmap_write_litespi_t_t_next_value_ce = 1'd0;
+reg     [3:0] litespimmap_write_mask = 4'd0;
+reg     [3:0] litespimmap_write_mask_litespi_t_f_next_value0 = 4'd0;
+reg           litespimmap_write_mask_litespi_t_f_next_value_ce0 = 1'd0;
 reg     [1:0] litespiphy_next_state = 2'd0;
 reg     [1:0] litespiphy_state = 2'd0;
 reg           litespisdrphycore0 = 1'd0;
@@ -635,7 +855,312 @@ reg           main_ram_cs = 1'd0;
 wire   [31:0] main_ram_datain;
 wire   [31:0] main_ram_dataout;
 reg           main_ram_wren = 1'd0;
-wire          oe;
+reg           mainsoc_bus_error = 1'd0;
+reg    [31:0] mainsoc_bus_errors = 32'd0;
+reg           mainsoc_bus_errors_re = 1'd0;
+wire   [31:0] mainsoc_bus_errors_status;
+wire          mainsoc_bus_errors_we;
+wire          mainsoc_cpu_rst;
+wire          mainsoc_dbus_ack;
+wire   [29:0] mainsoc_dbus_adr;
+wire    [1:0] mainsoc_dbus_bte;
+wire    [2:0] mainsoc_dbus_cti;
+wire          mainsoc_dbus_cyc;
+wire   [31:0] mainsoc_dbus_dat_r;
+wire   [31:0] mainsoc_dbus_dat_w;
+wire          mainsoc_dbus_err;
+wire    [3:0] mainsoc_dbus_sel;
+wire          mainsoc_dbus_stb;
+wire          mainsoc_dbus_we;
+wire          mainsoc_ibus_ack;
+wire   [29:0] mainsoc_ibus_adr;
+wire    [1:0] mainsoc_ibus_bte;
+wire    [2:0] mainsoc_ibus_cti;
+wire          mainsoc_ibus_cyc;
+wire   [31:0] mainsoc_ibus_dat_r;
+wire   [31:0] mainsoc_ibus_dat_w;
+wire          mainsoc_ibus_err;
+wire    [3:0] mainsoc_ibus_sel;
+wire          mainsoc_ibus_stb;
+wire          mainsoc_ibus_we;
+reg    [31:0] mainsoc_interrupt = 32'd0;
+wire          mainsoc_reset;
+reg           mainsoc_reset_re = 1'd0;
+reg     [1:0] mainsoc_reset_storage = 2'd0;
+reg     [3:0] mainsoc_rx_count = 4'd0;
+reg     [3:0] mainsoc_rx_count_rs232phyrx_next_value0 = 4'd0;
+reg           mainsoc_rx_count_rs232phyrx_next_value_ce0 = 1'd0;
+reg     [7:0] mainsoc_rx_data = 8'd0;
+reg     [7:0] mainsoc_rx_data_rs232phyrx_next_value1 = 8'd0;
+reg           mainsoc_rx_data_rs232phyrx_next_value_ce1 = 1'd0;
+reg           mainsoc_rx_enable = 1'd0;
+reg    [31:0] mainsoc_rx_phase = 32'd0;
+wire          mainsoc_rx_rx;
+reg           mainsoc_rx_rx_d = 1'd0;
+reg           mainsoc_rx_source_first = 1'd0;
+reg           mainsoc_rx_source_last = 1'd0;
+reg     [7:0] mainsoc_rx_source_payload_data = 8'd0;
+wire          mainsoc_rx_source_ready;
+reg           mainsoc_rx_source_valid = 1'd0;
+reg           mainsoc_rx_tick = 1'd0;
+reg           mainsoc_scratch_re = 1'd0;
+reg    [31:0] mainsoc_scratch_storage = 32'd305419896;
+reg           mainsoc_serial_tx_rs232phytx_next_value1 = 1'd0;
+reg           mainsoc_serial_tx_rs232phytx_next_value_ce1 = 1'd0;
+reg           mainsoc_soc_rst = 1'd0;
+reg           mainsoc_timer_en_re = 1'd0;
+reg           mainsoc_timer_en_storage = 1'd0;
+reg           mainsoc_timer_enable_re = 1'd0;
+reg           mainsoc_timer_enable_storage = 1'd0;
+wire          mainsoc_timer_irq;
+reg           mainsoc_timer_load_re = 1'd0;
+reg    [31:0] mainsoc_timer_load_storage = 32'd0;
+reg           mainsoc_timer_pending_r = 1'd0;
+reg           mainsoc_timer_pending_re = 1'd0;
+reg           mainsoc_timer_pending_status = 1'd0;
+wire          mainsoc_timer_pending_we;
+reg           mainsoc_timer_reload_re = 1'd0;
+reg    [31:0] mainsoc_timer_reload_storage = 32'd0;
+reg           mainsoc_timer_status_re = 1'd0;
+reg           mainsoc_timer_status_status = 1'd0;
+wire          mainsoc_timer_status_we;
+reg           mainsoc_timer_update_value_re = 1'd0;
+reg           mainsoc_timer_update_value_storage = 1'd0;
+reg    [31:0] mainsoc_timer_value = 32'd0;
+reg           mainsoc_timer_value_re = 1'd0;
+reg    [31:0] mainsoc_timer_value_status = 32'd0;
+wire          mainsoc_timer_value_we;
+wire          mainsoc_timer_zero0;
+wire          mainsoc_timer_zero1;
+wire          mainsoc_timer_zero2;
+reg           mainsoc_timer_zero_clear = 1'd0;
+reg           mainsoc_timer_zero_pending = 1'd0;
+wire          mainsoc_timer_zero_status;
+wire          mainsoc_timer_zero_trigger;
+reg           mainsoc_timer_zero_trigger_d = 1'd0;
+reg     [3:0] mainsoc_tx_count = 4'd0;
+reg     [3:0] mainsoc_tx_count_rs232phytx_next_value0 = 4'd0;
+reg           mainsoc_tx_count_rs232phytx_next_value_ce0 = 1'd0;
+reg     [7:0] mainsoc_tx_data = 8'd0;
+reg     [7:0] mainsoc_tx_data_rs232phytx_next_value2 = 8'd0;
+reg           mainsoc_tx_data_rs232phytx_next_value_ce2 = 1'd0;
+reg           mainsoc_tx_enable = 1'd0;
+reg    [31:0] mainsoc_tx_phase = 32'd0;
+wire          mainsoc_tx_sink_first;
+wire          mainsoc_tx_sink_last;
+wire    [7:0] mainsoc_tx_sink_payload_data;
+reg           mainsoc_tx_sink_ready = 1'd0;
+wire          mainsoc_tx_sink_valid;
+reg           mainsoc_tx_tick = 1'd0;
+reg           mainsoc_uart_enable_re = 1'd0;
+reg     [1:0] mainsoc_uart_enable_storage = 2'd0;
+wire          mainsoc_uart_irq;
+reg     [1:0] mainsoc_uart_pending_r = 2'd0;
+reg           mainsoc_uart_pending_re = 1'd0;
+reg     [1:0] mainsoc_uart_pending_status = 2'd0;
+wire          mainsoc_uart_pending_we;
+wire          mainsoc_uart_rx0;
+wire          mainsoc_uart_rx1;
+wire          mainsoc_uart_rx2;
+reg           mainsoc_uart_rx_clear = 1'd0;
+reg     [3:0] mainsoc_uart_rx_fifo_consume = 4'd0;
+wire          mainsoc_uart_rx_fifo_do_read;
+wire          mainsoc_uart_rx_fifo_fifo_in_first;
+wire          mainsoc_uart_rx_fifo_fifo_in_last;
+wire    [7:0] mainsoc_uart_rx_fifo_fifo_in_payload_data;
+wire          mainsoc_uart_rx_fifo_fifo_out_first;
+wire          mainsoc_uart_rx_fifo_fifo_out_last;
+wire    [7:0] mainsoc_uart_rx_fifo_fifo_out_payload_data;
+reg     [4:0] mainsoc_uart_rx_fifo_level0 = 5'd0;
+wire    [4:0] mainsoc_uart_rx_fifo_level1;
+reg     [3:0] mainsoc_uart_rx_fifo_produce = 4'd0;
+wire    [3:0] mainsoc_uart_rx_fifo_rdport_adr;
+wire    [9:0] mainsoc_uart_rx_fifo_rdport_dat_r;
+wire          mainsoc_uart_rx_fifo_rdport_re;
+wire          mainsoc_uart_rx_fifo_re;
+reg           mainsoc_uart_rx_fifo_readable = 1'd0;
+reg           mainsoc_uart_rx_fifo_replace = 1'd0;
+wire          mainsoc_uart_rx_fifo_sink_first;
+wire          mainsoc_uart_rx_fifo_sink_last;
+wire    [7:0] mainsoc_uart_rx_fifo_sink_payload_data;
+wire          mainsoc_uart_rx_fifo_sink_ready;
+wire          mainsoc_uart_rx_fifo_sink_valid;
+wire          mainsoc_uart_rx_fifo_source_first;
+wire          mainsoc_uart_rx_fifo_source_last;
+wire    [7:0] mainsoc_uart_rx_fifo_source_payload_data;
+wire          mainsoc_uart_rx_fifo_source_ready;
+wire          mainsoc_uart_rx_fifo_source_valid;
+wire    [9:0] mainsoc_uart_rx_fifo_syncfifo_din;
+wire    [9:0] mainsoc_uart_rx_fifo_syncfifo_dout;
+wire          mainsoc_uart_rx_fifo_syncfifo_re;
+wire          mainsoc_uart_rx_fifo_syncfifo_readable;
+wire          mainsoc_uart_rx_fifo_syncfifo_we;
+wire          mainsoc_uart_rx_fifo_syncfifo_writable;
+reg     [3:0] mainsoc_uart_rx_fifo_wrport_adr = 4'd0;
+wire    [9:0] mainsoc_uart_rx_fifo_wrport_dat_r;
+wire    [9:0] mainsoc_uart_rx_fifo_wrport_dat_w;
+wire          mainsoc_uart_rx_fifo_wrport_we;
+reg           mainsoc_uart_rx_pending = 1'd0;
+wire          mainsoc_uart_rx_status;
+wire          mainsoc_uart_rx_trigger;
+reg           mainsoc_uart_rx_trigger_d = 1'd0;
+reg           mainsoc_uart_rxempty_re = 1'd0;
+wire          mainsoc_uart_rxempty_status;
+wire          mainsoc_uart_rxempty_we;
+reg           mainsoc_uart_rxfull_re = 1'd0;
+wire          mainsoc_uart_rxfull_status;
+wire          mainsoc_uart_rxfull_we;
+wire    [7:0] mainsoc_uart_rxtx_r;
+reg           mainsoc_uart_rxtx_re = 1'd0;
+wire    [7:0] mainsoc_uart_rxtx_w;
+reg           mainsoc_uart_rxtx_we = 1'd0;
+reg           mainsoc_uart_status_re = 1'd0;
+reg     [1:0] mainsoc_uart_status_status = 2'd0;
+wire          mainsoc_uart_status_we;
+wire          mainsoc_uart_tx0;
+wire          mainsoc_uart_tx1;
+wire          mainsoc_uart_tx2;
+reg           mainsoc_uart_tx_clear = 1'd0;
+reg     [3:0] mainsoc_uart_tx_fifo_consume = 4'd0;
+wire          mainsoc_uart_tx_fifo_do_read;
+wire          mainsoc_uart_tx_fifo_fifo_in_first;
+wire          mainsoc_uart_tx_fifo_fifo_in_last;
+wire    [7:0] mainsoc_uart_tx_fifo_fifo_in_payload_data;
+wire          mainsoc_uart_tx_fifo_fifo_out_first;
+wire          mainsoc_uart_tx_fifo_fifo_out_last;
+wire    [7:0] mainsoc_uart_tx_fifo_fifo_out_payload_data;
+reg     [4:0] mainsoc_uart_tx_fifo_level0 = 5'd0;
+wire    [4:0] mainsoc_uart_tx_fifo_level1;
+reg     [3:0] mainsoc_uart_tx_fifo_produce = 4'd0;
+wire    [3:0] mainsoc_uart_tx_fifo_rdport_adr;
+wire    [9:0] mainsoc_uart_tx_fifo_rdport_dat_r;
+wire          mainsoc_uart_tx_fifo_rdport_re;
+wire          mainsoc_uart_tx_fifo_re;
+reg           mainsoc_uart_tx_fifo_readable = 1'd0;
+reg           mainsoc_uart_tx_fifo_replace = 1'd0;
+reg           mainsoc_uart_tx_fifo_sink_first = 1'd0;
+reg           mainsoc_uart_tx_fifo_sink_last = 1'd0;
+wire    [7:0] mainsoc_uart_tx_fifo_sink_payload_data;
+wire          mainsoc_uart_tx_fifo_sink_ready;
+wire          mainsoc_uart_tx_fifo_sink_valid;
+wire          mainsoc_uart_tx_fifo_source_first;
+wire          mainsoc_uart_tx_fifo_source_last;
+wire    [7:0] mainsoc_uart_tx_fifo_source_payload_data;
+wire          mainsoc_uart_tx_fifo_source_ready;
+wire          mainsoc_uart_tx_fifo_source_valid;
+wire    [9:0] mainsoc_uart_tx_fifo_syncfifo_din;
+wire    [9:0] mainsoc_uart_tx_fifo_syncfifo_dout;
+wire          mainsoc_uart_tx_fifo_syncfifo_re;
+wire          mainsoc_uart_tx_fifo_syncfifo_readable;
+wire          mainsoc_uart_tx_fifo_syncfifo_we;
+wire          mainsoc_uart_tx_fifo_syncfifo_writable;
+reg     [3:0] mainsoc_uart_tx_fifo_wrport_adr = 4'd0;
+wire    [9:0] mainsoc_uart_tx_fifo_wrport_dat_r;
+wire    [9:0] mainsoc_uart_tx_fifo_wrport_dat_w;
+wire          mainsoc_uart_tx_fifo_wrport_we;
+reg           mainsoc_uart_tx_pending = 1'd0;
+wire          mainsoc_uart_tx_status;
+wire          mainsoc_uart_tx_trigger;
+reg           mainsoc_uart_tx_trigger_d = 1'd0;
+reg           mainsoc_uart_txempty_re = 1'd0;
+wire          mainsoc_uart_txempty_status;
+wire          mainsoc_uart_txempty_we;
+reg           mainsoc_uart_txfull_re = 1'd0;
+wire          mainsoc_uart_txfull_status;
+wire          mainsoc_uart_txfull_we;
+wire          mainsoc_uart_uart_sink_first;
+wire          mainsoc_uart_uart_sink_last;
+wire    [7:0] mainsoc_uart_uart_sink_payload_data;
+wire          mainsoc_uart_uart_sink_ready;
+wire          mainsoc_uart_uart_sink_valid;
+wire          mainsoc_uart_uart_source_first;
+wire          mainsoc_uart_uart_source_last;
+wire    [7:0] mainsoc_uart_uart_source_payload_data;
+wire          mainsoc_uart_uart_source_ready;
+wire          mainsoc_uart_uart_source_valid;
+reg    [31:0] mainsoc_vexriscv = 32'd537919488;
+wire          master_cs;
+reg           master_cs_re = 1'd0;
+reg           master_cs_storage = 1'd0;
+wire    [7:0] master_len;
+wire    [7:0] master_mask;
+reg           master_phyconfig_re = 1'd0;
+reg    [23:0] master_phyconfig_storage = 24'd0;
+wire          master_rx_fifo_pipe_valid_sink_first;
+wire          master_rx_fifo_pipe_valid_sink_last;
+wire   [31:0] master_rx_fifo_pipe_valid_sink_payload_data;
+wire          master_rx_fifo_pipe_valid_sink_ready;
+wire          master_rx_fifo_pipe_valid_sink_valid;
+reg           master_rx_fifo_pipe_valid_source_first = 1'd0;
+reg           master_rx_fifo_pipe_valid_source_last = 1'd0;
+reg    [31:0] master_rx_fifo_pipe_valid_source_payload_data = 32'd0;
+wire          master_rx_fifo_pipe_valid_source_ready;
+reg           master_rx_fifo_pipe_valid_source_valid = 1'd0;
+wire          master_rx_fifo_sink_sink_first;
+wire          master_rx_fifo_sink_sink_last;
+wire   [31:0] master_rx_fifo_sink_sink_payload_data;
+wire          master_rx_fifo_sink_sink_ready;
+wire          master_rx_fifo_sink_sink_valid;
+wire          master_rx_fifo_source_source_first;
+wire          master_rx_fifo_source_source_last;
+wire   [31:0] master_rx_fifo_source_source_payload_data;
+wire          master_rx_fifo_source_source_ready;
+wire          master_rx_fifo_source_source_valid;
+wire          master_rx_ready;
+wire   [31:0] master_rxtx_r;
+reg           master_rxtx_re = 1'd0;
+wire   [31:0] master_rxtx_w;
+reg           master_rxtx_we = 1'd0;
+wire          master_sink_first;
+wire          master_sink_last;
+wire   [31:0] master_sink_payload_data;
+wire          master_sink_ready;
+wire          master_sink_valid;
+wire          master_source_first;
+wire          master_source_last;
+wire   [31:0] master_source_payload_data;
+wire    [5:0] master_source_payload_len;
+wire    [7:0] master_source_payload_mask;
+wire    [3:0] master_source_payload_width;
+wire          master_source_ready;
+wire          master_source_valid;
+reg           master_status_re = 1'd0;
+reg     [1:0] master_status_status = 2'd0;
+wire          master_status_we;
+wire          master_tx_fifo_pipe_valid_sink_first;
+wire          master_tx_fifo_pipe_valid_sink_last;
+wire   [31:0] master_tx_fifo_pipe_valid_sink_payload_data;
+wire    [5:0] master_tx_fifo_pipe_valid_sink_payload_len;
+wire    [7:0] master_tx_fifo_pipe_valid_sink_payload_mask;
+wire    [3:0] master_tx_fifo_pipe_valid_sink_payload_width;
+wire          master_tx_fifo_pipe_valid_sink_ready;
+wire          master_tx_fifo_pipe_valid_sink_valid;
+reg           master_tx_fifo_pipe_valid_source_first = 1'd0;
+reg           master_tx_fifo_pipe_valid_source_last = 1'd0;
+reg    [31:0] master_tx_fifo_pipe_valid_source_payload_data = 32'd0;
+reg     [5:0] master_tx_fifo_pipe_valid_source_payload_len = 6'd0;
+reg     [7:0] master_tx_fifo_pipe_valid_source_payload_mask = 8'd0;
+reg     [3:0] master_tx_fifo_pipe_valid_source_payload_width = 4'd0;
+wire          master_tx_fifo_pipe_valid_source_ready;
+reg           master_tx_fifo_pipe_valid_source_valid = 1'd0;
+reg           master_tx_fifo_sink_sink_first = 1'd0;
+wire          master_tx_fifo_sink_sink_last;
+wire   [31:0] master_tx_fifo_sink_sink_payload_data;
+wire    [5:0] master_tx_fifo_sink_sink_payload_len;
+wire    [7:0] master_tx_fifo_sink_sink_payload_mask;
+wire    [3:0] master_tx_fifo_sink_sink_payload_width;
+wire          master_tx_fifo_sink_sink_ready;
+wire          master_tx_fifo_sink_sink_valid;
+wire          master_tx_fifo_source_source_first;
+wire          master_tx_fifo_source_source_last;
+wire   [31:0] master_tx_fifo_source_source_payload_data;
+wire    [5:0] master_tx_fifo_source_source_payload_len;
+wire    [7:0] master_tx_fifo_source_source_payload_mask;
+wire    [3:0] master_tx_fifo_source_source_payload_width;
+wire          master_tx_fifo_source_source_ready;
+wire          master_tx_fifo_source_source_valid;
+wire          master_tx_ready;
+wire    [3:0] master_width;
 wire          por_clk;
 wire          port_bus_ack;
 wire   [29:0] port_bus_adr;
@@ -648,37 +1173,67 @@ wire          port_bus_err;
 wire    [3:0] port_bus_sel;
 wire          port_bus_stb;
 wire          port_bus_we;
+wire          port_master_internal_port_sink_first;
+wire          port_master_internal_port_sink_last;
+wire   [31:0] port_master_internal_port_sink_payload_data;
+wire    [5:0] port_master_internal_port_sink_payload_len;
+wire    [7:0] port_master_internal_port_sink_payload_mask;
+wire    [3:0] port_master_internal_port_sink_payload_width;
+wire          port_master_internal_port_sink_ready;
+wire          port_master_internal_port_sink_valid;
+wire          port_master_internal_port_source_first;
+wire          port_master_internal_port_source_last;
+wire   [31:0] port_master_internal_port_source_payload_data;
+wire          port_master_internal_port_source_ready;
+wire          port_master_internal_port_source_valid;
+wire          port_master_request;
+wire          port_master_user_port_sink_first;
+wire          port_master_user_port_sink_last;
+wire   [31:0] port_master_user_port_sink_payload_data;
+wire    [5:0] port_master_user_port_sink_payload_len;
+wire    [7:0] port_master_user_port_sink_payload_mask;
+wire    [3:0] port_master_user_port_sink_payload_width;
+wire          port_master_user_port_sink_ready;
+wire          port_master_user_port_sink_valid;
+wire          port_master_user_port_source_first;
+wire          port_master_user_port_source_last;
+wire   [31:0] port_master_user_port_source_payload_data;
+wire          port_master_user_port_source_ready;
+wire          port_master_user_port_source_valid;
+wire          port_mmap_internal_port_sink_first;
+wire          port_mmap_internal_port_sink_last;
+wire   [31:0] port_mmap_internal_port_sink_payload_data;
+wire    [5:0] port_mmap_internal_port_sink_payload_len;
+wire    [7:0] port_mmap_internal_port_sink_payload_mask;
+wire    [3:0] port_mmap_internal_port_sink_payload_width;
+wire          port_mmap_internal_port_sink_ready;
+wire          port_mmap_internal_port_sink_valid;
+wire          port_mmap_internal_port_source_first;
+wire          port_mmap_internal_port_source_last;
+wire   [31:0] port_mmap_internal_port_source_payload_data;
+wire          port_mmap_internal_port_source_ready;
+wire          port_mmap_internal_port_source_valid;
+wire          port_mmap_request;
+wire          port_mmap_user_port_sink_first;
+wire          port_mmap_user_port_sink_last;
+wire   [31:0] port_mmap_user_port_sink_payload_data;
+wire    [5:0] port_mmap_user_port_sink_payload_len;
+wire    [7:0] port_mmap_user_port_sink_payload_mask;
+wire    [3:0] port_mmap_user_port_sink_payload_width;
+wire          port_mmap_user_port_sink_ready;
+wire          port_mmap_user_port_sink_valid;
+wire          port_mmap_user_port_source_first;
+wire          port_mmap_user_port_source_last;
+wire   [31:0] port_mmap_user_port_source_payload_data;
+wire          port_mmap_user_port_source_ready;
+wire          port_mmap_user_port_source_valid;
 wire          re;
 reg           regs0 = 1'd0;
 reg           regs1 = 1'd0;
-wire          reset;
-reg           reset_re = 1'd0;
-reg     [1:0] reset_storage = 2'd0;
 reg           rs232phyrx_next_state = 1'd0;
 reg           rs232phyrx_state = 1'd0;
 reg           rs232phytx_next_state = 1'd0;
 reg           rs232phytx_state = 1'd0;
-reg     [3:0] rx_count = 4'd0;
-reg     [3:0] rx_count_rs232phyrx_next_value0 = 4'd0;
-reg           rx_count_rs232phyrx_next_value_ce0 = 1'd0;
-reg     [7:0] rx_data = 8'd0;
-reg     [7:0] rx_data_rs232phyrx_next_value1 = 8'd0;
-reg           rx_data_rs232phyrx_next_value_ce1 = 1'd0;
-reg           rx_enable = 1'd0;
-reg    [31:0] rx_phase = 32'd0;
-wire          rx_rx;
-reg           rx_rx_d = 1'd0;
-reg           rx_source_first = 1'd0;
-reg           rx_source_last = 1'd0;
-reg     [7:0] rx_source_payload_data = 8'd0;
-wire          rx_source_ready;
-reg           rx_source_valid = 1'd0;
-reg           rx_tick = 1'd0;
-wire          scl;
-reg           scratch_re = 1'd0;
-reg    [31:0] scratch_storage = 32'd305419896;
-wire          sda0;
-wire          sda1;
 wire          sdrio_clk;
 wire          sdrio_clk_1;
 wire          sdrio_clk_10;
@@ -692,284 +1247,8 @@ wire          sdrio_clk_6;
 wire          sdrio_clk_7;
 wire          sdrio_clk_8;
 wire          sdrio_clk_9;
-reg           serial_tx_rs232phytx_next_value1 = 1'd0;
-reg           serial_tx_rs232phytx_next_value_ce1 = 1'd0;
-reg           soc_rst = 1'd0;
-reg           spiflash_core_cs = 1'd0;
-wire          spiflash_core_internal_port_sink_first;
-wire          spiflash_core_internal_port_sink_last;
-wire   [31:0] spiflash_core_internal_port_sink_payload_data;
-wire    [5:0] spiflash_core_internal_port_sink_payload_len;
-wire    [7:0] spiflash_core_internal_port_sink_payload_mask;
-wire    [3:0] spiflash_core_internal_port_sink_payload_width;
-wire          spiflash_core_internal_port_sink_ready;
-wire          spiflash_core_internal_port_sink_valid;
-wire          spiflash_core_internal_port_source_first;
-wire          spiflash_core_internal_port_source_last;
-wire   [31:0] spiflash_core_internal_port_source_payload_data;
-wire          spiflash_core_internal_port_source_ready;
-wire          spiflash_core_internal_port_source_valid;
-reg           spiflash_core_litespimmap0 = 1'd0;
-reg           spiflash_core_litespimmap1 = 1'd0;
-reg    [29:0] spiflash_core_litespimmap_burst_adr = 30'd0;
-reg    [29:0] spiflash_core_litespimmap_burst_adr_litespi_f_next_value = 30'd0;
-reg           spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce = 1'd0;
-reg           spiflash_core_litespimmap_burst_cs = 1'd0;
-reg           spiflash_core_litespimmap_burst_cs_litespi_next_value = 1'd0;
-reg           spiflash_core_litespimmap_burst_cs_litespi_next_value_ce = 1'd0;
-reg           spiflash_core_litespimmap_bus_ack = 1'd0;
-wire   [29:0] spiflash_core_litespimmap_bus_adr;
-wire    [1:0] spiflash_core_litespimmap_bus_bte;
-wire    [2:0] spiflash_core_litespimmap_bus_cti;
-wire          spiflash_core_litespimmap_bus_cyc;
-reg    [31:0] spiflash_core_litespimmap_bus_dat_r = 32'd0;
-wire   [31:0] spiflash_core_litespimmap_bus_dat_w;
-reg           spiflash_core_litespimmap_bus_err = 1'd0;
-wire    [3:0] spiflash_core_litespimmap_bus_sel;
-wire          spiflash_core_litespimmap_bus_stb;
-wire          spiflash_core_litespimmap_bus_we;
-reg     [1:0] spiflash_core_litespimmap_byte_count = 2'd0;
-reg     [1:0] spiflash_core_litespimmap_byte_count_litespi_t_next_value = 2'd0;
-reg           spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce = 1'd0;
-reg     [8:0] spiflash_core_litespimmap_count = 9'd256;
-reg           spiflash_core_litespimmap_cs = 1'd0;
-reg    [31:0] spiflash_core_litespimmap_data_write = 32'd0;
-reg    [31:0] spiflash_core_litespimmap_data_write_litespi_t_f_next_value1 = 32'd0;
-reg           spiflash_core_litespimmap_data_write_litespi_t_f_next_value_ce1 = 1'd0;
-wire          spiflash_core_litespimmap_done;
-reg    [31:0] spiflash_core_litespimmap_dummy = 32'd57005;
-wire   [29:0] spiflash_core_litespimmap_offset;
-reg           spiflash_core_litespimmap_re = 1'd0;
-wire          spiflash_core_litespimmap_sink_first;
-wire          spiflash_core_litespimmap_sink_last;
-wire   [31:0] spiflash_core_litespimmap_sink_payload_data;
-reg           spiflash_core_litespimmap_sink_ready = 1'd0;
-wire          spiflash_core_litespimmap_sink_valid;
-reg           spiflash_core_litespimmap_source_first = 1'd0;
-reg           spiflash_core_litespimmap_source_last = 1'd0;
-reg    [31:0] spiflash_core_litespimmap_source_payload_data = 32'd0;
-reg     [5:0] spiflash_core_litespimmap_source_payload_len = 6'd0;
-reg     [7:0] spiflash_core_litespimmap_source_payload_mask = 8'd0;
-reg     [3:0] spiflash_core_litespimmap_source_payload_width = 4'd0;
-wire          spiflash_core_litespimmap_source_ready;
-reg           spiflash_core_litespimmap_source_valid = 1'd0;
-wire    [7:0] spiflash_core_litespimmap_spi_dummy_bits;
-reg     [7:0] spiflash_core_litespimmap_storage = 8'd8;
-reg           spiflash_core_litespimmap_wait = 1'd0;
-reg           spiflash_core_litespimmap_write = 1'd0;
-wire          spiflash_core_litespimmap_write_enabled;
-reg           spiflash_core_litespimmap_write_litespi_t_t_next_value = 1'd0;
-reg           spiflash_core_litespimmap_write_litespi_t_t_next_value_ce = 1'd0;
-reg     [3:0] spiflash_core_litespimmap_write_mask = 4'd0;
-reg     [3:0] spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0 = 4'd0;
-reg           spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0 = 1'd0;
-wire          spiflash_core_request;
-wire          spiflash_core_sink_first;
-wire          spiflash_core_sink_last;
-wire   [31:0] spiflash_core_sink_payload_data;
-wire          spiflash_core_sink_ready;
-wire          spiflash_core_sink_valid;
-wire          spiflash_core_source_first;
-wire          spiflash_core_source_last;
-wire   [31:0] spiflash_core_source_payload_data;
-wire    [5:0] spiflash_core_source_payload_len;
-wire    [7:0] spiflash_core_source_payload_mask;
-wire    [3:0] spiflash_core_source_payload_width;
-wire          spiflash_core_source_ready;
-wire          spiflash_core_source_valid;
-wire          spiflash_core_user_port_sink_first;
-wire          spiflash_core_user_port_sink_last;
-wire   [31:0] spiflash_core_user_port_sink_payload_data;
-wire    [5:0] spiflash_core_user_port_sink_payload_len;
-wire    [7:0] spiflash_core_user_port_sink_payload_mask;
-wire    [3:0] spiflash_core_user_port_sink_payload_width;
-wire          spiflash_core_user_port_sink_ready;
-wire          spiflash_core_user_port_sink_valid;
-wire          spiflash_core_user_port_source_first;
-wire          spiflash_core_user_port_source_last;
-wire   [31:0] spiflash_core_user_port_source_payload_data;
-wire          spiflash_core_user_port_source_ready;
-wire          spiflash_core_user_port_source_valid;
 wire          sys_clk_1;
 wire          sys_rst_1;
-reg    [19:0] timeout0_count = 20'd1000000;
-wire          timeout0_done;
-reg           timeout0_error = 1'd0;
-wire          timeout0_wait;
-reg    [19:0] timeout1_count = 20'd1000000;
-wire          timeout1_done;
-reg           timeout1_error = 1'd0;
-wire          timeout1_wait;
-reg           timer_en_re = 1'd0;
-reg           timer_en_storage = 1'd0;
-reg           timer_enable_re = 1'd0;
-reg           timer_enable_storage = 1'd0;
-wire          timer_irq;
-reg           timer_load_re = 1'd0;
-reg    [31:0] timer_load_storage = 32'd0;
-reg           timer_pending_r = 1'd0;
-reg           timer_pending_re = 1'd0;
-reg           timer_pending_status = 1'd0;
-wire          timer_pending_we;
-reg           timer_reload_re = 1'd0;
-reg    [31:0] timer_reload_storage = 32'd0;
-reg           timer_status_re = 1'd0;
-reg           timer_status_status = 1'd0;
-wire          timer_status_we;
-reg           timer_update_value_re = 1'd0;
-reg           timer_update_value_storage = 1'd0;
-reg    [31:0] timer_value = 32'd0;
-reg           timer_value_re = 1'd0;
-reg    [31:0] timer_value_status = 32'd0;
-wire          timer_value_we;
-wire          timer_zero0;
-wire          timer_zero1;
-wire          timer_zero2;
-reg           timer_zero_clear = 1'd0;
-reg           timer_zero_pending = 1'd0;
-wire          timer_zero_status;
-wire          timer_zero_trigger;
-reg           timer_zero_trigger_d = 1'd0;
-reg     [3:0] tx_count = 4'd0;
-reg     [3:0] tx_count_rs232phytx_next_value0 = 4'd0;
-reg           tx_count_rs232phytx_next_value_ce0 = 1'd0;
-reg     [7:0] tx_data = 8'd0;
-reg     [7:0] tx_data_rs232phytx_next_value2 = 8'd0;
-reg           tx_data_rs232phytx_next_value_ce2 = 1'd0;
-reg           tx_enable = 1'd0;
-reg    [31:0] tx_phase = 32'd0;
-wire          tx_sink_first;
-wire          tx_sink_last;
-wire    [7:0] tx_sink_payload_data;
-reg           tx_sink_ready = 1'd0;
-wire          tx_sink_valid;
-reg           tx_tick = 1'd0;
-reg           uart_enable_re = 1'd0;
-reg     [1:0] uart_enable_storage = 2'd0;
-wire          uart_irq;
-reg     [1:0] uart_pending_r = 2'd0;
-reg           uart_pending_re = 1'd0;
-reg     [1:0] uart_pending_status = 2'd0;
-wire          uart_pending_we;
-wire          uart_rx0;
-wire          uart_rx1;
-wire          uart_rx2;
-reg           uart_rx_clear = 1'd0;
-reg     [3:0] uart_rx_fifo_consume = 4'd0;
-wire          uart_rx_fifo_do_read;
-wire          uart_rx_fifo_fifo_in_first;
-wire          uart_rx_fifo_fifo_in_last;
-wire    [7:0] uart_rx_fifo_fifo_in_payload_data;
-wire          uart_rx_fifo_fifo_out_first;
-wire          uart_rx_fifo_fifo_out_last;
-wire    [7:0] uart_rx_fifo_fifo_out_payload_data;
-reg     [4:0] uart_rx_fifo_level0 = 5'd0;
-wire    [4:0] uart_rx_fifo_level1;
-reg     [3:0] uart_rx_fifo_produce = 4'd0;
-wire    [3:0] uart_rx_fifo_rdport_adr;
-wire    [9:0] uart_rx_fifo_rdport_dat_r;
-wire          uart_rx_fifo_rdport_re;
-wire          uart_rx_fifo_re;
-reg           uart_rx_fifo_readable = 1'd0;
-reg           uart_rx_fifo_replace = 1'd0;
-wire          uart_rx_fifo_sink_first;
-wire          uart_rx_fifo_sink_last;
-wire    [7:0] uart_rx_fifo_sink_payload_data;
-wire          uart_rx_fifo_sink_ready;
-wire          uart_rx_fifo_sink_valid;
-wire          uart_rx_fifo_source_first;
-wire          uart_rx_fifo_source_last;
-wire    [7:0] uart_rx_fifo_source_payload_data;
-wire          uart_rx_fifo_source_ready;
-wire          uart_rx_fifo_source_valid;
-wire    [9:0] uart_rx_fifo_syncfifo_din;
-wire    [9:0] uart_rx_fifo_syncfifo_dout;
-wire          uart_rx_fifo_syncfifo_re;
-wire          uart_rx_fifo_syncfifo_readable;
-wire          uart_rx_fifo_syncfifo_we;
-wire          uart_rx_fifo_syncfifo_writable;
-reg     [3:0] uart_rx_fifo_wrport_adr = 4'd0;
-wire    [9:0] uart_rx_fifo_wrport_dat_r;
-wire    [9:0] uart_rx_fifo_wrport_dat_w;
-wire          uart_rx_fifo_wrport_we;
-reg           uart_rx_pending = 1'd0;
-wire          uart_rx_status;
-wire          uart_rx_trigger;
-reg           uart_rx_trigger_d = 1'd0;
-reg           uart_rxempty_re = 1'd0;
-wire          uart_rxempty_status;
-wire          uart_rxempty_we;
-reg           uart_rxfull_re = 1'd0;
-wire          uart_rxfull_status;
-wire          uart_rxfull_we;
-wire    [7:0] uart_rxtx_r;
-reg           uart_rxtx_re = 1'd0;
-wire    [7:0] uart_rxtx_w;
-reg           uart_rxtx_we = 1'd0;
-reg           uart_status_re = 1'd0;
-reg     [1:0] uart_status_status = 2'd0;
-wire          uart_status_we;
-wire          uart_tx0;
-wire          uart_tx1;
-wire          uart_tx2;
-reg           uart_tx_clear = 1'd0;
-reg     [3:0] uart_tx_fifo_consume = 4'd0;
-wire          uart_tx_fifo_do_read;
-wire          uart_tx_fifo_fifo_in_first;
-wire          uart_tx_fifo_fifo_in_last;
-wire    [7:0] uart_tx_fifo_fifo_in_payload_data;
-wire          uart_tx_fifo_fifo_out_first;
-wire          uart_tx_fifo_fifo_out_last;
-wire    [7:0] uart_tx_fifo_fifo_out_payload_data;
-reg     [4:0] uart_tx_fifo_level0 = 5'd0;
-wire    [4:0] uart_tx_fifo_level1;
-reg     [3:0] uart_tx_fifo_produce = 4'd0;
-wire    [3:0] uart_tx_fifo_rdport_adr;
-wire    [9:0] uart_tx_fifo_rdport_dat_r;
-wire          uart_tx_fifo_rdport_re;
-wire          uart_tx_fifo_re;
-reg           uart_tx_fifo_readable = 1'd0;
-reg           uart_tx_fifo_replace = 1'd0;
-reg           uart_tx_fifo_sink_first = 1'd0;
-reg           uart_tx_fifo_sink_last = 1'd0;
-wire    [7:0] uart_tx_fifo_sink_payload_data;
-wire          uart_tx_fifo_sink_ready;
-wire          uart_tx_fifo_sink_valid;
-wire          uart_tx_fifo_source_first;
-wire          uart_tx_fifo_source_last;
-wire    [7:0] uart_tx_fifo_source_payload_data;
-wire          uart_tx_fifo_source_ready;
-wire          uart_tx_fifo_source_valid;
-wire    [9:0] uart_tx_fifo_syncfifo_din;
-wire    [9:0] uart_tx_fifo_syncfifo_dout;
-wire          uart_tx_fifo_syncfifo_re;
-wire          uart_tx_fifo_syncfifo_readable;
-wire          uart_tx_fifo_syncfifo_we;
-wire          uart_tx_fifo_syncfifo_writable;
-reg     [3:0] uart_tx_fifo_wrport_adr = 4'd0;
-wire    [9:0] uart_tx_fifo_wrport_dat_r;
-wire    [9:0] uart_tx_fifo_wrport_dat_w;
-wire          uart_tx_fifo_wrport_we;
-reg           uart_tx_pending = 1'd0;
-wire          uart_tx_status;
-wire          uart_tx_trigger;
-reg           uart_tx_trigger_d = 1'd0;
-reg           uart_txempty_re = 1'd0;
-wire          uart_txempty_status;
-wire          uart_txempty_we;
-reg           uart_txfull_re = 1'd0;
-wire          uart_txfull_status;
-wire          uart_txfull_we;
-wire          uart_uart_sink_first;
-wire          uart_uart_sink_last;
-wire    [7:0] uart_uart_sink_payload_data;
-wire          uart_uart_sink_ready;
-wire          uart_uart_sink_valid;
-wire          uart_uart_source_first;
-wire          uart_uart_source_last;
-wire    [7:0] uart_uart_source_payload_data;
-wire          uart_uart_source_ready;
-wire          uart_uart_source_valid;
 reg    [63:0] uptime_cycles = 64'd0;
 reg           uptime_cycles_re = 1'd0;
 reg    [63:0] uptime_cycles_status = 64'd0;
@@ -994,7 +1273,6 @@ reg           usb23_trigger_d = 1'd0;
 wire          usb23_usb0;
 wire          usb23_usb1;
 wire          usb23_usb2;
-reg    [31:0] vexriscv = 32'd537919488;
 wire          we;
 reg           wishbone2csr_next_state = 1'd0;
 reg           wishbone2csr_state = 1'd0;
@@ -1003,123 +1281,117 @@ reg           wishbone2csr_state = 1'd0;
 // Combinatorial Logic
 //------------------------------------------------------------------------------
 
-assign reset = (soc_rst | cpu_rst);
-assign spiflash_core_litespimmap_offset = 30'd536870912;
+assign mainsoc_reset = (mainsoc_soc_rst | mainsoc_cpu_rst);
 always @(*) begin
-    interrupt <= 32'd0;
-    interrupt[4] <= framectl_irq;
-    interrupt[1] <= timer_irq;
-    interrupt[2] <= uart_irq;
-    interrupt[0] <= usb23_irq;
+    mainsoc_interrupt <= 32'd0;
+    mainsoc_interrupt[3] <= (i2c0_i2c_int_trigger | i2c0_txrx_done_trigger);
+    mainsoc_interrupt[5] <= framectl_irq;
+    mainsoc_interrupt[1] <= mainsoc_timer_irq;
+    mainsoc_interrupt[2] <= mainsoc_uart_irq;
+    mainsoc_interrupt[0] <= usb23_irq;
 end
 assign sys_clk_1 = sys_clk;
 assign por_clk = sys_clk;
 assign sys_rst_1 = int_rst;
 always @(*) begin
-    decoder0_slave_sel <= 2'd0;
-    decoder0_slave_sel[0] <= (ibus_adr[29:22] == 6'd32);
-    decoder0_slave_sel[1] <= (ibus_adr[29:14] == 15'd16384);
+    decoder0_slave_sel <= 4'd0;
+    decoder0_slave_sel[0] <= (mainsoc_ibus_adr[29:22] == 6'd32);
+    decoder0_slave_sel[1] <= (mainsoc_ibus_adr[29:14] == 15'd16384);
+    decoder0_slave_sel[2] <= (mainsoc_ibus_adr[29:26] == 4'd11);
+    decoder0_slave_sel[3] <= (mainsoc_ibus_adr[29:14] == 16'd57344);
 end
-assign interface0_interface_adr = ibus_adr;
-assign interface0_interface_dat_w = ibus_dat_w;
-assign interface0_interface_sel = ibus_sel;
-assign interface0_interface_stb = ibus_stb;
-assign interface0_interface_we = ibus_we;
-assign interface0_interface_cti = ibus_cti;
-assign interface0_interface_bte = ibus_bte;
-assign interface1_interface_adr = ibus_adr;
-assign interface1_interface_dat_w = ibus_dat_w;
-assign interface1_interface_sel = ibus_sel;
-assign interface1_interface_stb = ibus_stb;
-assign interface1_interface_we = ibus_we;
-assign interface1_interface_cti = ibus_cti;
-assign interface1_interface_bte = ibus_bte;
-assign interface0_interface_cyc = (ibus_cyc & decoder0_slave_sel[0]);
-assign interface1_interface_cyc = (ibus_cyc & decoder0_slave_sel[1]);
-assign ibus_err = (interface0_interface_err | interface1_interface_err);
-assign timeout0_wait = ((ibus_stb & ibus_cyc) & (~ibus_ack));
-always @(*) begin
-    ibus_ack <= 1'd0;
-    ibus_dat_r <= 32'd0;
-    timeout0_error <= 1'd0;
-    ibus_ack <= (interface0_interface_ack | interface1_interface_ack);
-    ibus_dat_r <= (({32{decoder0_slave_sel_r[0]}} & interface0_interface_dat_r) | ({32{decoder0_slave_sel_r[1]}} & interface1_interface_dat_r));
-    if (timeout0_done) begin
-        ibus_dat_r <= 32'd4294967295;
-        ibus_ack <= 1'd1;
-        timeout0_error <= 1'd1;
-    end
-end
-assign timeout0_done = (timeout0_count == 1'd0);
+assign interface0_adr1 = mainsoc_ibus_adr;
+assign interface0_dat_w1 = mainsoc_ibus_dat_w;
+assign interface0_sel1 = mainsoc_ibus_sel;
+assign interface0_stb1 = mainsoc_ibus_stb;
+assign interface0_we1 = mainsoc_ibus_we;
+assign interface0_cti1 = mainsoc_ibus_cti;
+assign interface0_bte1 = mainsoc_ibus_bte;
+assign interface1_adr1 = mainsoc_ibus_adr;
+assign interface1_dat_w1 = mainsoc_ibus_dat_w;
+assign interface1_sel = mainsoc_ibus_sel;
+assign interface1_stb = mainsoc_ibus_stb;
+assign interface1_we1 = mainsoc_ibus_we;
+assign interface1_cti = mainsoc_ibus_cti;
+assign interface1_bte = mainsoc_ibus_bte;
+assign interface2_adr = mainsoc_ibus_adr;
+assign interface2_dat_w = mainsoc_ibus_dat_w;
+assign interface2_sel = mainsoc_ibus_sel;
+assign interface2_stb = mainsoc_ibus_stb;
+assign interface2_we = mainsoc_ibus_we;
+assign interface2_cti = mainsoc_ibus_cti;
+assign interface2_bte = mainsoc_ibus_bte;
+assign interface3_adr = mainsoc_ibus_adr;
+assign interface3_dat_w = mainsoc_ibus_dat_w;
+assign interface3_sel = mainsoc_ibus_sel;
+assign interface3_stb = mainsoc_ibus_stb;
+assign interface3_we = mainsoc_ibus_we;
+assign interface3_cti = mainsoc_ibus_cti;
+assign interface3_bte = mainsoc_ibus_bte;
+assign interface0_cyc1 = (mainsoc_ibus_cyc & decoder0_slave_sel[0]);
+assign interface1_cyc = (mainsoc_ibus_cyc & decoder0_slave_sel[1]);
+assign interface2_cyc = (mainsoc_ibus_cyc & decoder0_slave_sel[2]);
+assign interface3_cyc = (mainsoc_ibus_cyc & decoder0_slave_sel[3]);
+assign mainsoc_ibus_ack = (((interface0_ack1 | interface1_ack) | interface2_ack) | interface3_ack);
+assign mainsoc_ibus_err = (((interface0_err1 | interface1_err) | interface2_err) | interface3_err);
+assign mainsoc_ibus_dat_r = (((({32{decoder0_slave_sel_r[0]}} & interface0_dat_r1) | ({32{decoder0_slave_sel_r[1]}} & interface1_dat_r1)) | ({32{decoder0_slave_sel_r[2]}} & interface2_dat_r)) | ({32{decoder0_slave_sel_r[3]}} & interface3_dat_r));
 always @(*) begin
     decoder1_slave_sel <= 4'd0;
-    decoder1_slave_sel[0] <= (dbus_adr[29:22] == 6'd32);
-    decoder1_slave_sel[1] <= (dbus_adr[29:14] == 15'd16384);
-    decoder1_slave_sel[2] <= (dbus_adr[29:26] == 4'd11);
-    decoder1_slave_sel[3] <= (dbus_adr[29:14] == 16'd57344);
+    decoder1_slave_sel[0] <= (mainsoc_dbus_adr[29:22] == 6'd32);
+    decoder1_slave_sel[1] <= (mainsoc_dbus_adr[29:14] == 15'd16384);
+    decoder1_slave_sel[2] <= (mainsoc_dbus_adr[29:26] == 4'd11);
+    decoder1_slave_sel[3] <= (mainsoc_dbus_adr[29:14] == 16'd57344);
 end
-assign interface2_interface_adr = dbus_adr;
-assign interface2_interface_dat_w = dbus_dat_w;
-assign interface2_interface_sel = dbus_sel;
-assign interface2_interface_stb = dbus_stb;
-assign interface2_interface_we = dbus_we;
-assign interface2_interface_cti = dbus_cti;
-assign interface2_interface_bte = dbus_bte;
-assign interface3_interface_adr = dbus_adr;
-assign interface3_interface_dat_w = dbus_dat_w;
-assign interface3_interface_sel = dbus_sel;
-assign interface3_interface_stb = dbus_stb;
-assign interface3_interface_we = dbus_we;
-assign interface3_interface_cti = dbus_cti;
-assign interface3_interface_bte = dbus_bte;
-assign interface4_interface_adr = dbus_adr;
-assign interface4_interface_dat_w = dbus_dat_w;
-assign interface4_interface_sel = dbus_sel;
-assign interface4_interface_stb = dbus_stb;
-assign interface4_interface_we = dbus_we;
-assign interface4_interface_cti = dbus_cti;
-assign interface4_interface_bte = dbus_bte;
-assign interface5_interface_adr = dbus_adr;
-assign interface5_interface_dat_w = dbus_dat_w;
-assign interface5_interface_sel = dbus_sel;
-assign interface5_interface_stb = dbus_stb;
-assign interface5_interface_we = dbus_we;
-assign interface5_interface_cti = dbus_cti;
-assign interface5_interface_bte = dbus_bte;
-assign interface2_interface_cyc = (dbus_cyc & decoder1_slave_sel[0]);
-assign interface3_interface_cyc = (dbus_cyc & decoder1_slave_sel[1]);
-assign interface4_interface_cyc = (dbus_cyc & decoder1_slave_sel[2]);
-assign interface5_interface_cyc = (dbus_cyc & decoder1_slave_sel[3]);
-assign dbus_err = (((interface2_interface_err | interface3_interface_err) | interface4_interface_err) | interface5_interface_err);
-assign timeout1_wait = ((dbus_stb & dbus_cyc) & (~dbus_ack));
-always @(*) begin
-    dbus_ack <= 1'd0;
-    dbus_dat_r <= 32'd0;
-    timeout1_error <= 1'd0;
-    dbus_ack <= (((interface2_interface_ack | interface3_interface_ack) | interface4_interface_ack) | interface5_interface_ack);
-    dbus_dat_r <= (((({32{decoder1_slave_sel_r[0]}} & interface2_interface_dat_r) | ({32{decoder1_slave_sel_r[1]}} & interface3_interface_dat_r)) | ({32{decoder1_slave_sel_r[2]}} & interface4_interface_dat_r)) | ({32{decoder1_slave_sel_r[3]}} & interface5_interface_dat_r));
-    if (timeout1_done) begin
-        dbus_dat_r <= 32'd4294967295;
-        dbus_ack <= 1'd1;
-        timeout1_error <= 1'd1;
-    end
-end
-assign timeout1_done = (timeout1_count == 1'd0);
-assign spiflash_core_litespimmap_bus_adr = array_muxed0;
-assign spiflash_core_litespimmap_bus_dat_w = array_muxed1;
-assign spiflash_core_litespimmap_bus_sel = array_muxed2;
-assign spiflash_core_litespimmap_bus_cyc = array_muxed3;
-assign spiflash_core_litespimmap_bus_stb = array_muxed4;
-assign spiflash_core_litespimmap_bus_we = array_muxed5;
-assign spiflash_core_litespimmap_bus_cti = array_muxed6;
-assign spiflash_core_litespimmap_bus_bte = array_muxed7;
-assign interface0_interface_dat_r = spiflash_core_litespimmap_bus_dat_r;
-assign interface2_interface_dat_r = spiflash_core_litespimmap_bus_dat_r;
-assign interface0_interface_ack = (spiflash_core_litespimmap_bus_ack & (arbiter0_grant == 1'd0));
-assign interface2_interface_ack = (spiflash_core_litespimmap_bus_ack & (arbiter0_grant == 1'd1));
-assign interface0_interface_err = (spiflash_core_litespimmap_bus_err & (arbiter0_grant == 1'd0));
-assign interface2_interface_err = (spiflash_core_litespimmap_bus_err & (arbiter0_grant == 1'd1));
-assign arbiter0_request = {interface2_interface_cyc, interface0_interface_cyc};
+assign interface4_adr = mainsoc_dbus_adr;
+assign interface4_dat_w = mainsoc_dbus_dat_w;
+assign interface4_sel = mainsoc_dbus_sel;
+assign interface4_stb = mainsoc_dbus_stb;
+assign interface4_we = mainsoc_dbus_we;
+assign interface4_cti = mainsoc_dbus_cti;
+assign interface4_bte = mainsoc_dbus_bte;
+assign interface5_adr = mainsoc_dbus_adr;
+assign interface5_dat_w = mainsoc_dbus_dat_w;
+assign interface5_sel = mainsoc_dbus_sel;
+assign interface5_stb = mainsoc_dbus_stb;
+assign interface5_we = mainsoc_dbus_we;
+assign interface5_cti = mainsoc_dbus_cti;
+assign interface5_bte = mainsoc_dbus_bte;
+assign interface6_adr = mainsoc_dbus_adr;
+assign interface6_dat_w = mainsoc_dbus_dat_w;
+assign interface6_sel = mainsoc_dbus_sel;
+assign interface6_stb = mainsoc_dbus_stb;
+assign interface6_we = mainsoc_dbus_we;
+assign interface6_cti = mainsoc_dbus_cti;
+assign interface6_bte = mainsoc_dbus_bte;
+assign interface7_adr = mainsoc_dbus_adr;
+assign interface7_dat_w = mainsoc_dbus_dat_w;
+assign interface7_sel = mainsoc_dbus_sel;
+assign interface7_stb = mainsoc_dbus_stb;
+assign interface7_we = mainsoc_dbus_we;
+assign interface7_cti = mainsoc_dbus_cti;
+assign interface7_bte = mainsoc_dbus_bte;
+assign interface4_cyc = (mainsoc_dbus_cyc & decoder1_slave_sel[0]);
+assign interface5_cyc = (mainsoc_dbus_cyc & decoder1_slave_sel[1]);
+assign interface6_cyc = (mainsoc_dbus_cyc & decoder1_slave_sel[2]);
+assign interface7_cyc = (mainsoc_dbus_cyc & decoder1_slave_sel[3]);
+assign mainsoc_dbus_ack = (((interface4_ack | interface5_ack) | interface6_ack) | interface7_ack);
+assign mainsoc_dbus_err = (((interface4_err | interface5_err) | interface6_err) | interface7_err);
+assign mainsoc_dbus_dat_r = (((({32{decoder1_slave_sel_r[0]}} & interface4_dat_r) | ({32{decoder1_slave_sel_r[1]}} & interface5_dat_r)) | ({32{decoder1_slave_sel_r[2]}} & interface6_dat_r)) | ({32{decoder1_slave_sel_r[3]}} & interface7_dat_r));
+assign litespimmap_bus_adr = array_muxed0;
+assign litespimmap_bus_dat_w = array_muxed1;
+assign litespimmap_bus_sel = array_muxed2;
+assign litespimmap_bus_cyc = array_muxed3;
+assign litespimmap_bus_stb = array_muxed4;
+assign litespimmap_bus_we = array_muxed5;
+assign litespimmap_bus_cti = array_muxed6;
+assign litespimmap_bus_bte = array_muxed7;
+assign interface0_dat_r1 = litespimmap_bus_dat_r;
+assign interface4_dat_r = litespimmap_bus_dat_r;
+assign interface0_ack1 = (litespimmap_bus_ack & (arbiter0_grant == 1'd0));
+assign interface4_ack = (litespimmap_bus_ack & (arbiter0_grant == 1'd1));
+assign interface0_err1 = (litespimmap_bus_err & (arbiter0_grant == 1'd0));
+assign interface4_err = (litespimmap_bus_err & (arbiter0_grant == 1'd1));
+assign arbiter0_request = {interface4_cyc, interface0_cyc1};
 assign main_ram_bus_adr = array_muxed8;
 assign main_ram_bus_dat_w = array_muxed9;
 assign main_ram_bus_sel = array_muxed10;
@@ -1128,13 +1400,13 @@ assign main_ram_bus_stb = array_muxed12;
 assign main_ram_bus_we = array_muxed13;
 assign main_ram_bus_cti = array_muxed14;
 assign main_ram_bus_bte = array_muxed15;
-assign interface1_interface_dat_r = main_ram_bus_dat_r;
-assign interface3_interface_dat_r = main_ram_bus_dat_r;
-assign interface1_interface_ack = (main_ram_bus_ack & (arbiter1_grant == 1'd0));
-assign interface3_interface_ack = (main_ram_bus_ack & (arbiter1_grant == 1'd1));
-assign interface1_interface_err = (main_ram_bus_err & (arbiter1_grant == 1'd0));
-assign interface3_interface_err = (main_ram_bus_err & (arbiter1_grant == 1'd1));
-assign arbiter1_request = {interface3_interface_cyc, interface1_interface_cyc};
+assign interface1_dat_r1 = main_ram_bus_dat_r;
+assign interface5_dat_r = main_ram_bus_dat_r;
+assign interface1_ack = (main_ram_bus_ack & (arbiter1_grant == 1'd0));
+assign interface5_ack = (main_ram_bus_ack & (arbiter1_grant == 1'd1));
+assign interface1_err = (main_ram_bus_err & (arbiter1_grant == 1'd0));
+assign interface5_err = (main_ram_bus_err & (arbiter1_grant == 1'd1));
+assign arbiter1_request = {interface5_cyc, interface1_cyc};
 assign port_bus_adr = array_muxed16;
 assign port_bus_dat_w = array_muxed17;
 assign port_bus_sel = array_muxed18;
@@ -1143,221 +1415,275 @@ assign port_bus_stb = array_muxed20;
 assign port_bus_we = array_muxed21;
 assign port_bus_cti = array_muxed22;
 assign port_bus_bte = array_muxed23;
-assign interface4_interface_dat_r = port_bus_dat_r;
-assign interface4_interface_ack = (port_bus_ack & (arbiter2_grant == 1'd0));
-assign interface4_interface_err = (port_bus_err & (arbiter2_grant == 1'd0));
-assign arbiter2_request = {interface4_interface_cyc};
-assign arbiter2_grant = 1'd0;
-assign interface0_adr = array_muxed24;
-assign interface0_dat_w = array_muxed25;
-assign interface0_sel = array_muxed26;
-assign interface0_cyc = array_muxed27;
-assign interface0_stb = array_muxed28;
-assign interface0_we = array_muxed29;
-assign interface0_cti = array_muxed30;
-assign interface0_bte = array_muxed31;
-assign interface5_interface_dat_r = interface0_dat_r;
-assign interface5_interface_ack = (interface0_ack & (arbiter3_grant == 1'd0));
-assign interface5_interface_err = (interface0_err & (arbiter3_grant == 1'd0));
-assign arbiter3_request = {interface5_interface_cyc};
-assign arbiter3_grant = 1'd0;
-assign bus_errors_status = bus_errors;
+assign interface2_dat_r = port_bus_dat_r;
+assign interface6_dat_r = port_bus_dat_r;
+assign interface2_ack = (port_bus_ack & (arbiter2_grant == 1'd0));
+assign interface6_ack = (port_bus_ack & (arbiter2_grant == 1'd1));
+assign interface2_err = (port_bus_err & (arbiter2_grant == 1'd0));
+assign interface6_err = (port_bus_err & (arbiter2_grant == 1'd1));
+assign arbiter2_request = {interface6_cyc, interface2_cyc};
+assign interface0_adr0 = array_muxed24;
+assign interface0_dat_w0 = array_muxed25;
+assign interface0_sel0 = array_muxed26;
+assign interface0_cyc0 = array_muxed27;
+assign interface0_stb0 = array_muxed28;
+assign interface0_we0 = array_muxed29;
+assign interface0_cti0 = array_muxed30;
+assign interface0_bte0 = array_muxed31;
+assign interface3_dat_r = interface0_dat_r0;
+assign interface7_dat_r = interface0_dat_r0;
+assign interface3_ack = (interface0_ack0 & (arbiter3_grant == 1'd0));
+assign interface7_ack = (interface0_ack0 & (arbiter3_grant == 1'd1));
+assign interface3_err = (interface0_err0 & (arbiter3_grant == 1'd0));
+assign interface7_err = (interface0_err0 & (arbiter3_grant == 1'd1));
+assign arbiter3_request = {interface7_cyc, interface3_cyc};
+assign mainsoc_bus_errors_status = mainsoc_bus_errors;
 always @(*) begin
+    mainsoc_serial_tx_rs232phytx_next_value1 <= 1'd0;
+    mainsoc_serial_tx_rs232phytx_next_value_ce1 <= 1'd0;
+    mainsoc_tx_count_rs232phytx_next_value0 <= 4'd0;
+    mainsoc_tx_count_rs232phytx_next_value_ce0 <= 1'd0;
+    mainsoc_tx_data_rs232phytx_next_value2 <= 8'd0;
+    mainsoc_tx_data_rs232phytx_next_value_ce2 <= 1'd0;
+    mainsoc_tx_enable <= 1'd0;
+    mainsoc_tx_sink_ready <= 1'd0;
     rs232phytx_next_state <= 1'd0;
-    serial_tx_rs232phytx_next_value1 <= 1'd0;
-    serial_tx_rs232phytx_next_value_ce1 <= 1'd0;
-    tx_count_rs232phytx_next_value0 <= 4'd0;
-    tx_count_rs232phytx_next_value_ce0 <= 1'd0;
-    tx_data_rs232phytx_next_value2 <= 8'd0;
-    tx_data_rs232phytx_next_value_ce2 <= 1'd0;
-    tx_enable <= 1'd0;
-    tx_sink_ready <= 1'd0;
     rs232phytx_next_state <= rs232phytx_state;
     case (rs232phytx_state)
         1'd1: begin
-            tx_enable <= 1'd1;
-            if (tx_tick) begin
-                serial_tx_rs232phytx_next_value1 <= tx_data;
-                serial_tx_rs232phytx_next_value_ce1 <= 1'd1;
-                tx_count_rs232phytx_next_value0 <= (tx_count + 1'd1);
-                tx_count_rs232phytx_next_value_ce0 <= 1'd1;
-                tx_data_rs232phytx_next_value2 <= {1'd1, tx_data[7:1]};
-                tx_data_rs232phytx_next_value_ce2 <= 1'd1;
-                if ((tx_count == 4'd9)) begin
-                    tx_sink_ready <= 1'd1;
+            mainsoc_tx_enable <= 1'd1;
+            if (mainsoc_tx_tick) begin
+                mainsoc_serial_tx_rs232phytx_next_value1 <= mainsoc_tx_data;
+                mainsoc_serial_tx_rs232phytx_next_value_ce1 <= 1'd1;
+                mainsoc_tx_count_rs232phytx_next_value0 <= (mainsoc_tx_count + 1'd1);
+                mainsoc_tx_count_rs232phytx_next_value_ce0 <= 1'd1;
+                mainsoc_tx_data_rs232phytx_next_value2 <= {1'd1, mainsoc_tx_data[7:1]};
+                mainsoc_tx_data_rs232phytx_next_value_ce2 <= 1'd1;
+                if ((mainsoc_tx_count == 4'd9)) begin
+                    mainsoc_tx_sink_ready <= 1'd1;
                     rs232phytx_next_state <= 1'd0;
                 end
             end
         end
         default: begin
-            tx_count_rs232phytx_next_value0 <= 1'd0;
-            tx_count_rs232phytx_next_value_ce0 <= 1'd1;
-            serial_tx_rs232phytx_next_value1 <= 1'd1;
-            serial_tx_rs232phytx_next_value_ce1 <= 1'd1;
-            if (tx_sink_valid) begin
-                serial_tx_rs232phytx_next_value1 <= 1'd0;
-                serial_tx_rs232phytx_next_value_ce1 <= 1'd1;
-                tx_data_rs232phytx_next_value2 <= tx_sink_payload_data;
-                tx_data_rs232phytx_next_value_ce2 <= 1'd1;
+            mainsoc_tx_count_rs232phytx_next_value0 <= 1'd0;
+            mainsoc_tx_count_rs232phytx_next_value_ce0 <= 1'd1;
+            mainsoc_serial_tx_rs232phytx_next_value1 <= 1'd1;
+            mainsoc_serial_tx_rs232phytx_next_value_ce1 <= 1'd1;
+            if (mainsoc_tx_sink_valid) begin
+                mainsoc_serial_tx_rs232phytx_next_value1 <= 1'd0;
+                mainsoc_serial_tx_rs232phytx_next_value_ce1 <= 1'd1;
+                mainsoc_tx_data_rs232phytx_next_value2 <= mainsoc_tx_sink_payload_data;
+                mainsoc_tx_data_rs232phytx_next_value_ce2 <= 1'd1;
                 rs232phytx_next_state <= 1'd1;
             end
         end
     endcase
 end
 always @(*) begin
+    mainsoc_rx_count_rs232phyrx_next_value0 <= 4'd0;
+    mainsoc_rx_count_rs232phyrx_next_value_ce0 <= 1'd0;
+    mainsoc_rx_data_rs232phyrx_next_value1 <= 8'd0;
+    mainsoc_rx_data_rs232phyrx_next_value_ce1 <= 1'd0;
+    mainsoc_rx_enable <= 1'd0;
+    mainsoc_rx_source_payload_data <= 8'd0;
+    mainsoc_rx_source_valid <= 1'd0;
     rs232phyrx_next_state <= 1'd0;
-    rx_count_rs232phyrx_next_value0 <= 4'd0;
-    rx_count_rs232phyrx_next_value_ce0 <= 1'd0;
-    rx_data_rs232phyrx_next_value1 <= 8'd0;
-    rx_data_rs232phyrx_next_value_ce1 <= 1'd0;
-    rx_enable <= 1'd0;
-    rx_source_payload_data <= 8'd0;
-    rx_source_valid <= 1'd0;
     rs232phyrx_next_state <= rs232phyrx_state;
     case (rs232phyrx_state)
         1'd1: begin
-            rx_enable <= 1'd1;
-            if (rx_tick) begin
-                rx_count_rs232phyrx_next_value0 <= (rx_count + 1'd1);
-                rx_count_rs232phyrx_next_value_ce0 <= 1'd1;
-                rx_data_rs232phyrx_next_value1 <= {rx_rx, rx_data[7:1]};
-                rx_data_rs232phyrx_next_value_ce1 <= 1'd1;
-                if ((rx_count == 4'd9)) begin
-                    rx_source_valid <= (rx_rx == 1'd1);
-                    rx_source_payload_data <= rx_data;
+            mainsoc_rx_enable <= 1'd1;
+            if (mainsoc_rx_tick) begin
+                mainsoc_rx_count_rs232phyrx_next_value0 <= (mainsoc_rx_count + 1'd1);
+                mainsoc_rx_count_rs232phyrx_next_value_ce0 <= 1'd1;
+                mainsoc_rx_data_rs232phyrx_next_value1 <= {mainsoc_rx_rx, mainsoc_rx_data[7:1]};
+                mainsoc_rx_data_rs232phyrx_next_value_ce1 <= 1'd1;
+                if ((mainsoc_rx_count == 4'd9)) begin
+                    mainsoc_rx_source_valid <= (mainsoc_rx_rx == 1'd1);
+                    mainsoc_rx_source_payload_data <= mainsoc_rx_data;
                     rs232phyrx_next_state <= 1'd0;
                 end
             end
         end
         default: begin
-            rx_count_rs232phyrx_next_value0 <= 1'd0;
-            rx_count_rs232phyrx_next_value_ce0 <= 1'd1;
-            if (((rx_rx == 1'd0) & (rx_rx_d == 1'd1))) begin
+            mainsoc_rx_count_rs232phyrx_next_value0 <= 1'd0;
+            mainsoc_rx_count_rs232phyrx_next_value_ce0 <= 1'd1;
+            if (((mainsoc_rx_rx == 1'd0) & (mainsoc_rx_rx_d == 1'd1))) begin
                 rs232phyrx_next_state <= 1'd1;
             end
         end
     endcase
 end
-assign uart_uart_sink_valid = rx_source_valid;
-assign rx_source_ready = uart_uart_sink_ready;
-assign uart_uart_sink_first = rx_source_first;
-assign uart_uart_sink_last = rx_source_last;
-assign uart_uart_sink_payload_data = rx_source_payload_data;
-assign tx_sink_valid = uart_uart_source_valid;
-assign uart_uart_source_ready = tx_sink_ready;
-assign tx_sink_first = uart_uart_source_first;
-assign tx_sink_last = uart_uart_source_last;
-assign tx_sink_payload_data = uart_uart_source_payload_data;
-assign uart_tx_fifo_sink_valid = uart_rxtx_re;
-assign uart_tx_fifo_sink_payload_data = uart_rxtx_r;
-assign uart_uart_source_valid = uart_tx_fifo_source_valid;
-assign uart_tx_fifo_source_ready = uart_uart_source_ready;
-assign uart_uart_source_first = uart_tx_fifo_source_first;
-assign uart_uart_source_last = uart_tx_fifo_source_last;
-assign uart_uart_source_payload_data = uart_tx_fifo_source_payload_data;
-assign uart_txfull_status = (~uart_tx_fifo_sink_ready);
-assign uart_txempty_status = (~uart_tx_fifo_source_valid);
-assign uart_tx_trigger = uart_tx_fifo_sink_ready;
-assign uart_rx_fifo_sink_valid = uart_uart_sink_valid;
-assign uart_uart_sink_ready = uart_rx_fifo_sink_ready;
-assign uart_rx_fifo_sink_first = uart_uart_sink_first;
-assign uart_rx_fifo_sink_last = uart_uart_sink_last;
-assign uart_rx_fifo_sink_payload_data = uart_uart_sink_payload_data;
-assign uart_rxtx_w = uart_rx_fifo_source_payload_data;
-assign uart_rx_fifo_source_ready = (uart_rx_clear | (1'd0 & uart_rxtx_we));
-assign uart_rxempty_status = (~uart_rx_fifo_source_valid);
-assign uart_rxfull_status = (~uart_rx_fifo_sink_ready);
-assign uart_rx_trigger = uart_rx_fifo_source_valid;
-assign uart_tx0 = uart_tx_status;
-assign uart_tx1 = uart_tx_pending;
+assign mainsoc_uart_uart_sink_valid = mainsoc_rx_source_valid;
+assign mainsoc_rx_source_ready = mainsoc_uart_uart_sink_ready;
+assign mainsoc_uart_uart_sink_first = mainsoc_rx_source_first;
+assign mainsoc_uart_uart_sink_last = mainsoc_rx_source_last;
+assign mainsoc_uart_uart_sink_payload_data = mainsoc_rx_source_payload_data;
+assign mainsoc_tx_sink_valid = mainsoc_uart_uart_source_valid;
+assign mainsoc_uart_uart_source_ready = mainsoc_tx_sink_ready;
+assign mainsoc_tx_sink_first = mainsoc_uart_uart_source_first;
+assign mainsoc_tx_sink_last = mainsoc_uart_uart_source_last;
+assign mainsoc_tx_sink_payload_data = mainsoc_uart_uart_source_payload_data;
+assign mainsoc_uart_tx_fifo_sink_valid = mainsoc_uart_rxtx_re;
+assign mainsoc_uart_tx_fifo_sink_payload_data = mainsoc_uart_rxtx_r;
+assign mainsoc_uart_uart_source_valid = mainsoc_uart_tx_fifo_source_valid;
+assign mainsoc_uart_tx_fifo_source_ready = mainsoc_uart_uart_source_ready;
+assign mainsoc_uart_uart_source_first = mainsoc_uart_tx_fifo_source_first;
+assign mainsoc_uart_uart_source_last = mainsoc_uart_tx_fifo_source_last;
+assign mainsoc_uart_uart_source_payload_data = mainsoc_uart_tx_fifo_source_payload_data;
+assign mainsoc_uart_txfull_status = (~mainsoc_uart_tx_fifo_sink_ready);
+assign mainsoc_uart_txempty_status = (~mainsoc_uart_tx_fifo_source_valid);
+assign mainsoc_uart_tx_trigger = mainsoc_uart_tx_fifo_sink_ready;
+assign mainsoc_uart_rx_fifo_sink_valid = mainsoc_uart_uart_sink_valid;
+assign mainsoc_uart_uart_sink_ready = mainsoc_uart_rx_fifo_sink_ready;
+assign mainsoc_uart_rx_fifo_sink_first = mainsoc_uart_uart_sink_first;
+assign mainsoc_uart_rx_fifo_sink_last = mainsoc_uart_uart_sink_last;
+assign mainsoc_uart_rx_fifo_sink_payload_data = mainsoc_uart_uart_sink_payload_data;
+assign mainsoc_uart_rxtx_w = mainsoc_uart_rx_fifo_source_payload_data;
+assign mainsoc_uart_rx_fifo_source_ready = (mainsoc_uart_rx_clear | (1'd0 & mainsoc_uart_rxtx_we));
+assign mainsoc_uart_rxempty_status = (~mainsoc_uart_rx_fifo_source_valid);
+assign mainsoc_uart_rxfull_status = (~mainsoc_uart_rx_fifo_sink_ready);
+assign mainsoc_uart_rx_trigger = mainsoc_uart_rx_fifo_source_valid;
+assign mainsoc_uart_tx0 = mainsoc_uart_tx_status;
+assign mainsoc_uart_tx1 = mainsoc_uart_tx_pending;
 always @(*) begin
-    uart_tx_clear <= 1'd0;
-    if ((uart_pending_re & uart_pending_r[0])) begin
-        uart_tx_clear <= 1'd1;
+    mainsoc_uart_tx_clear <= 1'd0;
+    if ((mainsoc_uart_pending_re & mainsoc_uart_pending_r[0])) begin
+        mainsoc_uart_tx_clear <= 1'd1;
     end
 end
-assign uart_rx0 = uart_rx_status;
-assign uart_rx1 = uart_rx_pending;
+assign mainsoc_uart_rx0 = mainsoc_uart_rx_status;
+assign mainsoc_uart_rx1 = mainsoc_uart_rx_pending;
 always @(*) begin
-    uart_rx_clear <= 1'd0;
-    if ((uart_pending_re & uart_pending_r[1])) begin
-        uart_rx_clear <= 1'd1;
+    mainsoc_uart_rx_clear <= 1'd0;
+    if ((mainsoc_uart_pending_re & mainsoc_uart_pending_r[1])) begin
+        mainsoc_uart_rx_clear <= 1'd1;
     end
 end
-assign uart_irq = ((uart_pending_status[0] & uart_enable_storage[0]) | (uart_pending_status[1] & uart_enable_storage[1]));
-assign uart_tx_status = uart_tx_trigger;
-assign uart_rx_status = uart_rx_trigger;
-assign uart_tx_fifo_syncfifo_din = {uart_tx_fifo_fifo_in_last, uart_tx_fifo_fifo_in_first, uart_tx_fifo_fifo_in_payload_data};
-assign {uart_tx_fifo_fifo_out_last, uart_tx_fifo_fifo_out_first, uart_tx_fifo_fifo_out_payload_data} = uart_tx_fifo_syncfifo_dout;
-assign uart_tx_fifo_sink_ready = uart_tx_fifo_syncfifo_writable;
-assign uart_tx_fifo_syncfifo_we = uart_tx_fifo_sink_valid;
-assign uart_tx_fifo_fifo_in_first = uart_tx_fifo_sink_first;
-assign uart_tx_fifo_fifo_in_last = uart_tx_fifo_sink_last;
-assign uart_tx_fifo_fifo_in_payload_data = uart_tx_fifo_sink_payload_data;
-assign uart_tx_fifo_source_valid = uart_tx_fifo_readable;
-assign uart_tx_fifo_source_first = uart_tx_fifo_fifo_out_first;
-assign uart_tx_fifo_source_last = uart_tx_fifo_fifo_out_last;
-assign uart_tx_fifo_source_payload_data = uart_tx_fifo_fifo_out_payload_data;
-assign uart_tx_fifo_re = uart_tx_fifo_source_ready;
-assign uart_tx_fifo_syncfifo_re = (uart_tx_fifo_syncfifo_readable & ((~uart_tx_fifo_readable) | uart_tx_fifo_re));
-assign uart_tx_fifo_level1 = (uart_tx_fifo_level0 + uart_tx_fifo_readable);
+assign mainsoc_uart_irq = ((mainsoc_uart_pending_status[0] & mainsoc_uart_enable_storage[0]) | (mainsoc_uart_pending_status[1] & mainsoc_uart_enable_storage[1]));
+assign mainsoc_uart_tx_status = mainsoc_uart_tx_trigger;
+assign mainsoc_uart_rx_status = mainsoc_uart_rx_trigger;
+assign mainsoc_uart_tx_fifo_syncfifo_din = {mainsoc_uart_tx_fifo_fifo_in_last, mainsoc_uart_tx_fifo_fifo_in_first, mainsoc_uart_tx_fifo_fifo_in_payload_data};
+assign {mainsoc_uart_tx_fifo_fifo_out_last, mainsoc_uart_tx_fifo_fifo_out_first, mainsoc_uart_tx_fifo_fifo_out_payload_data} = mainsoc_uart_tx_fifo_syncfifo_dout;
+assign mainsoc_uart_tx_fifo_sink_ready = mainsoc_uart_tx_fifo_syncfifo_writable;
+assign mainsoc_uart_tx_fifo_syncfifo_we = mainsoc_uart_tx_fifo_sink_valid;
+assign mainsoc_uart_tx_fifo_fifo_in_first = mainsoc_uart_tx_fifo_sink_first;
+assign mainsoc_uart_tx_fifo_fifo_in_last = mainsoc_uart_tx_fifo_sink_last;
+assign mainsoc_uart_tx_fifo_fifo_in_payload_data = mainsoc_uart_tx_fifo_sink_payload_data;
+assign mainsoc_uart_tx_fifo_source_valid = mainsoc_uart_tx_fifo_readable;
+assign mainsoc_uart_tx_fifo_source_first = mainsoc_uart_tx_fifo_fifo_out_first;
+assign mainsoc_uart_tx_fifo_source_last = mainsoc_uart_tx_fifo_fifo_out_last;
+assign mainsoc_uart_tx_fifo_source_payload_data = mainsoc_uart_tx_fifo_fifo_out_payload_data;
+assign mainsoc_uart_tx_fifo_re = mainsoc_uart_tx_fifo_source_ready;
+assign mainsoc_uart_tx_fifo_syncfifo_re = (mainsoc_uart_tx_fifo_syncfifo_readable & ((~mainsoc_uart_tx_fifo_readable) | mainsoc_uart_tx_fifo_re));
+assign mainsoc_uart_tx_fifo_level1 = (mainsoc_uart_tx_fifo_level0 + mainsoc_uart_tx_fifo_readable);
 always @(*) begin
-    uart_tx_fifo_wrport_adr <= 4'd0;
-    if (uart_tx_fifo_replace) begin
-        uart_tx_fifo_wrport_adr <= (uart_tx_fifo_produce - 1'd1);
+    mainsoc_uart_tx_fifo_wrport_adr <= 4'd0;
+    if (mainsoc_uart_tx_fifo_replace) begin
+        mainsoc_uart_tx_fifo_wrport_adr <= (mainsoc_uart_tx_fifo_produce - 1'd1);
     end else begin
-        uart_tx_fifo_wrport_adr <= uart_tx_fifo_produce;
+        mainsoc_uart_tx_fifo_wrport_adr <= mainsoc_uart_tx_fifo_produce;
     end
 end
-assign uart_tx_fifo_wrport_dat_w = uart_tx_fifo_syncfifo_din;
-assign uart_tx_fifo_wrport_we = (uart_tx_fifo_syncfifo_we & (uart_tx_fifo_syncfifo_writable | uart_tx_fifo_replace));
-assign uart_tx_fifo_do_read = (uart_tx_fifo_syncfifo_readable & uart_tx_fifo_syncfifo_re);
-assign uart_tx_fifo_rdport_adr = uart_tx_fifo_consume;
-assign uart_tx_fifo_syncfifo_dout = uart_tx_fifo_rdport_dat_r;
-assign uart_tx_fifo_rdport_re = uart_tx_fifo_do_read;
-assign uart_tx_fifo_syncfifo_writable = (uart_tx_fifo_level0 != 5'd16);
-assign uart_tx_fifo_syncfifo_readable = (uart_tx_fifo_level0 != 1'd0);
-assign uart_rx_fifo_syncfifo_din = {uart_rx_fifo_fifo_in_last, uart_rx_fifo_fifo_in_first, uart_rx_fifo_fifo_in_payload_data};
-assign {uart_rx_fifo_fifo_out_last, uart_rx_fifo_fifo_out_first, uart_rx_fifo_fifo_out_payload_data} = uart_rx_fifo_syncfifo_dout;
-assign uart_rx_fifo_sink_ready = uart_rx_fifo_syncfifo_writable;
-assign uart_rx_fifo_syncfifo_we = uart_rx_fifo_sink_valid;
-assign uart_rx_fifo_fifo_in_first = uart_rx_fifo_sink_first;
-assign uart_rx_fifo_fifo_in_last = uart_rx_fifo_sink_last;
-assign uart_rx_fifo_fifo_in_payload_data = uart_rx_fifo_sink_payload_data;
-assign uart_rx_fifo_source_valid = uart_rx_fifo_readable;
-assign uart_rx_fifo_source_first = uart_rx_fifo_fifo_out_first;
-assign uart_rx_fifo_source_last = uart_rx_fifo_fifo_out_last;
-assign uart_rx_fifo_source_payload_data = uart_rx_fifo_fifo_out_payload_data;
-assign uart_rx_fifo_re = uart_rx_fifo_source_ready;
-assign uart_rx_fifo_syncfifo_re = (uart_rx_fifo_syncfifo_readable & ((~uart_rx_fifo_readable) | uart_rx_fifo_re));
-assign uart_rx_fifo_level1 = (uart_rx_fifo_level0 + uart_rx_fifo_readable);
+assign mainsoc_uart_tx_fifo_wrport_dat_w = mainsoc_uart_tx_fifo_syncfifo_din;
+assign mainsoc_uart_tx_fifo_wrport_we = (mainsoc_uart_tx_fifo_syncfifo_we & (mainsoc_uart_tx_fifo_syncfifo_writable | mainsoc_uart_tx_fifo_replace));
+assign mainsoc_uart_tx_fifo_do_read = (mainsoc_uart_tx_fifo_syncfifo_readable & mainsoc_uart_tx_fifo_syncfifo_re);
+assign mainsoc_uart_tx_fifo_rdport_adr = mainsoc_uart_tx_fifo_consume;
+assign mainsoc_uart_tx_fifo_syncfifo_dout = mainsoc_uart_tx_fifo_rdport_dat_r;
+assign mainsoc_uart_tx_fifo_rdport_re = mainsoc_uart_tx_fifo_do_read;
+assign mainsoc_uart_tx_fifo_syncfifo_writable = (mainsoc_uart_tx_fifo_level0 != 5'd16);
+assign mainsoc_uart_tx_fifo_syncfifo_readable = (mainsoc_uart_tx_fifo_level0 != 1'd0);
+assign mainsoc_uart_rx_fifo_syncfifo_din = {mainsoc_uart_rx_fifo_fifo_in_last, mainsoc_uart_rx_fifo_fifo_in_first, mainsoc_uart_rx_fifo_fifo_in_payload_data};
+assign {mainsoc_uart_rx_fifo_fifo_out_last, mainsoc_uart_rx_fifo_fifo_out_first, mainsoc_uart_rx_fifo_fifo_out_payload_data} = mainsoc_uart_rx_fifo_syncfifo_dout;
+assign mainsoc_uart_rx_fifo_sink_ready = mainsoc_uart_rx_fifo_syncfifo_writable;
+assign mainsoc_uart_rx_fifo_syncfifo_we = mainsoc_uart_rx_fifo_sink_valid;
+assign mainsoc_uart_rx_fifo_fifo_in_first = mainsoc_uart_rx_fifo_sink_first;
+assign mainsoc_uart_rx_fifo_fifo_in_last = mainsoc_uart_rx_fifo_sink_last;
+assign mainsoc_uart_rx_fifo_fifo_in_payload_data = mainsoc_uart_rx_fifo_sink_payload_data;
+assign mainsoc_uart_rx_fifo_source_valid = mainsoc_uart_rx_fifo_readable;
+assign mainsoc_uart_rx_fifo_source_first = mainsoc_uart_rx_fifo_fifo_out_first;
+assign mainsoc_uart_rx_fifo_source_last = mainsoc_uart_rx_fifo_fifo_out_last;
+assign mainsoc_uart_rx_fifo_source_payload_data = mainsoc_uart_rx_fifo_fifo_out_payload_data;
+assign mainsoc_uart_rx_fifo_re = mainsoc_uart_rx_fifo_source_ready;
+assign mainsoc_uart_rx_fifo_syncfifo_re = (mainsoc_uart_rx_fifo_syncfifo_readable & ((~mainsoc_uart_rx_fifo_readable) | mainsoc_uart_rx_fifo_re));
+assign mainsoc_uart_rx_fifo_level1 = (mainsoc_uart_rx_fifo_level0 + mainsoc_uart_rx_fifo_readable);
 always @(*) begin
-    uart_rx_fifo_wrport_adr <= 4'd0;
-    if (uart_rx_fifo_replace) begin
-        uart_rx_fifo_wrport_adr <= (uart_rx_fifo_produce - 1'd1);
+    mainsoc_uart_rx_fifo_wrport_adr <= 4'd0;
+    if (mainsoc_uart_rx_fifo_replace) begin
+        mainsoc_uart_rx_fifo_wrport_adr <= (mainsoc_uart_rx_fifo_produce - 1'd1);
     end else begin
-        uart_rx_fifo_wrport_adr <= uart_rx_fifo_produce;
+        mainsoc_uart_rx_fifo_wrport_adr <= mainsoc_uart_rx_fifo_produce;
     end
 end
-assign uart_rx_fifo_wrport_dat_w = uart_rx_fifo_syncfifo_din;
-assign uart_rx_fifo_wrport_we = (uart_rx_fifo_syncfifo_we & (uart_rx_fifo_syncfifo_writable | uart_rx_fifo_replace));
-assign uart_rx_fifo_do_read = (uart_rx_fifo_syncfifo_readable & uart_rx_fifo_syncfifo_re);
-assign uart_rx_fifo_rdport_adr = uart_rx_fifo_consume;
-assign uart_rx_fifo_syncfifo_dout = uart_rx_fifo_rdport_dat_r;
-assign uart_rx_fifo_rdport_re = uart_rx_fifo_do_read;
-assign uart_rx_fifo_syncfifo_writable = (uart_rx_fifo_level0 != 5'd16);
-assign uart_rx_fifo_syncfifo_readable = (uart_rx_fifo_level0 != 1'd0);
-assign timer_zero_trigger = (timer_value == 1'd0);
-assign timer_zero0 = timer_zero_status;
-assign timer_zero1 = timer_zero_pending;
+assign mainsoc_uart_rx_fifo_wrport_dat_w = mainsoc_uart_rx_fifo_syncfifo_din;
+assign mainsoc_uart_rx_fifo_wrport_we = (mainsoc_uart_rx_fifo_syncfifo_we & (mainsoc_uart_rx_fifo_syncfifo_writable | mainsoc_uart_rx_fifo_replace));
+assign mainsoc_uart_rx_fifo_do_read = (mainsoc_uart_rx_fifo_syncfifo_readable & mainsoc_uart_rx_fifo_syncfifo_re);
+assign mainsoc_uart_rx_fifo_rdport_adr = mainsoc_uart_rx_fifo_consume;
+assign mainsoc_uart_rx_fifo_syncfifo_dout = mainsoc_uart_rx_fifo_rdport_dat_r;
+assign mainsoc_uart_rx_fifo_rdport_re = mainsoc_uart_rx_fifo_do_read;
+assign mainsoc_uart_rx_fifo_syncfifo_writable = (mainsoc_uart_rx_fifo_level0 != 5'd16);
+assign mainsoc_uart_rx_fifo_syncfifo_readable = (mainsoc_uart_rx_fifo_level0 != 1'd0);
+assign mainsoc_timer_zero_trigger = (mainsoc_timer_value == 1'd0);
+assign mainsoc_timer_zero0 = mainsoc_timer_zero_status;
+assign mainsoc_timer_zero1 = mainsoc_timer_zero_pending;
 always @(*) begin
-    timer_zero_clear <= 1'd0;
-    if ((timer_pending_re & timer_pending_r)) begin
-        timer_zero_clear <= 1'd1;
+    mainsoc_timer_zero_clear <= 1'd0;
+    if ((mainsoc_timer_pending_re & mainsoc_timer_pending_r)) begin
+        mainsoc_timer_zero_clear <= 1'd1;
     end
 end
-assign timer_irq = (timer_pending_status & timer_enable_storage);
-assign timer_zero_status = timer_zero_trigger;
+assign mainsoc_timer_irq = (mainsoc_timer_pending_status & mainsoc_timer_enable_storage);
+assign mainsoc_timer_zero_status = mainsoc_timer_zero_trigger;
+assign i2c0_ena = i2c0_EN;
+assign i2c0_int_ena = i2c0_IEN;
+assign i2c0_start = i2c0_STA;
+assign i2c0_stop = i2c0_STO;
+assign i2c0_read = i2c0_RD;
+assign i2c0_write = i2c0_WR;
+assign i2c0_ack = i2c0_ACK;
+assign i2c0_iack = i2c0_IACK;
+assign i2c0_RxACK = i2c0_rxack;
+assign i2c0_Busy = i2c0_busy;
+assign i2c0_ArbLost = i2c0_arb_lost;
+assign i2c0_TIP = i2c0_tip;
+assign i2c0_IF = i2c0_intflag;
+assign i2c0_sda_o0 = i2c0_sda_o1;
+assign i2c0_sda_oe = (~i2c0_sda_oen);
+assign i2c0_scl_o0 = i2c0_scl_o1;
+assign i2c0_scl_oe = (~i2c0_scl_oen);
+assign i2c0_scl_i1 = i2c0_scl_i0;
+assign i2c0_sda_i1 = i2c0_sda_i0;
+always @(*) begin
+    i2c0_command_dat_w <= 8'd0;
+    i2c0_command_we <= 1'd0;
+    if ((i2c0_done | i2c0_i2c_al)) begin
+        i2c0_command_we <= 1'd1;
+        i2c0_command_dat_w <= 1'd0;
+    end else begin
+        i2c0_command_we <= 1'd0;
+    end
+end
+assign i2c0_i2c_int_trigger = (i2c0_intflag & i2c0_int_ena);
+assign i2c0_txrx_done_trigger = i2c0_tip;
+assign i2c0_i2c_int0 = i2c0_i2c_int_status;
+assign i2c0_i2c_int1 = i2c0_i2c_int_pending;
+always @(*) begin
+    i2c0_i2c_int_clear <= 1'd0;
+    if ((i2c0_pending_re & i2c0_pending_r[0])) begin
+        i2c0_i2c_int_clear <= 1'd1;
+    end
+end
+assign i2c0_txrx_done0 = i2c0_txrx_done_status;
+assign i2c0_txrx_done1 = i2c0_txrx_done_pending;
+always @(*) begin
+    i2c0_txrx_done_clear <= 1'd0;
+    if ((i2c0_pending_re & i2c0_pending_r[1])) begin
+        i2c0_txrx_done_clear <= 1'd1;
+    end
+end
+assign i2c0_irq = ((i2c0_pending_status[0] & i2c0_enable_storage[0]) | (i2c0_pending_status[1] & i2c0_enable_storage[1]));
+assign i2c0_i2c_int_status = 1'd0;
+assign i2c0_txrx_done_status = i2c0_txrx_done_trigger;
 assign litespisdrphycore_div = litespisdrphycore_spi_clk_divisor;
 assign litespisdrphycore_sample_cnt = 1'd1;
 assign litespisdrphycore_update_cnt = 1'd1;
@@ -1442,87 +1768,130 @@ always @(*) begin
         end
     endcase
 end
-assign litespisdrphycore_cs = spiflash_core_cs;
-assign spiflash_core_litespimmap_sink_valid = spiflash_core_user_port_source_valid;
-assign spiflash_core_user_port_source_ready = spiflash_core_litespimmap_sink_ready;
-assign spiflash_core_litespimmap_sink_first = spiflash_core_user_port_source_first;
-assign spiflash_core_litespimmap_sink_last = spiflash_core_user_port_source_last;
-assign spiflash_core_litespimmap_sink_payload_data = spiflash_core_user_port_source_payload_data;
-assign spiflash_core_user_port_sink_valid = spiflash_core_litespimmap_source_valid;
-assign spiflash_core_litespimmap_source_ready = spiflash_core_user_port_sink_ready;
-assign spiflash_core_user_port_sink_first = spiflash_core_litespimmap_source_first;
-assign spiflash_core_user_port_sink_last = spiflash_core_litespimmap_source_last;
-assign spiflash_core_user_port_sink_payload_data = spiflash_core_litespimmap_source_payload_data;
-assign spiflash_core_user_port_sink_payload_len = spiflash_core_litespimmap_source_payload_len;
-assign spiflash_core_user_port_sink_payload_width = spiflash_core_litespimmap_source_payload_width;
-assign spiflash_core_user_port_sink_payload_mask = spiflash_core_litespimmap_source_payload_mask;
-assign litespisdrphycore_sink_valid = spiflash_core_source_valid;
-assign spiflash_core_source_ready = litespisdrphycore_sink_ready;
-assign litespisdrphycore_sink_first = spiflash_core_source_first;
-assign litespisdrphycore_sink_last = spiflash_core_source_last;
-assign litespisdrphycore_sink_payload_data = spiflash_core_source_payload_data;
-assign litespisdrphycore_sink_payload_len = spiflash_core_source_payload_len;
-assign litespisdrphycore_sink_payload_width = spiflash_core_source_payload_width;
-assign litespisdrphycore_sink_payload_mask = spiflash_core_source_payload_mask;
-assign spiflash_core_sink_valid = litespisdrphycore_source_valid;
-assign litespisdrphycore_source_ready = spiflash_core_sink_ready;
-assign spiflash_core_sink_first = litespisdrphycore_source_first;
-assign spiflash_core_sink_last = litespisdrphycore_source_last;
-assign spiflash_core_sink_payload_data = litespisdrphycore_source_payload_data;
-assign spiflash_core_internal_port_sink_valid = spiflash_core_user_port_sink_valid;
-assign spiflash_core_user_port_sink_ready = spiflash_core_internal_port_sink_ready;
-assign spiflash_core_internal_port_sink_first = spiflash_core_user_port_sink_first;
-assign spiflash_core_internal_port_sink_last = spiflash_core_user_port_sink_last;
-assign spiflash_core_internal_port_sink_payload_data = spiflash_core_user_port_sink_payload_data;
-assign spiflash_core_internal_port_sink_payload_len = spiflash_core_user_port_sink_payload_len;
-assign spiflash_core_internal_port_sink_payload_width = spiflash_core_user_port_sink_payload_width;
-assign spiflash_core_internal_port_sink_payload_mask = spiflash_core_user_port_sink_payload_mask;
-assign spiflash_core_user_port_source_valid = spiflash_core_internal_port_source_valid;
-assign spiflash_core_internal_port_source_ready = spiflash_core_user_port_source_ready;
-assign spiflash_core_user_port_source_first = spiflash_core_internal_port_source_first;
-assign spiflash_core_user_port_source_last = spiflash_core_internal_port_source_last;
-assign spiflash_core_user_port_source_payload_data = spiflash_core_internal_port_source_payload_data;
-assign spiflash_core_request = spiflash_core_litespimmap_cs;
-assign litespi_tx_mux_sink_valid = spiflash_core_internal_port_sink_valid;
-assign spiflash_core_internal_port_sink_ready = litespi_tx_mux_sink_ready;
-assign litespi_tx_mux_sink_first = spiflash_core_internal_port_sink_first;
-assign litespi_tx_mux_sink_last = spiflash_core_internal_port_sink_last;
-assign litespi_tx_mux_sink_payload_data = spiflash_core_internal_port_sink_payload_data;
-assign litespi_tx_mux_sink_payload_len = spiflash_core_internal_port_sink_payload_len;
-assign litespi_tx_mux_sink_payload_width = spiflash_core_internal_port_sink_payload_width;
-assign litespi_tx_mux_sink_payload_mask = spiflash_core_internal_port_sink_payload_mask;
-assign spiflash_core_internal_port_source_valid = litespi_rx_demux_source_valid;
-assign litespi_rx_demux_source_ready = spiflash_core_internal_port_source_ready;
-assign spiflash_core_internal_port_source_first = litespi_rx_demux_source_first;
-assign spiflash_core_internal_port_source_last = litespi_rx_demux_source_last;
-assign spiflash_core_internal_port_source_payload_data = litespi_rx_demux_source_payload_data;
-assign litespi_request = {spiflash_core_request};
-assign spiflash_core_source_valid = litespi_tx_mux_source_valid;
-assign litespi_tx_mux_source_ready = spiflash_core_source_ready;
-assign spiflash_core_source_first = litespi_tx_mux_source_first;
-assign spiflash_core_source_last = litespi_tx_mux_source_last;
-assign spiflash_core_source_payload_data = litespi_tx_mux_source_payload_data;
-assign spiflash_core_source_payload_len = litespi_tx_mux_source_payload_len;
-assign spiflash_core_source_payload_width = litespi_tx_mux_source_payload_width;
-assign spiflash_core_source_payload_mask = litespi_tx_mux_source_payload_mask;
+assign litespisdrphycore_cs = crossbar_cs;
+assign litespimmap_sink_valid = port_mmap_user_port_source_valid;
+assign port_mmap_user_port_source_ready = litespimmap_sink_ready;
+assign litespimmap_sink_first = port_mmap_user_port_source_first;
+assign litespimmap_sink_last = port_mmap_user_port_source_last;
+assign litespimmap_sink_payload_data = port_mmap_user_port_source_payload_data;
+assign port_mmap_user_port_sink_valid = litespimmap_source_valid;
+assign litespimmap_source_ready = port_mmap_user_port_sink_ready;
+assign port_mmap_user_port_sink_first = litespimmap_source_first;
+assign port_mmap_user_port_sink_last = litespimmap_source_last;
+assign port_mmap_user_port_sink_payload_data = litespimmap_source_payload_data;
+assign port_mmap_user_port_sink_payload_len = litespimmap_source_payload_len;
+assign port_mmap_user_port_sink_payload_width = litespimmap_source_payload_width;
+assign port_mmap_user_port_sink_payload_mask = litespimmap_source_payload_mask;
+assign master_sink_valid = port_master_user_port_source_valid;
+assign port_master_user_port_source_ready = master_sink_ready;
+assign master_sink_first = port_master_user_port_source_first;
+assign master_sink_last = port_master_user_port_source_last;
+assign master_sink_payload_data = port_master_user_port_source_payload_data;
+assign port_master_user_port_sink_valid = master_source_valid;
+assign master_source_ready = port_master_user_port_sink_ready;
+assign port_master_user_port_sink_first = master_source_first;
+assign port_master_user_port_sink_last = master_source_last;
+assign port_master_user_port_sink_payload_data = master_source_payload_data;
+assign port_master_user_port_sink_payload_len = master_source_payload_len;
+assign port_master_user_port_sink_payload_width = master_source_payload_width;
+assign port_master_user_port_sink_payload_mask = master_source_payload_mask;
+assign litespisdrphycore_sink_valid = crossbar_source_valid;
+assign crossbar_source_ready = litespisdrphycore_sink_ready;
+assign litespisdrphycore_sink_first = crossbar_source_first;
+assign litespisdrphycore_sink_last = crossbar_source_last;
+assign litespisdrphycore_sink_payload_data = crossbar_source_payload_data;
+assign litespisdrphycore_sink_payload_len = crossbar_source_payload_len;
+assign litespisdrphycore_sink_payload_width = crossbar_source_payload_width;
+assign litespisdrphycore_sink_payload_mask = crossbar_source_payload_mask;
+assign crossbar_sink_valid = litespisdrphycore_source_valid;
+assign litespisdrphycore_source_ready = crossbar_sink_ready;
+assign crossbar_sink_first = litespisdrphycore_source_first;
+assign crossbar_sink_last = litespisdrphycore_source_last;
+assign crossbar_sink_payload_data = litespisdrphycore_source_payload_data;
+assign port_mmap_internal_port_sink_valid = port_mmap_user_port_sink_valid;
+assign port_mmap_user_port_sink_ready = port_mmap_internal_port_sink_ready;
+assign port_mmap_internal_port_sink_first = port_mmap_user_port_sink_first;
+assign port_mmap_internal_port_sink_last = port_mmap_user_port_sink_last;
+assign port_mmap_internal_port_sink_payload_data = port_mmap_user_port_sink_payload_data;
+assign port_mmap_internal_port_sink_payload_len = port_mmap_user_port_sink_payload_len;
+assign port_mmap_internal_port_sink_payload_width = port_mmap_user_port_sink_payload_width;
+assign port_mmap_internal_port_sink_payload_mask = port_mmap_user_port_sink_payload_mask;
+assign port_mmap_user_port_source_valid = port_mmap_internal_port_source_valid;
+assign port_mmap_internal_port_source_ready = port_mmap_user_port_source_ready;
+assign port_mmap_user_port_source_first = port_mmap_internal_port_source_first;
+assign port_mmap_user_port_source_last = port_mmap_internal_port_source_last;
+assign port_mmap_user_port_source_payload_data = port_mmap_internal_port_source_payload_data;
+assign port_mmap_request = litespimmap_cs;
+assign port_master_internal_port_sink_valid = port_master_user_port_sink_valid;
+assign port_master_user_port_sink_ready = port_master_internal_port_sink_ready;
+assign port_master_internal_port_sink_first = port_master_user_port_sink_first;
+assign port_master_internal_port_sink_last = port_master_user_port_sink_last;
+assign port_master_internal_port_sink_payload_data = port_master_user_port_sink_payload_data;
+assign port_master_internal_port_sink_payload_len = port_master_user_port_sink_payload_len;
+assign port_master_internal_port_sink_payload_width = port_master_user_port_sink_payload_width;
+assign port_master_internal_port_sink_payload_mask = port_master_user_port_sink_payload_mask;
+assign port_master_user_port_source_valid = port_master_internal_port_source_valid;
+assign port_master_internal_port_source_ready = port_master_user_port_source_ready;
+assign port_master_user_port_source_first = port_master_internal_port_source_first;
+assign port_master_user_port_source_last = port_master_internal_port_source_last;
+assign port_master_user_port_source_payload_data = port_master_internal_port_source_payload_data;
+assign port_master_request = master_cs;
+assign litespi_tx_mux_endpoint0_sink_valid = port_mmap_internal_port_sink_valid;
+assign port_mmap_internal_port_sink_ready = litespi_tx_mux_endpoint0_sink_ready;
+assign litespi_tx_mux_endpoint0_sink_first = port_mmap_internal_port_sink_first;
+assign litespi_tx_mux_endpoint0_sink_last = port_mmap_internal_port_sink_last;
+assign litespi_tx_mux_endpoint0_sink_payload_data = port_mmap_internal_port_sink_payload_data;
+assign litespi_tx_mux_endpoint0_sink_payload_len = port_mmap_internal_port_sink_payload_len;
+assign litespi_tx_mux_endpoint0_sink_payload_width = port_mmap_internal_port_sink_payload_width;
+assign litespi_tx_mux_endpoint0_sink_payload_mask = port_mmap_internal_port_sink_payload_mask;
+assign port_mmap_internal_port_source_valid = litespi_rx_demux_endpoint0_source_valid;
+assign litespi_rx_demux_endpoint0_source_ready = port_mmap_internal_port_source_ready;
+assign port_mmap_internal_port_source_first = litespi_rx_demux_endpoint0_source_first;
+assign port_mmap_internal_port_source_last = litespi_rx_demux_endpoint0_source_last;
+assign port_mmap_internal_port_source_payload_data = litespi_rx_demux_endpoint0_source_payload_data;
+assign litespi_tx_mux_endpoint1_sink_valid = port_master_internal_port_sink_valid;
+assign port_master_internal_port_sink_ready = litespi_tx_mux_endpoint1_sink_ready;
+assign litespi_tx_mux_endpoint1_sink_first = port_master_internal_port_sink_first;
+assign litespi_tx_mux_endpoint1_sink_last = port_master_internal_port_sink_last;
+assign litespi_tx_mux_endpoint1_sink_payload_data = port_master_internal_port_sink_payload_data;
+assign litespi_tx_mux_endpoint1_sink_payload_len = port_master_internal_port_sink_payload_len;
+assign litespi_tx_mux_endpoint1_sink_payload_width = port_master_internal_port_sink_payload_width;
+assign litespi_tx_mux_endpoint1_sink_payload_mask = port_master_internal_port_sink_payload_mask;
+assign port_master_internal_port_source_valid = litespi_rx_demux_endpoint1_source_valid;
+assign litespi_rx_demux_endpoint1_source_ready = port_master_internal_port_source_ready;
+assign port_master_internal_port_source_first = litespi_rx_demux_endpoint1_source_first;
+assign port_master_internal_port_source_last = litespi_rx_demux_endpoint1_source_last;
+assign port_master_internal_port_source_payload_data = litespi_rx_demux_endpoint1_source_payload_data;
+assign litespi_request = {port_master_request, port_mmap_request};
+assign crossbar_source_valid = litespi_tx_mux_source_valid;
+assign litespi_tx_mux_source_ready = crossbar_source_ready;
+assign crossbar_source_first = litespi_tx_mux_source_first;
+assign crossbar_source_last = litespi_tx_mux_source_last;
+assign crossbar_source_payload_data = litespi_tx_mux_source_payload_data;
+assign crossbar_source_payload_len = litespi_tx_mux_source_payload_len;
+assign crossbar_source_payload_width = litespi_tx_mux_source_payload_width;
+assign crossbar_source_payload_mask = litespi_tx_mux_source_payload_mask;
 assign litespi_tx_mux_sel = litespi_grant;
-assign litespi_rx_demux_sink_valid = spiflash_core_sink_valid;
-assign spiflash_core_sink_ready = litespi_rx_demux_sink_ready;
-assign litespi_rx_demux_sink_first = spiflash_core_sink_first;
-assign litespi_rx_demux_sink_last = spiflash_core_sink_last;
-assign litespi_rx_demux_sink_payload_data = spiflash_core_sink_payload_data;
+assign litespi_rx_demux_sink_valid = crossbar_sink_valid;
+assign crossbar_sink_ready = litespi_rx_demux_sink_ready;
+assign litespi_rx_demux_sink_first = crossbar_sink_first;
+assign litespi_rx_demux_sink_last = crossbar_sink_last;
+assign litespi_rx_demux_sink_payload_data = crossbar_sink_payload_data;
 assign litespi_rx_demux_sel = litespi_grant;
 always @(*) begin
-    spiflash_core_cs <= 1'd0;
+    crossbar_cs <= 1'd0;
     case (litespi_grant)
         1'd0: begin
-            spiflash_core_cs <= spiflash_core_litespimmap_cs;
+            crossbar_cs <= litespimmap_cs;
+        end
+        1'd1: begin
+            crossbar_cs <= master_cs;
         end
     endcase
 end
-assign litespi_grant = 1'd0;
 always @(*) begin
-    litespi_tx_mux_sink_ready <= 1'd0;
+    litespi_tx_mux_endpoint0_sink_ready <= 1'd0;
+    litespi_tx_mux_endpoint1_sink_ready <= 1'd0;
     litespi_tx_mux_source_first <= 1'd0;
     litespi_tx_mux_source_last <= 1'd0;
     litespi_tx_mux_source_payload_data <= 32'd0;
@@ -1532,132 +1901,153 @@ always @(*) begin
     litespi_tx_mux_source_valid <= 1'd0;
     case (litespi_tx_mux_sel)
         1'd0: begin
-            litespi_tx_mux_source_valid <= litespi_tx_mux_sink_valid;
-            litespi_tx_mux_sink_ready <= litespi_tx_mux_source_ready;
-            litespi_tx_mux_source_first <= litespi_tx_mux_sink_first;
-            litespi_tx_mux_source_last <= litespi_tx_mux_sink_last;
-            litespi_tx_mux_source_payload_data <= litespi_tx_mux_sink_payload_data;
-            litespi_tx_mux_source_payload_len <= litespi_tx_mux_sink_payload_len;
-            litespi_tx_mux_source_payload_width <= litespi_tx_mux_sink_payload_width;
-            litespi_tx_mux_source_payload_mask <= litespi_tx_mux_sink_payload_mask;
+            litespi_tx_mux_source_valid <= litespi_tx_mux_endpoint0_sink_valid;
+            litespi_tx_mux_endpoint0_sink_ready <= litespi_tx_mux_source_ready;
+            litespi_tx_mux_source_first <= litespi_tx_mux_endpoint0_sink_first;
+            litespi_tx_mux_source_last <= litespi_tx_mux_endpoint0_sink_last;
+            litespi_tx_mux_source_payload_data <= litespi_tx_mux_endpoint0_sink_payload_data;
+            litespi_tx_mux_source_payload_len <= litespi_tx_mux_endpoint0_sink_payload_len;
+            litespi_tx_mux_source_payload_width <= litespi_tx_mux_endpoint0_sink_payload_width;
+            litespi_tx_mux_source_payload_mask <= litespi_tx_mux_endpoint0_sink_payload_mask;
+        end
+        1'd1: begin
+            litespi_tx_mux_source_valid <= litespi_tx_mux_endpoint1_sink_valid;
+            litespi_tx_mux_endpoint1_sink_ready <= litespi_tx_mux_source_ready;
+            litespi_tx_mux_source_first <= litespi_tx_mux_endpoint1_sink_first;
+            litespi_tx_mux_source_last <= litespi_tx_mux_endpoint1_sink_last;
+            litespi_tx_mux_source_payload_data <= litespi_tx_mux_endpoint1_sink_payload_data;
+            litespi_tx_mux_source_payload_len <= litespi_tx_mux_endpoint1_sink_payload_len;
+            litespi_tx_mux_source_payload_width <= litespi_tx_mux_endpoint1_sink_payload_width;
+            litespi_tx_mux_source_payload_mask <= litespi_tx_mux_endpoint1_sink_payload_mask;
         end
     endcase
 end
 always @(*) begin
+    litespi_rx_demux_endpoint0_source_first <= 1'd0;
+    litespi_rx_demux_endpoint0_source_last <= 1'd0;
+    litespi_rx_demux_endpoint0_source_payload_data <= 32'd0;
+    litespi_rx_demux_endpoint0_source_valid <= 1'd0;
+    litespi_rx_demux_endpoint1_source_first <= 1'd0;
+    litespi_rx_demux_endpoint1_source_last <= 1'd0;
+    litespi_rx_demux_endpoint1_source_payload_data <= 32'd0;
+    litespi_rx_demux_endpoint1_source_valid <= 1'd0;
     litespi_rx_demux_sink_ready <= 1'd0;
-    litespi_rx_demux_source_first <= 1'd0;
-    litespi_rx_demux_source_last <= 1'd0;
-    litespi_rx_demux_source_payload_data <= 32'd0;
-    litespi_rx_demux_source_valid <= 1'd0;
     case (litespi_rx_demux_sel)
         1'd0: begin
-            litespi_rx_demux_source_valid <= litespi_rx_demux_sink_valid;
-            litespi_rx_demux_sink_ready <= litespi_rx_demux_source_ready;
-            litespi_rx_demux_source_first <= litespi_rx_demux_sink_first;
-            litespi_rx_demux_source_last <= litespi_rx_demux_sink_last;
-            litespi_rx_demux_source_payload_data <= litespi_rx_demux_sink_payload_data;
+            litespi_rx_demux_endpoint0_source_valid <= litespi_rx_demux_sink_valid;
+            litespi_rx_demux_sink_ready <= litespi_rx_demux_endpoint0_source_ready;
+            litespi_rx_demux_endpoint0_source_first <= litespi_rx_demux_sink_first;
+            litespi_rx_demux_endpoint0_source_last <= litespi_rx_demux_sink_last;
+            litespi_rx_demux_endpoint0_source_payload_data <= litespi_rx_demux_sink_payload_data;
+        end
+        1'd1: begin
+            litespi_rx_demux_endpoint1_source_valid <= litespi_rx_demux_sink_valid;
+            litespi_rx_demux_sink_ready <= litespi_rx_demux_endpoint1_source_ready;
+            litespi_rx_demux_endpoint1_source_first <= litespi_rx_demux_sink_first;
+            litespi_rx_demux_endpoint1_source_last <= litespi_rx_demux_sink_last;
+            litespi_rx_demux_endpoint1_source_payload_data <= litespi_rx_demux_sink_payload_data;
         end
     endcase
 end
-assign spiflash_core_litespimmap_spi_dummy_bits = spiflash_core_litespimmap_storage;
-assign spiflash_core_litespimmap_write_enabled = 1'd0;
-assign spiflash_core_litespimmap_done = (spiflash_core_litespimmap_count == 1'd0);
+assign litespimmap_spi_dummy_bits = litespimmap_storage;
+assign litespimmap_write_enabled = 1'd0;
+assign litespimmap_done = (litespimmap_count == 1'd0);
 always @(*) begin
     litespi_next_state <= 4'd0;
-    spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= 30'd0;
-    spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd0;
-    spiflash_core_litespimmap_burst_cs_litespi_next_value <= 1'd0;
-    spiflash_core_litespimmap_burst_cs_litespi_next_value_ce <= 1'd0;
-    spiflash_core_litespimmap_bus_ack <= 1'd0;
-    spiflash_core_litespimmap_bus_dat_r <= 32'd0;
-    spiflash_core_litespimmap_byte_count_litespi_t_next_value <= 2'd0;
-    spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce <= 1'd0;
-    spiflash_core_litespimmap_cs <= 1'd0;
-    spiflash_core_litespimmap_data_write_litespi_t_f_next_value1 <= 32'd0;
-    spiflash_core_litespimmap_data_write_litespi_t_f_next_value_ce1 <= 1'd0;
-    spiflash_core_litespimmap_sink_ready <= 1'd0;
-    spiflash_core_litespimmap_source_last <= 1'd0;
-    spiflash_core_litespimmap_source_payload_data <= 32'd0;
-    spiflash_core_litespimmap_source_payload_len <= 6'd0;
-    spiflash_core_litespimmap_source_payload_mask <= 8'd0;
-    spiflash_core_litespimmap_source_payload_width <= 4'd0;
-    spiflash_core_litespimmap_source_valid <= 1'd0;
-    spiflash_core_litespimmap_wait <= 1'd0;
-    spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd0;
-    spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd0;
-    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0 <= 4'd0;
-    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd0;
+    litespimmap_burst_adr_litespi_f_next_value <= 30'd0;
+    litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd0;
+    litespimmap_burst_cs_litespi_next_value <= 1'd0;
+    litespimmap_burst_cs_litespi_next_value_ce <= 1'd0;
+    litespimmap_bus_ack <= 1'd0;
+    litespimmap_bus_dat_r <= 32'd0;
+    litespimmap_byte_count_litespi_t_next_value <= 2'd0;
+    litespimmap_byte_count_litespi_t_next_value_ce <= 1'd0;
+    litespimmap_cs <= 1'd0;
+    litespimmap_data_write_litespi_t_f_next_value1 <= 32'd0;
+    litespimmap_data_write_litespi_t_f_next_value_ce1 <= 1'd0;
+    litespimmap_sink_ready <= 1'd0;
+    litespimmap_source_last <= 1'd0;
+    litespimmap_source_payload_data <= 32'd0;
+    litespimmap_source_payload_len <= 6'd0;
+    litespimmap_source_payload_mask <= 8'd0;
+    litespimmap_source_payload_width <= 4'd0;
+    litespimmap_source_valid <= 1'd0;
+    litespimmap_wait <= 1'd0;
+    litespimmap_write_litespi_t_t_next_value <= 1'd0;
+    litespimmap_write_litespi_t_t_next_value_ce <= 1'd0;
+    litespimmap_write_mask_litespi_t_f_next_value0 <= 4'd0;
+    litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd0;
     litespi_next_state <= litespi_state;
     case (litespi_state)
         1'd1: begin
-            spiflash_core_litespimmap_cs <= 1'd0;
-            if (spiflash_core_litespimmap_write_mask[0]) begin
+            litespimmap_cs <= 1'd0;
+            if (litespimmap_write_mask[0]) begin
                 litespi_next_state <= 2'd2;
-                spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd1;
-                spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
+                litespimmap_write_litespi_t_t_next_value <= 1'd1;
+                litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
             end else begin
-                if ((spiflash_core_litespimmap_byte_count == 2'd3)) begin
-                    spiflash_core_litespimmap_bus_ack <= 1'd1;
-                    spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= (spiflash_core_litespimmap_burst_adr + 1'd1);
-                    spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
+                if ((litespimmap_byte_count == 2'd3)) begin
+                    litespimmap_bus_ack <= 1'd1;
+                    litespimmap_burst_adr_litespi_f_next_value <= (litespimmap_burst_adr + 1'd1);
+                    litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
                     litespi_next_state <= 1'd0;
-                    spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd0;
-                    spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
+                    litespimmap_write_litespi_t_t_next_value <= 1'd0;
+                    litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
                 end else begin
-                    spiflash_core_litespimmap_byte_count_litespi_t_next_value <= (spiflash_core_litespimmap_byte_count + 1'd1);
-                    spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce <= 1'd1;
-                    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0 <= {spiflash_core_litespimmap0, spiflash_core_litespimmap_write_mask[3:1]};
-                    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd1;
+                    litespimmap_byte_count_litespi_t_next_value <= (litespimmap_byte_count + 1'd1);
+                    litespimmap_byte_count_litespi_t_next_value_ce <= 1'd1;
+                    litespimmap_write_mask_litespi_t_f_next_value0 <= {litespimmap0, litespimmap_write_mask[3:1]};
+                    litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd1;
                 end
             end
         end
         2'd2: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_source_valid <= 1'd1;
-            if ((spiflash_core_litespimmap_write_enabled & spiflash_core_litespimmap_write)) begin
-                spiflash_core_litespimmap_source_payload_data <= 2'd2;
+            litespimmap_cs <= 1'd1;
+            litespimmap_source_valid <= 1'd1;
+            if ((litespimmap_write_enabled & litespimmap_write)) begin
+                litespimmap_source_payload_data <= 2'd2;
             end else begin
-                spiflash_core_litespimmap_source_payload_data <= 7'd107;
+                litespimmap_source_payload_data <= 7'd107;
             end
-            spiflash_core_litespimmap_source_payload_len <= 4'd8;
-            spiflash_core_litespimmap_source_payload_width <= 1'd1;
-            spiflash_core_litespimmap_source_payload_mask <= 1'd1;
-            spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= spiflash_core_litespimmap_bus_adr;
-            spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
-            if (spiflash_core_litespimmap_source_ready) begin
+            litespimmap_source_payload_len <= 4'd8;
+            litespimmap_source_payload_width <= 1'd1;
+            litespimmap_source_payload_mask <= 1'd1;
+            litespimmap_burst_adr_litespi_f_next_value <= litespimmap_bus_adr;
+            litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
+            if (litespimmap_source_ready) begin
                 litespi_next_state <= 2'd3;
             end
         end
         2'd3: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_sink_ready <= 1'd1;
-            if (spiflash_core_litespimmap_sink_valid) begin
+            litespimmap_cs <= 1'd1;
+            litespimmap_sink_ready <= 1'd1;
+            if (litespimmap_sink_valid) begin
                 litespi_next_state <= 3'd4;
             end
         end
         3'd4: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_source_valid <= 1'd1;
-            spiflash_core_litespimmap_source_payload_width <= 1'd1;
-            spiflash_core_litespimmap_source_payload_mask <= 1'd1;
-            spiflash_core_litespimmap_source_payload_data <= {(spiflash_core_litespimmap_bus_adr - spiflash_core_litespimmap_offset), spiflash_core_litespimmap_byte_count};
-            spiflash_core_litespimmap_source_payload_len <= 5'd24;
-            spiflash_core_litespimmap_burst_cs_litespi_next_value <= 1'd1;
-            spiflash_core_litespimmap_burst_cs_litespi_next_value_ce <= 1'd1;
-            spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= spiflash_core_litespimmap_bus_adr;
-            spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
-            if (spiflash_core_litespimmap_source_ready) begin
+            litespimmap_cs <= 1'd1;
+            litespimmap_source_valid <= 1'd1;
+            litespimmap_source_payload_width <= 1'd1;
+            litespimmap_source_payload_mask <= 1'd1;
+            litespimmap_source_payload_data <= {(litespimmap_bus_adr - litespimmap_offset), litespimmap_byte_count};
+            litespimmap_source_payload_len <= 5'd24;
+            litespimmap_burst_cs_litespi_next_value <= 1'd1;
+            litespimmap_burst_cs_litespi_next_value_ce <= 1'd1;
+            litespimmap_burst_adr_litespi_f_next_value <= litespimmap_bus_adr;
+            litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
+            if (litespimmap_source_ready) begin
                 litespi_next_state <= 3'd5;
             end
         end
         3'd5: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_sink_ready <= 1'd1;
-            if (spiflash_core_litespimmap_sink_valid) begin
-                if ((spiflash_core_litespimmap_write_enabled & spiflash_core_litespimmap_write)) begin
+            litespimmap_cs <= 1'd1;
+            litespimmap_sink_ready <= 1'd1;
+            if (litespimmap_sink_valid) begin
+                if ((litespimmap_write_enabled & litespimmap_write)) begin
                     litespi_next_state <= 4'd10;
                 end else begin
-                    if ((spiflash_core_litespimmap_spi_dummy_bits == 1'd0)) begin
+                    if ((litespimmap_spi_dummy_bits == 1'd0)) begin
                         litespi_next_state <= 4'd8;
                     end else begin
                         litespi_next_state <= 3'd6;
@@ -1666,120 +2056,172 @@ always @(*) begin
             end
         end
         3'd6: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_source_valid <= 1'd1;
-            spiflash_core_litespimmap_source_payload_width <= 1'd1;
-            spiflash_core_litespimmap_source_payload_mask <= 1'd0;
-            spiflash_core_litespimmap_source_payload_data <= spiflash_core_litespimmap_dummy;
-            spiflash_core_litespimmap_source_payload_len <= spiflash_core_litespimmap_spi_dummy_bits;
-            if (spiflash_core_litespimmap_source_ready) begin
+            litespimmap_cs <= 1'd1;
+            litespimmap_source_valid <= 1'd1;
+            litespimmap_source_payload_width <= 1'd1;
+            litespimmap_source_payload_mask <= 1'd0;
+            litespimmap_source_payload_data <= litespimmap_dummy;
+            litespimmap_source_payload_len <= litespimmap_spi_dummy_bits;
+            if (litespimmap_source_ready) begin
                 litespi_next_state <= 3'd7;
             end
         end
         3'd7: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_sink_ready <= 1'd1;
-            if (spiflash_core_litespimmap_sink_valid) begin
+            litespimmap_cs <= 1'd1;
+            litespimmap_sink_ready <= 1'd1;
+            if (litespimmap_sink_valid) begin
                 litespi_next_state <= 4'd8;
             end
         end
         4'd8: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_source_valid <= 1'd1;
-            spiflash_core_litespimmap_source_last <= 1'd1;
-            spiflash_core_litespimmap_source_payload_width <= 3'd4;
-            spiflash_core_litespimmap_source_payload_len <= 6'd32;
-            spiflash_core_litespimmap_source_payload_mask <= 1'd0;
-            if (spiflash_core_litespimmap_source_ready) begin
+            litespimmap_cs <= 1'd1;
+            litespimmap_source_valid <= 1'd1;
+            litespimmap_source_last <= 1'd1;
+            litespimmap_source_payload_width <= 3'd4;
+            litespimmap_source_payload_len <= 6'd32;
+            litespimmap_source_payload_mask <= 1'd0;
+            if (litespimmap_source_ready) begin
                 litespi_next_state <= 4'd9;
             end
         end
         4'd9: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_sink_ready <= 1'd1;
-            spiflash_core_litespimmap_bus_dat_r <= {spiflash_core_litespimmap_sink_payload_data[7:0], spiflash_core_litespimmap_sink_payload_data[15:8], spiflash_core_litespimmap_sink_payload_data[23:16], spiflash_core_litespimmap_sink_payload_data[31:24]};
-            if (spiflash_core_litespimmap_sink_valid) begin
-                spiflash_core_litespimmap_bus_ack <= 1'd1;
-                spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= (spiflash_core_litespimmap_burst_adr + 1'd1);
-                spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
+            litespimmap_cs <= 1'd1;
+            litespimmap_sink_ready <= 1'd1;
+            litespimmap_bus_dat_r <= {litespimmap_sink_payload_data[7:0], litespimmap_sink_payload_data[15:8], litespimmap_sink_payload_data[23:16], litespimmap_sink_payload_data[31:24]};
+            if (litespimmap_sink_valid) begin
+                litespimmap_bus_ack <= 1'd1;
+                litespimmap_burst_adr_litespi_f_next_value <= (litespimmap_burst_adr + 1'd1);
+                litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
                 litespi_next_state <= 1'd0;
             end
         end
         4'd10: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_source_valid <= 1'd1;
-            spiflash_core_litespimmap_source_payload_width <= 1'd1;
-            spiflash_core_litespimmap_source_payload_mask <= 4'd15;
-            spiflash_core_litespimmap_source_payload_data <= spiflash_core_litespimmap_data_write;
-            spiflash_core_litespimmap_source_payload_len <= 4'd8;
-            if (spiflash_core_litespimmap_source_ready) begin
+            litespimmap_cs <= 1'd1;
+            litespimmap_source_valid <= 1'd1;
+            litespimmap_source_payload_width <= 1'd1;
+            litespimmap_source_payload_mask <= 4'd15;
+            litespimmap_source_payload_data <= litespimmap_data_write;
+            litespimmap_source_payload_len <= 4'd8;
+            if (litespimmap_source_ready) begin
                 litespi_next_state <= 4'd11;
             end
         end
         4'd11: begin
-            spiflash_core_litespimmap_cs <= 1'd1;
-            spiflash_core_litespimmap_sink_ready <= 1'd1;
-            if (spiflash_core_litespimmap_sink_valid) begin
-                if ((spiflash_core_litespimmap_byte_count != 2'd3)) begin
-                    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0 <= {spiflash_core_litespimmap1, spiflash_core_litespimmap_write_mask[3:1]};
-                    spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd1;
-                    spiflash_core_litespimmap_byte_count_litespi_t_next_value <= (spiflash_core_litespimmap_byte_count + 1'd1);
-                    spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce <= 1'd1;
-                    spiflash_core_litespimmap_data_write_litespi_t_f_next_value1 <= (spiflash_core_litespimmap_data_write >>> 4'd8);
-                    spiflash_core_litespimmap_data_write_litespi_t_f_next_value_ce1 <= 1'd1;
-                    if (spiflash_core_litespimmap_write_mask[1]) begin
+            litespimmap_cs <= 1'd1;
+            litespimmap_sink_ready <= 1'd1;
+            if (litespimmap_sink_valid) begin
+                if ((litespimmap_byte_count != 2'd3)) begin
+                    litespimmap_write_mask_litespi_t_f_next_value0 <= {litespimmap1, litespimmap_write_mask[3:1]};
+                    litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd1;
+                    litespimmap_byte_count_litespi_t_next_value <= (litespimmap_byte_count + 1'd1);
+                    litespimmap_byte_count_litespi_t_next_value_ce <= 1'd1;
+                    litespimmap_data_write_litespi_t_f_next_value1 <= (litespimmap_data_write >>> 4'd8);
+                    litespimmap_data_write_litespi_t_f_next_value_ce1 <= 1'd1;
+                    if (litespimmap_write_mask[1]) begin
                         litespi_next_state <= 4'd10;
                     end else begin
-                        spiflash_core_litespimmap_cs <= 1'd0;
-                        spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd0;
-                        spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
+                        litespimmap_cs <= 1'd0;
+                        litespimmap_write_litespi_t_t_next_value <= 1'd0;
+                        litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
                         litespi_next_state <= 1'd1;
                     end
                 end else begin
-                    spiflash_core_litespimmap_bus_ack <= 1'd1;
-                    spiflash_core_litespimmap_burst_adr_litespi_f_next_value <= (spiflash_core_litespimmap_burst_adr + 1'd1);
-                    spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
+                    litespimmap_bus_ack <= 1'd1;
+                    litespimmap_burst_adr_litespi_f_next_value <= (litespimmap_burst_adr + 1'd1);
+                    litespimmap_burst_adr_litespi_f_next_value_ce <= 1'd1;
                     litespi_next_state <= 1'd0;
                 end
             end
         end
         default: begin
-            spiflash_core_litespimmap_wait <= 1'd1;
-            spiflash_core_litespimmap_burst_cs_litespi_next_value <= (spiflash_core_litespimmap_burst_cs & (~spiflash_core_litespimmap_done));
-            spiflash_core_litespimmap_burst_cs_litespi_next_value_ce <= 1'd1;
-            spiflash_core_litespimmap_cs <= spiflash_core_litespimmap_burst_cs;
-            if ((spiflash_core_litespimmap_bus_cyc & spiflash_core_litespimmap_bus_stb)) begin
-                spiflash_core_litespimmap_byte_count_litespi_t_next_value <= 1'd0;
-                spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce <= 1'd1;
-                if ((~spiflash_core_litespimmap_bus_we)) begin
-                    if (((spiflash_core_litespimmap_burst_cs & (spiflash_core_litespimmap_bus_adr == spiflash_core_litespimmap_burst_adr)) & ((~spiflash_core_litespimmap_write_enabled) | (~spiflash_core_litespimmap_write)))) begin
+            litespimmap_wait <= 1'd1;
+            litespimmap_burst_cs_litespi_next_value <= (litespimmap_burst_cs & (~litespimmap_done));
+            litespimmap_burst_cs_litespi_next_value_ce <= 1'd1;
+            litespimmap_cs <= litespimmap_burst_cs;
+            if ((litespimmap_bus_cyc & litespimmap_bus_stb)) begin
+                litespimmap_byte_count_litespi_t_next_value <= 1'd0;
+                litespimmap_byte_count_litespi_t_next_value_ce <= 1'd1;
+                if ((~litespimmap_bus_we)) begin
+                    if (((litespimmap_burst_cs & (litespimmap_bus_adr == litespimmap_burst_adr)) & ((~litespimmap_write_enabled) | (~litespimmap_write)))) begin
                         litespi_next_state <= 4'd8;
                     end else begin
-                        spiflash_core_litespimmap_cs <= 1'd0;
+                        litespimmap_cs <= 1'd0;
                         litespi_next_state <= 2'd2;
                     end
-                    spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd0;
-                    spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
+                    litespimmap_write_litespi_t_t_next_value <= 1'd0;
+                    litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
                 end else begin
-                    if (spiflash_core_litespimmap_write_enabled) begin
-                        spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0 <= spiflash_core_litespimmap_bus_sel;
-                        spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd1;
-                        spiflash_core_litespimmap_data_write_litespi_t_f_next_value1 <= spiflash_core_litespimmap_bus_dat_w;
-                        spiflash_core_litespimmap_data_write_litespi_t_f_next_value_ce1 <= 1'd1;
-                        if ((((spiflash_core_litespimmap_burst_cs & (spiflash_core_litespimmap_bus_adr == spiflash_core_litespimmap_burst_adr)) & spiflash_core_litespimmap_bus_sel[0]) & spiflash_core_litespimmap_write)) begin
+                    if (litespimmap_write_enabled) begin
+                        litespimmap_write_mask_litespi_t_f_next_value0 <= litespimmap_bus_sel;
+                        litespimmap_write_mask_litespi_t_f_next_value_ce0 <= 1'd1;
+                        litespimmap_data_write_litespi_t_f_next_value1 <= litespimmap_bus_dat_w;
+                        litespimmap_data_write_litespi_t_f_next_value_ce1 <= 1'd1;
+                        if ((((litespimmap_burst_cs & (litespimmap_bus_adr == litespimmap_burst_adr)) & litespimmap_bus_sel[0]) & litespimmap_write)) begin
                             litespi_next_state <= 4'd10;
                         end else begin
-                            spiflash_core_litespimmap_cs <= 1'd0;
+                            litespimmap_cs <= 1'd0;
                             litespi_next_state <= 1'd1;
                         end
-                        spiflash_core_litespimmap_write_litespi_t_t_next_value <= 1'd1;
-                        spiflash_core_litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
+                        litespimmap_write_litespi_t_t_next_value <= 1'd1;
+                        litespimmap_write_litespi_t_t_next_value_ce <= 1'd1;
                     end
                 end
             end
         end
     endcase
 end
+assign master_rx_fifo_sink_sink_valid = master_sink_valid;
+assign master_sink_ready = master_rx_fifo_sink_sink_ready;
+assign master_rx_fifo_sink_sink_first = master_sink_first;
+assign master_rx_fifo_sink_sink_last = master_sink_last;
+assign master_rx_fifo_sink_sink_payload_data = master_sink_payload_data;
+assign master_source_valid = master_tx_fifo_source_source_valid;
+assign master_tx_fifo_source_source_ready = master_source_ready;
+assign master_source_first = master_tx_fifo_source_source_first;
+assign master_source_last = master_tx_fifo_source_source_last;
+assign master_source_payload_data = master_tx_fifo_source_source_payload_data;
+assign master_source_payload_len = master_tx_fifo_source_source_payload_len;
+assign master_source_payload_width = master_tx_fifo_source_source_payload_width;
+assign master_source_payload_mask = master_tx_fifo_source_source_payload_mask;
+assign master_cs = master_cs_storage;
+assign master_tx_fifo_sink_sink_valid = master_rxtx_re;
+assign master_tx_ready = master_tx_fifo_sink_sink_ready;
+assign master_tx_fifo_sink_sink_payload_data = master_rxtx_r;
+assign master_tx_fifo_sink_sink_payload_len = master_len;
+assign master_tx_fifo_sink_sink_payload_width = master_width;
+assign master_tx_fifo_sink_sink_payload_mask = master_mask;
+assign master_tx_fifo_sink_sink_last = 1'd1;
+assign master_rx_fifo_source_source_ready = master_rxtx_we;
+assign master_rx_ready = master_rx_fifo_source_source_valid;
+assign master_rxtx_w = master_rx_fifo_source_source_payload_data;
+assign master_tx_fifo_pipe_valid_sink_ready = ((~master_tx_fifo_pipe_valid_source_valid) | master_tx_fifo_pipe_valid_source_ready);
+assign master_tx_fifo_pipe_valid_sink_valid = master_tx_fifo_sink_sink_valid;
+assign master_tx_fifo_sink_sink_ready = master_tx_fifo_pipe_valid_sink_ready;
+assign master_tx_fifo_pipe_valid_sink_first = master_tx_fifo_sink_sink_first;
+assign master_tx_fifo_pipe_valid_sink_last = master_tx_fifo_sink_sink_last;
+assign master_tx_fifo_pipe_valid_sink_payload_data = master_tx_fifo_sink_sink_payload_data;
+assign master_tx_fifo_pipe_valid_sink_payload_len = master_tx_fifo_sink_sink_payload_len;
+assign master_tx_fifo_pipe_valid_sink_payload_width = master_tx_fifo_sink_sink_payload_width;
+assign master_tx_fifo_pipe_valid_sink_payload_mask = master_tx_fifo_sink_sink_payload_mask;
+assign master_tx_fifo_source_source_valid = master_tx_fifo_pipe_valid_source_valid;
+assign master_tx_fifo_pipe_valid_source_ready = master_tx_fifo_source_source_ready;
+assign master_tx_fifo_source_source_first = master_tx_fifo_pipe_valid_source_first;
+assign master_tx_fifo_source_source_last = master_tx_fifo_pipe_valid_source_last;
+assign master_tx_fifo_source_source_payload_data = master_tx_fifo_pipe_valid_source_payload_data;
+assign master_tx_fifo_source_source_payload_len = master_tx_fifo_pipe_valid_source_payload_len;
+assign master_tx_fifo_source_source_payload_width = master_tx_fifo_pipe_valid_source_payload_width;
+assign master_tx_fifo_source_source_payload_mask = master_tx_fifo_pipe_valid_source_payload_mask;
+assign master_rx_fifo_pipe_valid_sink_ready = ((~master_rx_fifo_pipe_valid_source_valid) | master_rx_fifo_pipe_valid_source_ready);
+assign master_rx_fifo_pipe_valid_sink_valid = master_rx_fifo_sink_sink_valid;
+assign master_rx_fifo_sink_sink_ready = master_rx_fifo_pipe_valid_sink_ready;
+assign master_rx_fifo_pipe_valid_sink_first = master_rx_fifo_sink_sink_first;
+assign master_rx_fifo_pipe_valid_sink_last = master_rx_fifo_sink_sink_last;
+assign master_rx_fifo_pipe_valid_sink_payload_data = master_rx_fifo_sink_sink_payload_data;
+assign master_rx_fifo_source_source_valid = master_rx_fifo_pipe_valid_source_valid;
+assign master_rx_fifo_pipe_valid_source_ready = master_rx_fifo_source_source_ready;
+assign master_rx_fifo_source_source_first = master_rx_fifo_pipe_valid_source_first;
+assign master_rx_fifo_source_source_last = master_rx_fifo_pipe_valid_source_last;
+assign master_rx_fifo_source_source_payload_data = master_rx_fifo_pipe_valid_source_payload_data;
 assign main_ram_datain = main_ram_bus_dat_w[31:0];
 always @(*) begin
     main_ram_bus_dat_r <= 32'd0;
@@ -1825,26 +2267,26 @@ end
 assign framectl_irq = (framectl_pending_status & framectl_enable_storage);
 assign framectl_status = framectl_trigger;
 always @(*) begin
-    interface0_ack <= 1'd0;
-    interface0_dat_r <= 32'd0;
-    interface1_adr <= 14'd0;
-    interface1_dat_w <= 32'd0;
+    interface0_ack0 <= 1'd0;
+    interface0_dat_r0 <= 32'd0;
+    interface1_adr0 <= 14'd0;
+    interface1_dat_w0 <= 32'd0;
     interface1_re <= 1'd0;
-    interface1_we <= 1'd0;
+    interface1_we0 <= 1'd0;
     wishbone2csr_next_state <= 1'd0;
     wishbone2csr_next_state <= wishbone2csr_state;
     case (wishbone2csr_state)
         1'd1: begin
-            interface0_ack <= 1'd1;
-            interface0_dat_r <= interface1_dat_r;
+            interface0_ack0 <= 1'd1;
+            interface0_dat_r0 <= interface1_dat_r0;
             wishbone2csr_next_state <= 1'd0;
         end
         default: begin
-            interface1_dat_w <= interface0_dat_w;
-            if ((interface0_cyc & interface0_stb)) begin
-                interface1_adr <= interface0_adr[29:0];
-                interface1_re <= ((~interface0_we) & (interface0_sel != 1'd0));
-                interface1_we <= (interface0_we & (interface0_sel != 1'd0));
+            interface1_dat_w0 <= interface0_dat_w0;
+            if ((interface0_cyc0 & interface0_stb0)) begin
+                interface1_adr0 <= interface0_adr0[29:0];
+                interface1_re <= ((~interface0_we0) & (interface0_sel0 != 1'd0));
+                interface1_we0 <= (interface0_we0 & (interface0_sel0 != 1'd0));
                 wishbone2csr_next_state <= 1'd1;
             end
         end
@@ -1879,16 +2321,16 @@ always @(*) begin
     end
 end
 always @(*) begin
-    soc_rst <= 1'd0;
-    if (reset_re) begin
-        soc_rst <= reset_storage[0];
+    mainsoc_soc_rst <= 1'd0;
+    if (mainsoc_reset_re) begin
+        mainsoc_soc_rst <= mainsoc_reset_storage[0];
     end
 end
-assign cpu_rst = reset_storage[1];
-assign csrbank0_reset0_w = reset_storage[1:0];
-assign csrbank0_scratch0_w = scratch_storage[31:0];
-assign csrbank0_bus_errors_w = bus_errors_status[31:0];
-assign bus_errors_we = csrbank0_bus_errors_we;
+assign mainsoc_cpu_rst = mainsoc_reset_storage[1];
+assign csrbank0_reset0_w = mainsoc_reset_storage[1:0];
+assign csrbank0_scratch0_w = mainsoc_scratch_storage[31:0];
+assign csrbank0_bus_errors_w = mainsoc_bus_errors_status[31:0];
+assign mainsoc_bus_errors_we = csrbank0_bus_errors_we;
 assign csrbank1_sel = (interface1_bank_bus_adr[13:9] == 1'd1);
 assign csrbank1_ev_status_r = interface1_bank_bus_dat_w[0];
 always @(*) begin
@@ -1932,34 +2374,152 @@ assign framectl_pending_we = csrbank1_ev_pending_we;
 assign framectl_frame2 = framectl_enable_storage;
 assign csrbank1_ev_enable0_w = framectl_enable_storage;
 assign csrbank2_sel = (interface2_bank_bus_adr[13:9] == 4'd10);
-assign csrbank2_w0_r = interface2_bank_bus_dat_w[2:0];
+assign csrbank2_prescale0_r = interface2_bank_bus_dat_w[15:0];
 always @(*) begin
-    csrbank2_w0_re <= 1'd0;
-    csrbank2_w0_we <= 1'd0;
+    csrbank2_prescale0_re <= 1'd0;
+    csrbank2_prescale0_we <= 1'd0;
     if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 1'd0))) begin
-        csrbank2_w0_re <= interface2_bank_bus_we;
-        csrbank2_w0_we <= interface2_bank_bus_re;
+        csrbank2_prescale0_re <= interface2_bank_bus_we;
+        csrbank2_prescale0_we <= interface2_bank_bus_re;
     end
 end
-assign csrbank2_r_r = interface2_bank_bus_dat_w[0];
+assign csrbank2_control0_r = interface2_bank_bus_dat_w[7:0];
 always @(*) begin
-    csrbank2_r_re <= 1'd0;
-    csrbank2_r_we <= 1'd0;
+    csrbank2_control0_re <= 1'd0;
+    csrbank2_control0_we <= 1'd0;
     if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 1'd1))) begin
-        csrbank2_r_re <= interface2_bank_bus_we;
-        csrbank2_r_we <= interface2_bank_bus_re;
+        csrbank2_control0_re <= interface2_bank_bus_we;
+        csrbank2_control0_we <= interface2_bank_bus_re;
     end
 end
-assign scl = _w_storage[0];
-assign oe = _w_storage[1];
-assign sda0 = _w_storage[2];
-assign csrbank2_w0_w = _w_storage[2:0];
+assign csrbank2_txr0_r = interface2_bank_bus_dat_w[7:0];
 always @(*) begin
-    _r_status <= 1'd0;
-    _r_status <= sda1;
+    csrbank2_txr0_re <= 1'd0;
+    csrbank2_txr0_we <= 1'd0;
+    if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 2'd2))) begin
+        csrbank2_txr0_re <= interface2_bank_bus_we;
+        csrbank2_txr0_we <= interface2_bank_bus_re;
+    end
 end
-assign csrbank2_r_w = _r_status;
-assign _r_we = csrbank2_r_we;
+assign csrbank2_rxr_r = interface2_bank_bus_dat_w[7:0];
+always @(*) begin
+    csrbank2_rxr_re <= 1'd0;
+    csrbank2_rxr_we <= 1'd0;
+    if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 2'd3))) begin
+        csrbank2_rxr_re <= interface2_bank_bus_we;
+        csrbank2_rxr_we <= interface2_bank_bus_re;
+    end
+end
+assign csrbank2_command0_r = interface2_bank_bus_dat_w[7:0];
+always @(*) begin
+    csrbank2_command0_re <= 1'd0;
+    csrbank2_command0_we <= 1'd0;
+    if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 3'd4))) begin
+        csrbank2_command0_re <= interface2_bank_bus_we;
+        csrbank2_command0_we <= interface2_bank_bus_re;
+    end
+end
+assign csrbank2_status_r = interface2_bank_bus_dat_w[7:0];
+always @(*) begin
+    csrbank2_status_re <= 1'd0;
+    csrbank2_status_we <= 1'd0;
+    if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 3'd5))) begin
+        csrbank2_status_re <= interface2_bank_bus_we;
+        csrbank2_status_we <= interface2_bank_bus_re;
+    end
+end
+assign csrbank2_core_reset0_r = interface2_bank_bus_dat_w[0];
+always @(*) begin
+    csrbank2_core_reset0_re <= 1'd0;
+    csrbank2_core_reset0_we <= 1'd0;
+    if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 3'd6))) begin
+        csrbank2_core_reset0_re <= interface2_bank_bus_we;
+        csrbank2_core_reset0_we <= interface2_bank_bus_re;
+    end
+end
+assign csrbank2_ev_status_r = interface2_bank_bus_dat_w[1:0];
+always @(*) begin
+    csrbank2_ev_status_re <= 1'd0;
+    csrbank2_ev_status_we <= 1'd0;
+    if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 3'd7))) begin
+        csrbank2_ev_status_re <= interface2_bank_bus_we;
+        csrbank2_ev_status_we <= interface2_bank_bus_re;
+    end
+end
+assign csrbank2_ev_pending_r = interface2_bank_bus_dat_w[1:0];
+always @(*) begin
+    csrbank2_ev_pending_re <= 1'd0;
+    csrbank2_ev_pending_we <= 1'd0;
+    if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 4'd8))) begin
+        csrbank2_ev_pending_re <= interface2_bank_bus_we;
+        csrbank2_ev_pending_we <= interface2_bank_bus_re;
+    end
+end
+assign csrbank2_ev_enable0_r = interface2_bank_bus_dat_w[1:0];
+always @(*) begin
+    csrbank2_ev_enable0_re <= 1'd0;
+    csrbank2_ev_enable0_we <= 1'd0;
+    if ((csrbank2_sel & (interface2_bank_bus_adr[8:0] == 4'd9))) begin
+        csrbank2_ev_enable0_re <= interface2_bank_bus_we;
+        csrbank2_ev_enable0_we <= interface2_bank_bus_re;
+    end
+end
+assign csrbank2_prescale0_w = i2c0_prescale_storage[15:0];
+assign i2c0_Resvd0 = i2c0_control_storage[5:0];
+assign i2c0_IEN = i2c0_control_storage[6];
+assign i2c0_EN = i2c0_control_storage[7];
+assign csrbank2_control0_w = i2c0_control_storage[7:0];
+assign csrbank2_txr0_w = i2c0_txr_storage[7:0];
+assign csrbank2_rxr_w = i2c0_rxr_status[7:0];
+assign i2c0_rxr_we = csrbank2_rxr_we;
+always @(*) begin
+    i2c0_IACK <= 1'd0;
+    if (i2c0_command_re) begin
+        i2c0_IACK <= i2c0_command_storage[0];
+    end
+end
+assign i2c0_Resvd1 = i2c0_command_storage[2:1];
+assign i2c0_ACK = i2c0_command_storage[3];
+assign i2c0_WR = i2c0_command_storage[4];
+assign i2c0_RD = i2c0_command_storage[5];
+assign i2c0_STO = i2c0_command_storage[6];
+assign i2c0_STA = i2c0_command_storage[7];
+assign csrbank2_command0_w = i2c0_command_storage[7:0];
+always @(*) begin
+    i2c0_status_status0 <= 8'd0;
+    i2c0_status_status0[0] <= i2c0_IF;
+    i2c0_status_status0[1] <= i2c0_TIP;
+    i2c0_status_status0[4:2] <= i2c0_Resvd2;
+    i2c0_status_status0[5] <= i2c0_ArbLost;
+    i2c0_status_status0[6] <= i2c0_Busy;
+    i2c0_status_status0[7] <= i2c0_RxACK;
+end
+assign csrbank2_status_w = i2c0_status_status0[7:0];
+assign i2c0_status_we0 = csrbank2_status_we;
+always @(*) begin
+    i2c0_reset <= 1'd0;
+    if (i2c0_core_reset_re) begin
+        i2c0_reset <= i2c0_core_reset_storage;
+    end
+end
+assign csrbank2_core_reset0_w = i2c0_core_reset_storage;
+always @(*) begin
+    i2c0_status_status1 <= 2'd0;
+    i2c0_status_status1[0] <= i2c0_i2c_int0;
+    i2c0_status_status1[1] <= i2c0_txrx_done0;
+end
+assign csrbank2_ev_status_w = i2c0_status_status1[1:0];
+assign i2c0_status_we1 = csrbank2_ev_status_we;
+always @(*) begin
+    i2c0_pending_status <= 2'd0;
+    i2c0_pending_status[0] <= i2c0_i2c_int1;
+    i2c0_pending_status[1] <= i2c0_txrx_done1;
+end
+assign csrbank2_ev_pending_w = i2c0_pending_status[1:0];
+assign i2c0_pending_we = csrbank2_ev_pending_we;
+assign i2c0_i2c_int2 = i2c0_enable_storage[0];
+assign i2c0_txrx_done2 = i2c0_enable_storage[1];
+assign csrbank2_ev_enable0_w = i2c0_enable_storage[1:0];
 assign csrbank3_sel = (interface3_bank_bus_adr[13:9] == 2'd2);
 assign csrbank3_mmap_dummy_bits0_r = interface3_bank_bus_dat_w[7:0];
 always @(*) begin
@@ -1970,7 +2530,55 @@ always @(*) begin
         csrbank3_mmap_dummy_bits0_we <= interface3_bank_bus_re;
     end
 end
-assign csrbank3_mmap_dummy_bits0_w = spiflash_core_litespimmap_storage[7:0];
+assign csrbank3_master_cs0_r = interface3_bank_bus_dat_w[0];
+always @(*) begin
+    csrbank3_master_cs0_re <= 1'd0;
+    csrbank3_master_cs0_we <= 1'd0;
+    if ((csrbank3_sel & (interface3_bank_bus_adr[8:0] == 1'd1))) begin
+        csrbank3_master_cs0_re <= interface3_bank_bus_we;
+        csrbank3_master_cs0_we <= interface3_bank_bus_re;
+    end
+end
+assign csrbank3_master_phyconfig0_r = interface3_bank_bus_dat_w[23:0];
+always @(*) begin
+    csrbank3_master_phyconfig0_re <= 1'd0;
+    csrbank3_master_phyconfig0_we <= 1'd0;
+    if ((csrbank3_sel & (interface3_bank_bus_adr[8:0] == 2'd2))) begin
+        csrbank3_master_phyconfig0_re <= interface3_bank_bus_we;
+        csrbank3_master_phyconfig0_we <= interface3_bank_bus_re;
+    end
+end
+assign master_rxtx_r = interface3_bank_bus_dat_w[31:0];
+always @(*) begin
+    master_rxtx_re <= 1'd0;
+    master_rxtx_we <= 1'd0;
+    if ((csrbank3_sel & (interface3_bank_bus_adr[8:0] == 2'd3))) begin
+        master_rxtx_re <= interface3_bank_bus_we;
+        master_rxtx_we <= interface3_bank_bus_re;
+    end
+end
+assign csrbank3_master_status_r = interface3_bank_bus_dat_w[1:0];
+always @(*) begin
+    csrbank3_master_status_re <= 1'd0;
+    csrbank3_master_status_we <= 1'd0;
+    if ((csrbank3_sel & (interface3_bank_bus_adr[8:0] == 3'd4))) begin
+        csrbank3_master_status_re <= interface3_bank_bus_we;
+        csrbank3_master_status_we <= interface3_bank_bus_re;
+    end
+end
+assign csrbank3_mmap_dummy_bits0_w = litespimmap_storage[7:0];
+assign csrbank3_master_cs0_w = master_cs_storage;
+assign master_len = master_phyconfig_storage[7:0];
+assign master_width = master_phyconfig_storage[11:8];
+assign master_mask = master_phyconfig_storage[23:16];
+assign csrbank3_master_phyconfig0_w = master_phyconfig_storage[23:0];
+always @(*) begin
+    master_status_status <= 2'd0;
+    master_status_status[0] <= master_tx_ready;
+    master_status_status[1] <= master_rx_ready;
+end
+assign csrbank3_master_status_w = master_status_status[1:0];
+assign master_status_we = csrbank3_master_status_we;
 assign csrbank4_sel = (interface4_bank_bus_adr[13:9] == 4'd8);
 assign csrbank4_clk_divisor0_r = interface4_bank_bus_dat_w[7:0];
 always @(*) begin
@@ -2082,38 +2690,38 @@ always @(*) begin
         csrbank5_uptime_cycles0_we <= interface5_bank_bus_re;
     end
 end
-assign csrbank5_load0_w = timer_load_storage[31:0];
-assign csrbank5_reload0_w = timer_reload_storage[31:0];
-assign csrbank5_en0_w = timer_en_storage;
-assign csrbank5_update_value0_w = timer_update_value_storage;
-assign csrbank5_value_w = timer_value_status[31:0];
-assign timer_value_we = csrbank5_value_we;
+assign csrbank5_load0_w = mainsoc_timer_load_storage[31:0];
+assign csrbank5_reload0_w = mainsoc_timer_reload_storage[31:0];
+assign csrbank5_en0_w = mainsoc_timer_en_storage;
+assign csrbank5_update_value0_w = mainsoc_timer_update_value_storage;
+assign csrbank5_value_w = mainsoc_timer_value_status[31:0];
+assign mainsoc_timer_value_we = csrbank5_value_we;
 always @(*) begin
-    timer_status_status <= 1'd0;
-    timer_status_status <= timer_zero0;
+    mainsoc_timer_status_status <= 1'd0;
+    mainsoc_timer_status_status <= mainsoc_timer_zero0;
 end
-assign csrbank5_ev_status_w = timer_status_status;
-assign timer_status_we = csrbank5_ev_status_we;
+assign csrbank5_ev_status_w = mainsoc_timer_status_status;
+assign mainsoc_timer_status_we = csrbank5_ev_status_we;
 always @(*) begin
-    timer_pending_status <= 1'd0;
-    timer_pending_status <= timer_zero1;
+    mainsoc_timer_pending_status <= 1'd0;
+    mainsoc_timer_pending_status <= mainsoc_timer_zero1;
 end
-assign csrbank5_ev_pending_w = timer_pending_status;
-assign timer_pending_we = csrbank5_ev_pending_we;
-assign timer_zero2 = timer_enable_storage;
-assign csrbank5_ev_enable0_w = timer_enable_storage;
+assign csrbank5_ev_pending_w = mainsoc_timer_pending_status;
+assign mainsoc_timer_pending_we = csrbank5_ev_pending_we;
+assign mainsoc_timer_zero2 = mainsoc_timer_enable_storage;
+assign csrbank5_ev_enable0_w = mainsoc_timer_enable_storage;
 assign csrbank5_uptime_latch0_w = uptime_latch_storage;
 assign csrbank5_uptime_cycles1_w = uptime_cycles_status[63:32];
 assign csrbank5_uptime_cycles0_w = uptime_cycles_status[31:0];
 assign uptime_cycles_we = csrbank5_uptime_cycles0_we;
 assign csrbank6_sel = (interface6_bank_bus_adr[13:9] == 2'd3);
-assign uart_rxtx_r = interface6_bank_bus_dat_w[7:0];
+assign mainsoc_uart_rxtx_r = interface6_bank_bus_dat_w[7:0];
 always @(*) begin
-    uart_rxtx_re <= 1'd0;
-    uart_rxtx_we <= 1'd0;
+    mainsoc_uart_rxtx_re <= 1'd0;
+    mainsoc_uart_rxtx_we <= 1'd0;
     if ((csrbank6_sel & (interface6_bank_bus_adr[8:0] == 1'd0))) begin
-        uart_rxtx_re <= interface6_bank_bus_we;
-        uart_rxtx_we <= interface6_bank_bus_re;
+        mainsoc_uart_rxtx_re <= interface6_bank_bus_we;
+        mainsoc_uart_rxtx_we <= interface6_bank_bus_re;
     end
 end
 assign csrbank6_txfull_r = interface6_bank_bus_dat_w[0];
@@ -2179,31 +2787,31 @@ always @(*) begin
         csrbank6_rxfull_we <= interface6_bank_bus_re;
     end
 end
-assign csrbank6_txfull_w = uart_txfull_status;
-assign uart_txfull_we = csrbank6_txfull_we;
-assign csrbank6_rxempty_w = uart_rxempty_status;
-assign uart_rxempty_we = csrbank6_rxempty_we;
+assign csrbank6_txfull_w = mainsoc_uart_txfull_status;
+assign mainsoc_uart_txfull_we = csrbank6_txfull_we;
+assign csrbank6_rxempty_w = mainsoc_uart_rxempty_status;
+assign mainsoc_uart_rxempty_we = csrbank6_rxempty_we;
 always @(*) begin
-    uart_status_status <= 2'd0;
-    uart_status_status[0] <= uart_tx0;
-    uart_status_status[1] <= uart_rx0;
+    mainsoc_uart_status_status <= 2'd0;
+    mainsoc_uart_status_status[0] <= mainsoc_uart_tx0;
+    mainsoc_uart_status_status[1] <= mainsoc_uart_rx0;
 end
-assign csrbank6_ev_status_w = uart_status_status[1:0];
-assign uart_status_we = csrbank6_ev_status_we;
+assign csrbank6_ev_status_w = mainsoc_uart_status_status[1:0];
+assign mainsoc_uart_status_we = csrbank6_ev_status_we;
 always @(*) begin
-    uart_pending_status <= 2'd0;
-    uart_pending_status[0] <= uart_tx1;
-    uart_pending_status[1] <= uart_rx1;
+    mainsoc_uart_pending_status <= 2'd0;
+    mainsoc_uart_pending_status[0] <= mainsoc_uart_tx1;
+    mainsoc_uart_pending_status[1] <= mainsoc_uart_rx1;
 end
-assign csrbank6_ev_pending_w = uart_pending_status[1:0];
-assign uart_pending_we = csrbank6_ev_pending_we;
-assign uart_tx2 = uart_enable_storage[0];
-assign uart_rx2 = uart_enable_storage[1];
-assign csrbank6_ev_enable0_w = uart_enable_storage[1:0];
-assign csrbank6_txempty_w = uart_txempty_status;
-assign uart_txempty_we = csrbank6_txempty_we;
-assign csrbank6_rxfull_w = uart_rxfull_status;
-assign uart_rxfull_we = csrbank6_rxfull_we;
+assign csrbank6_ev_pending_w = mainsoc_uart_pending_status[1:0];
+assign mainsoc_uart_pending_we = csrbank6_ev_pending_we;
+assign mainsoc_uart_tx2 = mainsoc_uart_enable_storage[0];
+assign mainsoc_uart_rx2 = mainsoc_uart_enable_storage[1];
+assign csrbank6_ev_enable0_w = mainsoc_uart_enable_storage[1:0];
+assign csrbank6_txempty_w = mainsoc_uart_txempty_status;
+assign mainsoc_uart_txempty_we = csrbank6_txempty_we;
+assign csrbank6_rxfull_w = mainsoc_uart_rxfull_status;
+assign mainsoc_uart_rxfull_we = csrbank6_rxfull_we;
 assign csrbank7_sel = (interface7_bank_bus_adr[13:9] == 4'd11);
 assign csrbank7_ev_status_r = interface7_bank_bus_dat_w[0];
 always @(*) begin
@@ -2246,11 +2854,11 @@ assign csrbank7_ev_pending_w = usb23_pending_status;
 assign usb23_pending_we = csrbank7_ev_pending_we;
 assign usb23_usb2 = usb23_enable_storage;
 assign csrbank7_ev_enable0_w = usb23_enable_storage;
-assign adr = interface1_adr;
+assign adr = interface1_adr0;
 assign re = interface1_re;
-assign we = interface1_we;
-assign dat_w = interface1_dat_w;
-assign interface1_dat_r = dat_r;
+assign we = interface1_we0;
+assign dat_w = interface1_dat_w0;
+assign interface1_dat_r0 = dat_r;
 assign interface0_bank_bus_adr = adr;
 assign interface1_bank_bus_adr = adr;
 assign interface2_bank_bus_adr = adr;
@@ -2288,10 +2896,10 @@ always @(*) begin
     array_muxed0 <= 30'd0;
     case (arbiter0_grant)
         1'd0: begin
-            array_muxed0 <= interface0_interface_adr;
+            array_muxed0 <= interface0_adr1;
         end
         default: begin
-            array_muxed0 <= interface2_interface_adr;
+            array_muxed0 <= interface4_adr;
         end
     endcase
 end
@@ -2299,10 +2907,10 @@ always @(*) begin
     array_muxed1 <= 32'd0;
     case (arbiter0_grant)
         1'd0: begin
-            array_muxed1 <= interface0_interface_dat_w;
+            array_muxed1 <= interface0_dat_w1;
         end
         default: begin
-            array_muxed1 <= interface2_interface_dat_w;
+            array_muxed1 <= interface4_dat_w;
         end
     endcase
 end
@@ -2310,10 +2918,10 @@ always @(*) begin
     array_muxed2 <= 4'd0;
     case (arbiter0_grant)
         1'd0: begin
-            array_muxed2 <= interface0_interface_sel;
+            array_muxed2 <= interface0_sel1;
         end
         default: begin
-            array_muxed2 <= interface2_interface_sel;
+            array_muxed2 <= interface4_sel;
         end
     endcase
 end
@@ -2321,10 +2929,10 @@ always @(*) begin
     array_muxed3 <= 1'd0;
     case (arbiter0_grant)
         1'd0: begin
-            array_muxed3 <= interface0_interface_cyc;
+            array_muxed3 <= interface0_cyc1;
         end
         default: begin
-            array_muxed3 <= interface2_interface_cyc;
+            array_muxed3 <= interface4_cyc;
         end
     endcase
 end
@@ -2332,10 +2940,10 @@ always @(*) begin
     array_muxed4 <= 1'd0;
     case (arbiter0_grant)
         1'd0: begin
-            array_muxed4 <= interface0_interface_stb;
+            array_muxed4 <= interface0_stb1;
         end
         default: begin
-            array_muxed4 <= interface2_interface_stb;
+            array_muxed4 <= interface4_stb;
         end
     endcase
 end
@@ -2343,10 +2951,10 @@ always @(*) begin
     array_muxed5 <= 1'd0;
     case (arbiter0_grant)
         1'd0: begin
-            array_muxed5 <= interface0_interface_we;
+            array_muxed5 <= interface0_we1;
         end
         default: begin
-            array_muxed5 <= interface2_interface_we;
+            array_muxed5 <= interface4_we;
         end
     endcase
 end
@@ -2354,10 +2962,10 @@ always @(*) begin
     array_muxed6 <= 3'd0;
     case (arbiter0_grant)
         1'd0: begin
-            array_muxed6 <= interface0_interface_cti;
+            array_muxed6 <= interface0_cti1;
         end
         default: begin
-            array_muxed6 <= interface2_interface_cti;
+            array_muxed6 <= interface4_cti;
         end
     endcase
 end
@@ -2365,10 +2973,10 @@ always @(*) begin
     array_muxed7 <= 2'd0;
     case (arbiter0_grant)
         1'd0: begin
-            array_muxed7 <= interface0_interface_bte;
+            array_muxed7 <= interface0_bte1;
         end
         default: begin
-            array_muxed7 <= interface2_interface_bte;
+            array_muxed7 <= interface4_bte;
         end
     endcase
 end
@@ -2376,10 +2984,10 @@ always @(*) begin
     array_muxed8 <= 30'd0;
     case (arbiter1_grant)
         1'd0: begin
-            array_muxed8 <= interface1_interface_adr;
+            array_muxed8 <= interface1_adr1;
         end
         default: begin
-            array_muxed8 <= interface3_interface_adr;
+            array_muxed8 <= interface5_adr;
         end
     endcase
 end
@@ -2387,10 +2995,10 @@ always @(*) begin
     array_muxed9 <= 32'd0;
     case (arbiter1_grant)
         1'd0: begin
-            array_muxed9 <= interface1_interface_dat_w;
+            array_muxed9 <= interface1_dat_w1;
         end
         default: begin
-            array_muxed9 <= interface3_interface_dat_w;
+            array_muxed9 <= interface5_dat_w;
         end
     endcase
 end
@@ -2398,10 +3006,10 @@ always @(*) begin
     array_muxed10 <= 4'd0;
     case (arbiter1_grant)
         1'd0: begin
-            array_muxed10 <= interface1_interface_sel;
+            array_muxed10 <= interface1_sel;
         end
         default: begin
-            array_muxed10 <= interface3_interface_sel;
+            array_muxed10 <= interface5_sel;
         end
     endcase
 end
@@ -2409,10 +3017,10 @@ always @(*) begin
     array_muxed11 <= 1'd0;
     case (arbiter1_grant)
         1'd0: begin
-            array_muxed11 <= interface1_interface_cyc;
+            array_muxed11 <= interface1_cyc;
         end
         default: begin
-            array_muxed11 <= interface3_interface_cyc;
+            array_muxed11 <= interface5_cyc;
         end
     endcase
 end
@@ -2420,10 +3028,10 @@ always @(*) begin
     array_muxed12 <= 1'd0;
     case (arbiter1_grant)
         1'd0: begin
-            array_muxed12 <= interface1_interface_stb;
+            array_muxed12 <= interface1_stb;
         end
         default: begin
-            array_muxed12 <= interface3_interface_stb;
+            array_muxed12 <= interface5_stb;
         end
     endcase
 end
@@ -2431,10 +3039,10 @@ always @(*) begin
     array_muxed13 <= 1'd0;
     case (arbiter1_grant)
         1'd0: begin
-            array_muxed13 <= interface1_interface_we;
+            array_muxed13 <= interface1_we1;
         end
         default: begin
-            array_muxed13 <= interface3_interface_we;
+            array_muxed13 <= interface5_we;
         end
     endcase
 end
@@ -2442,10 +3050,10 @@ always @(*) begin
     array_muxed14 <= 3'd0;
     case (arbiter1_grant)
         1'd0: begin
-            array_muxed14 <= interface1_interface_cti;
+            array_muxed14 <= interface1_cti;
         end
         default: begin
-            array_muxed14 <= interface3_interface_cti;
+            array_muxed14 <= interface5_cti;
         end
     endcase
 end
@@ -2453,145 +3061,190 @@ always @(*) begin
     array_muxed15 <= 2'd0;
     case (arbiter1_grant)
         1'd0: begin
-            array_muxed15 <= interface1_interface_bte;
+            array_muxed15 <= interface1_bte;
         end
         default: begin
-            array_muxed15 <= interface3_interface_bte;
+            array_muxed15 <= interface5_bte;
         end
     endcase
 end
 always @(*) begin
     array_muxed16 <= 30'd0;
     case (arbiter2_grant)
+        1'd0: begin
+            array_muxed16 <= interface2_adr;
+        end
         default: begin
-            array_muxed16 <= interface4_interface_adr;
+            array_muxed16 <= interface6_adr;
         end
     endcase
 end
 always @(*) begin
     array_muxed17 <= 32'd0;
     case (arbiter2_grant)
+        1'd0: begin
+            array_muxed17 <= interface2_dat_w;
+        end
         default: begin
-            array_muxed17 <= interface4_interface_dat_w;
+            array_muxed17 <= interface6_dat_w;
         end
     endcase
 end
 always @(*) begin
     array_muxed18 <= 4'd0;
     case (arbiter2_grant)
+        1'd0: begin
+            array_muxed18 <= interface2_sel;
+        end
         default: begin
-            array_muxed18 <= interface4_interface_sel;
+            array_muxed18 <= interface6_sel;
         end
     endcase
 end
 always @(*) begin
     array_muxed19 <= 1'd0;
     case (arbiter2_grant)
+        1'd0: begin
+            array_muxed19 <= interface2_cyc;
+        end
         default: begin
-            array_muxed19 <= interface4_interface_cyc;
+            array_muxed19 <= interface6_cyc;
         end
     endcase
 end
 always @(*) begin
     array_muxed20 <= 1'd0;
     case (arbiter2_grant)
+        1'd0: begin
+            array_muxed20 <= interface2_stb;
+        end
         default: begin
-            array_muxed20 <= interface4_interface_stb;
+            array_muxed20 <= interface6_stb;
         end
     endcase
 end
 always @(*) begin
     array_muxed21 <= 1'd0;
     case (arbiter2_grant)
+        1'd0: begin
+            array_muxed21 <= interface2_we;
+        end
         default: begin
-            array_muxed21 <= interface4_interface_we;
+            array_muxed21 <= interface6_we;
         end
     endcase
 end
 always @(*) begin
     array_muxed22 <= 3'd0;
     case (arbiter2_grant)
+        1'd0: begin
+            array_muxed22 <= interface2_cti;
+        end
         default: begin
-            array_muxed22 <= interface4_interface_cti;
+            array_muxed22 <= interface6_cti;
         end
     endcase
 end
 always @(*) begin
     array_muxed23 <= 2'd0;
     case (arbiter2_grant)
+        1'd0: begin
+            array_muxed23 <= interface2_bte;
+        end
         default: begin
-            array_muxed23 <= interface4_interface_bte;
+            array_muxed23 <= interface6_bte;
         end
     endcase
 end
 always @(*) begin
     array_muxed24 <= 30'd0;
     case (arbiter3_grant)
+        1'd0: begin
+            array_muxed24 <= interface3_adr;
+        end
         default: begin
-            array_muxed24 <= interface5_interface_adr;
+            array_muxed24 <= interface7_adr;
         end
     endcase
 end
 always @(*) begin
     array_muxed25 <= 32'd0;
     case (arbiter3_grant)
+        1'd0: begin
+            array_muxed25 <= interface3_dat_w;
+        end
         default: begin
-            array_muxed25 <= interface5_interface_dat_w;
+            array_muxed25 <= interface7_dat_w;
         end
     endcase
 end
 always @(*) begin
     array_muxed26 <= 4'd0;
     case (arbiter3_grant)
+        1'd0: begin
+            array_muxed26 <= interface3_sel;
+        end
         default: begin
-            array_muxed26 <= interface5_interface_sel;
+            array_muxed26 <= interface7_sel;
         end
     endcase
 end
 always @(*) begin
     array_muxed27 <= 1'd0;
     case (arbiter3_grant)
+        1'd0: begin
+            array_muxed27 <= interface3_cyc;
+        end
         default: begin
-            array_muxed27 <= interface5_interface_cyc;
+            array_muxed27 <= interface7_cyc;
         end
     endcase
 end
 always @(*) begin
     array_muxed28 <= 1'd0;
     case (arbiter3_grant)
+        1'd0: begin
+            array_muxed28 <= interface3_stb;
+        end
         default: begin
-            array_muxed28 <= interface5_interface_stb;
+            array_muxed28 <= interface7_stb;
         end
     endcase
 end
 always @(*) begin
     array_muxed29 <= 1'd0;
     case (arbiter3_grant)
+        1'd0: begin
+            array_muxed29 <= interface3_we;
+        end
         default: begin
-            array_muxed29 <= interface5_interface_we;
+            array_muxed29 <= interface7_we;
         end
     endcase
 end
 always @(*) begin
     array_muxed30 <= 3'd0;
     case (arbiter3_grant)
+        1'd0: begin
+            array_muxed30 <= interface3_cti;
+        end
         default: begin
-            array_muxed30 <= interface5_interface_cti;
+            array_muxed30 <= interface7_cti;
         end
     endcase
 end
 always @(*) begin
     array_muxed31 <= 2'd0;
     case (arbiter3_grant)
+        1'd0: begin
+            array_muxed31 <= interface3_bte;
+        end
         default: begin
-            array_muxed31 <= interface5_interface_bte;
+            array_muxed31 <= interface7_bte;
         end
     endcase
 end
-assign rx_rx = regs1;
-assign sdrio_clk_10 = sys_clk_1;
-assign sdrio_clk_11 = sys_clk_1;
-assign sdrio_clk_12 = sys_clk_1;
+assign mainsoc_rx_rx = regs1;
 assign sdrio_clk = sys_clk_1;
 assign sdrio_clk_1 = sys_clk_1;
 assign sdrio_clk_2 = sys_clk_1;
@@ -2599,9 +3252,12 @@ assign sdrio_clk_3 = sys_clk_1;
 assign sdrio_clk_4 = sys_clk_1;
 assign sdrio_clk_5 = sys_clk_1;
 assign sdrio_clk_6 = sys_clk_1;
-assign sdrio_clk_9 = sys_clk_1;
 assign sdrio_clk_7 = sys_clk_1;
 assign sdrio_clk_8 = sys_clk_1;
+assign sdrio_clk_9 = sys_clk_1;
+assign sdrio_clk_10 = sys_clk_1;
+assign sdrio_clk_11 = sys_clk_1;
+assign sdrio_clk_12 = sys_clk_1;
 
 
 //------------------------------------------------------------------------------
@@ -2612,7 +3268,7 @@ always @(posedge por_clk) begin
     int_rst <= sys_rst;
 end
 
-always @(posedge sdrio_clk_10) begin
+always @(posedge sdrio_clk) begin
     spiflash4x_clk <= litespisdrphycore_clk;
     inferedsdrtristate0_oe <= litespisdrphycore_dq_oe[0];
     inferedsdrtristate1_oe <= litespisdrphycore_dq_oe[1];
@@ -2630,21 +3286,7 @@ end
 
 always @(posedge sys_clk_1) begin
     decoder0_slave_sel_r <= decoder0_slave_sel;
-    if (timeout0_wait) begin
-        if ((~timeout0_done)) begin
-            timeout0_count <= (timeout0_count - 1'd1);
-        end
-    end else begin
-        timeout0_count <= 20'd1000000;
-    end
     decoder1_slave_sel_r <= decoder1_slave_sel;
-    if (timeout1_wait) begin
-        if ((~timeout1_done)) begin
-            timeout1_count <= (timeout1_count - 1'd1);
-        end
-    end else begin
-        timeout1_count <= 20'd1000000;
-    end
     case (arbiter0_grant)
         1'd0: begin
             if ((~arbiter0_request[0])) begin
@@ -2677,117 +3319,165 @@ always @(posedge sys_clk_1) begin
             end
         end
     endcase
-    if ((bus_errors != 32'd4294967295)) begin
-        if (bus_error) begin
-            bus_errors <= (bus_errors + 1'd1);
+    case (arbiter2_grant)
+        1'd0: begin
+            if ((~arbiter2_request[0])) begin
+                if (arbiter2_request[1]) begin
+                    arbiter2_grant <= 1'd1;
+                end
+            end
+        end
+        1'd1: begin
+            if ((~arbiter2_request[1])) begin
+                if (arbiter2_request[0]) begin
+                    arbiter2_grant <= 1'd0;
+                end
+            end
+        end
+    endcase
+    case (arbiter3_grant)
+        1'd0: begin
+            if ((~arbiter3_request[0])) begin
+                if (arbiter3_request[1]) begin
+                    arbiter3_grant <= 1'd1;
+                end
+            end
+        end
+        1'd1: begin
+            if ((~arbiter3_request[1])) begin
+                if (arbiter3_request[0]) begin
+                    arbiter3_grant <= 1'd0;
+                end
+            end
+        end
+    endcase
+    if ((mainsoc_bus_errors != 32'd4294967295)) begin
+        if (mainsoc_bus_error) begin
+            mainsoc_bus_errors <= (mainsoc_bus_errors + 1'd1);
         end
     end
-    {tx_tick, tx_phase} <= 23'd8246337;
-    if (tx_enable) begin
-        {tx_tick, tx_phase} <= (tx_phase + 23'd8246337);
+    {mainsoc_tx_tick, mainsoc_tx_phase} <= 23'd8246337;
+    if (mainsoc_tx_enable) begin
+        {mainsoc_tx_tick, mainsoc_tx_phase} <= (mainsoc_tx_phase + 23'd8246337);
     end
     rs232phytx_state <= rs232phytx_next_state;
-    if (tx_count_rs232phytx_next_value_ce0) begin
-        tx_count <= tx_count_rs232phytx_next_value0;
+    if (mainsoc_tx_count_rs232phytx_next_value_ce0) begin
+        mainsoc_tx_count <= mainsoc_tx_count_rs232phytx_next_value0;
     end
-    if (serial_tx_rs232phytx_next_value_ce1) begin
-        serial_tx <= serial_tx_rs232phytx_next_value1;
+    if (mainsoc_serial_tx_rs232phytx_next_value_ce1) begin
+        serial_tx <= mainsoc_serial_tx_rs232phytx_next_value1;
     end
-    if (tx_data_rs232phytx_next_value_ce2) begin
-        tx_data <= tx_data_rs232phytx_next_value2;
+    if (mainsoc_tx_data_rs232phytx_next_value_ce2) begin
+        mainsoc_tx_data <= mainsoc_tx_data_rs232phytx_next_value2;
     end
-    rx_rx_d <= rx_rx;
-    {rx_tick, rx_phase} <= 32'd2147483648;
-    if (rx_enable) begin
-        {rx_tick, rx_phase} <= (rx_phase + 23'd8246337);
+    mainsoc_rx_rx_d <= mainsoc_rx_rx;
+    {mainsoc_rx_tick, mainsoc_rx_phase} <= 32'd2147483648;
+    if (mainsoc_rx_enable) begin
+        {mainsoc_rx_tick, mainsoc_rx_phase} <= (mainsoc_rx_phase + 23'd8246337);
     end
     rs232phyrx_state <= rs232phyrx_next_state;
-    if (rx_count_rs232phyrx_next_value_ce0) begin
-        rx_count <= rx_count_rs232phyrx_next_value0;
+    if (mainsoc_rx_count_rs232phyrx_next_value_ce0) begin
+        mainsoc_rx_count <= mainsoc_rx_count_rs232phyrx_next_value0;
     end
-    if (rx_data_rs232phyrx_next_value_ce1) begin
-        rx_data <= rx_data_rs232phyrx_next_value1;
+    if (mainsoc_rx_data_rs232phyrx_next_value_ce1) begin
+        mainsoc_rx_data <= mainsoc_rx_data_rs232phyrx_next_value1;
     end
-    if (uart_tx_clear) begin
-        uart_tx_pending <= 1'd0;
+    if (mainsoc_uart_tx_clear) begin
+        mainsoc_uart_tx_pending <= 1'd0;
     end
-    uart_tx_trigger_d <= uart_tx_trigger;
-    if ((uart_tx_trigger & (~uart_tx_trigger_d))) begin
-        uart_tx_pending <= 1'd1;
+    mainsoc_uart_tx_trigger_d <= mainsoc_uart_tx_trigger;
+    if ((mainsoc_uart_tx_trigger & (~mainsoc_uart_tx_trigger_d))) begin
+        mainsoc_uart_tx_pending <= 1'd1;
     end
-    if (uart_rx_clear) begin
-        uart_rx_pending <= 1'd0;
+    if (mainsoc_uart_rx_clear) begin
+        mainsoc_uart_rx_pending <= 1'd0;
     end
-    uart_rx_trigger_d <= uart_rx_trigger;
-    if ((uart_rx_trigger & (~uart_rx_trigger_d))) begin
-        uart_rx_pending <= 1'd1;
+    mainsoc_uart_rx_trigger_d <= mainsoc_uart_rx_trigger;
+    if ((mainsoc_uart_rx_trigger & (~mainsoc_uart_rx_trigger_d))) begin
+        mainsoc_uart_rx_pending <= 1'd1;
     end
-    if (uart_tx_fifo_syncfifo_re) begin
-        uart_tx_fifo_readable <= 1'd1;
+    if (mainsoc_uart_tx_fifo_syncfifo_re) begin
+        mainsoc_uart_tx_fifo_readable <= 1'd1;
     end else begin
-        if (uart_tx_fifo_re) begin
-            uart_tx_fifo_readable <= 1'd0;
+        if (mainsoc_uart_tx_fifo_re) begin
+            mainsoc_uart_tx_fifo_readable <= 1'd0;
         end
     end
-    if (((uart_tx_fifo_syncfifo_we & uart_tx_fifo_syncfifo_writable) & (~uart_tx_fifo_replace))) begin
-        uart_tx_fifo_produce <= (uart_tx_fifo_produce + 1'd1);
+    if (((mainsoc_uart_tx_fifo_syncfifo_we & mainsoc_uart_tx_fifo_syncfifo_writable) & (~mainsoc_uart_tx_fifo_replace))) begin
+        mainsoc_uart_tx_fifo_produce <= (mainsoc_uart_tx_fifo_produce + 1'd1);
     end
-    if (uart_tx_fifo_do_read) begin
-        uart_tx_fifo_consume <= (uart_tx_fifo_consume + 1'd1);
+    if (mainsoc_uart_tx_fifo_do_read) begin
+        mainsoc_uart_tx_fifo_consume <= (mainsoc_uart_tx_fifo_consume + 1'd1);
     end
-    if (((uart_tx_fifo_syncfifo_we & uart_tx_fifo_syncfifo_writable) & (~uart_tx_fifo_replace))) begin
-        if ((~uart_tx_fifo_do_read)) begin
-            uart_tx_fifo_level0 <= (uart_tx_fifo_level0 + 1'd1);
-        end
-    end else begin
-        if (uart_tx_fifo_do_read) begin
-            uart_tx_fifo_level0 <= (uart_tx_fifo_level0 - 1'd1);
-        end
-    end
-    if (uart_rx_fifo_syncfifo_re) begin
-        uart_rx_fifo_readable <= 1'd1;
-    end else begin
-        if (uart_rx_fifo_re) begin
-            uart_rx_fifo_readable <= 1'd0;
-        end
-    end
-    if (((uart_rx_fifo_syncfifo_we & uart_rx_fifo_syncfifo_writable) & (~uart_rx_fifo_replace))) begin
-        uart_rx_fifo_produce <= (uart_rx_fifo_produce + 1'd1);
-    end
-    if (uart_rx_fifo_do_read) begin
-        uart_rx_fifo_consume <= (uart_rx_fifo_consume + 1'd1);
-    end
-    if (((uart_rx_fifo_syncfifo_we & uart_rx_fifo_syncfifo_writable) & (~uart_rx_fifo_replace))) begin
-        if ((~uart_rx_fifo_do_read)) begin
-            uart_rx_fifo_level0 <= (uart_rx_fifo_level0 + 1'd1);
+    if (((mainsoc_uart_tx_fifo_syncfifo_we & mainsoc_uart_tx_fifo_syncfifo_writable) & (~mainsoc_uart_tx_fifo_replace))) begin
+        if ((~mainsoc_uart_tx_fifo_do_read)) begin
+            mainsoc_uart_tx_fifo_level0 <= (mainsoc_uart_tx_fifo_level0 + 1'd1);
         end
     end else begin
-        if (uart_rx_fifo_do_read) begin
-            uart_rx_fifo_level0 <= (uart_rx_fifo_level0 - 1'd1);
+        if (mainsoc_uart_tx_fifo_do_read) begin
+            mainsoc_uart_tx_fifo_level0 <= (mainsoc_uart_tx_fifo_level0 - 1'd1);
         end
     end
-    if (timer_en_storage) begin
-        if ((timer_value == 1'd0)) begin
-            timer_value <= timer_reload_storage;
+    if (mainsoc_uart_rx_fifo_syncfifo_re) begin
+        mainsoc_uart_rx_fifo_readable <= 1'd1;
+    end else begin
+        if (mainsoc_uart_rx_fifo_re) begin
+            mainsoc_uart_rx_fifo_readable <= 1'd0;
+        end
+    end
+    if (((mainsoc_uart_rx_fifo_syncfifo_we & mainsoc_uart_rx_fifo_syncfifo_writable) & (~mainsoc_uart_rx_fifo_replace))) begin
+        mainsoc_uart_rx_fifo_produce <= (mainsoc_uart_rx_fifo_produce + 1'd1);
+    end
+    if (mainsoc_uart_rx_fifo_do_read) begin
+        mainsoc_uart_rx_fifo_consume <= (mainsoc_uart_rx_fifo_consume + 1'd1);
+    end
+    if (((mainsoc_uart_rx_fifo_syncfifo_we & mainsoc_uart_rx_fifo_syncfifo_writable) & (~mainsoc_uart_rx_fifo_replace))) begin
+        if ((~mainsoc_uart_rx_fifo_do_read)) begin
+            mainsoc_uart_rx_fifo_level0 <= (mainsoc_uart_rx_fifo_level0 + 1'd1);
+        end
+    end else begin
+        if (mainsoc_uart_rx_fifo_do_read) begin
+            mainsoc_uart_rx_fifo_level0 <= (mainsoc_uart_rx_fifo_level0 - 1'd1);
+        end
+    end
+    if (mainsoc_timer_en_storage) begin
+        if ((mainsoc_timer_value == 1'd0)) begin
+            mainsoc_timer_value <= mainsoc_timer_reload_storage;
         end else begin
-            timer_value <= (timer_value - 1'd1);
+            mainsoc_timer_value <= (mainsoc_timer_value - 1'd1);
         end
     end else begin
-        timer_value <= timer_load_storage;
+        mainsoc_timer_value <= mainsoc_timer_load_storage;
     end
-    if (timer_update_value_re) begin
-        timer_value_status <= timer_value;
+    if (mainsoc_timer_update_value_re) begin
+        mainsoc_timer_value_status <= mainsoc_timer_value;
     end
     uptime_cycles <= (uptime_cycles + 1'd1);
     if (uptime_latch_re) begin
         uptime_cycles_status <= uptime_cycles;
     end
-    if (timer_zero_clear) begin
-        timer_zero_pending <= 1'd0;
+    if (mainsoc_timer_zero_clear) begin
+        mainsoc_timer_zero_pending <= 1'd0;
     end
-    timer_zero_trigger_d <= timer_zero_trigger;
-    if ((timer_zero_trigger & (~timer_zero_trigger_d))) begin
-        timer_zero_pending <= 1'd1;
+    mainsoc_timer_zero_trigger_d <= mainsoc_timer_zero_trigger;
+    if ((mainsoc_timer_zero_trigger & (~mainsoc_timer_zero_trigger_d))) begin
+        mainsoc_timer_zero_pending <= 1'd1;
+    end
+    i2c0_tip <= (i2c0_read | i2c0_write);
+    i2c0_intflag <= (((i2c0_done | i2c0_i2c_al) | i2c0_intflag) & (~i2c0_iack));
+    i2c0_arb_lost <= (i2c0_i2c_al | (i2c0_arb_lost & (~i2c0_start)));
+    if (i2c0_i2c_int_clear) begin
+        i2c0_i2c_int_pending <= 1'd0;
+    end
+    if (i2c0_i2c_int_trigger) begin
+        i2c0_i2c_int_pending <= 1'd1;
+    end
+    if (i2c0_txrx_done_clear) begin
+        i2c0_txrx_done_pending <= 1'd0;
+    end
+    i2c0_txrx_done_trigger_d <= i2c0_txrx_done_trigger;
+    if (((~i2c0_txrx_done_trigger) & i2c0_txrx_done_trigger_d)) begin
+        i2c0_txrx_done_pending <= 1'd1;
     end
     if (litespisdrphycore_sr_out_load) begin
         litespisdrphycore_sr_out <= (litespisdrphycore_sink_payload_data <<< (6'd32 - litespisdrphycore_sink_payload_len));
@@ -2848,31 +3538,62 @@ always @(posedge sys_clk_1) begin
     if (litespisdrphycore_sr_cnt_litespiphy_next_value_ce) begin
         litespisdrphycore_sr_cnt <= litespisdrphycore_sr_cnt_litespiphy_next_value;
     end
-    if (spiflash_core_litespimmap_wait) begin
-        if ((~spiflash_core_litespimmap_done)) begin
-            spiflash_core_litespimmap_count <= (spiflash_core_litespimmap_count - 1'd1);
+    case (litespi_grant)
+        1'd0: begin
+            if ((~litespi_request[0])) begin
+                if (litespi_request[1]) begin
+                    litespi_grant <= 1'd1;
+                end
+            end
+        end
+        1'd1: begin
+            if ((~litespi_request[1])) begin
+                if (litespi_request[0]) begin
+                    litespi_grant <= 1'd0;
+                end
+            end
+        end
+    endcase
+    if (litespimmap_wait) begin
+        if ((~litespimmap_done)) begin
+            litespimmap_count <= (litespimmap_count - 1'd1);
         end
     end else begin
-        spiflash_core_litespimmap_count <= 9'd256;
+        litespimmap_count <= 9'd256;
     end
     litespi_state <= litespi_next_state;
-    if (spiflash_core_litespimmap_burst_cs_litespi_next_value_ce) begin
-        spiflash_core_litespimmap_burst_cs <= spiflash_core_litespimmap_burst_cs_litespi_next_value;
+    if (litespimmap_burst_cs_litespi_next_value_ce) begin
+        litespimmap_burst_cs <= litespimmap_burst_cs_litespi_next_value;
     end
-    if (spiflash_core_litespimmap_byte_count_litespi_t_next_value_ce) begin
-        spiflash_core_litespimmap_byte_count <= spiflash_core_litespimmap_byte_count_litespi_t_next_value;
+    if (litespimmap_byte_count_litespi_t_next_value_ce) begin
+        litespimmap_byte_count <= litespimmap_byte_count_litespi_t_next_value;
     end
-    if (spiflash_core_litespimmap_write_litespi_t_t_next_value_ce) begin
-        spiflash_core_litespimmap_write <= spiflash_core_litespimmap_write_litespi_t_t_next_value;
+    if (litespimmap_write_litespi_t_t_next_value_ce) begin
+        litespimmap_write <= litespimmap_write_litespi_t_t_next_value;
     end
-    if (spiflash_core_litespimmap_write_mask_litespi_t_f_next_value_ce0) begin
-        spiflash_core_litespimmap_write_mask <= spiflash_core_litespimmap_write_mask_litespi_t_f_next_value0;
+    if (litespimmap_write_mask_litespi_t_f_next_value_ce0) begin
+        litespimmap_write_mask <= litespimmap_write_mask_litespi_t_f_next_value0;
     end
-    if (spiflash_core_litespimmap_data_write_litespi_t_f_next_value_ce1) begin
-        spiflash_core_litespimmap_data_write <= spiflash_core_litespimmap_data_write_litespi_t_f_next_value1;
+    if (litespimmap_data_write_litespi_t_f_next_value_ce1) begin
+        litespimmap_data_write <= litespimmap_data_write_litespi_t_f_next_value1;
     end
-    if (spiflash_core_litespimmap_burst_adr_litespi_f_next_value_ce) begin
-        spiflash_core_litespimmap_burst_adr <= spiflash_core_litespimmap_burst_adr_litespi_f_next_value;
+    if (litespimmap_burst_adr_litespi_f_next_value_ce) begin
+        litespimmap_burst_adr <= litespimmap_burst_adr_litespi_f_next_value;
+    end
+    if (((~master_tx_fifo_pipe_valid_source_valid) | master_tx_fifo_pipe_valid_source_ready)) begin
+        master_tx_fifo_pipe_valid_source_valid <= master_tx_fifo_pipe_valid_sink_valid;
+        master_tx_fifo_pipe_valid_source_first <= master_tx_fifo_pipe_valid_sink_first;
+        master_tx_fifo_pipe_valid_source_last <= master_tx_fifo_pipe_valid_sink_last;
+        master_tx_fifo_pipe_valid_source_payload_data <= master_tx_fifo_pipe_valid_sink_payload_data;
+        master_tx_fifo_pipe_valid_source_payload_len <= master_tx_fifo_pipe_valid_sink_payload_len;
+        master_tx_fifo_pipe_valid_source_payload_width <= master_tx_fifo_pipe_valid_sink_payload_width;
+        master_tx_fifo_pipe_valid_source_payload_mask <= master_tx_fifo_pipe_valid_sink_payload_mask;
+    end
+    if (((~master_rx_fifo_pipe_valid_source_valid) | master_rx_fifo_pipe_valid_source_ready)) begin
+        master_rx_fifo_pipe_valid_source_valid <= master_rx_fifo_pipe_valid_sink_valid;
+        master_rx_fifo_pipe_valid_source_first <= master_rx_fifo_pipe_valid_sink_first;
+        master_rx_fifo_pipe_valid_source_last <= master_rx_fifo_pipe_valid_sink_last;
+        master_rx_fifo_pipe_valid_source_payload_data <= master_rx_fifo_pipe_valid_sink_payload_data;
     end
     main_ram_bus_ack <= ((main_ram_bus_stb & main_ram_bus_cyc) & (~main_ram_bus_ack));
     if (usb23_clear) begin
@@ -2905,14 +3626,14 @@ always @(posedge sys_clk_1) begin
         endcase
     end
     if (csrbank0_reset0_re) begin
-        reset_storage[1:0] <= csrbank0_reset0_r;
+        mainsoc_reset_storage[1:0] <= csrbank0_reset0_r;
     end
-    reset_re <= csrbank0_reset0_re;
+    mainsoc_reset_re <= csrbank0_reset0_re;
     if (csrbank0_scratch0_re) begin
-        scratch_storage[31:0] <= csrbank0_scratch0_r;
+        mainsoc_scratch_storage[31:0] <= csrbank0_scratch0_r;
     end
-    scratch_re <= csrbank0_scratch0_re;
-    bus_errors_re <= csrbank0_bus_errors_re;
+    mainsoc_scratch_re <= csrbank0_scratch0_re;
+    mainsoc_bus_errors_re <= csrbank0_bus_errors_re;
     interface1_bank_bus_dat_r <= 1'd0;
     if (csrbank1_sel) begin
         case (interface1_bank_bus_adr[8:0])
@@ -2940,30 +3661,104 @@ always @(posedge sys_clk_1) begin
     if (csrbank2_sel) begin
         case (interface2_bank_bus_adr[8:0])
             1'd0: begin
-                interface2_bank_bus_dat_r <= csrbank2_w0_w;
+                interface2_bank_bus_dat_r <= csrbank2_prescale0_w;
             end
             1'd1: begin
-                interface2_bank_bus_dat_r <= csrbank2_r_w;
+                interface2_bank_bus_dat_r <= csrbank2_control0_w;
+            end
+            2'd2: begin
+                interface2_bank_bus_dat_r <= csrbank2_txr0_w;
+            end
+            2'd3: begin
+                interface2_bank_bus_dat_r <= csrbank2_rxr_w;
+            end
+            3'd4: begin
+                interface2_bank_bus_dat_r <= csrbank2_command0_w;
+            end
+            3'd5: begin
+                interface2_bank_bus_dat_r <= csrbank2_status_w;
+            end
+            3'd6: begin
+                interface2_bank_bus_dat_r <= csrbank2_core_reset0_w;
+            end
+            3'd7: begin
+                interface2_bank_bus_dat_r <= csrbank2_ev_status_w;
+            end
+            4'd8: begin
+                interface2_bank_bus_dat_r <= csrbank2_ev_pending_w;
+            end
+            4'd9: begin
+                interface2_bank_bus_dat_r <= csrbank2_ev_enable0_w;
             end
         endcase
     end
-    if (csrbank2_w0_re) begin
-        _w_storage[2:0] <= csrbank2_w0_r;
+    if (csrbank2_prescale0_re) begin
+        i2c0_prescale_storage[15:0] <= csrbank2_prescale0_r;
     end
-    _w_re <= csrbank2_w0_re;
-    _r_re <= csrbank2_r_re;
+    i2c0_prescale_re <= csrbank2_prescale0_re;
+    if (csrbank2_control0_re) begin
+        i2c0_control_storage[7:0] <= csrbank2_control0_r;
+    end
+    i2c0_control_re <= csrbank2_control0_re;
+    if (csrbank2_txr0_re) begin
+        i2c0_txr_storage[7:0] <= csrbank2_txr0_r;
+    end
+    i2c0_txr_re <= csrbank2_txr0_re;
+    i2c0_rxr_re <= csrbank2_rxr_re;
+    if (i2c0_command_we) begin
+        i2c0_command_storage <= i2c0_command_dat_w;
+    end
+    if (csrbank2_command0_re) begin
+        i2c0_command_storage[7:0] <= csrbank2_command0_r;
+    end
+    i2c0_command_re <= csrbank2_command0_re;
+    i2c0_status_re0 <= csrbank2_status_re;
+    if (csrbank2_core_reset0_re) begin
+        i2c0_core_reset_storage <= csrbank2_core_reset0_r;
+    end
+    i2c0_core_reset_re <= csrbank2_core_reset0_re;
+    i2c0_status_re1 <= csrbank2_ev_status_re;
+    if (csrbank2_ev_pending_re) begin
+        i2c0_pending_r[1:0] <= csrbank2_ev_pending_r;
+    end
+    i2c0_pending_re <= csrbank2_ev_pending_re;
+    if (csrbank2_ev_enable0_re) begin
+        i2c0_enable_storage[1:0] <= csrbank2_ev_enable0_r;
+    end
+    i2c0_enable_re <= csrbank2_ev_enable0_re;
     interface3_bank_bus_dat_r <= 1'd0;
     if (csrbank3_sel) begin
         case (interface3_bank_bus_adr[8:0])
             1'd0: begin
                 interface3_bank_bus_dat_r <= csrbank3_mmap_dummy_bits0_w;
             end
+            1'd1: begin
+                interface3_bank_bus_dat_r <= csrbank3_master_cs0_w;
+            end
+            2'd2: begin
+                interface3_bank_bus_dat_r <= csrbank3_master_phyconfig0_w;
+            end
+            2'd3: begin
+                interface3_bank_bus_dat_r <= master_rxtx_w;
+            end
+            3'd4: begin
+                interface3_bank_bus_dat_r <= csrbank3_master_status_w;
+            end
         endcase
     end
     if (csrbank3_mmap_dummy_bits0_re) begin
-        spiflash_core_litespimmap_storage[7:0] <= csrbank3_mmap_dummy_bits0_r;
+        litespimmap_storage[7:0] <= csrbank3_mmap_dummy_bits0_r;
     end
-    spiflash_core_litespimmap_re <= csrbank3_mmap_dummy_bits0_re;
+    litespimmap_re <= csrbank3_mmap_dummy_bits0_re;
+    if (csrbank3_master_cs0_re) begin
+        master_cs_storage <= csrbank3_master_cs0_r;
+    end
+    master_cs_re <= csrbank3_master_cs0_re;
+    if (csrbank3_master_phyconfig0_re) begin
+        master_phyconfig_storage[23:0] <= csrbank3_master_phyconfig0_r;
+    end
+    master_phyconfig_re <= csrbank3_master_phyconfig0_re;
+    master_status_re <= csrbank3_master_status_re;
     interface4_bank_bus_dat_r <= 1'd0;
     if (csrbank4_sel) begin
         case (interface4_bank_bus_adr[8:0])
@@ -3015,31 +3810,31 @@ always @(posedge sys_clk_1) begin
         endcase
     end
     if (csrbank5_load0_re) begin
-        timer_load_storage[31:0] <= csrbank5_load0_r;
+        mainsoc_timer_load_storage[31:0] <= csrbank5_load0_r;
     end
-    timer_load_re <= csrbank5_load0_re;
+    mainsoc_timer_load_re <= csrbank5_load0_re;
     if (csrbank5_reload0_re) begin
-        timer_reload_storage[31:0] <= csrbank5_reload0_r;
+        mainsoc_timer_reload_storage[31:0] <= csrbank5_reload0_r;
     end
-    timer_reload_re <= csrbank5_reload0_re;
+    mainsoc_timer_reload_re <= csrbank5_reload0_re;
     if (csrbank5_en0_re) begin
-        timer_en_storage <= csrbank5_en0_r;
+        mainsoc_timer_en_storage <= csrbank5_en0_r;
     end
-    timer_en_re <= csrbank5_en0_re;
+    mainsoc_timer_en_re <= csrbank5_en0_re;
     if (csrbank5_update_value0_re) begin
-        timer_update_value_storage <= csrbank5_update_value0_r;
+        mainsoc_timer_update_value_storage <= csrbank5_update_value0_r;
     end
-    timer_update_value_re <= csrbank5_update_value0_re;
-    timer_value_re <= csrbank5_value_re;
-    timer_status_re <= csrbank5_ev_status_re;
+    mainsoc_timer_update_value_re <= csrbank5_update_value0_re;
+    mainsoc_timer_value_re <= csrbank5_value_re;
+    mainsoc_timer_status_re <= csrbank5_ev_status_re;
     if (csrbank5_ev_pending_re) begin
-        timer_pending_r <= csrbank5_ev_pending_r;
+        mainsoc_timer_pending_r <= csrbank5_ev_pending_r;
     end
-    timer_pending_re <= csrbank5_ev_pending_re;
+    mainsoc_timer_pending_re <= csrbank5_ev_pending_re;
     if (csrbank5_ev_enable0_re) begin
-        timer_enable_storage <= csrbank5_ev_enable0_r;
+        mainsoc_timer_enable_storage <= csrbank5_ev_enable0_r;
     end
-    timer_enable_re <= csrbank5_ev_enable0_re;
+    mainsoc_timer_enable_re <= csrbank5_ev_enable0_re;
     if (csrbank5_uptime_latch0_re) begin
         uptime_latch_storage <= csrbank5_uptime_latch0_r;
     end
@@ -3049,7 +3844,7 @@ always @(posedge sys_clk_1) begin
     if (csrbank6_sel) begin
         case (interface6_bank_bus_adr[8:0])
             1'd0: begin
-                interface6_bank_bus_dat_r <= uart_rxtx_w;
+                interface6_bank_bus_dat_r <= mainsoc_uart_rxtx_w;
             end
             1'd1: begin
                 interface6_bank_bus_dat_r <= csrbank6_txfull_w;
@@ -3074,19 +3869,19 @@ always @(posedge sys_clk_1) begin
             end
         endcase
     end
-    uart_txfull_re <= csrbank6_txfull_re;
-    uart_rxempty_re <= csrbank6_rxempty_re;
-    uart_status_re <= csrbank6_ev_status_re;
+    mainsoc_uart_txfull_re <= csrbank6_txfull_re;
+    mainsoc_uart_rxempty_re <= csrbank6_rxempty_re;
+    mainsoc_uart_status_re <= csrbank6_ev_status_re;
     if (csrbank6_ev_pending_re) begin
-        uart_pending_r[1:0] <= csrbank6_ev_pending_r;
+        mainsoc_uart_pending_r[1:0] <= csrbank6_ev_pending_r;
     end
-    uart_pending_re <= csrbank6_ev_pending_re;
+    mainsoc_uart_pending_re <= csrbank6_ev_pending_re;
     if (csrbank6_ev_enable0_re) begin
-        uart_enable_storage[1:0] <= csrbank6_ev_enable0_r;
+        mainsoc_uart_enable_storage[1:0] <= csrbank6_ev_enable0_r;
     end
-    uart_enable_re <= csrbank6_ev_enable0_re;
-    uart_txempty_re <= csrbank6_txempty_re;
-    uart_rxfull_re <= csrbank6_rxfull_re;
+    mainsoc_uart_enable_re <= csrbank6_ev_enable0_re;
+    mainsoc_uart_txempty_re <= csrbank6_txempty_re;
+    mainsoc_uart_rxfull_re <= csrbank6_rxfull_re;
     interface7_bank_bus_dat_r <= 1'd0;
     if (csrbank7_sel) begin
         case (interface7_bank_bus_adr[8:0])
@@ -3111,62 +3906,82 @@ always @(posedge sys_clk_1) begin
     end
     usb23_enable_re <= csrbank7_ev_enable0_re;
     if (sys_rst_1) begin
-        reset_storage <= 2'd0;
-        reset_re <= 1'd0;
-        scratch_storage <= 32'd305419896;
-        scratch_re <= 1'd0;
-        bus_errors_re <= 1'd0;
-        bus_errors <= 32'd0;
+        mainsoc_reset_storage <= 2'd0;
+        mainsoc_reset_re <= 1'd0;
+        mainsoc_scratch_storage <= 32'd305419896;
+        mainsoc_scratch_re <= 1'd0;
+        mainsoc_bus_errors_re <= 1'd0;
+        mainsoc_bus_errors <= 32'd0;
         serial_tx <= 1'd1;
-        tx_tick <= 1'd0;
-        rx_tick <= 1'd0;
-        rx_rx_d <= 1'd0;
-        uart_txfull_re <= 1'd0;
-        uart_rxempty_re <= 1'd0;
-        uart_tx_pending <= 1'd0;
-        uart_tx_trigger_d <= 1'd0;
-        uart_rx_pending <= 1'd0;
-        uart_rx_trigger_d <= 1'd0;
-        uart_status_re <= 1'd0;
-        uart_pending_re <= 1'd0;
-        uart_pending_r <= 2'd0;
-        uart_enable_storage <= 2'd0;
-        uart_enable_re <= 1'd0;
-        uart_txempty_re <= 1'd0;
-        uart_rxfull_re <= 1'd0;
-        uart_tx_fifo_readable <= 1'd0;
-        uart_tx_fifo_level0 <= 5'd0;
-        uart_tx_fifo_produce <= 4'd0;
-        uart_tx_fifo_consume <= 4'd0;
-        uart_rx_fifo_readable <= 1'd0;
-        uart_rx_fifo_level0 <= 5'd0;
-        uart_rx_fifo_produce <= 4'd0;
-        uart_rx_fifo_consume <= 4'd0;
-        timer_load_storage <= 32'd0;
-        timer_load_re <= 1'd0;
-        timer_reload_storage <= 32'd0;
-        timer_reload_re <= 1'd0;
-        timer_en_storage <= 1'd0;
-        timer_en_re <= 1'd0;
-        timer_update_value_storage <= 1'd0;
-        timer_update_value_re <= 1'd0;
-        timer_value_status <= 32'd0;
-        timer_value_re <= 1'd0;
-        timer_zero_pending <= 1'd0;
-        timer_zero_trigger_d <= 1'd0;
-        timer_status_re <= 1'd0;
-        timer_pending_re <= 1'd0;
-        timer_pending_r <= 1'd0;
-        timer_enable_storage <= 1'd0;
-        timer_enable_re <= 1'd0;
-        timer_value <= 32'd0;
+        mainsoc_tx_tick <= 1'd0;
+        mainsoc_rx_tick <= 1'd0;
+        mainsoc_rx_rx_d <= 1'd0;
+        mainsoc_uart_txfull_re <= 1'd0;
+        mainsoc_uart_rxempty_re <= 1'd0;
+        mainsoc_uart_tx_pending <= 1'd0;
+        mainsoc_uart_tx_trigger_d <= 1'd0;
+        mainsoc_uart_rx_pending <= 1'd0;
+        mainsoc_uart_rx_trigger_d <= 1'd0;
+        mainsoc_uart_status_re <= 1'd0;
+        mainsoc_uart_pending_re <= 1'd0;
+        mainsoc_uart_pending_r <= 2'd0;
+        mainsoc_uart_enable_storage <= 2'd0;
+        mainsoc_uart_enable_re <= 1'd0;
+        mainsoc_uart_txempty_re <= 1'd0;
+        mainsoc_uart_rxfull_re <= 1'd0;
+        mainsoc_uart_tx_fifo_readable <= 1'd0;
+        mainsoc_uart_tx_fifo_level0 <= 5'd0;
+        mainsoc_uart_tx_fifo_produce <= 4'd0;
+        mainsoc_uart_tx_fifo_consume <= 4'd0;
+        mainsoc_uart_rx_fifo_readable <= 1'd0;
+        mainsoc_uart_rx_fifo_level0 <= 5'd0;
+        mainsoc_uart_rx_fifo_produce <= 4'd0;
+        mainsoc_uart_rx_fifo_consume <= 4'd0;
+        mainsoc_timer_load_storage <= 32'd0;
+        mainsoc_timer_load_re <= 1'd0;
+        mainsoc_timer_reload_storage <= 32'd0;
+        mainsoc_timer_reload_re <= 1'd0;
+        mainsoc_timer_en_storage <= 1'd0;
+        mainsoc_timer_en_re <= 1'd0;
+        mainsoc_timer_update_value_storage <= 1'd0;
+        mainsoc_timer_update_value_re <= 1'd0;
+        mainsoc_timer_value_status <= 32'd0;
+        mainsoc_timer_value_re <= 1'd0;
+        mainsoc_timer_zero_pending <= 1'd0;
+        mainsoc_timer_zero_trigger_d <= 1'd0;
+        mainsoc_timer_status_re <= 1'd0;
+        mainsoc_timer_pending_re <= 1'd0;
+        mainsoc_timer_pending_r <= 1'd0;
+        mainsoc_timer_enable_storage <= 1'd0;
+        mainsoc_timer_enable_re <= 1'd0;
+        mainsoc_timer_value <= 32'd0;
         uptime_latch_storage <= 1'd0;
         uptime_latch_re <= 1'd0;
         uptime_cycles_status <= 64'd0;
         uptime_cycles_re <= 1'd0;
-        _w_storage <= 3'd5;
-        _w_re <= 1'd0;
-        _r_re <= 1'd0;
+        i2c0_prescale_storage <= 16'd65535;
+        i2c0_prescale_re <= 1'd0;
+        i2c0_control_storage <= 8'd0;
+        i2c0_control_re <= 1'd0;
+        i2c0_txr_storage <= 8'd0;
+        i2c0_txr_re <= 1'd0;
+        i2c0_rxr_re <= 1'd0;
+        i2c0_command_storage <= 8'd0;
+        i2c0_command_re <= 1'd0;
+        i2c0_status_re0 <= 1'd0;
+        i2c0_core_reset_storage <= 1'd0;
+        i2c0_core_reset_re <= 1'd0;
+        i2c0_i2c_int_pending <= 1'd0;
+        i2c0_txrx_done_pending <= 1'd0;
+        i2c0_txrx_done_trigger_d <= 1'd0;
+        i2c0_status_re1 <= 1'd0;
+        i2c0_pending_re <= 1'd0;
+        i2c0_pending_r <= 2'd0;
+        i2c0_enable_storage <= 2'd0;
+        i2c0_enable_re <= 1'd0;
+        i2c0_arb_lost <= 1'd0;
+        i2c0_tip <= 1'd0;
+        i2c0_intflag <= 1'd0;
         litespisdrphycore_storage <= 8'd0;
         litespisdrphycore_re <= 1'd0;
         litespisdrphycore_cnt <= 8'd0;
@@ -3174,13 +3989,25 @@ always @(posedge sys_clk_1) begin
         litespisdrphycore_posedge_reg <= 1'd0;
         litespisdrphycore_posedge_reg2 <= 1'd0;
         litespisdrphycore_count <= 4'd11;
-        spiflash_core_litespimmap_burst_cs <= 1'd0;
-        spiflash_core_litespimmap_count <= 9'd256;
-        spiflash_core_litespimmap_write <= 1'd0;
-        spiflash_core_litespimmap_write_mask <= 4'd0;
-        spiflash_core_litespimmap_storage <= 8'd8;
-        spiflash_core_litespimmap_re <= 1'd0;
-        spiflash_core_litespimmap_data_write <= 32'd0;
+        litespimmap_burst_cs <= 1'd0;
+        litespimmap_count <= 9'd256;
+        litespimmap_write <= 1'd0;
+        litespimmap_write_mask <= 4'd0;
+        litespimmap_storage <= 8'd8;
+        litespimmap_re <= 1'd0;
+        litespimmap_data_write <= 32'd0;
+        master_cs_storage <= 1'd0;
+        master_cs_re <= 1'd0;
+        master_phyconfig_storage <= 24'd0;
+        master_phyconfig_re <= 1'd0;
+        master_status_re <= 1'd0;
+        master_tx_fifo_pipe_valid_source_valid <= 1'd0;
+        master_tx_fifo_pipe_valid_source_payload_data <= 32'd0;
+        master_tx_fifo_pipe_valid_source_payload_len <= 6'd0;
+        master_tx_fifo_pipe_valid_source_payload_width <= 4'd0;
+        master_tx_fifo_pipe_valid_source_payload_mask <= 8'd0;
+        master_rx_fifo_pipe_valid_source_valid <= 1'd0;
+        master_rx_fifo_pipe_valid_source_payload_data <= 32'd0;
         main_ram_bus_ack <= 1'd0;
         usb23_pending <= 1'd0;
         usb23_trigger_d <= 1'd0;
@@ -3196,15 +4023,16 @@ always @(posedge sys_clk_1) begin
         framectl_pending_r <= 1'd0;
         framectl_enable_storage <= 1'd0;
         framectl_enable_re <= 1'd0;
-        decoder0_slave_sel_r <= 2'd0;
-        timeout0_count <= 20'd1000000;
+        decoder0_slave_sel_r <= 4'd0;
         decoder1_slave_sel_r <= 4'd0;
-        timeout1_count <= 20'd1000000;
         arbiter0_grant <= 1'd0;
         arbiter1_grant <= 1'd0;
+        arbiter2_grant <= 1'd0;
+        arbiter3_grant <= 1'd0;
         rs232phytx_state <= 1'd0;
         rs232phyrx_state <= 1'd0;
         litespiphy_state <= 2'd0;
+        litespi_grant <= 1'd0;
         litespi_state <= 4'd0;
         wishbone2csr_state <= 1'd0;
     end
@@ -3226,16 +4054,16 @@ reg [9:0] storage[0:15];
 reg [9:0] storage_dat0;
 reg [9:0] storage_dat1;
 always @(posedge sys_clk_1) begin
-	if (uart_tx_fifo_wrport_we)
-		storage[uart_tx_fifo_wrport_adr] <= uart_tx_fifo_wrport_dat_w;
-	storage_dat0 <= storage[uart_tx_fifo_wrport_adr];
+	if (mainsoc_uart_tx_fifo_wrport_we)
+		storage[mainsoc_uart_tx_fifo_wrport_adr] <= mainsoc_uart_tx_fifo_wrport_dat_w;
+	storage_dat0 <= storage[mainsoc_uart_tx_fifo_wrport_adr];
 end
 always @(posedge sys_clk_1) begin
-	if (uart_tx_fifo_rdport_re)
-		storage_dat1 <= storage[uart_tx_fifo_rdport_adr];
+	if (mainsoc_uart_tx_fifo_rdport_re)
+		storage_dat1 <= storage[mainsoc_uart_tx_fifo_rdport_adr];
 end
-assign uart_tx_fifo_wrport_dat_r = storage_dat0;
-assign uart_tx_fifo_rdport_dat_r = storage_dat1;
+assign mainsoc_uart_tx_fifo_wrport_dat_r = storage_dat0;
+assign mainsoc_uart_tx_fifo_rdport_dat_r = storage_dat1;
 
 
 //------------------------------------------------------------------------------
@@ -3247,22 +4075,54 @@ reg [9:0] storage_1[0:15];
 reg [9:0] storage_1_dat0;
 reg [9:0] storage_1_dat1;
 always @(posedge sys_clk_1) begin
-	if (uart_rx_fifo_wrport_we)
-		storage_1[uart_rx_fifo_wrport_adr] <= uart_rx_fifo_wrport_dat_w;
-	storage_1_dat0 <= storage_1[uart_rx_fifo_wrport_adr];
+	if (mainsoc_uart_rx_fifo_wrport_we)
+		storage_1[mainsoc_uart_rx_fifo_wrport_adr] <= mainsoc_uart_rx_fifo_wrport_dat_w;
+	storage_1_dat0 <= storage_1[mainsoc_uart_rx_fifo_wrport_adr];
 end
 always @(posedge sys_clk_1) begin
-	if (uart_rx_fifo_rdport_re)
-		storage_1_dat1 <= storage_1[uart_rx_fifo_rdport_adr];
+	if (mainsoc_uart_rx_fifo_rdport_re)
+		storage_1_dat1 <= storage_1[mainsoc_uart_rx_fifo_rdport_adr];
 end
-assign uart_rx_fifo_wrport_dat_r = storage_1_dat0;
-assign uart_rx_fifo_rdport_dat_r = storage_1_dat1;
+assign mainsoc_uart_rx_fifo_wrport_dat_r = storage_1_dat0;
+assign mainsoc_uart_rx_fifo_rdport_dat_r = storage_1_dat1;
 
 
-assign i2c0_scl = (~scl) ? 1'd0 : 1'bz;
+assign i2c0_scl = i2c0_scl_oe ? i2c0_scl_o0 : 1'bz;
+assign i2c0_scl_i0 = i2c0_scl;
 
-assign i2c0_sda = (oe & (~sda0)) ? 1'd0 : 1'bz;
-assign sda1 = i2c0_sda;
+assign i2c0_sda = i2c0_sda_oe ? i2c0_sda_o0 : 1'bz;
+assign i2c0_sda_i0 = i2c0_sda;
+
+//------------------------------------------------------------------------------
+// Instance i2c_controller_byte_ctrl of i2c_controller_byte_ctrl Module.
+//------------------------------------------------------------------------------
+i2c_controller_byte_ctrl i2c_controller_byte_ctrl(
+	// Inputs.
+	.ack_in   (i2c0_ack),
+	.clk      (sys_clk_1),
+	.clk_cnt  (i2c0_prescale_storage),
+	.din      (i2c0_txr_storage),
+	.ena      (i2c0_ena),
+	.nReset   (1'd1),
+	.read     ((i2c0_read & (~i2c0_done))),
+	.rst      ((sys_rst_1 | i2c0_reset)),
+	.scl_i    (i2c0_scl_i1),
+	.sda_i    (i2c0_sda_i1),
+	.start    (i2c0_start),
+	.stop     ((i2c0_stop & (~i2c0_done))),
+	.write    ((i2c0_write & (~i2c0_done))),
+
+	// Outputs.
+	.ack_out  (i2c0_rxack),
+	.cmd_ack  (i2c0_done),
+	.dout     (i2c0_rxr_status),
+	.i2c_al   (i2c0_i2c_al),
+	.i2c_busy (i2c0_busy),
+	.scl_o    (i2c0_scl_o1),
+	.scl_oen  (i2c0_scl_oen),
+	.sda_o    (i2c0_sda_o1),
+	.sda_oen  (i2c0_sda_oen)
+);
 
 //------------------------------------------------------------------------------
 // Instance SP512K of SP512K Module.
@@ -3292,39 +4152,39 @@ SP512K #(
 VexRiscv VexRiscv(
 	// Inputs.
 	.clk                    (sys_clk_1),
-	.dBusWishbone_ACK       (dbus_ack),
-	.dBusWishbone_DAT_MISO  (dbus_dat_r),
-	.dBusWishbone_ERR       (dbus_err),
+	.dBusWishbone_ACK       (mainsoc_dbus_ack),
+	.dBusWishbone_DAT_MISO  (mainsoc_dbus_dat_r),
+	.dBusWishbone_ERR       (mainsoc_dbus_err),
 	.debugReset             (jtag_reset),
-	.externalInterruptArray (interrupt),
-	.externalResetVector    (vexriscv),
-	.iBusWishbone_ACK       (ibus_ack),
-	.iBusWishbone_DAT_MISO  (ibus_dat_r),
-	.iBusWishbone_ERR       (ibus_err),
+	.externalInterruptArray (mainsoc_interrupt),
+	.externalResetVector    (mainsoc_vexriscv),
+	.iBusWishbone_ACK       (mainsoc_ibus_ack),
+	.iBusWishbone_DAT_MISO  (mainsoc_ibus_dat_r),
+	.iBusWishbone_ERR       (mainsoc_ibus_err),
 	.jtag_tck               (jtag_tck),
 	.jtag_tdi               (jtag_tdi),
 	.jtag_tms               (jtag_tms),
-	.reset                  ((sys_rst_1 | reset)),
+	.reset                  ((sys_rst_1 | mainsoc_reset)),
 	.softwareInterrupt      (1'd0),
 	.timerInterrupt         (1'd0),
 
 	// Outputs.
-	.dBusWishbone_ADR       (dbus_adr),
-	.dBusWishbone_BTE       (dbus_bte),
-	.dBusWishbone_CTI       (dbus_cti),
-	.dBusWishbone_CYC       (dbus_cyc),
-	.dBusWishbone_DAT_MOSI  (dbus_dat_w),
-	.dBusWishbone_SEL       (dbus_sel),
-	.dBusWishbone_STB       (dbus_stb),
-	.dBusWishbone_WE        (dbus_we),
-	.iBusWishbone_ADR       (ibus_adr),
-	.iBusWishbone_BTE       (ibus_bte),
-	.iBusWishbone_CTI       (ibus_cti),
-	.iBusWishbone_CYC       (ibus_cyc),
-	.iBusWishbone_DAT_MOSI  (ibus_dat_w),
-	.iBusWishbone_SEL       (ibus_sel),
-	.iBusWishbone_STB       (ibus_stb),
-	.iBusWishbone_WE        (ibus_we),
+	.dBusWishbone_ADR       (mainsoc_dbus_adr),
+	.dBusWishbone_BTE       (mainsoc_dbus_bte),
+	.dBusWishbone_CTI       (mainsoc_dbus_cti),
+	.dBusWishbone_CYC       (mainsoc_dbus_cyc),
+	.dBusWishbone_DAT_MOSI  (mainsoc_dbus_dat_w),
+	.dBusWishbone_SEL       (mainsoc_dbus_sel),
+	.dBusWishbone_STB       (mainsoc_dbus_stb),
+	.dBusWishbone_WE        (mainsoc_dbus_we),
+	.iBusWishbone_ADR       (mainsoc_ibus_adr),
+	.iBusWishbone_BTE       (mainsoc_ibus_bte),
+	.iBusWishbone_CTI       (mainsoc_ibus_cti),
+	.iBusWishbone_CYC       (mainsoc_ibus_cyc),
+	.iBusWishbone_DAT_MOSI  (mainsoc_ibus_dat_w),
+	.iBusWishbone_SEL       (mainsoc_ibus_sel),
+	.iBusWishbone_STB       (mainsoc_ibus_stb),
+	.iBusWishbone_WE        (mainsoc_ibus_we),
 	.jtag_tdo               (jtag_tdo)
 );
 
@@ -3343,5 +4203,5 @@ assign inferedsdrtristate3__i = spiflash4x_dq[3];
 endmodule
 
 // -----------------------------------------------------------------------------
-//  Auto-Generated by LiteX on 2024-08-26 16:40:06.
+//  Auto-Generated by LiteX on 2024-10-26 22:23:07.
 //------------------------------------------------------------------------------

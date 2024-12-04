@@ -46,9 +46,9 @@ parameter FIRMWARE_FILENAME = "firmware.hex";
 parameter FIRMWARE_OFFSET = 32'h0100_0000;
 
 `define MEM_FILENAME "MEM.TXT"
-`define SECSI_FILENAME "/tmp/SECSI.TXT"
-`define SFDP_FILENAME "/tmp/SFDP.TXT"
-`define SREG_FILENAME "/tmp/SREG.TXT"
+`define SECSI_FILENAME "SECSI.TXT"
+`define SFDP_FILENAME "SFDP.TXT"
+`define SREG_FILENAME "SREG.TXT"
 
 
 // The following registers define the main memory spaces of the device.

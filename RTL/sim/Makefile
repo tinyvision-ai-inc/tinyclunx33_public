@@ -13,7 +13,7 @@ IP = ../ip
 LITEX = ../litex/build/som/gateware
 
 TOP = fpga_top_lifcl33u_som
-SIM_SRCS = $(IP)/wb2axip/rtl/afifo.v $(IP)/wb2axip/rtl/wbxclk.v
+#SIM_SRCS = $(IP)/wb2axip/rtl/afifo.v $(IP)/wb2axip/rtl/wbxclk.v
 SIM_SRCS += $(RTL)/VexRiscv.v
 SIM_SRCS += $(TB)/tb_$(TOP).sv
 
@@ -24,6 +24,7 @@ SRCH_PATH = -y $(TB) -y $(RTL) -y $(COMMON) -y $(LITEX) \
  -y $(COMMON_IP)/rx_dphy_2l/rtl -y $(COMMON_IP)/rx_dphy_s_2lane/rtl -y $(COMMON_IP)/b2p_2lane/rtl\
  -y $(COMMON_IP)/p2b_2lane/rtl -y $(COMMON_IP)/tx_dphy_s_2lane/rtl \
  -y $(COMMON_IP)/p2b_2l_yuv422_8/rtl \
+ -y ../python/i2c \
  -y $(IP)/wb_intercon/rtl/verilog -y $(IP)/cdc_utils/rtl/verilog -y $(IP)/wb_ram/rtl/verilog
 
  INC_DIR = +incdir+$(IP)/wb_common

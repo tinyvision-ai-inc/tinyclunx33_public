@@ -48,9 +48,25 @@
 };
 &i2c0 {
 	reg = <0xe0005000 0x4
-		0xe0005004 0x4>;
-	reg-names = "write",
-		"read";
+		0xe0005004 0x4
+		0xe0005008 0x4
+		0xe000500c 0x4
+		0xe0005010 0x4
+		0xe0005014 0x4
+		0xe0005018 0x4
+		0xe000501c 0x4
+		0xe0005020 0x4
+		0xe0005024 0x4>;
+	reg-names = "prescale",
+		"control",
+		"txr",
+		"rxr",
+		"command",
+		"status",
+		"core_reset",
+		"ev_status",
+		"ev_pending",
+		"ev_enable";
 };
 &i2s_rx {
 	status = "disabled";

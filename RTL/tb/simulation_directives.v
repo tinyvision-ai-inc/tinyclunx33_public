@@ -1,6 +1,7 @@
 ///// Simulation Directives for CSI2 Aggregation RD /////
 
 `define SIM
+`define VERBOSE
 
 //`define NO_CH0_RX	// skip CH #0
 `define NO_CH1_RX	// skip CH #1

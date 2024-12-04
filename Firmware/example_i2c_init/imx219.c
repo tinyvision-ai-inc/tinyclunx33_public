@@ -1,17 +1,28 @@
 #include "imx219.h"
 
 #include "system.h"
+#include <stdbool.h>
 #include <libbase/uart.h>
 #include <libbase/console.h>
-#include <libbase/i2c.h>
+//#include <libbase/i2c.h>
 
+static bool i2c_write(uint8_t addr, uint8_t reg, uint8_t *data, int len, int stop) {
+    // Dummy function for I2C write
+    return true;
+}
+
+static bool i2c_read(uint8_t addr, uint8_t reg, uint8_t *data, int len) {
+    // Dummy function for I2C read
+    return true;
+}
 static bool sensor_i2c_write(uint16_t addr, uint8_t data) {
 	uint8_t val = data;
 	return i2c_write(IMX219_I2C_ADDR, addr, &val, 1, 2);
 }
 
 static bool sensor_i2c_read(uint16_t addr, uint8_t *data) {
-	return i2c_read (IMX219_I2C_ADDR, addr, data, 1, true, 2);
+//	return i2c_read (IMX219_I2C_ADDR, addr, data, 1, true, 2);
+	return i2c_read (IMX219_I2C_ADDR, addr, data, 1);
 }
 
 imgsensor_mode_t *selected_img_mode;
