@@ -93,8 +93,7 @@ by adding the following snippet at the bottom of the file:
 ...
 
     - name: tinyclunx33_sdk
-      url: git@github.com:tinyvision-ai-inc/zephyr_internal
-      revision: tinyclunx33_sdk
+      url: https://github.com/tinyvision-ai-inc/zephyr_internal
 ```
 
 
