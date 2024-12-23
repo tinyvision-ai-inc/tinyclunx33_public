@@ -1,4 +1,5 @@
-ldc_set_sysconfig {CONFIGIO_VOLTAGE_BANK0=1.8 CONFIGIO_VOLTAGE_BANK1=1.8 CONFIG_IOSLEW=FAST TRANSFR=OFF MASTER_SPI_PORT=DISABLE INITN_PORT=DISABLE BOOTMODE=DUAL COMPRESS_CONFIG=OFF MCCLK_FREQ=28.1 JTAG_PORT=DISABLE}
+ldc_set_sysconfig {CONFIGIO_VOLTAGE_BANK0=1.8 CONFIGIO_VOLTAGE_BANK1=1.8 CONFIG_IOSLEW=FAST TRANSFR=OFF MASTER_SPI_PORT=DISABLE INITN_PORT=DISABLE MCCLK_FREQ=28.1 COMPRESS_CONFIG=OFF JTAG_PORT=DISABLE SLAVE_I3C_PORT=DISABLE DONE_PORT=DISABLE}
+
 ldc_set_vcc -bank 0 1.8
 ldc_set_vcc -bank 1 1.8
 ldc_set_vcc -bank 2 1.8
@@ -16,6 +17,8 @@ ldc_set_location -site {G1} [get_ports gpio_g1]
 ldc_set_location -site {B1} [get_ports gpio_b1]
 ldc_set_location -site {A3} [get_ports gpio_a3]
 ldc_set_location -site {A3} [get_ports led]
+ldc_set_location -site {A3} [get_ports camera_led0]
+
 ldc_set_location -site {A1} [get_ports button_n]
 ldc_set_location -site {B1} [get_ports button2_n]
 ldc_set_port -iobuf {PULLMODE=UP} [get_ports button_n]
@@ -50,6 +53,11 @@ ldc_set_location -site {F2} [get_ports TCK]
 ldc_set_location -site {D2} [get_ports TDI]
 ldc_set_location -site {B2} [get_ports TMS]
 ldc_set_location -site {D1} [get_ports TDO]
+
+ldc_set_location -site {F2} [get_ports jtag_tck]
+ldc_set_location -site {D2} [get_ports jtag_tdi]
+ldc_set_location -site {B2} [get_ports jtag_tms]
+ldc_set_location -site {D1} [get_ports jtag_tdo]
 # This constraint set applies to the 2 Lane MIPI in, 2 Lane MIPI out adapter.
 # 2L MIPI receive is mapped as follows:
 # DIFF 0: MIPI Lane 0
