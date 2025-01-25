@@ -6,5 +6,6 @@ This list of documents aims to guide you from reception of the devkit to a worki
 [Quick Start](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example)
 @subpage appnote_firmware
 @subpage appnote_zephyr_sdk
+@subpage appnote_zephyr_video_pipeline
+@subpage appnote_zephyr_configuration
 </div>
-

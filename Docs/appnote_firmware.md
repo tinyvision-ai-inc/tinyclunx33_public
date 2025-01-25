@@ -4,7 +4,7 @@
 ## Quick Start
 
 The
-[`tinyclunx33_sdk` README](https://github.com/tinyvision-ai-inc/tinyclunx33_sdk)
+[`tinyvision_zephyr_sdk` README](https://github.com/tinyvision-ai-inc/tinyvision_zephyr_sdk)
 provides a condensed list of commands to run to get a working firmware.
 
 

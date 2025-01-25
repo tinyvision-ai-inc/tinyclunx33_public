@@ -35,11 +35,24 @@ that has all the dependencies correctly setup already,
 and more can be added for integrating 3rd-party code, or splitting a larger codebase in modules.
 
 
+## Nightly builds
+
+One way to be sure to reproduce the results would be the
+[nightly builds](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/actions/workflows/getting_started_on_linux.yml),
+which runs the
+[`getting_started_on_linux.sh`](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/blob/main/getting_started_on_linux.sh)
+script every night.
+
+The build status can be seen on the
+[tinyclunx33_zephyr_example](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/tree/main?tab=readme-ov-file#tinyclunx33-zephyr-example)
+README.
+
+
 ## Building the firmware
 
 This guide uses the
 [`tinyclunx33_zephyr_example`](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example)
-sample application named `app_imx219`.
+sample application named `app_shell`.
 
 There are several targets for building the firmware, depending on what platform you wish to build on:
 
@@ -65,9 +78,10 @@ Assuming a Board Rev2, a Devkit Rev2, and SoC RTL010 being used:
    west update
    ```
 
-4. Build a sample application from this example repository, for instance `app_imx219`.
+4. Build a sample application from this example repository, for instance `app_shell` for
+   [RTL010](https://github.com/tinyvision-ai-inc/tinyclunx33_public/releases/tag/v0.10).
    ```
-   cd tinyclunx33_zephyr_example/app_imx219
+   cd tinyclunx33_zephyr_example/app_shell
    west build --board tinyclunx33@rev2/rtl010 --shield tinyclunx33_devkit_rev2
    ```
 
@@ -75,6 +89,11 @@ Assuming a Board Rev2, a Devkit Rev2, and SoC RTL010 being used:
    ```
    west flash
    ```
+
+6. Disconnect and reconnect the USB ports to power cycle the board, then you can see
+   logs by connecting the DEBUG interface and use the 2nd serial console that shows-up,
+   such as `/dev/ttyUSB1` in Linux, at baud rate `156200`. Once connected, press the reset
+   switch (`SW2` on the Devkit Rev 2) to see the early boot logs appear.
 
 See also [SoM Flash](som_flash.md) for other flash programming options.
 
