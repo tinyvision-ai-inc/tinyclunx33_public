@@ -79,6 +79,17 @@ ldc_set_location -site {G7} [get_ports {mipi_tx_dat_p[1]}]
 ldc_set_location -site {G6} [get_ports {mipi_tx_dat_m[1]}]
 ldc_set_location -site {J6} [get_ports mipi_tx_clk_p]
 ldc_set_location -site {H6} [get_ports mipi_tx_clk_m]
+
+ldc_set_location -site {F7} [get_ports {mipi_rx2_dat_p[0]}]
+ldc_set_location -site {E6} [get_ports {mipi_rx2_dat_m[0]}]
+ldc_set_location -site {J6} [get_ports {mipi_rx2_dat_p[1]}]
+ldc_set_location -site {H6} [get_ports {mipi_rx2_dat_m[1]}]
+ldc_set_location -site {G7} [get_ports mipi_rx2_clk_p]
+ldc_set_location -site {G6} [get_ports mipi_rx2_clk_m]
+ldc_set_port -iobuf {SLEWRATE=FAST PULLMODE=NONE} [get_ports mipi_rx*_m*]
+ldc_set_port -iobuf {SLEWRATE=NA IO_TYPE=MIPI_DPHY} [get_ports mipi_rx*_p*]
+
+
 #---- Byte2Pixel constraints --------------------------------------------------------------------------------------#
 ######                                                                                       ######
 # NOTE:  The byte-to-pixel IP treats the byte clock and the pixel clock as asynchronous.          #
