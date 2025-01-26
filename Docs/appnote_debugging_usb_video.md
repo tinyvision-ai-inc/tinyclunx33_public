@@ -11,6 +11,82 @@ chat server about how Zephyr works in general, as well as on the
 [Zephyr documentation](https://docs.zephyrproject.org/latest/).
 
 
+Build errors
+------------
+
+The [Zephyr debug resources](https://docs.zephyrproject.org/latest/build/dts/troubleshooting.html)
+would cover this topic more in depth, however here is some extension to it:
+
+### General build system
+
+Here is how the build system is layered:
+
+1. First, the devicetree generates configuration variables used by everything else.
+
+2. Then, the Kconfig uses these, and also generates extra CONFIG_ variables used by C and CMake.
+
+3. Finally, this is a normal CMake system, that builds C.
+
+Chaining multiple layers of configuration is very frequent while building. For instance, the C
+preprocessor reads C, turned into preprocessed C, turned into intermediate representation, turned
+into assembly, turned into objects, turned into a binary. The same happens above the C level to
+avoid solving all the problems in one place.
+
+* If an error comes from the devicetree syntax, the problem is not on Kconfig, CMake or C.
+* If an error comes from Kconfig, this means that the problem can come from Kconfig or the devictree.
+* If an error comes from CMake, this means that the problem can come from any configuration tool.
+* If an error comes from the C compiler, then any other layer can be the cause.
+
+This means that the C errors related to the configuratoin system are the most challenging to debug.
+
+To help with that, it is possible to verify that the files generated at each layer are still looking
+as expected:
+
+### Devicetree verifications
+
+The devicetree used is at `build/zephyr/zephyr.dts`.
+
+* Is there `status = "okay"` for each peripheral of interest? If not, this can be enabled in the
+  `app.overlay` of the application.
+
+* Are some peripheralls looking misconfigured? Verifying that the build command matches what is
+  expected (the `--board` with `tinyclunx33`, `/soc` and `@rev` as expected).
+  A complete "clean" build is sometimes necessary when updating the `app.overlay` or devicetree.
+
+
+### Kconfig verification
+
+The Kconfig used is at `build/zephyr/.config`.
+
+* Is there a `CONFIG_DT_HAS_...` for the problematic driver? If not, this means there is a missing
+  devicetree entry, and checking the `zephyr.dts` again could help.
+
+* Is there a `CONFIG_...` option disabled while it was expected to be enabled? Checking if it can
+  is set in `prj.conf` can help, or otherwise look at the warning during the build time, often
+  explaining what went wrong and why.
+
+
+### CMake verification
+
+The CMake system uses the various CMakeLists.txt directly.
+The way a driver is used
+
+
+### Generated C verification
+
+Errors involving macros like `DT_...` are related to the devicetree.
+The C macros genreated by the devicetree and used by all the drivers are at
+`build/zephyr/include/generated/zephyr/devicetree_generated.h`.
+
+The lowest level available to debug the most tedious C macro errors is to search for the names
+that the C preprocessor cannot find or build, and see if there is the expected name generated on
+this file. If not, this suggests that either the C macros are not doing what is expected (i.e.
+working on a new driver), or that there is a Kconfig or Devicetree issue.
+
+This file also contains the reference between the device numbers and the device name, whch help
+for errors such as `undefined reference to __device_dts_ord_123`.
+
+
 Physical problems
 -----------------
 
@@ -59,7 +135,7 @@ these, the host selects an appropriate driver for this device. This is the *USB 
 
 To tell if the enumeration did succeed, the `lsusb` command (Linux), `ioreg -p IOUSB` command
 (Mac OSX), or [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) (Windows)
-should show an entry for the tinyCLUNX33, named 'tinyVision.ai tinyCLUNX33" by default.
+should show an entry for the tinyCLUNX33, named "tinyVision.ai tinyCLUNX33" by default.
 
 In all case, upon error preventing the device to be detected, the host-side system logs and
 Zephyr-side logs will contain precious information about what happened.
@@ -84,6 +160,34 @@ If the USB device works but the video device does not appear in the list of vide
 `/dev/video2` on Linux, or the list of webcams in online video conferences systems), this means
 that the enumeration did succeed, but some descriptor was not considered valid. Debugging the
 descriptors content itself could be needed.
+
+### Not enough endpoints
+
+If the following error message appears through the logs, then this means that the number of USB
+endpoints configured at build time to provide enough for every USB class.
+
+```
+...
+D: trying to assign address for EP 0x85
+...
+E: usbd_init: Failed to assign endpoint address
+E: usbd_init: Failed to assign endpoint addresses
+```
+
+This can be configured on the devicetree for the USB driver (USB Device Controller, UDC):
+
+```
+&zephyr_udc0 {
+	num-in-endpoints = <4>;
+	num-out-endpoints = <2>;
+};
+```
+
+A few examples:
+
+- 1 IN and 1 OUT descriptors for the control endpoint (EP 0x00 + EP 0x80) always present.
+- 1 IN descriptor for by each UVC
+- 2 IN and 1 OUT descriptors for each CDC ACM
 
 
 Debugging the Descriptors
