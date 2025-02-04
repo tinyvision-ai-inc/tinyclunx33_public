@@ -330,16 +330,19 @@ with for instance the `devmem` Zephyr command:
 uart:~$ uvcmanager
 uvcmanager - UVC Manager debug commands
 Subcommands:
-  conf  : Print the uvcmanager configuration
-          Usage: conf <device>
+  show  : Print the uvcmanager configuration
+          Usage: show <device>
 ```
+
+Note that the only valid argument for `<device>` is `uvcmanager@...` (with a number instead of `...`
+as proposed by tab completion).
 
 The UVC Manager shows early debug information about the input video stream as well as other
 low-level information. By looking at the `STREAM ADDRESS` field, the location of the data pipe can
 be obtained, and read from the shell to test if data comes out of it:
 
 ```
-$ uvcmanager conf uvcmanager@b4000000
+$ uvcmanager show uvcmanager@b4000000
 ...
 STREAM ADDRESS  0xb1200000
 ...
