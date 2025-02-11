@@ -90,6 +90,44 @@ for errors such as `undefined reference to __device_dts_ord_123`.
 Physical problems
 -----------------
 
+### Debug command
+
+If the USB DEBUG serial interface is available, it is possible to query the `dwc3` driver state.
+
+This indicates that the USB link is not detecting any host, for one of the reason below.
+
+```
+uart:~$ dwc3 link usb@b0000000
+DWC3_DSTS_CONNECTSPD_SS
+DWC3_DSTS_USBLNKST_USB3_CMPLY
+```
+
+This indicates that the host is correctly detected, and the interface is in "active" mode, i.e.
+actively transmitting or transmitted recently:
+
+```
+uart:~$ dwc3 link usb@b0000000
+DWC3_DSTS_CONNECTSPD_SS
+DWC3_DSTS_USBLNKST_USB3_U0
+```
+
+This indicates that the host is correctly detected, and temporarily went to sleep due to lack
+of activity, associated with .
+
+```
+uart:~$ dwc3 link usb@b0000000
+DWC3_DSTS_CONNECTSPD_SS
+DWC3_DSTS_USBLNKST_USB3_U3
+```
+
+On Linux, the switch from U3 to U0 is typically marked host-side with `dmesg` logs such as:
+
+```
+[661871.949384] usb 2-2: Suspending interface 2
+[661871.949398] usb 2-2: Suspending interface 1
+[661871.949403] usb 2-2: Suspending interface 0
+```
+
 ### Bad cable
 
 First of all, a bad USB cable is a frequent source of failure, and testing different cables, or
