@@ -58,9 +58,9 @@ There are several targets for building the firmware, depending on what platform 
 
 * **Shield:** `tinyclunx33_devkit_rev1`, `tinyclunx33_devkit_rev2`, `custom`
 * **Board:** `tinyclunx33@rev1`, `tinyclunx33@rev2`
-* **SoC:** `rtl008`, `rtl009`, `rtl010`, `custom`
+* **SoC:** `rtl_0_10`, `rtl_0_11`, `rtl_1_0_2`, `custom`
 
-Assuming a Board Rev2, a Devkit Rev2, and SoC RTL010 being used:
+Assuming a Board Rev2, a Devkit Rev2, and SoC RTL 1.0.2 being used:
 
 1. Follow the general Zephyr to setup the build environment for your platform:
    <https://docs.zephyrproject.org/latest/develop/getting_started/index.html>
@@ -82,7 +82,7 @@ Assuming a Board Rev2, a Devkit Rev2, and SoC RTL010 being used:
    [RTL010](https://github.com/tinyvision-ai-inc/tinyclunx33_public/releases/tag/v0.10).
    ```
    cd tinyclunx33_zephyr_example/app_shell
-   west build --board tinyclunx33@rev2/rtl010 --shield tinyclunx33_devkit_rev2
+   west build --board tinyclunx33@rev2/rtl_1_0_2 --shield tinyclunx33_devkit_rev2
    ```
 
 5. Then, program the firmware into the devkit, with the DEBUG interface connected.
