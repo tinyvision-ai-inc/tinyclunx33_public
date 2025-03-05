@@ -13,8 +13,9 @@ The tinyCLUNX devkit is shipped with a pre-flashed FPGA bitfile and Zephyr image
 2. Check the jumpers on the devkit to ensure that the jumpers are correctly installed as shown in the picture above.
 3. Connect the MIPI adapter board to the devkit by aligning the connectors and gently pressing down until fully seated.
 
-<img src="images/tinyclunx_dual_rpi_top.png" width="162" alt="tinyCLUNX33 dual RPi adapter Topside"/>
-<img src="images/tinyclunx_dual_rpi_bottom.png" width="162" alt="tinyCLUNX33 dual RPi adapter Bottomside"/>
+![tinyCLUNX33 dual RPi adapter Topside](images/tinyclunx_dual_rpi_top.png)
+
+![tinyCLUNX33 dual RPi adapter Bottomside](images/tinyclunx_dual_rpi_bottom.png)
 
 
 **Note**: The devkit has 2 USBC connectors, one labelled "DEBUG" and the other labelled "DATA". The "DEBUG" connector is used to program the FPGA and is not required for the initial boot process, it also presents an additional serial port that is hooked up to the RISCV processor in the FPGA for boot as well as the Zephyr shell. 
