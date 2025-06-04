@@ -48,12 +48,12 @@ integration of the NXLRAM as well as a controller for the external RAM chip.
   [LIFCL-33U-8CTG104CAS](https://www.latticesemi.com/Products/FPGAandCPLD/CrossLink-NX)
   FPGA (search for 33U in this page).
 
-- Infineon
-  [S27KS0641DPBHI020](https://www.infineon.com/dgdl/?fileId=8ac78c8c7d0d8da4017d0ed18c684db5)
-  HyperRAM
-
 - AP Memory
   [APS256XXN-OB9-G](https://www.apmemory.com/wp-content/uploads/APM_PSRAM_OPI_Xccela-APS256XXN-OBRx-v1.0-PKG.pdf)
   Double-Data-Rate HPI (x16) PSRAM
+
+- **NOTE** The Infineon
+  [S27KS0641DPBHI020](https://www.infineon.com/dgdl/?fileId=8ac78c8c7d0d8da4017d0ed18c684db5)
+  HyperRAM is also pin compatible but is not installed since this is an 8-bit part and hence only capable of half the bandwidth of the APM part above.
 
 ![](images/tinyclunx33_som_ram_schematic.png)
