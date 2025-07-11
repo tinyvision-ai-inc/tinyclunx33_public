@@ -1,11 +1,8 @@
 # SoM Clocks {#som_clocks}
 
-The FPGA features two internal oscillators and an internal PLL to further
-synthesize a clock signal out of the available sources.
+The FPGA features one 60MHz internal oscillator that drives the USB reference clock and an internal PLL to further synthesize a clock signal out of the available sources.
 
-An external Si5351A PLL is responsible for generating the differential USB3
-reference clock, and has one remaining clock signals free to use.
-Clocks are synthesized out of a 25 MHz Crystal Oscillator on the SoM.
+An external Si5351A PLL on the devkit is responsible for generating any custom clocks.
 
 ![](images/tinyclunx33_som_clock_tree.drawio.png)
 
@@ -15,14 +12,10 @@ and value for a given clock setup.
 
 | Clock                          | Frequency  | Location                 |
 |--------------------------------|------------|--------------------------|
-| PLL input crystal oscillator   | 25 MHz     | Si5351 input XA, XB      |
-| USB REFCLK differential clock  | 60 MHz     | Si5351 output CLK0, CLK1 |
-| PLL Extra output clock         | Selectable | Si5351 output CLK2       |
-| PLL External input clock       | Selectable | SoM input pin            |
-| FPGA high frequency oscillator | 450 MHz    | FPGA fabric              |
+| USB REFCLK differential clock  | 60 MHz     | Internal to SoM |
+| FPGA PLL External input clock       | Selectable | SoM input pin            |
+| FPGA high frequency oscillator | <=450 MHz    | FPGA fabric              |
 | FPGA low power oscillator      | 128 kHz    | FPGA fabric              |
-| FPGA GPLL                      | Selectable | FPGA fabric              |
-| MIPI clock                     | Selectable | RTL on the FPGA          |
 
 
 ## Hardware integration
@@ -30,25 +23,15 @@ and value for a given clock setup.
 The USB differential clock generation is already integrated in the SoM.
 Here is the description of how it works internally.
 
-The extra free output clock may be looped back to the external input clock pin,
-so that the PLL provides a clock with an arbitrary frequency directly to the FPGA.
-
-It is also possible to use the free output clock pin elsewhere on the project.
-
-It is also possible to provide an external input clock source to the FPGA.
-
+The onboard 60MHz clock may be looped back to the external input clock pin,
+so that the PLL provides a clock directly to the FPGA. If this frequency is unsuitable for the application, users can also utilize the Si5351 oscillator on the devkit to generate arbitrary frequencies.
 
 ## RTL integration
 
 The clocks are already integrated in the RTL.
-Here is the description of how it works internally.
 
 The FPGA can use the external input clock, routed to its pin `H8`, which is
-a primary clock pin (PCLK), usable for DDR I/O.
-
-The FPGA is able to use the clock signals as a basis for implementing a timer
-core.
-
+a primary clock pin (PCLK).
 
 ## Zephyr integration
 

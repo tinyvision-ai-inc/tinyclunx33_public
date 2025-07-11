@@ -1,6 +1,6 @@
 # SoM Hardware {#som}
 
-25.4mm x 25.4mm x 4.5mm module, commercial temperature grade: 0°C to 85°C
+26.4mm x 26.4mm x 4.5mm module, industrial temperature grade: -40°C to +85°C
 
 <div class="grid">
 @subpage som_clocks
@@ -26,17 +26,17 @@ Connector:
 - Compute: 8 diff pairs, 32 MB [oSPI/HyperRAM](som_memory.md) @ <0.5GBps
 
 I/O interfaces:
-- 3x fully programmable clocks
-- GPIO, I2C, field updates through FPGA or direct flash programming
-- GPIO voltage is programmable
+- Internal 60MHz or external clock option for full flexibility in application
+- GPIO, I2C, field updates through FPGA (under development) or direct flash programming over JTAG
+- Programmable bank voltages to enable glueless interfaces
 
 Firmware/RTL:
 - Zephyr for control path on RISCv
-- No-code graphical RTL generator with large # of IP blocks (under development)
+- No-code graphical RTL generator with large # of IP blocks
 
 Development boards:
 - [devkit] for programming/debug
-- extra adapter boards for various camera connectors and expansion
-- reference designs such as a basis of a compact camera device
+- Adapter boards for various camera connectors and expansion
+- Reference design for a compact camera device
 
 ![](images/tinyclunx33_block_diagram.drawio.png)
