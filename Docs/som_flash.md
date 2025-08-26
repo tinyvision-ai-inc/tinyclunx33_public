@@ -1,6 +1,6 @@
 # SoM Flash {#som_flash}
 
-A 16 MByte (128 Mbit) QSPI flash with Dual Transmission Rate (DTR) can store the
+A 32 MByte (256 Mbit) QSPI flash with Dual Transmission Rate (DTR) can store the
 FPGA bitfile as well as a storing the firmware that the soft CPU core can
 execute in-place (XIP).
 

@@ -1,6 +1,6 @@
 # SoM Hardware {#som}
 
-26.4mm x 26.4mm x 4.5mm module, industrial temperature grade: -40°C to +85°C
+26mm x 26mm x 4.5mm module, industrial temperature grade: -40°C to +85°C
 
 <div class="grid">
 @subpage som_clocks
