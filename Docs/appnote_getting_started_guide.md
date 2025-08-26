@@ -37,13 +37,13 @@ Customizing for your application
 FAQ's
 ------------
 
-## ** How to control the I2C for my sensor **: Here are a couple of ways to do this:
+### How to control the I2C for my sensor: Here are a couple of ways to do this:
 1. Once the driver is properly written, the enumeration process will expose the exposure, gain etc. to the host UVC stack. UVC control changes now flow through to the I2C automagically.
 2. Many of your sensor controls may not map directly to what UVC offers. In such a case, you can write your own protocol over a serial port. To do this:
   a. Use the exported Zephyr shell over the USB link and write your own commands there so that the application can talk to the Zephyr shell over a serial port.
   b. Export a dedicated serial port over the USB link and host your commands/applications over this link.
 
-## ** What sensors can you support? **
+### What sensors can you support?
 
 We can support any sensor (cameras, thermal, vibration, IMU, audio etc.) that has the following interfaces:
 
@@ -54,7 +54,7 @@ We can support any sensor (cameras, thermal, vibration, IMU, audio etc.) that ha
   - If you use MIPI, that bank voltage shall be set to 1.2V.
 - A maximum of 27 pins on the `Compute` and 37 pins on the `Connectivity` module can be used to interface to the sensor, excluding the I2C.
 
-## Unsupported sensor interfaces
+#### Unsupported sensor interfaces
 
 - We use a soft MIPI which is limited to 1.2Gbps per link. Any data stream that requires a higher data rate than this cannot be supported. Suggest using a 4 Lane setup in this case.
 - MIPI C-PHY: We do not support the new MIPI CPHY standard since the FPGA IO cells do not have this capability.
