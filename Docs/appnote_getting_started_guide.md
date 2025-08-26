@@ -33,28 +33,3 @@ Customizing for your application
 5. Build the FPGA and check for timing errors if any. Tweak RTL to add pipelines as well as Synthesis and PAR settings to eliminate timing errors.
 
 **NOTE:** The design must be timing clean!
-
-FAQ's
-------------
-
-### How to control the I2C for my sensor: Here are a couple of ways to do this:
-1. Once the driver is properly written, the enumeration process will expose the exposure, gain etc. to the host UVC stack. UVC control changes now flow through to the I2C automagically.
-2. Many of your sensor controls may not map directly to what UVC offers. In such a case, you can write your own protocol over a serial port. To do this:
-  a. Use the exported Zephyr shell over the USB link and write your own commands there so that the application can talk to the Zephyr shell over a serial port.
-  b. Export a dedicated serial port over the USB link and host your commands/applications over this link.
-
-### What sensors can you support?
-
-We can support any sensor (cameras, thermal, vibration, IMU, audio etc.) that has the following interfaces:
-
-- 1/2/4 lane MIPI sensors with up to 1.2Gbps MIPI data rate
-- LVDS, SPI, DVP sensor interfaces. IO pads on the FPGA are limited to 1.8V and an external translator is required to support 3.3V IO. 
-- We bring out 1 bank of IO on the `Compute` module and 2 banks of IO on the `Connectivity` module.
-  - Each bank must have the same voltage IO.
-  - If you use MIPI, that bank voltage shall be set to 1.2V.
-- A maximum of 27 pins on the `Compute` and 37 pins on the `Connectivity` module can be used to interface to the sensor, excluding the I2C.
-
-#### Unsupported sensor interfaces
-
-- We use a soft MIPI which is limited to 1.2Gbps per link. Any data stream that requires a higher data rate than this cannot be supported. Suggest using a 4 Lane setup in this case.
-- MIPI C-PHY: We do not support the new MIPI CPHY standard since the FPGA IO cells do not have this capability.
