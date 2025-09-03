@@ -68,11 +68,11 @@ In order to adapt the firmware to all these different situations it is possible 
 `west build` command that will select the correct panaché:
 
 ```
-west build --board tinyclunx33@rev2/rtl_1_0_2 --shield tinyclunx33_devkit_rev2
-                   ~~~~~~~~~~~ ~~~~ ~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                   |           |    |         |
-                   |           |    |         The optional shield argument,
-                   |           |    |         also specifying the version.
+west build --board tinyclunx33@rev2/rtl_1_0
+                   ~~~~~~~~~~~ ~~~~ ~~~~~~~
+                   |           |    |
+                   |           |    |
+                   |           |    |
                    |           |    |
                    |           |    The RTL version, which can be /custom for
                    |           |    fully custom RTLs (see below).
@@ -90,7 +90,7 @@ In case a custom RTL is built, with a custom video core, it is possible to start
 [`app_custom_rtl`](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/tree/tinyclunx33_sdk/app_custom_rtl)
 example, which shows the configuration of a top-level RTL.
 
-The build command would then feature the `/custom` SoC name instead of i.e. `/rtl011`.
+The build command would then feature the `/custom` SoC name instead of i.e. `/rtl_1_0`.
 
 In the
 [`app.overlay`](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/blob/tinyclunx33_sdk/app_custom_rtl/app.overlay)
