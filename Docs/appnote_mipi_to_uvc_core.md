@@ -159,7 +159,7 @@ Please refer to the the [Zephyr application note](appnote_zephyr_sdk.md) for mor
 
 #### Licensing the core
 
-- **Evaluation**: The core is available for evaluation via a time limited evaluation at no cost. Please contact `sales@tinyvision.ai` for more details.
+- **Evaluation**: The core is available for evaluation via a time limited evaluation (approx. 4 hours running time). Please contact `sales@tinyvision.ai` for more details.
 - **Production**: A paid license is required to use the core in a customer product. Please contact `sales@tinyvision.ai` for more details.
 
 #### Utilization
