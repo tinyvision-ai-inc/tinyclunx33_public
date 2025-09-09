@@ -195,6 +195,7 @@ The MIPI2UVC core provides several memory-mapped regions accessible through the 
 **Notes:**
 - All regions support 32-bit word access only (byte-level access not implemented)
 - Lower 2 bits of Wishbone address are ignored
+- You must use the `nocache` attribute for these memory regions to avoid the common mistake of caching data meant for IO
 - CSR regions provide stream-specific configuration and status
 - USB Manager regions handle USB enumeration and UVC descriptor management
 - The `wb_csr` block provides an `LMMI` interface to communicate with various Lattice cores such as the MIPI Rx DPHY. This is mapped in the `wb_csr` block at an offset of `0x400`. For example, the CSI block for stream 0 will be mapped at registers starting at `0xb200_0400`.
@@ -208,7 +209,7 @@ The MIPI2UVC core provides several memory-mapped regions accessible through the 
 #### Standards and Compliance
 
 - **USB3 Certification**: The FPGA itself has passed USB3 certification testing. Please contact Lattice Semiconductor sales for more details. The certification requires a USB redriver for the Tx for passing the long cable test but otherwise does not require a re-driver.
-- **UVC Compliance**: We run through the UVC compliance suite of tests to maximize compliance with the UVC 1.5 specification.
+- **UVC Compliance**: We run through the UVC compliance suite of tests to maximize compliance with the UVC 1.5 specification. 
 
 #### Code Samples
 
@@ -221,9 +222,10 @@ RTL examples feature:
 - Wishbone CSR for collecting statistics and controlling the ISP
 - I2C to control sensors
 
+
 #### Debugging tips
 
-**TBD**
+Please refer to [this page](https://tinyclunx33.tinyvision.ai/appnote_debugging_usb_video.html ) for tips on debugging common issues with Video.
 
 ## Core Revision History
 
@@ -242,8 +244,9 @@ RTL examples feature:
 - **Wishbone Bus Specification**: [Wishbone B4 Specification](https://cdn.opencores.org/downloads/wbspec_b4.pdf) - OpenCores Foundation
 - **ARM AMBA Specifications**: [ARM AMBA Documentation](https://developer.arm.com/documentation/ihi0024/latest/) - ARM Limited
 - **USB Video Class Specification**: [UVC 1.5 Specification](https://www.usb.org/sites/default/files/documents/uvc_1_5_20121220.zip) - USB Implementers Forum
-- **UVC Compliance Test Suite**: [USB-IF Compliance Tools](https://www.usb.org/compliance) - USB Implementers Forum (USB30CV and USB20VC tools)
+- **USB3CV Compliance Test Suite**: [USB-IF Compliance Tools](https://www.usb.org/document-library/usb3cv) - USB Implementers Forum
 - **AXI4-Stream Protocol**: [AMBA 4 AXI4-Stream Protocol Specification](https://developer.arm.com/documentation/ihi0051/latest/) - ARM Limited
+- **Zephyr UVC Video**: [The Zephyr video page](https://docs.zephyrproject.org/latest/samples/subsys/usb/uvc/README.html) - Linux Foundation
 
 ### Related Documentation
 
