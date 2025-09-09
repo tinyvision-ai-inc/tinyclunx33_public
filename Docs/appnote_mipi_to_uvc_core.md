@@ -138,11 +138,11 @@ The MIPI2UVC core provides several memory-mapped regions accessible through the 
 |--------|--------------|------|------|--------|-------------|
 | **USB Core** | `0xb0000000` | `0xff000000` | 16MB | CPU, USB | USB hard IP core configuration and control registers |
 | **AXI RAM** | `0xb1000000` | `0xff000000` | 16MB | CPU, Data | Memory-mapped interface to the AXI shared RAM |
+| **CSR: First stream** | `0xb2000000` | `0xfff00000` | 1MB | CPU | Control and Status Registers for primary stream |
+| **CSR: Second stream** | `0xb2100000` | `0xfff00000` | 1MB | CPU | Control and Status Registers for secondary stream |
 | **USB Manager: First stream** | `0xb4000000` | `0xfffffc00` | 1KB | CPU, Regs | USB manager configuration registers |
 | **USB Manager Regs: Second stream** | `0xb4000400` | `0xfffffc00` | 1KB | CPU, Regs | USB manager configuration registers |
 | **Data Mover Core** | `0xb4009000` | `0xfffffc00` | 1KB | CPU | Data mover control registers |
-| **CSR: First stream** | `0xb2000000` | `0xfff00000` | 1MB | CPU | Control and Status Registers for primary stream |
-| **CSR: Second stream** | `0xb2100000` | `0xfff00000` | 1MB | CPU | Control and Status Registers for secondary stream |
 | **IRQ** | `0xbf000000` | `0xfffffc00` | 1KB | CPU | Interrupt controller registers |
 
 **Notes:**
@@ -150,13 +150,14 @@ The MIPI2UVC core provides several memory-mapped regions accessible through the 
 - Lower 2 bits of Wishbone address are ignored
 - CSR regions provide stream-specific configuration and status
 - USB Manager regions handle USB enumeration and UVC descriptor management
+- The `wb_csr` block provides an `LMMI` interface to communicate with various Lattice cores such as the MIPI Rx DPHY. This is mapped in the `wb_csr` block at an offset of `0x400`. For example, the CSI block for stream 0 will be mapped at registers starting at `0xb200_0400`.
 
 
 
 ### Performance Considerations
 
-- Maximum throughput depends on USB speed (USB 2.0/3.0)
-- Stream bandwidth is shared between the video streams
+- Maximum throughput depends on USB speed (USB 2.0/3.0) as well as host side USB hardware and stack.
+- The USB3 Stream bandwidth is shared between the video streams. Aim for a maximum of 3.4Gbps of data between all streams as a peak number.
 - FIFO depth affects latency and throughput characteristics.
 
 ## References
