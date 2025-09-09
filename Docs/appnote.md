@@ -12,4 +12,6 @@ This list of documents aims to guide you from reception of the devkit to a worki
 @subpage appnote_zephyr_video_pipeline
 @subpage appnote_zephyr_configuration
 @subpage appnote_debugging_usb_video
+@subpage appnote_mipi_to_uvc_core
+
 </div>
