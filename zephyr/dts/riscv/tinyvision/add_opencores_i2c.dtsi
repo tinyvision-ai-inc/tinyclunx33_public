@@ -1,0 +1,19 @@
+/*
+ * Copyright (c) 2024 tinyVision.ai Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include <zephyr/dt-bindings/i2c/i2c.h>
+
+/ {
+	soc {
+		i2c0: i2c@e0005000 {
+			compatible = "opencores,i2c";
+			reg = <0xe0005000 0x8>;
+			clock-frequency = <I2C_BITRATE_STANDARD>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+		};
+	};
+};

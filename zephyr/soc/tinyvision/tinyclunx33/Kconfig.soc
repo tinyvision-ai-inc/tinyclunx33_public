@@ -1,0 +1,57 @@
+# Copyright (c) 2024 tinyVision.ai Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_SERIES_TINYCLUNX33
+	bool "tinyCLUNX33 RTL-basd SoC"
+	help
+	  Each SoC under this series is a release of an FPGA RTL ("gateware")
+	  that implements the virtual SoC loaded onto the FPGA. They are
+	  published by tinyVision.ai.
+
+config SOC_TINYCLUNX33_RTL_0_8
+	bool "tinyCLUNX33 RTL v0.8 release"
+	select SOC_SERIES_TINYCLUNX33
+	help
+	  This SoC lacks MIPI support, but features a test pattern generator
+	  to test the USB bandwidth.
+
+config SOC_TINYCLUNX33_RTL_0_9
+	bool "tinyCLUNX33 RTL v0.9 release"
+	select SOC_SERIES_TINYCLUNX33
+	help
+	  This SoC introduces MIPI support.
+
+config SOC_TINYCLUNX33_RTL_0_10
+	bool "tinyCLUNX33 RTL v0.10 release"
+	select SOC_SERIES_TINYCLUNX33
+	help
+	  The tinyCLUNX33 RTL v0.10 release.
+
+config SOC_TINYCLUNX33_RTL_0_11
+	bool "tinyCLUNX33 RTL v0.11 release"
+	select SOC_SERIES_TINYCLUNX33
+	help
+	  The tinyCLUNX33 RTL v0.11 release.
+
+config SOC_TINYCLUNX33_RTL_1_0
+	bool "tinyCLUNX33 RTL v1.0.* releases"
+	select SOC_SERIES_TINYCLUNX33
+	help
+	  The tinyCLUNX33 RTL v1.0.* releases.
+
+config SOC_TINYCLUNX33_RTL_1_1
+	bool "tinyCLUNX33 RTL v1.1.* releases"
+	select SOC_SERIES_TINYCLUNX33
+	help
+	  The tinyCLUNX33 RTL v1.1.* releases.
+
+config SOC_SERIES
+	default "tinyclunx33" if SOC_SERIES_TINYCLUNX33
+
+config SOC
+	default "rtl_0_8" if SOC_TINYCLUNX33_RTL_0_8
+	default "rtl_0_9" if SOC_TINYCLUNX33_RTL_0_9
+	default "rtl_0_10" if SOC_TINYCLUNX33_RTL_0_10
+	default "rtl_0_11" if SOC_TINYCLUNX33_RTL_0_11
+	default "rtl_1_0" if SOC_TINYCLUNX33_RTL_1_0
+	default "rtl_1_1" if SOC_TINYCLUNX33_RTL_1_1

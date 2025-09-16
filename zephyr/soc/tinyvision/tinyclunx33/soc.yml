@@ -1,0 +1,13 @@
+# Copyright (c) 2024-2025, tinyVision.ai Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+series:
+- name: tinyclunx33
+  socs:
+  - name: custom
+  - name: rtl_0_8
+  - name: rtl_0_9
+  - name: rtl_0_10
+  - name: rtl_0_11
+  - name: rtl_1_0
+  - name: rtl_1_1

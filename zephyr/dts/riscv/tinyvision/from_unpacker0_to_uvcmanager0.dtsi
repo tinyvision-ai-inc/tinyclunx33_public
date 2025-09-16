@@ -1,0 +1,16 @@
+/*
+ * Copyright (c) 2025 tinyVision.ai Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+&unpacker0 { status = "okay"; };
+&uvcmanager0 { status = "okay"; };
+
+&unpacker0_ep_out {
+	remote-endpoint-label = "uvcmanager0_ep_in";
+};
+
+&uvcmanager0_ep_in {
+	remote-endpoint-label = "unpacker0_ep_out";
+};

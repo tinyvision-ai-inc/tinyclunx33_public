@@ -1,0 +1,12 @@
+# Copyright (c) 2025 tinyVision.ai Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+description: Debayer core present tinyVision.ai FPGA systems
+
+compatible: "tinyvision,stats"
+
+include: base.yaml
+
+child-binding:
+  child-binding:
+    include: video-interfaces.yaml

@@ -1,0 +1,12 @@
+checkout-command: git checkout .
+clean-command: git clean -d -f -x
+patches:
+
+- author: Josuah Demangeon
+  email: me@josuah.net
+  date: '2025-07-14'
+  merge-pr: https://github.com/zephyrproject-rtos/zephyr/pull/82801
+  module: zephyr
+  path: zephyr_usb3.patch
+  sha256sum: 6d89d0a3d41de1fac4fdef631c3b8ed9276ea6b8c5d9d4c2d502efb97cdb9e3e
+  upstreamable: true

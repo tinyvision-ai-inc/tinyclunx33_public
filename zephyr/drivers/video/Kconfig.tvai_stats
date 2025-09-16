@@ -1,0 +1,11 @@
+# Copyright (c) 2025 tinyVision.ai Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+config VIDEO_TINYVISION_STATS
+	bool "statistic collection engine present on tinyVision.ai designs"
+	depends on DT_HAS_TINYVISION_STATS_ENABLED
+	default y
+	help
+	  Enable driver for the tinyVision.ai statistics collection peripheral.
+	  This driver does not do any hardware I/O and only provide debug commands and
+	  statistics using the upcoming Zephyr stats API.

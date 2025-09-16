@@ -1,0 +1,18 @@
+# Copyright (c) 2025 tinyVision.ai Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+  Pixel format unpacker converting from MIPI data packed types such as Y10P, Y12P, Y14P to 16-bit
+  unpacked data types, zero-padded.
+
+compatible: "tinyvision,unpacker"
+
+include: base.yaml
+
+child-binding:
+  child-binding:
+    include: video-interfaces.yaml
+    properties:
+      reg:
+        type: array
+        required: true
