@@ -1,0 +1,12 @@
+board:
+  name: tinyclunx33
+  vendor: tinyvision
+  revision:
+    format: custom
+    default: "rev2"
+    revisions:
+      - name: "rev1"
+      - name: "rev2"
+  socs:
+  - name: rtl_1_0
+  - name: rtl_1_1

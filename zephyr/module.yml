@@ -1,0 +1,10 @@
+build:
+  kconfig: zephyr/Kconfig
+  cmake: zephyr
+  settings:
+    dts_root: zephyr
+    board_root: zephyr
+    soc_root: zephyr
+
+runners:
+  - file: zephyr/scripts/ecpprog_mpremote.py
