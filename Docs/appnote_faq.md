@@ -34,3 +34,10 @@ We can support any sensor (cameras, thermal, vibration, IMU, audio etc.) that ha
 
 The data path does not use the RISCV processor. As a result, there is no overhead for an increased frame rate. We have measured test patterns at well over 1.5kHz for smaller sizes. The bridge can sustain a data rate of 3.4Gbps for a single stream. The frame rate is not a consideration.
 
+### How to allocate pins on the SoM for my own custom board?
+
+The tinyCLUNX SoM brings out the FPGA banks 3 and/or 2 (Compute SoM only). Please follow these rules when allocating signals to your sensors on the SoM:
+1. MIPI clock (or any interface with a clock) _shall_ be routed to the lanes with `PCLK` in them.
+2. Interfaces with a single ended clock _shall_ be routed to `PCLK_P` pins.
+3. The lanes within a _bank_ are length matched to each other. Differential signals such as MIPI that require length matching between lanes _shall_ use pairs within the same bank.
+4. All signals within a single bank _shall_ use the same IO voltage.
