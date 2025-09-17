@@ -8,10 +8,5 @@ board:
       - name: "rev1"
       - name: "rev2"
   socs:
-  - name: custom
-  - name: rtl_0_8
-  - name: rtl_0_9
-  - name: rtl_0_10
-  - name: rtl_0_11
   - name: rtl_1_0
   - name: rtl_1_1

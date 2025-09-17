@@ -1,9 +1,0 @@
-# Copyright (c) 2025 tinyVision.ai Inc.
-# SPDX-License-Identifier: Apache-2.0
-
-config VIDEO_LATTICE_CSI2RX
-	bool "Driver for Lattice MIPI CSI-2 D-PHY Receiver Submodule"
-	depends on DT_HAS_LATTICE_CSI2RX_ENABLED
-	default y
-	help
-	  Enable the driver for the Lattice MIPI-CSI FPGA core.

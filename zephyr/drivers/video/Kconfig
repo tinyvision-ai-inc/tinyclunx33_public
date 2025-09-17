@@ -1,23 +1,8 @@
-# Copyright (c) 2024 tinyVision.ai Inc.
+# Copyright (c) 2025 tinyVision.ai Inc.
 # SPDX-License-Identifier: Apache-2.0
 
 if VIDEO
 
-config VIDEO_I2C_RETRY_NUM
-	int "Number of attempts for retrying I2C communication if it failed"
-	default 3
-	help
-	  The default is there to reduce the chance of failure (i.e. occasional EMI) without
-	  flooding the I2C bus upon error with too many retries. There is a 1ms wait time between
-	  every retry.
-
 rsource "Kconfig.imx219"
-rsource "Kconfig.lscc_csi2rx"
-rsource "Kconfig.tvai_debayer"
-rsource "Kconfig.tvai_stacker"
-rsource "Kconfig.tvai_stats"
-rsource "Kconfig.tvai_testpattern"
-rsource "Kconfig.tvai_unpacker"
-rsource "Kconfig.tvai_uvcmanager"
 
 endif

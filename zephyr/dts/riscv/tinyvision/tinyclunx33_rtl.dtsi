@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#include <zephyr/dt-bindings/i2c/i2c.h>
+
 / {
 	compatible = "tinyvision,tinyclunx33";
 	model = "tinyvision,tinyclunx33";
@@ -147,224 +149,13 @@
 			current-speed = <156200>;
 		};
 
-		/* Video-specific soft-peripherals */
-
-		csi0: csi@b2000400 {
-			compatible = "lattice,csi2rx";
-			reg = <0xb2000400 0x400>;
-			status = "disabled";
-
-			port {
-				#address-cells = <1>;
-				#size-cells = <0>;
-
-				csi0_ep_in: endpoint@0 {
-					reg = <0>;
-					remote-endpoint-label = "";
-				};
-
-				csi0_ep_out1: endpoint@1 {
-					reg = <1>;
-					remote-endpoint-label = "";
-				};
-
-				csi0_ep_out2: endpoint@2 {
-					reg = <2>;
-					remote-endpoint-label = "";
-				};
-			};
+		i2c0: i2c@e0005000 {
+			compatible = "opencores,i2c";
+			reg = <0xe0005000 0x8>;
+			clock-frequency = <I2C_BITRATE_STANDARD>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 		};
-
-		csi1: csi@b2100400 {
-			compatible = "lattice,csi2rx";
-			reg = <0xb2100400 0x400>;
-			status = "disabled";
-
-			port {
-				#address-cells = <1>;
-				#size-cells = <0>;
-
-				csi1_ep_in: endpoint@0 {
-					reg = <0>;
-					remote-endpoint-label = "";
-				};
-
-				csi1_ep_out1: endpoint@1 {
-					reg = <1>;
-					remote-endpoint-label = "";
-				};
-
-				csi1_ep_out2: endpoint@2 {
-					reg = <2>;
-					remote-endpoint-label = "";
-				};
-			};
-		};
-
-		debayer0: debayer0 {
-			compatible = "tinyvision,debayer";
-			status = "disabled";
-
-			port {
-				#address-cells = <1>;
-				#size-cells = <0>;
-
-				debayer0_ep_in: endpoint@0 {
-					reg = <0>;
-					remote-endpoint-label = "";
-				};
-
-				debayer0_ep_out: endpoint@1 {
-					reg = <1>;
-					remote-endpoint-label = "";
-				};
-			};
-		};
-
-		debayer1: debayer1 {
-			compatible = "tinyvision,debayer";
-			status = "disabled";
-
-			port {
-				#address-cells = <1>;
-				#size-cells = <0>;
-
-				debayer1_ep_in: endpoint@0 {
-					reg = <0>;
-					remote-endpoint-label = "";
-				};
-
-				debayer1_ep_out: endpoint@1 {
-					reg = <1>;
-					remote-endpoint-label = "";
-				};
-			};
-		};
-
-		stats1: stats@b2100000 {
-			compatible = "tinyvision,stats";
-			reg = <0xb2100000 0x40>;
-			status = "disabled";
-
-			port {
-				stats1_ep_in: endpoint {
-					remote-endpoint-label = "";
-				};
-			};
-		};
-
-		stats0: stats@b2000000 {
-			compatible = "tinyvision,stats";
-			reg = <0xb2000000 0x40>;
-			status = "disabled";
-
-			port {
-				stats0_ep_in: endpoint {
-					remote-endpoint-label = "";
-				};
-			};
-		};
-
-		stacker: stacker {
-			compatible = "tinyvision,stacker";
-			status = "disabled";
-
-			port {
-				#address-cells = <1>;
-				#size-cells = <0>;
-
-				stacker_ep_in0: endpoint@0 {
-					reg = <0>;
-					remote-endpoint-label = "";
-				};
-
-				stacker_ep_in1: endpoint@1 {
-					reg = <1>;
-					remote-endpoint-label = "";
-				};
-
-				stacker_ep_out: endpoint@2 {
-					reg = <2>;
-					remote-endpoint-label = "";
-				};
-			};
-		};
-
-		unpacker0: unpacker0 {
-			compatible = "tinyvision,unpacker";
-			status = "disabled";
-
-			port {
-				#address-cells = <1>;
-				#size-cells = <0>;
-
-				unpacker0_ep_in: endpoint@0 {
-					reg = <0>;
-					remote-endpoint-label = "";
-				};
-
-				unpacker0_ep_out: endpoint@1 {
-					reg = <1>;
-					remote-endpoint-label = "";
-				};
-			};
-		};
-
-		unpacker1: unpacker1 {
-			compatible = "tinyvision,unpacker";
-			status = "disabled";
-
-			port {
-				#address-cells = <1>;
-				#size-cells = <0>;
-
-				unpacker1_ep_in: endpoint@0 {
-					reg = <0>;
-					remote-endpoint-label = "";
-				};
-
-				unpacker1_ep_out: endpoint@1 {
-					reg = <1>;
-					remote-endpoint-label = "";
-				};
-			};
-		};
-
-		uvcmanager0: uvcmanager@b4000000 {
-			compatible = "tinyvision,uvcmanager";
-			reg = <0xb4000000 0x400
-			       0xb1200000 0x10000>;
-			reg-names = "base",
-				    "fifo";
-			usb-controller = <&zephyr_udc0>;
-			usb-endpoint = <0x81>;
-			status = "disabled";
-
-			port {
-				uvcmanager0_ep_in: endpoint {
-					remote-endpoint-label = "";
-				};
-			};
-		};
-
-		uvcmanager1: uvcmanager@b4000400 {
-			compatible = "tinyvision,uvcmanager";
-			reg = <0xb4000400 0x400
-			       0xb1300000 0x10000>;
-			reg-names = "base",
-				    "fifo";
-			usb-controller = <&zephyr_udc0>;
-			usb-endpoint = <0x82>;
-			status = "disabled";
-
-			port {
-				uvcmanager1_ep_in: endpoint {
-					remote-endpoint-label = "";
-				};
-			};
-		};
-
-		/* USB hardware peripheral */
 
 		zephyr_udc0: usb@b0000000 {
 			compatible = "snps,dwc3";
@@ -388,9 +179,3 @@
 		};
 	};
 };
-
-/* "raspberrypi,csi-connector" integration */
-csi_interface: &csi0 {};
-csi_capture_port: &csi0 {};
-csi_ep_in: &csi0_ep_in {};
-csi_connector: &gpio0 {};
