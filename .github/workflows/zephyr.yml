@@ -3,6 +3,8 @@ name: Build Zephyr Examples
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -86,6 +88,6 @@ jobs:
       - name: Build the firmware samples
         run: |
           . ${ZEPHYRPROJECT}/.venv/bin/activate
-          cd ${ZEPHYRPROJECT}/${{ github.event.repository.name }}/Firmware/${{ matrix.application }}
+          cd ${ZEPHYRPROJECT}/${{ github.event.repository.name }}/firmware/${{ matrix.application }}
           west build -b "tinyclunx33@rev2/${{ matrix.soc_version }}"
           cp build/zephyr/zephyr.elf ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ steps.date.outputs.date }}_${{ github.sha }}.elf
