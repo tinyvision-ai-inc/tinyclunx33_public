@@ -1,9 +1,5 @@
 # RTL Reference Design
 
-[Source](https://github.com/tinyvision-ai-inc/tinyclunx33/tree/main/RTL/) |
-[Release](https://github.com/tinyvision-ai-inc/tinyclunx33/releases/) |
-[Zephyr Example](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
-
 The RTL Reference Design is a set of Verilog sources (sometimes generated from
 another HDL) providing common design elements for building an application on
 top of the SoM hardware.
@@ -14,7 +10,7 @@ product, or as a base to build upon.
 ![](images/rtl_reference_design.drawio.png)
 
 To build this component, refer to the
-[RTL build instructions](https://github.com/tinyvision-ai-inc/tinyCLUNX33/blob/main/RTL/README.md).
+[RTL build instructions](https://github.com/tinyvision-ai-inc/tinyclunx33/blob/main/rtl/README.md).
 
 For RTL engineers, the Reference Design is presented as a single module
 providing a data communication interface for the feed that goes through USB.
@@ -116,7 +112,7 @@ Please program the FPGA using the [instructions provided](som_flash.md).
 ### The DONE LED is lit but the RTL Reference Design does not work
 
 Make sure to also load a
-[Zephyr Example Release](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/)
+[Zephyr Example Release](https://github.com/tinyvision-ai-inc/tinyclunx33/releases/)
 matchiing the RTL Reference Design version you programmed.
 
 Check also the [flash offset at which you program things](som_flash.md).

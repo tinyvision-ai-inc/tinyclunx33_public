@@ -98,12 +98,12 @@ know what is the next and previous driver in the chain.
 
 In order to facilitate the configuration, the tinyCLUNX33 video elements are already pre-integrated
 as seen
-[here](https://github.com/tinyvision-ai-inc/tinyvision_zephyr_sdk/tree/main/dts/riscv/tinyvision),
+[here](https://github.com/tinyvision-ai-inc/priv-tvai-usb/tree/main/zephyr/dts/riscv/tinyvision),
 and turned off by default.
 
 This permits to keep the applications compact, which only need to turn on the drivers they use, as
 seen
-[here](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/blob/main/app_imx219/app.overlay).
+[here](https://github.com/tinyvision-ai-inc/priv-tvai-usb/blob/main/firmware/zephyr_imx219/app.overlay).
 
 The syntax to enable a core in Zephyr is:
 

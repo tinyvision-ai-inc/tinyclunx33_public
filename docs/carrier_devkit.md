@@ -41,7 +41,7 @@ Linux terminal, Mac OSX terminal, Windows with
 [Radiant Programmer](https://tinyclunx33.tinyvision.ai/md_som_flash.html#autotoc_md25).
 
 Follow the install instructions from the
-[latest release page](https://github.com/tinyvision-ai-inc/tinyclunx33_zephyr_example/releases/latest).
+[latest release page](https://github.com/tinyvision-ai-inc/tinyclunx33/releases/latest).
 
 Then, unplug all USB cables to completely power off the board.
 Then, connect to the board using a serial console viewer, such as minicom, picocom,

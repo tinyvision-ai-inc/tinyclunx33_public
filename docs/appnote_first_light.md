@@ -4,8 +4,7 @@ This app note covers the steps to get the tinyCLUNX33 devkit running for the fir
 
 Going through each step is not mandatory but only informative, and reaching tinyVision.ai on the [chat server](https://discord.com/invite/3qbXujE) or by email is more than welcome.
 
-First Steps
-------------
+## First Steps
 
 The tinyCLUNX devkit is shipped with a pre-flashed FPGA bitfile and Zephyr image. To get started, you will need to power on the devkit by connecting the USB cable to your computer and the devkit. Before you do this however, we recommend a few applications to be installed so you can verify proper functionality and debug if needed. For details about the devkit hardware, please see the [devkit documentation](@https://tinyclunx33.tinyvision.ai/md_carrier__devkit.html).
 
@@ -21,8 +20,7 @@ The tinyCLUNX devkit is shipped with a pre-flashed FPGA bitfile and Zephyr image
 **Note**: The devkit has 2 USBC connectors, one labelled "DEBUG" and the other labelled "DATA". The "DEBUG" connector is used to program the FPGA and is not required for the initial boot process, it also presents an additional serial port that is hooked up to the RISCV processor in the FPGA for boot as well as the Zephyr shell. 
 The "USER" connector can also be used to power up the devkit and will enumerate as a Superspeed USB device.
 
-Windows
---------
+## Windows
 
 - [PotPlayer](https://potplayer.org/en/index.html): An excellent program that allows viewing multiple camera streams simultaneously.
 - [TeraTerm](https://teratermproject.github.io/index-en.html) or any other serial terminal program: To access the Zephyr shell. The FTDI on the devkit provides a dual serial port, pick the higher port on Windows. The exact baud rate setting depends on the bitfile programmed on the devkit, please see the release notes for this information.
@@ -36,8 +34,8 @@ Windows
 6. If you hit the `<Tab>` key while the image stream is playing, you will see the details of the data including frame rate, size, jitter as well as a frame count. This can be quite useful to verify that the data is being received correctly.
 
 To view the second image stream, open another instance of PotPlayer and follow the same steps as above by selecting the other tinyCLUNX33 device.
-Linux
------
+
+## Linux
 
 We do not require any special software on Linux to be able to debug. The following are equivalent programs that are available on Linux:
 - `ffplay`: A video player that can play multiple streams simultaneously.
@@ -51,8 +49,7 @@ We do not require any special software on Linux to be able to debug. The followi
 5. To view the camera stream, connect the devkit to your computer using the "DATA" connector and run `ffplay /dev/video1` (or whatever the new video number is) in another terminal. You should see a video stream from the devkit.
 6. Repeat the `ffplay /dev/video3` step to view the other camera stream if applicable.
 
-No video :(
-------------
+## No video :(
 
 If you dont see any video on the devkit, you can try the following:
 

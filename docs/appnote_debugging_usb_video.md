@@ -10,9 +10,7 @@ Furthermore, help can also be found on the [Zephyr Project](https://discord.com/
 chat server about how Zephyr works in general, as well as on the
 [Zephyr documentation](https://docs.zephyrproject.org/latest/).
 
-
-Build errors
-------------
+## Build errors
 
 The [Zephyr debug resources](https://docs.zephyrproject.org/latest/build/dts/troubleshooting.html)
 would cover this topic more in depth, however here is some extension to it:
@@ -53,7 +51,6 @@ The devicetree used is at `build/zephyr/zephyr.dts`.
   expected (the `--board` with `tinyclunx33`, `/soc` and `@rev` as expected).
   A complete "clean" build is sometimes necessary when updating the `app.overlay` or devicetree.
 
-
 ### Kconfig verification
 
 The Kconfig used is at `build/zephyr/.config`.
@@ -65,12 +62,10 @@ The Kconfig used is at `build/zephyr/.config`.
   is set in `prj.conf` can help, or otherwise look at the warning during the build time, often
   explaining what went wrong and why.
 
-
 ### CMake verification
 
 The CMake system uses the various CMakeLists.txt directly.
 The way a driver is used
-
 
 ### Generated C verification
 
@@ -86,9 +81,7 @@ working on a new driver), or that there is a Kconfig or Devicetree issue.
 This file also contains the reference between the device numbers and the device name, whch help
 for errors such as `undefined reference to __device_dts_ord_123`.
 
-
-Physical problems
------------------
+## Physical problems
 
 ### Debug command
 
@@ -163,9 +156,7 @@ When additional hardware gets connected to the devkit, this can lead to addition
 pulled by the USB device, up to being too much for what an USB port can supply. In which case,
 disconnecting every external device from the devkit (i.e. the adapter boards) can reveal useful.
 
-
-Debugging the enumeration
--------------------------
+## Debugging the enumeration
 
 An USB Video device is fundamentally an USB device: once it is connected to the host, the host
 queries its USB descriptors, arrays of bytes encoding the functions of the device. According to
@@ -227,9 +218,7 @@ A few examples:
 - 1 IN descriptor for by each UVC
 - 2 IN and 1 OUT descriptors for each CDC ACM
 
-
-Debugging the Descriptors
--------------------------
+## Debugging the Descriptors
 
 If the USB descriptors are valid and correctly transmitted during enumeration, then a system video
 interface should appear. Even if there is any problem with the video transfer.
@@ -264,9 +253,7 @@ image sensor driver, or custom driver you are developing. This means that if the
 content are wrong, it can be due to data coming from the video driver (i.e. empty list of formats)
 or be a bug in the USB Video Class (i.e. wrong order for a list).
 
-
-Debugging the video stream
---------------------------
+## Debugging the video stream
 
 For any kind of error, enabling the verbose logs for the Linux `uvcvideo` driver gives better
 insights of what is going on under the hood. To enable them:

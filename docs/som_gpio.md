@@ -1,4 +1,7 @@
 # SoM GPIO {#som_gpio}
 
-TODO: Description of all the GPIO pin usage, including the enable control
-signals or the signals not controlled by the FPGA.
+There is currently no GPIO controller on the reference design,
+given in most projects all the pins were used for other purposes,
+and GPIO expanders were preferred to save ppins.
+
+However, nothing prevents a GPIO controller to be implemented.
