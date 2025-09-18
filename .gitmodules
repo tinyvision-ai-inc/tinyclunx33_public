@@ -40,3 +40,45 @@
 [submodule "rtl/ip/stream_utils"]
 	path = rtl/ip/stream_utils
 	url = https://github.com/olofk/stream_utils.git
+[submodule "doxygen-awesome-css"]
+	path = doxygen-awesome-css
+	url = https://github.com/jothepro/doxygen-awesome-css.git
+[submodule "VexRiscv"]
+	path = VexRiscv
+	url = https://github.com/SpinalHDL/VexRiscv
+[submodule "verilog-i2c"]
+	path = verilog-i2c
+	url = https://github.com/alexforencich/verilog-i2c.git
+[submodule "ahb3lite_wb_bridge"]
+	path = ahb3lite_wb_bridge
+	url = https://github.com/vfinotti/ahb3lite_wb_bridge.git
+[submodule "verilog-axi"]
+	path = verilog-axi
+	url = https://github.com/alexforencich/verilog-axi.git
+[submodule "wb_intercon"]
+	path = wb_intercon
+	url = https://github.com/olofk/wb_intercon.git
+[submodule "wb_common"]
+	path = wb_common
+	url = https://github.com/fusesoc/wb_common.git
+[submodule "cdc_utils"]
+	path = cdc_utils
+	url = https://github.com/fusesoc/cdc_utils.git
+[submodule "verilog-arbiter"]
+	path = verilog-arbiter
+	url = https://github.com/bmartini/verilog-arbiter.git
+[submodule "fifo"]
+	path = fifo
+	url = https://github.com/olofk/fifo.git
+[submodule "wb_ram"]
+	path = wb_ram
+	url = https://github.com/fusesoc/wb_ram.git
+[submodule "wb2axip"]
+	path = wb2axip
+	url = https://github.com/ZipCPU/wb2axip.git
+[submodule "wb_bfm"]
+	path = wb_bfm
+	url = https://github.com/olofk/wb_bfm.git
+[submodule "stream_utils"]
+	path = stream_utils
+	url = https://github.com/olofk/stream_utils.git
