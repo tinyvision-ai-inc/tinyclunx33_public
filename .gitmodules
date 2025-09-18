@@ -1,5 +1,5 @@
-[submodule "Docs/doxygen-awesome-css"]
-	path = Docs/doxygen-awesome-css
+[submodule "docs/doxygen-awesome-css"]
+	path = docs/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
 [submodule "RTL/VexRiscv"]
 	path = RTL/ip/VexRiscv
