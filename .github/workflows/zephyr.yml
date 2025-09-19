@@ -3,6 +3,7 @@ name: Build Zephyr Examples
 on:
   push:
     branches: ["main"]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -44,10 +45,10 @@ jobs:
       - name: Setup a new Zephyr workspace
         if: ${{ steps.cache-zephyrproject.outputs.cache-hit != 'true' }}
         run: |
-          python -m venv ${ZEPHYRPROJECT}/.venv
-          . ${ZEPHYRPROJECT}/.venv/bin/activate
+          python -m venv ${{ env.ZEPHYRPROJECT }}/.venv
+          . ${{ env.ZEPHYRPROJECT }}/.venv/bin/activate
           python -m pip install west ninja
-          cd ${ZEPHYRPROJECT}
+          cd ${{ env.ZEPHYRPROJECT }}
           west init --local ${{ github.event.repository.name }}
           west update
           west packages pip --install
@@ -84,8 +85,8 @@ jobs:
 
       - name: Update the Zephyr workspace
         run: |
-          . ${ZEPHYRPROJECT}/.venv/bin/activate
-          cd ${ZEPHYRPROJECT}
+          . ${{ env.ZEPHYRPROJECT }}/.venv/bin/activate
+          cd ${{ env.ZEPHYRPROJECT }}
           west update
           west zephyr-export
           west patch apply
@@ -94,18 +95,18 @@ jobs:
 
       - name: Build the firmware samples
         run: |
-          . ${ZEPHYRPROJECT}/.venv/bin/activate
-          cd ${ZEPHYRPROJECT}/${{ github.event.repository.name }}/firmware/${{ matrix.application }}
+          . ${{ env.ZEPHYRPROJECT }}/.venv/bin/activate
+          cd ${{ env.ZEPHYRPROJECT }}/${{ github.event.repository.name }}/firmware/${{ matrix.application }}
           west build -b "tinyclunx33@rev2/${{ matrix.soc_version }}"
-          cp build/zephyr/zephyr.elf ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.elf
-          cp build/zephyr/zephyr.map ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.map
-          cp build/zephyr/zephyr.bin ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.bin
+          cp build/zephyr/zephyr.elf ${{ env.ZEPHYRPROJECT }}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.elf
+          cp build/zephyr/zephyr.map ${{ env.ZEPHYRPROJECT }}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.map
+          cp build/zephyr/zephyr.bin ${{ env.ZEPHYRPROJECT }}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.bin
 
       - name: Upload the firmware files
         uses: actions/upload-artifact@v4
         with:
-          name: tinyclunx33_zephyr_examples
+          name: tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}
           path: |
-            ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.map
-            ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.elf
-            ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.bin
+            ${{ env.ZEPHYRPROJECT }}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.elf
+            ${{ env.ZEPHYRPROJECT }}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.map
+            ${{ env.ZEPHYRPROJECT }}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.bin
