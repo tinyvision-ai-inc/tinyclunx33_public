@@ -98,6 +98,7 @@ jobs:
           cd ${ZEPHYRPROJECT}/${{ github.event.repository.name }}/firmware/${{ matrix.application }}
           west build -b "tinyclunx33@rev2/${{ matrix.soc_version }}"
           cp build/zephyr/zephyr.elf ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.elf
+          cp build/zephyr/zephyr.map ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.map
           cp build/zephyr/zephyr.bin ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.bin
 
       - name: Upload the firmware files
@@ -105,5 +106,6 @@ jobs:
         with:
           name: tinyclunx33_zephyr_examples
           path: |
-            ${ZEPHYRPROJECT}/tinyclunx33_*.bin
-            ${ZEPHYRPROJECT}/tinyclunx33_*.elf
+            ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.map
+            ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.elf
+            ${ZEPHYRPROJECT}/tinyclunx33_${{ matrix.application }}_${{ matrix.soc_version }}_${{ steps.date.outputs.date }}_${{ github.sha }}.bin
